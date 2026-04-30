@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle for premium feel -->
+  <circle cx="256" cy="256" r="250" fill="#f8f9fa"/>
+  
+  <!-- Silhouette of girl (Simplified representation of the logo) -->
+  <path d="M256 120C210 120 180 150 180 200C180 240 200 270 230 290C210 300 190 330 190 370C190 390 200 400 220 400C240 400 250 380 260 360C270 380 280 400 300 400C320 400 330 390 330 370C330 330 310 300 290 290C320 270 340 240 340 200C340 150 310 120 256 120Z" fill="#1a1a1a"/>
+  <path d="M340 200C360 210 380 200 390 210C400 220 380 250 360 260" stroke="#1a1a1a" stroke-width="10" stroke-linecap="round"/>
+  
+  <!-- Stylized Branding -->
+  <text x="256" y="460" text-anchor="middle" font-family="serif" font-weight="bold" font-size="60" fill="#1a1a1a">CG4U</text>
+</svg>
