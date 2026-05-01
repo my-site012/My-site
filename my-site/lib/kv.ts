@@ -1,15 +1,18 @@
-import { Kv } from "@vercel/kv";
+import { createClient } from "@vercel/kv";
 
-// Initialize KV client (ensure KV_URL and KV_REST_API_TOKEN are set in env)
-export const kv = new Kv({
-  url: process.env.KV_URL ?? "",
-  token: process.env.KV_REST_API_TOKEN ?? "",
-});
+const kvUrl = process.env.KV_URL;
+const kvToken = process.env.KV_REST_API_TOKEN;
+
+// Initialize KV client safely
+export const kv = (kvUrl && kvToken) 
+  ? createClient({ url: kvUrl, token: kvToken })
+  : null;
 
 /**
  * Increment a numeric counter safely.
  */
 export async function incrementCounter(key: string): Promise<number> {
+  if (!kv) return 0;
   const current = Number(await kv.get(key)) || 0;
   const next = current + 1;
   await kv.set(key, String(next));
@@ -20,6 +23,7 @@ export async function incrementCounter(key: string): Promise<number> {
  * Set a key/value pair (string).
  */
 export async function setValue(key: string, value: string): Promise<void> {
+  if (!kv) return;
   await kv.set(key, value);
 }
 
@@ -27,6 +31,7 @@ export async function setValue(key: string, value: string): Promise<void> {
  * Get a string value.
  */
 export async function getValue(key: string): Promise<string | null> {
+  if (!kv) return null;
   const val = await kv.get(key);
   return val ? String(val) : null;
 }
