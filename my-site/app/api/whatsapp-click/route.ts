@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { incrementCounter } from "@/lib/kv";
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     const newCount = await incrementCounter("whatsapp_clicks");

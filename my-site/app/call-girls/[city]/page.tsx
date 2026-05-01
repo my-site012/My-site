@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId } from "@/lib/ad-logic";
 import { getValue } from "@/lib/kv";
 
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
   return getAllCities().map(city => ({
     city: getCitySlug(city)

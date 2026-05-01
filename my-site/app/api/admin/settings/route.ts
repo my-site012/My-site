@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getValue, setValue, kv } from "@/lib/kv";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const session = req.cookies.get("admin_session");
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
