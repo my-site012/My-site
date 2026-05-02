@@ -16,35 +16,45 @@ export async function generateStaticParams() {
 
 function getDefaultSeoData(cityName: string, state: string): CitySEOContent {
   return {
-    metaTitle: `Call Girls in ${cityName} | ${cityName} Escorts | Verified Profiles | CallGirl4U`,
-    metaDescription: `Find verified call girls in ${cityName}, ${state}. Browse genuine ads for escort service and companionship on CallGirl4U. Safe, discreet, 24/7 available.`,
-    metaKeywords: `${cityName} Escorts, call girls in ${cityName}, ${cityName} call girls, ${cityName} escort service, ${cityName} call girls number, CallGirl4U`,
-    h1: `Call Girls in ${cityName} – Verified & Available 24/7`,
-    heroSubtext: `Find real, verified <strong>${cityName} call girls</strong>. Safe service, cash payment, home delivery. Browse hundreds of genuine profiles and find <strong>${cityName} call girls number</strong> now.`,
-    introHeading: `${cityName} Escorts — Safe, Verified & Affordable`,
-    introText: `Welcome to the ultimate platform to find <strong>Call Girls in ${cityName}</strong>. We ensure our users have a safe, discreet, and unforgettable experience. Whether you are looking for <strong>Collage girl girls ${cityName}</strong>, housewives, or Russian escorts, we offer a diverse range of 100% verified profiles. If you are searching for a <strong>genuine ${cityName} call girls number</strong>, we connect you with 100% verified profiles in the city. Safety and privacy are our top priorities for our clients.`,
+    metaTitle: `Premium Call Girls in ${cityName} | ${cityName} Escorts - Verified 24/7`,
+    metaDescription: `Find the most exclusive call girls in ${cityName}. 100% verified profiles, no advance payment, and total discretion. Experience premium escort service in ${cityName} today.`,
+    metaKeywords: `${cityName} Escorts, call girls in ${cityName}, ${cityName} call girls, ${cityName} escort service, ${cityName} call girls number, genuine call girls ${cityName}, verified profiles, cash payment, home delivery, hotel delivery, 24/7`,
+    h1: `Premium Call Girls in ${cityName} - Genuine Escort Service 24/7`,
+    heroSubtext: `Discover the most **exclusive call girls in ${cityName}**. Our platform offers **verified profiles** of stunning companions, from college girls to high-profile escorts. Enjoy a safe, discreet experience with **cash payment** and **home delivery** options. Find your perfect match and get a **genuine ${cityName} call girls number** today.`,
+    introHeading: `Experience Unmatched Luxury with Premium Call Girls in ${cityName}`,
+    introText: `Finding companionship that is both high-quality and reliable shouldn't be a gamble. When you are looking for the best **Call Girls in ${cityName}**, you deserve an experience that blends sophistication with absolute discretion. We pride ourselves on being the most trusted hub for **${cityName} call girls**, offering a curated selection of stunning women who understand the art of pleasure and conversation. Whether you are a local resident or a traveler staying in a luxury hotel, our **escort service in ${cityName}** is designed to meet your highest expectations. <br/><br/>Every profile you see here represents a real person, ensuring that your evening is spent with someone as beautiful in person as they are in their photos. We understand that your time is valuable, which is why we offer seamless **24/7** availability, ensuring that whenever the mood strikes, a top-tier companion is just a call away. Our platform is built on the pillars of trust and quality, making us the go-to choice for those who don't want to settle for anything less than the extraordinary. Your satisfaction is our only priority.`,
     whyChooseHeading: `Why Choose Us for Call Girl Service in ${cityName}?`,
-    whyChooseText: `Choosing our platform guarantees you access to fully verified profiles without the risk of fake photos. We are strictly against advance payments—<strong>No advance payment</strong> is required—you only pay in cash. Our <strong>Call Girls ${cityName}</strong> services are available 24/7 in ${cityName}, with guaranteed privacy and discreet meetups tailored to your comfort and convenience.`,
-    typesHeading: `Types of Call Girls Available in ${cityName}`,
-    typesText: `We offer a wide selection of companions in ${cityName}. <strong>College girls ${cityName}</strong> provide a fresh and energetic experience. Housewife Call Girls offer mature companionship. Russian Call Girls bring premium international elite experiences, while Independent and High Profile <strong>Call Girls ${cityName}</strong> cater specifically to our VIP clients in the city.`,
-    bookingHeading: `How to Book Call Girl Service in ${cityName} — Step by Step`,
-    bookingText: `Step 1: Browse available profiles on our site. Step 2: Select your preferred companion in ${cityName}. Step 3: Call or WhatsApp the <strong>${cityName} call girls number</strong> directly. Step 4: Confirm your location, pay cash on delivery, and enjoy your time.`,
+    whyChooseText: `<ul class="list-disc pl-5 space-y-2">
+      <li><strong>Verified Profiles Only:</strong> Say goodbye to catfishing. We ensure all our models are 100% genuine and verified.</li>
+      <li><strong>Strict No Advance Policy:</strong> Your safety is paramount. We only accept <strong>cash payment</strong> after you meet the model.</li>
+      <li><strong>Total Discretion:</strong> We respect your privacy above all. No digital footprints, just pure, unadulterated enjoyment.</li>
+      <li><strong>Flexible Locations:</strong> Whether you prefer <strong>home delivery</strong> or <strong>hotel delivery</strong>, our girls travel to you.</li>
+      <li><strong>24/7 Availability:</strong> Day or night, our dedicated team is ready to assist your companionship needs in ${cityName}.</li>
+    </ul>`,
+    typesHeading: `Exotic Types of Call Girls Available in ${cityName}`,
+    typesText: `We believe variety is the spice of life. That’s why we offer a diverse range of companions to suit every preference. Our **College girls in ${cityName}** are perfect for those seeking youthful energy and fun-loving vibes; they bring a refreshing charm to every encounter. For a more mature and refined experience, our **Housewives** category offers warmth, sophistication, and a deeper level of connection. <br/><br/>If you are looking for international flair, our elite **Russian escorts** provide a world-class experience right here in the city, blending exotic beauty with professional poise. For our most discerning clients, we feature **High Profile models** and independent girls who offer the pinnacle of luxury and class. No matter your choice, each companion is dedicated to making your time together unforgettable, ensuring that every moment is filled with passion and genuine connection.`,
+    bookingHeading: `How to Book Call Girl Service in ${cityName} — Step-by-Step`,
+    bookingText: `<ol class="list-decimal pl-5 space-y-2">
+      <li><strong>Browse & Select:</strong> Explore our gallery of **verified profiles** and choose the beauty that catches your eye.</li>
+      <li><strong>Contact Directly:</strong> Reach out via the **${cityName} call girls number** provided on the profile via call or WhatsApp.</li>
+      <li><strong>Discuss Details:</strong> Confirm the duration, location (Home or Hotel), and any specific preferences you might have.</li>
+      <li><strong>Enjoy the Meeting:</strong> Meet your companion, verify everything, and pay via **cash payment** at the start of the session.</li>
+    </ol>`,
     areasHeading: `Call Girl Service Available in All Areas of ${cityName}`,
-    areasText: `We provide fast and reliable services everywhere in ${cityName}, including top local areas and premium hotel locations. Wherever you are staying, our verified escorts will travel to your location. No matter the time or place, we ensure smooth and safe availability across ${cityName}.`,
-    rateHeading: `Call Girl Rate List in ${cityName} — Affordable Pricing`,
-    rateIntro: `We offer transparent pricing for all services in ${cityName}. Below is a general rate estimation. All rates are negotiable. <strong>No advance payment</strong> required. Cash payment only.`,
+    areasText: `We provide fast and reliable services everywhere in ${cityName}, including top local areas and premium hotel locations. Wherever you are staying, our verified escorts will travel to your location. No matter the time or place, we ensure smooth and safe availability across ${cityName}. We cover every corner to ensure you are never alone.`,
+    rateHeading: `Call Girl Rate List in ${cityName} — Affordable Luxury`,
+    rateIntro: `We believe in transparent pricing without hidden costs. Below is a general rate list for our **escort service in ${cityName}**. Remember, we strictly follow a **no advance payment** policy.`,
     privacyHeading: `100% Safe, Secure & Private Call Girl Service in ${cityName}`,
-    privacyText: `Your privacy in ${cityName} is fully protected. We do not store any personal data. All meetings happen confidentially in safe environments. Avoid online footprints—we prioritize pure cash transactions and absolute discretion. Get <strong>genuine ${cityName} call girls number</strong> only on CallGirl4U.`,
-    faqHeading: `Frequently Asked Questions – Call Girls in ${cityName} on CallGirl4U`,
+    privacyText: `Security isn't just a feature; it's our foundation. We know that in the world of **escort service in ${cityName}**, privacy is the most important factor. We use encrypted communication and never store any of your personal data on our servers. Our models are trained to be professional and discreet, ensuring that your private life remains exactly that—private. <br/><br/>By choosing our platform, you are opting for a service that values your reputation as much as you do. Get a **genuine ${cityName} call girls number** and experience the peace of mind that comes with a truly professional agency. We go the extra mile to ensure that every encounter is handled with the utmost secrecy, allowing you to relax and enjoy the moment without a single worry.`,
     faqs: [
-      { q: `How do I find a genuine call girl in ${cityName}?`, a: `Simply browse our verified profiles section and contact the model directly via call or WhatsApp in ${cityName}. We guarantee genuine photos on CallGirl4U.` },
-      { q: `Is the service available 24 hours in ${cityName}?`, a: `Yes, our call girls are available 24/7 for both day and night bookings across ${cityName} and nearby areas.` },
-      { q: `Do you take advance payment?`, a: `No, we strictly follow a <strong>No advance payment</strong> policy. Never pay any advance online.` },
-      { q: `What types of call girls are available in ${cityName}?`, a: `You can find college girls, housewives, independent models, and international escorts in our ${cityName} listings on CallGirl4U.` },
-      { q: `Is my personal information safe with you?`, a: `Absolutely. We ensure 100% confidentiality and never share client details anywhere.` }
+      { q: `How can I be sure the profiles in ${cityName} are real?`, a: `We manually verify every profile. The photos you see are of the actual models. We guarantee <strong>verified profiles</strong> for all our clients.` },
+      { q: `Do you provide home delivery in ${cityName}?`, a: `Yes, we offer both <strong>home delivery</strong> and <strong>hotel delivery</strong> options for your convenience and comfort.` },
+      { q: `What is the payment process?`, a: `We only accept <strong>cash payment</strong> at the time of the meeting. We never ask for any advance payment online.` },
+      { q: `Is the service available late at night?`, a: `Absolutely. Our service is available <strong>24/7</strong> in ${cityName} to cater to your needs at any hour.` },
+      { q: `Can I book a Russian escort in ${cityName}?`, a: `Yes, we have a premium selection of high-profile and Russian escorts available for booking.` }
     ],
-    hindiText: `${cityName} mein call girl service dhoondhna ab bahut aasan hai. Hamari website par sabhi profiles safe aur genuine hain, jo 24 ghante available rehti hain. Cash payment aur ghar delivery ya hotel delivery ki suvidha uplabdh hai. Kisi bhi fake advance payment se bachein aur sirf genuine ${cityName} कॉल गर्ल se milein.`,
-    profiles: [] // Profile names will be dynamically mixed inline below
+    hindiText: `${cityName} mein best service dhoond rahe ho? To tension chhodo aur direct call karo. Hamare paas sabhi **verified profiles** hain aur hum koi bhi **advance payment nahi lete**. Sab kuch safe aur secure hai, aap **cash payment** kar sakte hain meeting ke time par. Chahe **home delivery** ho ya **hotel delivery**, hum 24/7 available hain. Kisi bhi fake logo ko advance mat dena, sirf genuine kaam ke liye hamein contact karein aur apni raat rangeen banayein.`,
+    profiles: []
   }
 }
 
@@ -163,13 +173,13 @@ export default async function CityPage({ params, searchParams }: { params: Promi
         <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.introText }} />
 
         <h2 className="text-2xl mb-4">{seoData.whyChooseHeading}</h2>
-        <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.whyChooseText }} />
+        <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.whyChooseText }} />
 
         <h2 className="text-2xl mb-4">{seoData.typesHeading}</h2>
         <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.typesText }} />
 
         <h2 className="text-2xl mb-4">{seoData.bookingHeading}</h2>
-        <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.bookingText }} />
+        <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.bookingText }} />
 
         <h2 className="text-2xl mb-4">{seoData.areasHeading}</h2>
         <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.areasText }} />
@@ -182,7 +192,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
               <tr className="bg-gray-100 border-b border-gray-200">
                 <th className="p-4 font-semibold text-gray-700">Category</th>
                 <th className="p-4 font-semibold text-gray-700">1 Shot</th>
-                <th className="p-4 font-semibold text-gray-700">2 Short</th>
+                <th className="p-4 font-semibold text-gray-700">2 Shots</th>
                 <th className="p-4 font-semibold text-gray-700">Full Night</th>
               </tr>
             </thead>
@@ -223,7 +233,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
         </div>
 
         <div className="bg-red-50 p-6 rounded-xl border border-red-200 my-8 shadow-sm">
-          <p className="text-gray-800 font-medium leading-relaxed italic">{seoData.hindiText}</p>
+          <p className="text-gray-800 font-medium leading-relaxed italic" dangerouslySetInnerHTML={{ __html: seoData.hindiText }} />
         </div>
       </article>
     </div>
