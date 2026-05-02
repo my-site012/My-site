@@ -4,9 +4,16 @@ const kvUrl = process.env.KV_URL;
 const kvToken = process.env.KV_REST_API_TOKEN;
 
 // Initialize KV client safely
-export const kv = (kvUrl && kvToken) 
-  ? createClient({ url: kvUrl, token: kvToken })
-  : null;
+export const kv = (() => {
+  try {
+    if (kvUrl && kvToken) {
+      return createClient({ url: kvUrl, token: kvToken });
+    }
+  } catch (e) {
+    console.error("KV client initialization failed:", e);
+  }
+  return null;
+})();
 
 /**
  * Increment a numeric counter safely.
