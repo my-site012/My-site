@@ -1,6 +1,6 @@
 import { createClient } from "@vercel/kv";
 
-const kvUrl = process.env.KV_URL;
+const kvUrl = process.env.KV_REST_API_URL;
 const kvToken = process.env.KV_REST_API_TOKEN;
 
 // Initialize KV client safely
