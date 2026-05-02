@@ -75,6 +75,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
         <WhatsAppButton 
           phone={displayPhone}
           message={`Hi, My name is ___, I am in ${location} and I need a call girl. Please share a photo. (${title})`}
+          adContext={{ profileName: title, location: location, pageUrl: `/ad/${id}` }}
           className="flex items-center justify-center gap-1 bg-[#25D366] hover:bg-[#20bd5c] text-white text-[10px] md:text-sm font-bold py-2 rounded-lg transition-all shadow-sm active:scale-95"
         >
           <span className="text-xs md:text-lg">💬</span> WhatsApp

@@ -6,13 +6,22 @@ interface WhatsAppButtonProps {
   phone: string;
   message?: string;
   className?: string;
+  adContext?: {
+    profileName: string;
+    location: string;
+    pageUrl: string;
+  };
   children: React.ReactNode;
 }
 
-export default function WhatsAppButton({ phone, message, className, children }: WhatsAppButtonProps) {
+export default function WhatsAppButton({ phone, message, className, adContext, children }: WhatsAppButtonProps) {
   const handleClick = async () => {
     try {
-      await fetch("/api/whatsapp-click", { method: "POST" });
+      await fetch("/api/whatsapp-click", { 
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adContext })
+      });
     } catch (error) {
       console.error("Failed to track click");
     }

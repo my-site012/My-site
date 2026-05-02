@@ -180,6 +180,7 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
                   <WhatsAppButton 
                     phone={displayPhone}
                     message={`Hi, My name is ___, I am in ${location} and I need a call girl. Please share a photo. (${name})`}
+                    adContext={{ profileName: name, location: location, pageUrl: `/ad/${id}` }}
                     className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-xl flex justify-center items-center gap-2 transition shadow-lg active:scale-95"
                   >
                      <span>💬 WhatsApp</span>

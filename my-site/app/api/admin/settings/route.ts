@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getValue, setValue, kv } from "@/lib/kv";
+import { getValue, setValue, kv, getLogs } from "@/lib/kv";
 
 export const dynamic = 'force-dynamic';
 
@@ -9,10 +9,12 @@ export async function GET(req: NextRequest) {
 
   const clicks = await getValue("whatsapp_clicks");
   const phone = await getValue("contact_phone");
+  const logs = await getLogs("whatsapp_activity_logs", 50); // Get latest 50 logs
   
   return NextResponse.json({ 
     clicks: Number(clicks) || 0, 
-    phone: phone || "+918905586425" 
+    phone: phone || "+918905586425",
+    logs: logs || []
   });
 }
 

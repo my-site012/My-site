@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
-  const [stats, setStats] = useState({ clicks: 0, phone: "" });
+  const [stats, setStats] = useState({ clicks: 0, phone: "", logs: [] as any[] });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -164,6 +164,53 @@ export default function AdminPage() {
                 {message && <span className="text-green-600 font-bold text-sm animate-pulse">{message}</span>}
               </div>
             </form>
+          </div>
+        </div>
+
+        {/* Recent Activity Log */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mt-8">
+          <div className="p-6 border-b border-gray-50 flex justify-between items-center">
+            <h3 className="text-lg font-bold text-gray-900 uppercase tracking-tight">Recent Activity Log</h3>
+            <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">{stats.logs.length} Recent Clicks</span>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider text-gray-500 font-bold">
+                  <th className="p-4">Time</th>
+                  <th className="p-4">Profile Name</th>
+                  <th className="p-4">Location</th>
+                  <th className="p-4">Page URL</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {stats.logs.map((log, i) => (
+                  <tr key={i} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-4 text-xs text-gray-500 whitespace-nowrap">
+                      {new Date(log.timestamp).toLocaleString()}
+                    </td>
+                    <td className="p-4 font-bold text-gray-900 text-sm">
+                      {log.profileName} <span className="text-red-500" title="Genuine Photos">💋 100% GENUINE PHOTOS</span>
+                    </td>
+                    <td className="p-4 text-sm text-blue-600 font-medium whitespace-nowrap">
+                      <span className="bg-blue-50 px-2 py-1 rounded-lg">{log.location}</span>
+                    </td>
+                    <td className="p-4 text-sm text-blue-500 hover:text-blue-700 hover:underline max-w-[200px] truncate whitespace-nowrap">
+                      <a href={log.pageUrl} target="_blank" rel="noopener noreferrer">
+                        {log.pageUrl}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+                {stats.logs.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="p-8 text-center text-gray-400 font-medium">
+                      No recent activity logged yet.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </main>

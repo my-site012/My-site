@@ -42,3 +42,31 @@ export async function getValue(key: string): Promise<string | null> {
   const val = await kv.get(key);
   return val ? String(val) : null;
 }
+
+/**
+ * Push an object to a list (pre-pend) and trim the list to keep max length.
+ */
+export async function pushLog(key: string, log: any, maxLength: number = 1500): Promise<void> {
+  if (!kv) return;
+  try {
+    await kv.lpush(key, JSON.stringify(log));
+    await kv.ltrim(key, 0, maxLength - 1);
+  } catch (error) {
+    console.error("Failed to push log:", error);
+  }
+}
+
+/**
+ * Get items from a list.
+ */
+export async function getLogs(key: string, count: number = 100): Promise<any[]> {
+  if (!kv) return [];
+  try {
+    const logs = await kv.lrange(key, 0, count - 1);
+    // Vercel KV lrange returns array of parsed JSON if they were objects
+    return Array.isArray(logs) ? logs : [];
+  } catch (error) {
+    console.error("Failed to get logs:", error);
+    return [];
+  }
+}
