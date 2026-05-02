@@ -74,6 +74,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
       <div className="p-2 md:p-3 grid grid-cols-2 gap-2 bg-gray-50 mt-auto border-t border-gray-100">
         <WhatsAppButton 
           phone={displayPhone}
+          message={`Hi, My name is ___, I am in ${location} and I need a call girl. Please share a photo. (${title})`}
           className="flex items-center justify-center gap-1 bg-[#25D366] hover:bg-[#20bd5c] text-white text-[10px] md:text-sm font-bold py-2 rounded-lg transition-all shadow-sm active:scale-95"
         >
           <span className="text-xs md:text-lg">💬</span> WhatsApp

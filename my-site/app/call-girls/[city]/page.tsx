@@ -440,12 +440,14 @@ export default async function CityPage({ params, searchParams }: { params: Promi
               'bg-green-600','bg-rose-600','bg-indigo-700','bg-amber-600',
             ];
             return (
-              <span
+              <Link
                 key={i}
-                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 cursor-default`}
+                href={`/call-girls/${city}`}
+                title={tag}
+                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}
               >
                 {tag} <span aria-hidden>&#10148;</span>
-              </span>
+              </Link>
             );
           })}
         </div>

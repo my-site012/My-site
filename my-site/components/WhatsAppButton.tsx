@@ -4,21 +4,22 @@ import React from "react";
 
 interface WhatsAppButtonProps {
   phone: string;
+  message?: string;
   className?: string;
   children: React.ReactNode;
 }
 
-export default function WhatsAppButton({ phone, className, children }: WhatsAppButtonProps) {
+export default function WhatsAppButton({ phone, message, className, children }: WhatsAppButtonProps) {
   const handleClick = async () => {
     try {
-      // Track click in KV
       await fetch("/api/whatsapp-click", { method: "POST" });
     } catch (error) {
       console.error("Failed to track click");
     }
-    
-    // Redirect to WhatsApp
-    window.open(`https://wa.me/${phone.replace(/\D/g, "")}`, "_blank");
+
+    const cleanPhone = phone.replace(/\D/g, "");
+    const encodedMsg = message ? `?text=${encodeURIComponent(message)}` : "";
+    window.open(`https://wa.me/${cleanPhone}${encodedMsg}`, "_blank");
   };
 
   return (
