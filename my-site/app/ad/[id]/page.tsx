@@ -54,7 +54,7 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   // Image Selection (Must match CityPage exactly)
   let profileImages: string[] = [];
   if (id.includes('-') && !id.startsWith('featured')) {
-    const cityPool = getDeterministicImagesPool(rawLocation, 24); 
+    const cityPool = getDeterministicImagesPool(rawLocation, 48); 
     const mainImg = cityPool[adIndex % cityPool.length];
     
     // For gallery, we take shifted versions from the same city pool to keep it consistent
@@ -179,6 +179,7 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
                   </a>
                   <WhatsAppButton 
                     phone={displayPhone}
+                    message={`Hi, My name is ___, I am in ${location} and I need a call girl. Please share a photo. (${name})`}
                     className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-xl flex justify-center items-center gap-2 transition shadow-lg active:scale-95"
                   >
                      <span>💬 WhatsApp</span>
