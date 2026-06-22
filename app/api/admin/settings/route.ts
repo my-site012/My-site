@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getValue, setValue, kv, getLogs } from "@/lib/kv";
+import { getValue, setValue, getLogs } from "@/lib/kv";
 
 export const dynamic = 'force-dynamic';
 

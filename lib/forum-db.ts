@@ -1,4 +1,4 @@
-import { kv } from "./kv";
+import { isKvAvailable, setJson, getJson, lPush, lRange, lTrim, mGet } from "./kv";
 import fs from "fs";
 import path from "path";
 
@@ -41,7 +41,7 @@ const INITIAL_POSTS: ForumPost[] = [
     city: "Aerocity",
     content: "Just had a full body massage session with Reshma in Aerocity. She is extremely professional and polite. The session was worth every rupee, pay only in cash after service. Pure 10/10.",
     likes: 12,
-    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(), // 5 hours ago
+    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
     replies: [
       {
         id: "reply_initial_1_1",
@@ -59,7 +59,7 @@ const INITIAL_POSTS: ForumPost[] = [
     city: "All Cities",
     content: "Important safety warning: Never pay anyone in advance. Genuine independent service providers will NEVER ask for advance payments, booking fees, or transport charges online. Always follow Cash on Delivery.",
     likes: 28,
-    createdAt: new Date(Date.now() - 3600000 * 24).toISOString(), // 1 day ago
+    createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
     replies: [
       {
         id: "reply_initial_2_1",
@@ -77,7 +77,7 @@ const INITIAL_POSTS: ForumPost[] = [
     city: "Mumbai",
     content: "Met Priya in Andheri East today. She matches her pictures perfectly and has a wonderful personality. Cash payment after service made the booking risk-free.",
     likes: 8,
-    createdAt: new Date(Date.now() - 3600000 * 36).toISOString(), // 1.5 days ago
+    createdAt: new Date(Date.now() - 3600000 * 36).toISOString(),
     replies: []
   }
 ];
@@ -109,25 +109,25 @@ function writeFallbackFile(posts: ForumPost[]) {
 }
 
 export async function getForumPosts(): Promise<ForumPost[]> {
-  if (!kv) {
+  if (!isKvAvailable()) {
     return readFallbackFile();
   }
-  
+
   try {
-    const ids = await kv.lrange("forum:post_ids", 0, 99);
+    const ids = await lRange("forum:post_ids", 0, 99);
     if (!ids || ids.length === 0) {
-      // Seed initial posts in Vercel KV if empty
+      // Seed initial posts in KV if empty
       for (const post of INITIAL_POSTS) {
-        await kv.set(`forum:post:${post.id}`, JSON.stringify(post));
-        await kv.lpush("forum:post_ids", post.id);
+        await setJson(`forum:post:${post.id}`, post);
+        await lPush("forum:post_ids", post.id);
       }
       return INITIAL_POSTS;
     }
-    
+
     // Fetch all posts
     const keys = ids.map(id => `forum:post:${id}`);
-    const results = await kv.mget<any[]>(...keys);
-    
+    const results = await mGet(keys);
+
     const posts: ForumPost[] = [];
     for (const result of results) {
       if (result) {
@@ -138,8 +138,7 @@ export async function getForumPosts(): Promise<ForumPost[]> {
         }
       }
     }
-    
-    // Sort by createdAt descending
+
     return posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   } catch (error) {
     console.error("Failed to get forum posts from KV, falling back to local file:", error);
@@ -166,7 +165,7 @@ export async function createForumPost(
     createdAt: new Date().toISOString()
   };
 
-  if (!kv) {
+  if (!isKvAvailable()) {
     const posts = readFallbackFile();
     posts.unshift(newPost);
     writeFallbackFile(posts);
@@ -174,9 +173,9 @@ export async function createForumPost(
   }
 
   try {
-    await kv.set(`forum:post:${newPost.id}`, JSON.stringify(newPost));
-    await kv.lpush("forum:post_ids", newPost.id);
-    await kv.ltrim("forum:post_ids", 0, 99); // Keep last 100 posts
+    await setJson(`forum:post:${newPost.id}`, newPost);
+    await lPush("forum:post_ids", newPost.id);
+    await lTrim("forum:post_ids", 0, 99);
     return newPost;
   } catch (error) {
     console.error("Failed to save post to KV, saving to local file:", error);
@@ -199,7 +198,7 @@ export async function addForumReply(
     createdAt: new Date().toISOString()
   };
 
-  if (!kv) {
+  if (!isKvAvailable()) {
     const posts = readFallbackFile();
     const post = posts.find(p => p.id === postId);
     if (post) {
@@ -211,12 +210,11 @@ export async function addForumReply(
   }
 
   try {
-    const rawPost = await kv.get(`forum:post:${postId}`);
-    if (!rawPost) return null;
-    
-    const post: ForumPost = typeof rawPost === "string" ? JSON.parse(rawPost) : rawPost;
+    const post = await getJson<ForumPost>(`forum:post:${postId}`);
+    if (!post) return null;
+
     post.replies.push(newReply);
-    await kv.set(`forum:post:${postId}`, JSON.stringify(post));
+    await setJson(`forum:post:${postId}`, post);
     return newReply;
   } catch (error) {
     console.error("Failed to add reply to KV, falling back to local file:", error);
@@ -232,7 +230,7 @@ export async function addForumReply(
 }
 
 export async function likeForumPost(postId: string): Promise<number> {
-  if (!kv) {
+  if (!isKvAvailable()) {
     const posts = readFallbackFile();
     const post = posts.find(p => p.id === postId);
     if (post) {
@@ -244,12 +242,11 @@ export async function likeForumPost(postId: string): Promise<number> {
   }
 
   try {
-    const rawPost = await kv.get(`forum:post:${postId}`);
-    if (!rawPost) return 0;
-    
-    const post: ForumPost = typeof rawPost === "string" ? JSON.parse(rawPost) : rawPost;
+    const post = await getJson<ForumPost>(`forum:post:${postId}`);
+    if (!post) return 0;
+
     post.likes += 1;
-    await kv.set(`forum:post:${postId}`, JSON.stringify(post));
+    await setJson(`forum:post:${postId}`, post);
     return post.likes;
   } catch (error) {
     console.error("Failed to like post in KV, falling back to local file:", error);

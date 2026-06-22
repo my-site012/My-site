@@ -1,18 +1,60 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function AdminPage() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null); // null = checking
   const [email, setEmail] = useState("");
   const [stats, setStats] = useState({ clicks: 0, phone: "", logs: [] as any[] });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [fetchError, setFetchError] = useState("");
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const res = await fetch("/api/admin/settings");
+      if (res.ok) {
+        const data = await res.json();
+        setStats(data);
+        setFetchError("");
+      } else if (res.status === 401) {
+        // Session expired, go back to login
+        setIsLoggedIn(false);
+      } else {
+        setFetchError("Failed to load data. Please try again.");
+      }
+    } catch (err) {
+      setFetchError("Network error. Check connection.");
+    }
+  }, []);
+
+  // On mount: check if session cookie exists by trying to fetch stats
+  useEffect(() => {
+    const checkSession = async () => {
+      const res = await fetch("/api/admin/settings");
+      if (res.ok) {
+        const data = await res.json();
+        setStats(data);
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+    checkSession();
+  }, []);
+
+  // Auto-refresh every 30 seconds when logged in
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    const interval = setInterval(fetchStats, 30000);
+    return () => clearInterval(interval);
+  }, [isLoggedIn, fetchStats]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const res = await fetch("/api/admin/login", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
     });
     if (res.ok) {
@@ -23,12 +65,9 @@ export default function AdminPage() {
     }
   };
 
-  const fetchStats = async () => {
-    const res = await fetch("/api/admin/settings");
-    if (res.ok) {
-      const data = await res.json();
-      setStats(data);
-    }
+  const handleLogout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" }).catch(() => {});
+    setIsLoggedIn(false);
   };
 
   const handleUpdatePhone = async (e: React.FormEvent) => {
@@ -36,6 +75,7 @@ export default function AdminPage() {
     setLoading(true);
     const res = await fetch("/api/admin/settings", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ phone: stats.phone }),
     });
     setLoading(false);
@@ -44,6 +84,15 @@ export default function AdminPage() {
       setTimeout(() => setMessage(""), 3000);
     }
   };
+
+  // Loading state while checking session
+  if (isLoggedIn === null) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-gray-500 font-medium text-lg animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
   if (!isLoggedIn) {
     return (
@@ -85,16 +134,30 @@ export default function AdminPage() {
             </h1>
             <p className="text-gray-500 text-sm">Welcome back, Sunil. Here's what's happening today.</p>
           </div>
-          <button 
-            onClick={() => window.location.reload()}
-            className="text-gray-500 hover:text-red-600 font-medium"
-          >
-            Logout
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={fetchStats}
+              className="text-gray-500 hover:text-red-600 font-medium text-sm border border-gray-200 px-3 py-1.5 rounded-lg hover:border-red-300 transition"
+            >
+              🔄 Refresh
+            </button>
+            <button
+              onClick={handleLogout}
+              className="text-gray-500 hover:text-red-600 font-medium"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4">
+        {fetchError && (
+          <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
+            ⚠️ {fetchError}
+          </div>
+        )}
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 relative overflow-hidden group">
@@ -118,6 +181,7 @@ export default function AdminPage() {
             <p className="text-green-100 text-sm leading-relaxed">
               Database linked successfully! Click stats are now permanently and securely saved across redeployments.
             </p>
+            <p className="text-green-200 text-xs mt-2">Auto-refreshes every 30s</p>
           </div>
         </div>
 
