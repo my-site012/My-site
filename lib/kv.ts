@@ -10,75 +10,66 @@ export function isKvAvailable(): boolean {
   return !!(KV_URL && KV_TOKEN);
 }
 
-async function kvFetch(command: string): Promise<any> {
+/**
+ * Execute a Redis command by POSTing a JSON array of arguments to the root Upstash endpoint.
+ * This is the standard, safest way to send commands and handles all argument serialization.
+ */
+async function kvCommand(args: any[]): Promise<any> {
   if (!KV_URL || !KV_TOKEN) {
     console.error("KV env vars missing: KV_REST_API_URL or KV_REST_API_TOKEN not set");
     return null;
   }
   try {
-    const res = await fetch(`${KV_URL}/${command}`, {
-      headers: { Authorization: `Bearer ${KV_TOKEN}` },
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      console.error(`KV fetch error: ${res.status} ${res.statusText}`);
-      return null;
-    }
-    const json = await res.json();
-    return json?.result ?? null;
-  } catch (err) {
-    console.error("KV fetch exception:", err);
-    return null;
-  }
-}
-
-async function kvPost(endpoint: string, body: any): Promise<any> {
-  if (!KV_URL || !KV_TOKEN) return null;
-  try {
-    const res = await fetch(`${KV_URL}/${endpoint}`, {
+    const res = await fetch(KV_URL, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${KV_TOKEN}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(args),
       cache: "no-store",
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error(`KV command error: ${res.status} ${res.statusText}`);
+      return null;
+    }
     const json = await res.json();
+    if (json?.error) {
+      console.error("KV Redis error:", json.error);
+      return null;
+    }
     return json?.result ?? null;
   } catch (err) {
-    console.error("KV post exception:", err);
+    console.error("KV command exception:", err);
     return null;
   }
 }
 
 /** Increment a numeric counter using INCR */
 export async function incrementCounter(key: string): Promise<number> {
-  const result = await kvFetch(`incr/${encodeURIComponent(key)}`);
+  const result = await kvCommand(["INCR", key]);
   return result ? Number(result) : 0;
 }
 
 /** Set a key/value pair */
 export async function setValue(key: string, value: string): Promise<void> {
-  await kvFetch(`set/${encodeURIComponent(key)}/${encodeURIComponent(value)}`);
+  await kvCommand(["SET", key, value]);
 }
 
 /** Set a key to a JSON-serialized object */
 export async function setJson(key: string, value: any): Promise<void> {
-  const encoded = encodeURIComponent(JSON.stringify(value));
-  await kvFetch(`set/${encodeURIComponent(key)}/${encoded}`);
+  await kvCommand(["SET", key, JSON.stringify(value)]);
 }
 
 /** Get a string value */
 export async function getValue(key: string): Promise<string | null> {
-  const result = await kvFetch(`get/${encodeURIComponent(key)}`);
+  const result = await kvCommand(["GET", key]);
   return result !== null ? String(result) : null;
 }
 
 /** Get a JSON value */
 export async function getJson<T = any>(key: string): Promise<T | null> {
-  const result = await kvFetch(`get/${encodeURIComponent(key)}`);
+  const result = await kvCommand(["GET", key]);
   if (result === null) return null;
   try {
     return (typeof result === "string" ? JSON.parse(result) : result) as T;
@@ -89,37 +80,35 @@ export async function getJson<T = any>(key: string): Promise<T | null> {
 
 /** Push items to a list (LPUSH) */
 export async function lPush(key: string, ...values: string[]): Promise<void> {
-  await kvPost(`lpush/${encodeURIComponent(key)}`, values);
+  if (!values.length) return;
+  await kvCommand(["LPUSH", key, ...values]);
 }
 
 /** Get items from a list (LRANGE) */
 export async function lRange(key: string, start: number, stop: number): Promise<string[]> {
-  const result = await kvFetch(`lrange/${encodeURIComponent(key)}/${start}/${stop}`);
+  const result = await kvCommand(["LRANGE", key, start, stop]);
   return Array.isArray(result) ? result : [];
 }
 
 /** Trim a list (LTRIM) */
 export async function lTrim(key: string, start: number, stop: number): Promise<void> {
-  await kvFetch(`ltrim/${encodeURIComponent(key)}/${start}/${stop}`);
+  await kvCommand(["LTRIM", key, start, stop]);
 }
 
 /** Get list length (LLEN) */
 export async function lLen(key: string): Promise<number> {
-  const result = await kvFetch(`llen/${encodeURIComponent(key)}`);
+  const result = await kvCommand(["LLEN", key]);
   return result ? Number(result) : 0;
 }
 
 /** Get multiple keys (MGET) */
 export async function mGet(keys: string[]): Promise<(string | null)[]> {
   if (!keys.length) return [];
-  const encodedKeys = keys.map(k => encodeURIComponent(k)).join("/");
-  const result = await kvFetch(`mget/${encodedKeys}`);
+  const result = await kvCommand(["MGET", ...keys]);
   return Array.isArray(result) ? result : [];
 }
 
-/**
- * Push an object to a list (prepend) and trim to keep max length.
- */
+/** Push an object to a list (prepend) and trim to keep max length. */
 export async function pushLog(key: string, log: any, maxLength: number = 1500): Promise<void> {
   try {
     await lPush(key, JSON.stringify(log));
@@ -129,15 +118,19 @@ export async function pushLog(key: string, log: any, maxLength: number = 1500): 
   }
 }
 
-/**
- * Get items from a list, auto-parsing JSON.
- */
+/** Get items from a list, auto-parsing JSON and handling double-encoded legacy formats. */
 export async function getLogs(key: string, count: number = 100): Promise<any[]> {
   try {
     const items = await lRange(key, 0, count - 1);
     return items.map((item) => {
       try {
-        return typeof item === "string" ? JSON.parse(item) : item;
+        let parsed = typeof item === "string" ? JSON.parse(item) : item;
+        // Handle double-encoded array format from the previous LPUSH payload structure
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const inner = parsed[0];
+          parsed = typeof inner === "string" ? JSON.parse(inner) : inner;
+        }
+        return parsed;
       } catch {
         return item;
       }
@@ -148,5 +141,5 @@ export async function getLogs(key: string, count: number = 100): Promise<any[]> 
   }
 }
 
-// Legacy export — kept for compatibility with any code that checks `if (!kv)`
+// Legacy export — kept for compatibility
 export const kv = null;
