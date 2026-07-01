@@ -17,8 +17,31 @@ export default function MassageDirectory() {
   const states = getAllStates();
   const allCities = getAllCities();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Massage Service Directory India",
+    "description": "Browse local full body massage service, female to male spa, B2B massage, and home delivery massage in all states across India.",
+    "url": "https://callgirl4u.com/massage",
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": states.length,
+      "itemListElement": states.map((state, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://callgirl4u.com/massage`,
+        "name": `Massage Service in ${state}`
+      }))
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
+      {/* Dynamic SEO JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="bg-white py-12 border-b shadow-sm">
         <div className="max-w-4xl mx-auto px-4 text-center">

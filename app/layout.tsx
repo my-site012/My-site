@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AgeVerification from "@/components/AgeVerification";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://callgirl4u.com"),
@@ -40,7 +37,7 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="4q9gLbRNwfJE0crAutXcsgeVLQloYZ6L7aSihfNXfo8" />
       </head>
-      <body className={inter.className}>
+      <body className="antialiased">
         <AgeVerification />
         <Header />
         <main className="min-h-screen">

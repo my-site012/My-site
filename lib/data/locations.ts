@@ -13,8 +13,9 @@ export const locations: Record<string, string[]> = {
     "Itanagar", "Tawang", "Pasighat", "Lower Subansiri", "Ziro"
   ],
   "Assam": [
-    "Guwahati", "Dibrugarh", "Jorhat", "Silchar", "Rangia",
-    "Nagaon", "Bongaigaon", "Tinsukia", "Tezpur", "Digboi", "Sonari"
+    "Bongaigaon", "Dibrugarh", "Digboi", "Dispur", "Dhubri",
+    "Dubri", "Guwahati", "Jorhat", "Nagaon", "Rangia",
+    "Silchar", "Sonari", "Tezpur", "Tinsukia"
   ],
   "Bihar": [
     "Patna", "Gaya", "Muzaffarpur", "Bhagalpur", "Purnia",
@@ -26,46 +27,53 @@ export const locations: Record<string, string[]> = {
     "Bodh Gaya"
   ],
   "Chhattisgarh": [
-    "Raipur", "Bhilai", "Bilaspur", "Kumhari", "Ratanpur",
-    "Korba", "Raigarh", "Jagdalpur", "Ambikapur", "Dhamtari",
-    "Mahasamund", "Durg", "Saraipali"
+    "Ambikapur", "Bhilai", "Bilaspur", "Dhamtari", "Dhamtri",
+    "Durg", "Gaurela", "Jagadalpur", "Jagdalpur", "Korba",
+    "Kumhari", "Mahasamund", "Pendra", "Raigarh", "Raipur",
+    "Ratanpur", "Saraipali", "Sarguja"
   ],
   "Goa": [
     "Panaji", "Calangute", "Margao", "Vasco da Gama", "Candolim"
   ],
   "Gujarat": [
-    "Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar",
-    "Bharuch", "Bhuj", "Jamnagar", "Navsari", "Palanpur",
-    "Vapi", "Bhavnagar", "Junagadh", "Gandhidham", "Anand",
-    "Morbi", "Nadiad", "Surendranagar", "Mehsana", "Porbandar",
-    "Valsad", "Gondal", "Godhra", "Patan", "Kalol",
-    "Dahod", "Botad", "Amreli", "Deesa", "Jetpur",
-    "Chikhli", "Bareja", "Sanand", "Bardoli", "Kamrej",
-    "Kosamba", "Rander", "Mandvi", "Dholka", "Veraval",
-    "Halol", "Kandla", "Una", "Kadi", "Rajpipla"
+    "Ahmedabad", "Amreli", "Anand", "Bardoli", "Bareja",
+    "Bhavnagar", "Bharuch", "Bhuj", "Botad", "Chikhli",
+    "Dahod", "Deesa", "Dholka", "Gandhi Nagar", "Gandhidham",
+    "Gandhinagar", "Godhra", "Gondal", "Halol", "Jamnagar",
+    "Jetpur", "Junagadh", "Junagarh", "Kadi", "Kalol",
+    "Kamrej", "Kandla", "Kosamba", "Kutch", "Mandvi",
+    "Mehsana", "Morbi", "Nadiad", "Navsari", "Palanpur",
+    "Patan", "Porbandar", "Rajkot", "Rajpipla", "Rander",
+    "Sanand", "Surat", "Surendranagar", "Una", "Vadodara",
+    "Valsad", "Vapi", "Veraval"
   ],
   "Haryana": [
-    "Gurgaon", "Faridabad", "Ambala", "Karnal", "Bahadurgarh",
-    "Panchkula", "Panipat", "Yamunanagar", "Rohtak", "Hisar",
-    "Sonipat", "Bhiwani", "Sirsa", "Jhajjar", "Jind",
-    "Kurukshetra", "Thanesar", "Kaithal", "Rewari", "Mahendragarh"
+    "Ambala", "Bahadurgarh", "Bhiwani", "Faridabad", "Gohana",
+    "Gurgaon", "Hisar", "Jhajjar", "Jind", "Kaithal",
+    "Karnal", "Kurukshetra", "Kurushetra", "Mahendragarh", "Panchkula",
+    "Panipat", "Rewari", "Rohtak", "Sirsa", "Sonipat",
+    "Thanesar", "Yamunanagar"
   ],
   "Himachal Pradesh": [
-    "Shimla", "Manali", "Dharamshala", "Kullu", "Solan",
-    "Mandi", "Chamba", "Kangra", "Hamirpur", "Palampur",
-    "Una", "Nalagarh", "Baddi", "Ghumarwin"
+    "Baddi", "Bilaspur", "Chamba", "Dharamshala", "Ghumarwin",
+    "Hamirpur", "Kangra", "Kullu", "Manali", "Mandi",
+    "Nalagarh", "Nurpur", "Palampur", "Shimla", "Solan", "Una"
   ],
   "Jharkhand": [
     "Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Deoghar",
     "Hazaribagh", "Giridih", "Ramgarh"
   ],
   "Karnataka": [
-    "Bengaluru", "Mysuru", "Mangaluru", "Hubballi", "Belagavi",
-    "Raichur", "Dharwad", "Kalaburagi", "Davanagere", "Bellary",
-    "Bijapur", "Shimoga", "Tumkur", "Bidar", "Hospet",
-    "Gadag", "Kolar", "Hassan", "Bhadravati", "Chitradurga",
-    "Udupi", "Mandya", "Chikmagalur", "Koppal", "Bagalkot",
-    "Ranebennur", "Haveri", "Bommasandra", "Arsikere", "Sirsi", "Manipal"
+    "Arsikere", "Bagalkot", "Belagavi", "Bellary", "Bengaluru",
+    "Bhadravati", "Bidar", "Bijapur", "Bommasandra", "Chikmagalur",
+    "Chitradurga", "Davanagere", "Devanahalli", "Devanhali", "Dharwad",
+    "Electronic City", "Gadag", "Hassan", "Haveri", "Hospet",
+    "HSR Layout", "Hubballi", "Hubli", "Jainagar", "Jayanagar",
+    "Kalaburagi", "Kolar", "Koppal", "Koramangala", "Kormangla",
+    "Mandya", "Mangalore", "Mangaluru", "Mangluru", "Manipal",
+    "Marathahalli", "Mysore", "Mysuru", "Nelamangala", "Neelmangla",
+    "Raichur", "Ranebennur", "Shimoga", "Sirsi", "Tumkur",
+    "Udupi", "Whitefield"
   ],
   "Kerala": [
     "Kochi", "Thiruvananthapuram", "Kozhikode", "Thrissur", "Kollam",
@@ -80,25 +88,26 @@ export const locations: Record<string, string[]> = {
     "Muvattupuzha", "Kottarakara", "Adoor", "Pattambi", "Aluva"
   ],
   "Madhya Pradesh": [
-    "Bhopal", "Indore", "Jabalpur", "Gwalior", "Ujjain",
-    "Sagar", "Dewas", "Satna", "Ratlam", "Rewa",
-    "Katni", "Singrauli", "Burhanpur", "Khandwa", "Bhind",
-    "Chhindwara", "Guna", "Shivpuri", "Vidisha", "Chhatarpur",
-    "Damoh", "Mandsaur", "Khargone", "Neemuch", "Pithampur",
-    "Dhar", "Itarsi", "Sehore", "Morena", "Betul",
-    "Seoni", "Datia", "Nagda"
+    "Betul", "Bhind", "Bhopal", "Burhanpur", "Chhatarpur",
+    "Chhindwara", "Damoh", "Datia", "Dewas", "Dhar",
+    "Guna", "Gwalior", "Indore", "Itarsi", "Jabalpur",
+    "Katni", "Khajuraaho", "Khandwa", "Khargone", "Mandsaur",
+    "Morena", "Nagda", "Neemuch", "Panchmadi", "Pithampur",
+    "Ratlam", "Rewa", "Sagar", "Satna", "Sehore",
+    "Seoni", "Shivpuri", "Singrauli", "Ujjain", "Vidisha"
   ],
   "Maharashtra": [
-    "Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad",
-    "Navi Mumbai", "Thane", "Pimpri Chinchwad", "Vasai Virar",
-    "Solapur", "Kolhapur", "Amravati", "Latur", "Akola",
-    "Jalgaon", "Dhule", "Sangli", "Ahmednagar", "Raigad",
-    "Chandrapur", "Parbhani", "Bhiwandi", "Ulhasnagar", "Nanded",
-    "Kalyan", "Panvel", "Lonavala", "Baramati", "Jalna",
-    "Bhusawal", "Ratnagiri", "Beed", "Gondia", "Satara",
-    "Barshi", "Yavatmal", "Achalpur", "Osmanabad", "Nandurbar",
-    "Wardha", "Udgir", "Hinganghat", "Mira Bhayandar", "Palghar",
-    "Malegaon", "Ichalkaranji", "Kharadi", "Badlapur", "Ambarnath"
+    "Achalpur", "Ahmednagar", "Akola", "Akot", "Ambarnath",
+    "Ambajogai", "Ambojogai", "Amravati", "Aurangabad", "Badlapur",
+    "Baramati", "Barshi", "Beed", "Bhiwandi", "Bhusawal",
+    "Chandrapur", "Dharashiv", "Dhule", "Dombivali", "Dombivli",
+    "Gondia", "Hinganghat", "Ichalkaranji", "Jalgaon", "Jalna",
+    "Junnar", "Kalyan", "Kharadi", "Kolhapur", "Latur",
+    "Lonavala", "Malegaon", "Mira Bhayandar", "Mumbai", "Nagpur",
+    "Nanded", "Nandurbar", "Nashik", "Navi Mumbai", "Osmanabad",
+    "Palghar", "Panvel", "Parbhani", "Pimpri Chinchwad", "Pune",
+    "Raigad", "Ratnagiri", "Sangli", "Satara", "Solapur",
+    "Thane", "Udgir", "Vasai Virar", "Wardha", "Yavatmal"
   ],
   "Manipur": [
     "Imphal", "Bishnupur"
@@ -119,11 +128,12 @@ export const locations: Record<string, string[]> = {
     "Jharsuguda", "Joda", "Talcher"
   ],
   "Punjab": [
-    "Ludhiana", "Amritsar", "Chandigarh", "Jalandhar", "Patiala",
-    "Mohali", "Pathankot", "Hoshiarpur", "Batala", "Moga",
-    "Fazilka", "Phagwara", "Barnala", "Firozpur", "Kapurthala",
-    "Sangrur", "Rupnagar", "Abohar", "Gurdaspur", "Khanna",
-    "Malerkotla", "Muktsar", "Rajpura", "Sunam", "Faridkot", "Zirakpur"
+    "Abohar", "Ambala", "Amritsar", "Anandpur Sahib", "Barnala",
+    "Batala", "Bathinda", "Chandigarh", "Faridkot", "Fazilka",
+    "Firozpur", "Gurdaspur", "Hoshiarpur", "Hosiyarpur", "Jalandhar",
+    "Kapurthala", "Ludhiana", "Malerkotla", "Mansa", "Moga",
+    "Mohali", "Muktsar", "Patiala", "Pathankot", "Phagwara",
+    "Rajpura", "Rupnagar", "Sangrur", "Sunam", "Zirakpur"
   ],
   "Rajasthan": [
     "Jaipur", "Jodhpur", "Udaipur", "Ajmer", "Kota",
@@ -157,56 +167,59 @@ export const locations: Record<string, string[]> = {
     "Agartala", "Dharmanagar"
   ],
   "Uttar Pradesh": [
-    "Lucknow", "Noida", "Agra", "Varanasi", "Kanpur",
-    "Allahabad", "Meerut", "Ghaziabad", "Prayagraj", "Bareilly",
-    "Gorakhpur", "Aligarh", "Moradabad", "Mathura", "Ayodhya",
-    "Firozabad", "Jhansi", "Muzaffarnagar", "Saharanpur", "Rampur",
-    "Shahjahanpur", "Farrukhabad", "Hapur", "Etawah", "Mirzapur",
-    "Bulandshahr", "Sambhal", "Amroha", "Hardoi", "Fatehpur",
-    "Raebareli", "Jalaun", "Sitapur", "Bahraich", "Unnao",
-    "Jaunpur", "Lakhimpur Kheri", "Banda", "Pilibhit",
-    "Chandauli", "Barabanki", "Gonda", "Mainpuri", "Lalitpur",
-    "Azamgarh", "Bijnor", "Basti", "Ballia", "Greater Noida",
-    "Gomti Nagar", "Indira Nagar", "Vrindavan"
+    "Agra", "Aligarh", "Allahabad", "Amroha", "Ayodhya",
+    "Azamgarh", "Bahraich", "Ballia", "Banda", "Barabanki",
+    "Bareilly", "Basti", "Bijnor", "Bulandshahr", "Chandauli",
+    "Etawah", "Farrukhabad", "Fatehpur", "Firozabad", "Gaziabad",
+    "Ghaziabad", "Gomti Nagar", "Gonda", "Gorakhpur", "Greater Noida",
+    "Hapur", "Hardoi", "Indira Nagar", "Jalaun", "Jaunpur",
+    "Jhansi", "Kanpur", "Lakhimpur Kheri", "Lalitpur", "Lucknow",
+    "Mainpuri", "Mathura", "Meerut", "Merut", "Mirzapur",
+    "Moradabad", "Muzaffarnagar", "Noida", "Pilibhit", "Prayagraj",
+    "Raebareli", "Rampur", "Sahanjhapur", "Saharanpur", "Sambhal",
+    "Shahjahanpur", "Sitapur", "Unnao", "Varanasi", "Vrindavan"
   ],
   "Uttarakhand": [
-    "Dehradun", "Haridwar", "Nainital", "Mussoorie", "Rishikesh",
-    "Roorkee", "Rudrapur", "Kashipur", "Kathgodam", "Kotdwar",
-    "Uttarkashi", "Haldwani"
+    "Almora", "Dehradun", "Haldwani", "Haridwar", "Kashipur",
+    "Kathgodam", "Kotdwar", "Mussoorie", "Nainital", "Pithoragarh",
+    "Rishikesh", "Roorkee", "Rudrapur", "Rurki", "Srinagar",
+    "Tehri", "Tihri", "Uttarkashi"
   ],
   "West Bengal": [
-    "Kolkata", "Howrah", "Durgapur", "Asansol", "Siliguri",
-    "Bardhaman", "Kharagpur", "Malda", "Haldia", "Darjeeling",
-    "Jalpaiguri", "Murshidabad", "Barasat", "Barrackpore", "Hooghly",
-    "Krishnanagar", "Medinipur", "Baharampur", "Habra", "Shantipur",
-    "Dankuni", "Ranaghat", "Raiganj", "Garia", "Rajarhat",
-    "Baruipur", "Dum Dum", "Budge Budge", "Bidhan Nagar",
-    "Balurghat", "Basirhat", "Bankura", "Purulia", "Cooch Behar",
-    "Baranagar", "Bhatpara", "Kamarhati", "Kanchrapara", "Uluberia",
-    "Digha", "Alipurduar", "Paschim Medinipur"
+    "Alipurduar", "Asansol", "Baharampur", "Balurghat", "Bankura",
+    "Baranagar", "Barasat", "Barrackpore", "Baruipur", "Basirhat",
+    "Bhatpara", "Bidhan Nagar", "Bolpur", "Budge Budge", "Cooch Behar",
+    "Dankuni", "Darjeeling", "Digha", "Dum Dum", "Durgapur",
+    "Garia", "Habra", "Haldia", "Hooghly", "Howrah",
+    "Jalpaiguri", "Kamarhati", "Kanchrapara", "Kharagpur", "Kolkata",
+    "Krishnanagar", "Malda", "Medinipur", "Murshidabad", "Paschim Medinipur",
+    "Purulia", "Raiganj", "Rajarhat", "Ranaghat", "Shantiniketan",
+    "Shantipur", "Siliguri", "Uluberia"
   ],
   "Delhi NCR": [
-    "Delhi", "New Delhi", "Dwarka", "Rohini", "Vasant Kunj",
-    "Vasant Vihar", "Connaught Place", "Saket", "Uttam Nagar",
-    "Aerocity", "Mahipalpur", "Nehru Place", "Laxmi Nagar",
-    "Pitampura", "Chattarpur", "Daryaganj", "Paharganj", "Karol Bagh",
-    "Lajpat Nagar", "Munirka", "Paschim Vihar", "Defence Colony",
-    "Golf Links", "Greater Kailash", "Green Park", "Hauz Khas",
-    "Janakpuri", "Malviya Nagar", "Model Town", "Shahdara",
-    "Shalimar Bagh", "Ashok Vihar", "Gulabi Bagh", "Kamla Nagar",
-    "Dilshad Garden", "Chandni Chowk", "Mayur Vihar", "Mehrauli",
-    "Safdarjung Enclave", "Sangam Vihar", "South Extension",
-    "Mukherjee Nagar", "Bhikaji Cama Place", "Chanakyapuri",
-    "Rajendra Nagar", "Rajiv Chowk", "Pragati Maidan",
-    "Patparganj", "Nirman Vihar", "Preet Vihar", "Anand Vihar",
-    "Kailash Colony", "RK Puram", "Sarojini Nagar", "Khan Market",
-    "Jangpura", "Jasola", "New Friends Colony", "Govindpuri",
-    "Okhla", "Sarita Vihar", "Tughlakabad", "Badarpur",
-    "Naraina", "Palam", "Kalkaji", "Ramesh Nagar", "Subhash Nagar",
-    "Kirti Nagar", "Mayapuri", "Moti Nagar", "Patel Nagar",
-    "Punjabi Bagh", "Rajouri Garden", "Tilak Nagar", "Vikaspuri",
-    "Yamuna Vihar", "Vivek Vihar", "Najafgarh", "Dwarka Mor",
-    "Qutub Minar", "GB Road"
+    "Aerocity", "Anand Vihar", "Ashok Vihar", "Badarpur",
+    "Bhikaji Cama Place", "Central Delhi", "Chanakyapuri", "Chandni Chowk",
+    "Chattarpur", "Connaught Place", "Connaught Palace (CP)", "Daryaganj",
+    "Defence Colony", "Delhi", "Dilshad Garden", "Dwarka",
+    "Dwarka Mor", "East Delhi", "GB Road", "Golf Links",
+    "Govindpuri", "Greater Kailash", "Green Park", "Gulabi Bagh",
+    "Hauz Khas", "Janakpuri", "Jankpuri", "Jangpura",
+    "Jasola", "Kailash Colony", "Kalkaji", "Kamla Nagar",
+    "Kapas Hera", "Karol Bagh", "Karolbagh", "Khan Market",
+    "Kirti Nagar", "Lajpat Nagar", "Laxmi Nagar", "Mahipalpur",
+    "Malviya Nagar", "Mayapuri", "Mayur Vihar", "Mehrauli",
+    "Model Town", "Moti Nagar", "Mukherjee Nagar", "Munirka",
+    "Najafgarh", "Nehru Place", "New Delhi", "New Friends Colony",
+    "Nirman Vihar", "North Delhi", "Okhla", "Old Delhi", "Paharganj",
+    "Palam", "Paschim Vihar", "Patel Nagar", "Patparganj",
+    "Pitampura", "Pragati Maidan", "Preet Vihar", "Punjabi Bagh",
+    "Qutub Minar", "Rajendra Nagar", "Rajiv Chowk", "Rajouri Garden",
+    "Ramesh Nagar", "RK Puram", "Rohini", "Sadar Bazar",
+    "Safdarjung Enclave", "Saket", "Sangam Vihar", "Sarita Vihar",
+    "Sarojini Nagar", "Shahdara", "Shalimar Bagh", "South Extension",
+    "Subhash Nagar", "Tilak Nagar", "Tughlakabad", "Uttam Nagar",
+    "Vasant Kunj", "Vasant Vihar", "Vikas Puri", "Vikaspuri",
+    "Vivek Vihar", "West Delhi", "Yamuna Vihar"
   ],
   "Chandigarh": [
     "Chandigarh", "Manimajra"

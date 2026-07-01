@@ -129,8 +129,32 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   const mainImage = profileImages.length > 0 ? profileImages[0] : "";
   const galleryImages = profileImages.slice(1, 4); 
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": `${name} - ${isMassage ? 'Massage Therapist' : 'Independent Call Girl'}`,
+    "image": `https://callgirl4u.com${mainImage}`,
+    "priceRange": `INR ${price}`,
+    "telephone": displayPhone,
+    "url": `https://callgirl4u.com/ad/${id}`,
+    "description": isMassage 
+      ? `Verified Massage Therapist ${name} in ${location}. Contact via WhatsApp/Call for premium body massage services.`
+      : `Verified Call Girl ${name} in ${location}. Contact via WhatsApp/Call for premium companion services.`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": location,
+      "addressRegion": location,
+      "addressCountry": "IN"
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen py-8">
+      {/* Dynamic SEO JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-6xl mx-auto px-4">
         
         <div className="text-sm text-gray-500 mb-6 flex gap-2">

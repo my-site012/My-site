@@ -405,7 +405,7 @@ export default async function MassageCityPage({ params, searchParams }: { params
       {/* Tags Section */}
       <section className="max-w-4xl mx-auto px-4 pb-12">
         <h2 className="text-xl font-bold text-gray-900 mb-4">Related Tags</h2>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mb-6">
           {([
             `Massage in ${cityName}`,
             `${cityName} Massage Service`,
@@ -434,6 +434,84 @@ export default async function MassageCityPage({ params, searchParams }: { params
               </Link>
             );
           })}
+        </div>
+
+        {/* Yellow SEO Tag Cloud */}
+        <div className="bg-[#f7d046] text-gray-950 p-6 rounded-xl border border-yellow-400/30 shadow-sm">
+          <div className="text-xs md:text-sm font-medium leading-relaxed text-justify tracking-wide">
+            {([
+              `Massage in ${cityName}`,
+              `${cityName} Massage Service`,
+              `Body Massage ${cityName}`,
+              `Spa in ${cityName}`,
+              `Female to Male Massage ${cityName}`,
+              `B2B Massage ${cityName}`,
+              `Happy Ending Massage ${cityName}`,
+              `Home Massage ${cityName}`,
+              `Hotel Massage ${cityName}`,
+              `Full Body Massage ${cityName}`,
+              `Massage Parlour in ${cityName}`,
+              `Male to Female Massage ${cityName}`,
+              `Sensual Massage ${cityName}`,
+              `Massage Service near me`,
+              `Therapists in ${cityName}`,
+              `Swedish Massage ${cityName}`,
+              `Deep Tissue Massage ${cityName}`,
+              `Aromatherapy Massage ${cityName}`,
+              `Thai Massage ${cityName}`,
+              `Massage near me`,
+              `Massage Center in ${cityName}`,
+              `Best Massage in ${cityName}`,
+              `Cheap Massage in ${cityName}`,
+              `Massage rates in ${cityName}`,
+              `VIP Massage ${cityName}`,
+              `Verified Massage Parlours ${cityName}`,
+              `Independent Massage Therapist ${cityName}`,
+              `Private Massage ${cityName}`,
+              `Outcall Massage ${cityName}`,
+              `Incall Massage ${cityName}`,
+              `Massage Contact Number ${cityName}`,
+              `Massage WhatsApp Number`,
+              `Adult Massage ${cityName}`,
+              `Erotic Massage ${cityName}`,
+              `Lomi Lomi Massage ${cityName}`,
+              `Hot Stone Massage ${cityName}`,
+              `Sports Massage ${cityName}`,
+              `Foot Massage ${cityName}`,
+              `Head Massage ${cityName}`,
+              `Back Massage ${cityName}`,
+              `Massage for Men in ${cityName}`,
+              `Massage for Women in ${cityName}`,
+              `Couple Massage ${cityName}`,
+              `Massage booking ${cityName}`,
+              `Relaxing Massage ${cityName}`,
+              `Sandwich Massage ${cityName}`,
+              `Nuru Massage ${cityName}`,
+              `Nurru Massage in ${cityName}`,
+              `Body to Body Massage ${cityName}`,
+              `Full Body Massage Center ${cityName}`,
+              `Top Massage Spa ${cityName}`,
+              `Massage therapy ${cityName}`,
+              `Traditional Massage ${cityName}`,
+              `Best Spa Service ${cityName}`,
+              `Spa Massage Center ${cityName}`,
+            ] as string[]).map((tag, idx, arr) => (
+              <span key={idx}>
+                <Link
+                  href={`/massage/${city}`}
+                  title={tag}
+                  className="hover:underline hover:text-black/80 transition-colors"
+                >
+                  {tag}
+                </Link>
+                {idx < arr.length - 1 && (
+                  <span className="mx-2 text-gray-950 font-normal select-none" aria-hidden>
+                    ☛
+                  </span>
+                )}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
     </div>
