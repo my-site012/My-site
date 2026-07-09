@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | CallGirl4U",
+  title: "Terms and Conditions | CallGirl4U India",
+  description: "Read the Terms and Conditions for using CallGirl4U adult classifieds directory in India. Rules regarding platform use, content guidelines, and legal compliance.",
   robots: { index: false, follow: true },
+  alternates: { canonical: "https://callgirl4u.com/terms" }
 };
 
 export default function TermsPage() {

@@ -1,14 +1,24 @@
+import type { Metadata } from "next";
 import StateGrid from "@/components/StateGrid";
 import AdCard from "@/components/AdCard";
 import { getAllCities } from "@/lib/data/locations";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId } from "@/lib/ad-logic";
 import CitySearch from "@/components/CitySearch";
-import { getValue } from "@/lib/kv";
+import { cachedGetValue } from "@/lib/kv";
+
+// ISR: revalidate every hour — homepage content is deterministic
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://callgirl4u.com",
+  },
+};
 
 export default async function Home() {
   // Use a stable seed for featured ads
   const featuredImages = getDeterministicImagesPool("featured-home-seed", 8);
-  const globalPhone = await getValue("contact_phone");
+  const globalPhone = await cachedGetValue("contact_phone");
 
   const websiteSchema = {
     "@context": "https://schema.org",

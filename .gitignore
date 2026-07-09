@@ -42,3 +42,8 @@ next-env.d.ts
 
 .vercel
 .env*.local
+
+# local logs and scratch
+vercel_login_out.log
+task.md
+/scratch/

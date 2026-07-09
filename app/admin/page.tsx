@@ -5,10 +5,30 @@ import { useState, useEffect, useCallback } from "react";
 export default function AdminPage() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null); // null = checking
   const [email, setEmail] = useState("");
-  const [stats, setStats] = useState({ clicks: 0, phone: "", logs: [] as any[] });
+  const [stats, setStats] = useState({ clicks: 0, phone: "", logs: [] as any[], maintenance: false, dailyHits: [] as {date: string; hits: number}[] });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [fetchError, setFetchError] = useState("");
+  const [phones, setPhones] = useState<string[]>(["", "", "", "", "", ""]);
+  const [boyPhones, setBoyPhones] = useState<string[]>(["", "", "", "", "", ""]);
+
+  useEffect(() => {
+    if (stats.phone) {
+      const arr = stats.phone.split(",").map(p => p.trim());
+      const filledArr = [...arr, "", "", "", "", "", ""].slice(0, 6);
+      setPhones(filledArr);
+    }
+  }, [stats.phone]);
+
+  useEffect(() => {
+    if ((stats as any).callBoyPhone) {
+      const arr = (stats as any).callBoyPhone.split(",").map((p: string) => p.trim());
+      const filledArr = [...arr, "", "", "", "", "", ""].slice(0, 6);
+      setBoyPhones(filledArr);
+    } else {
+      setBoyPhones(["", "", "", "", "", ""]);
+    }
+  }, [(stats as any).callBoyPhone]);
 
   const fetchStats = useCallback(async () => {
     try {
@@ -73,14 +93,17 @@ export default function AdminPage() {
   const handleUpdatePhone = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    const phoneString = phones.map(p => p.trim()).filter(Boolean).join(",");
+    const boyPhoneString = boyPhones.map(p => p.trim()).filter(Boolean).join(",");
     const res = await fetch("/api/admin/settings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: stats.phone }),
+      body: JSON.stringify({ phone: phoneString, callBoyPhone: boyPhoneString }),
     });
     setLoading(false);
     if (res.ok) {
-      setMessage("Phone number updated successfully!");
+      setStats(prev => ({ ...prev, phone: phoneString, callBoyPhone: boyPhoneString } as any));
+      setMessage("Phone numbers updated successfully!");
       setTimeout(() => setMessage(""), 3000);
     }
   };
@@ -107,7 +130,7 @@ export default function AdminPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
-                placeholder="worksunil26@gmail.com"
+                placeholder="admin@yourdomain.com"
                 required
               />
             </div>
@@ -185,35 +208,184 @@ export default function AdminPage() {
           </div>
         </div>
 
+        {/* 30-Day WhatsApp Hits Calendar */}
+        {(() => {
+          const dailyHits = stats.dailyHits || [];
+          const maxHits = Math.max(...dailyHits.map(d => d.hits), 1);
+          const today = new Date().toISOString().split("T")[0];
+
+          const getColor = (hits: number) => {
+            if (hits === 0) return { bg: "bg-gray-100", text: "text-gray-300" };
+            const ratio = hits / maxHits;
+            if (ratio > 0.75) return { bg: "bg-green-600", text: "text-white" };
+            if (ratio > 0.5) return { bg: "bg-green-400", text: "text-white" };
+            if (ratio > 0.25) return { bg: "bg-green-200", text: "text-green-900" };
+            return { bg: "bg-green-100", text: "text-green-700" };
+          };
+
+          const totalThisMonth = dailyHits.reduce((sum, d) => sum + d.hits, 0);
+          const todayHits = dailyHits.find(d => d.date === today)?.hits || 0;
+          const avgHits = dailyHits.length > 0 ? Math.round(totalThisMonth / dailyHits.filter(d => d.hits > 0).length || 0) : 0;
+
+          return (
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+              <div className="p-6 border-b border-gray-50 flex flex-wrap justify-between items-center gap-4">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 uppercase tracking-tight flex items-center gap-2">
+                    <span>📅</span> WhatsApp Hits — Last 30 Days
+                  </h3>
+                  <p className="text-xs text-gray-400 mt-1">Har din ke unique WhatsApp clicks ka breakdown</p>
+                </div>
+                <div className="flex gap-4 text-center">
+                  <div className="bg-green-50 rounded-2xl px-4 py-2">
+                    <div className="text-2xl font-black text-green-600">{todayHits}</div>
+                    <div className="text-[10px] text-green-500 font-bold uppercase">Aaj</div>
+                  </div>
+                  <div className="bg-gray-50 rounded-2xl px-4 py-2">
+                    <div className="text-2xl font-black text-gray-800">{totalThisMonth}</div>
+                    <div className="text-[10px] text-gray-400 font-bold uppercase">30 Din Total</div>
+                  </div>
+                  <div className="bg-blue-50 rounded-2xl px-4 py-2">
+                    <div className="text-2xl font-black text-blue-600">{avgHits}</div>
+                    <div className="text-[10px] text-blue-400 font-bold uppercase">Avg/Din</div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-10 gap-2">
+                  {dailyHits.map((day) => {
+                    const { bg, text } = getColor(day.hits);
+                    const isToday = day.date === today;
+                    const dateObj = new Date(day.date + "T00:00:00");
+                    const dayNum = dateObj.getDate();
+                    const monthName = dateObj.toLocaleString("en-IN", { month: "short" });
+                    return (
+                      <div
+                        key={day.date}
+                        title={`${day.date}: ${day.hits} hits`}
+                        className={`group relative flex flex-col items-center justify-center rounded-xl p-2 cursor-default transition-all duration-200 hover:scale-110 hover:shadow-md ${bg} ${isToday ? "ring-2 ring-offset-1 ring-green-500" : ""}`}
+                        style={{ minHeight: 56 }}
+                      >
+                        <span className={`text-[10px] font-bold uppercase ${text} opacity-70`}>{monthName}</span>
+                        <span className={`text-base font-black leading-none ${text}`}>{dayNum}</span>
+                        <span className={`text-xs font-bold mt-0.5 ${text}`}>
+                          {day.hits > 0 ? day.hits : "–"}
+                        </span>
+                        {isToday && (
+                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-white" />
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Legend */}
+                <div className="mt-4 flex items-center gap-3 justify-end">
+                  <span className="text-[10px] text-gray-400 font-semibold">Kam</span>
+                  <div className="flex gap-1">
+                    {["bg-gray-100", "bg-green-100", "bg-green-200", "bg-green-400", "bg-green-600"].map((c) => (
+                      <div key={c} className={`w-4 h-4 rounded ${c}`} />
+                    ))}
+                  </div>
+                  <span className="text-[10px] text-gray-400 font-semibold">Zyada</span>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
         {/* Settings Section */}
+
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6 border-b border-gray-50">
             <h3 className="text-lg font-bold text-gray-900 uppercase tracking-tight">Global Meta & Contact Settings</h3>
           </div>
           <div className="p-8">
             <form onSubmit={handleUpdatePhone} className="max-w-2xl space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Global WhatsApp Number</label>
-                  <input
-                    type="text"
-                    value={stats.phone}
-                    onChange={(e) => setStats({ ...stats, phone: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition"
-                    placeholder="919119332977"
-                  />
-                  <p className="mt-1.5 text-[10px] text-gray-400">Include country code, e.g. 918905822138</p>
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-4">
+                  Rotated Contact Numbers (Up to 6 numbers)
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {phones.map((phoneVal, i) => (
+                    <div key={i}>
+                      <label className="block text-xs font-bold text-gray-400 mb-1">Number {i + 1}</label>
+                      <input
+                        type="text"
+                        value={phoneVal}
+                        onChange={(e) => {
+                          const updated = [...phones];
+                          updated[i] = e.target.value;
+                          setPhones(updated);
+                        }}
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition text-sm"
+                        placeholder="e.g. 918905822138"
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Global Phone Number</label>
-                  <input
-                    type="text"
-                    value={stats.phone}
-                    disabled
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-gray-400 cursor-not-allowed"
-                    placeholder="Same as WhatsApp"
-                  />
-                  <p className="mt-1.5 text-[10px] text-gray-400">For "Call Now" buttons</p>
+                <p className="mt-3 text-[10px] text-gray-400">
+                  Include country code (e.g. 91 for India). Calls &amp; WhatsApp clicks will rotate deterministically and distribute evenly across all filled numbers.
+                </p>
+              </div>
+
+              <div className="border-t border-gray-100 pt-6">
+                <label className="block text-sm font-bold text-gray-700 mb-4">
+                  Call Boy Dedicated Numbers (Up to 6 numbers)
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {boyPhones.map((phoneVal, i) => (
+                    <div key={i}>
+                      <label className="block text-xs font-bold text-gray-400 mb-1">Number {i + 1}</label>
+                      <input
+                        type="text"
+                        value={phoneVal}
+                        onChange={(e) => {
+                          const updated = [...boyPhones];
+                          updated[i] = e.target.value;
+                          setBoyPhones(updated);
+                        }}
+                        className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 outline-none transition text-sm"
+                        placeholder="e.g. 918905822138"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-[10px] text-gray-400">
+                  Dedicated numbers only used for the Call Boy category. If empty, it will fall back to general rotated numbers.
+                </p>
+              </div>
+
+              <div className="border-t border-gray-100 pt-6">
+                <h4 className="text-sm font-bold text-gray-700 mb-2">Maintenance Mode</h4>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const newStatus = !stats.maintenance;
+                      setStats({ ...stats, maintenance: newStatus });
+                      setLoading(true);
+                      const res = await fetch("/api/admin/settings", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ maintenance: newStatus }),
+                      });
+                      setLoading(false);
+                      if (res.ok) {
+                        setMessage(`Maintenance mode ${newStatus ? "ENABLED" : "DISABLED"} successfully!`);
+                        setTimeout(() => setMessage(""), 3000);
+                      }
+                    }}
+                    className={`px-4 py-2 rounded-xl font-bold transition-all shadow-md active:scale-95 cursor-pointer ${
+                      stats.maintenance 
+                        ? "bg-red-600 text-white hover:bg-red-700" 
+                        : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                    }`}
+                  >
+                    {stats.maintenance ? "🔴 Maintenance Active" : "🟢 Maintenance Off"}
+                  </button>
+                  <p className="text-xs text-gray-500">
+                    If active, all non-admin visitors will be redirected to the maintenance page.
+                  </p>
                 </div>
               </div>
 

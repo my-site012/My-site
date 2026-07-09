@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "DMCA Policy | CallGirl4U",
+  title: "DMCA Copyright Policy | CallGirl4U India",
+  description: "DMCA Policy and Takedown Request procedure for CallGirl4U. Guidelines for reporting copyright infringement or content removal requests.",
   robots: { index: false, follow: true },
+  alternates: { canonical: "https://callgirl4u.com/dmca" }
 };
 
 export default function DMCAPage() {

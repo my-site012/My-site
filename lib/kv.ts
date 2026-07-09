@@ -2,6 +2,7 @@
  * Direct Upstash REST API client — no @vercel/kv library needed.
  * Uses plain fetch() calls which always work in Next.js Edge/Serverless.
  */
+import { unstable_cache } from "next/cache";
 
 const KV_URL = process.env.KV_REST_API_URL || "https://balanced-ibex-111880.upstash.io";
 const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
@@ -51,9 +52,42 @@ export async function incrementCounter(key: string): Promise<number> {
   return result ? Number(result) : 0;
 }
 
+/** Increment a daily counter key and set 32-day TTL (so it auto-expires after 30+ days) */
+export async function incrementDailyCounter(key: string): Promise<number> {
+  const result = await kvCommand(["INCR", key]);
+  const count = result ? Number(result) : 0;
+  // Set TTL only on first creation (count===1), so we don't reset it on every hit
+  if (count === 1) {
+    await kvCommand(["EXPIRE", key, 32 * 24 * 3600]); // 32 days
+  }
+  return count;
+}
+
+/** Get WhatsApp hits for the last 30 days. Returns array of {date, hits} */
+export async function getDailyHits(days: number = 30): Promise<{ date: string; hits: number }[]> {
+  const dates: string[] = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date();
+    d.setUTCDate(d.getUTCDate() - i);
+    dates.push(d.toISOString().split("T")[0]);
+  }
+  const keys = dates.map((d) => `whatsapp_daily:${d}`);
+  const values = await mGet(keys);
+  return dates.map((date, idx) => ({
+    date,
+    hits: values[idx] ? Number(values[idx]) : 0,
+  }));
+}
+
 /** Set a key/value pair */
 export async function setValue(key: string, value: string): Promise<void> {
   await kvCommand(["SET", key, value]);
+}
+
+/** Set a key with EX (expiry) and NX (only if not exists) options. Returns true if key was set. */
+export async function setNx(key: string, value: string, expirySeconds: number): Promise<boolean> {
+  const result = await kvCommand(["SET", key, value, "EX", expirySeconds, "NX"]);
+  return result === "OK";
 }
 
 /** Set a key to a JSON-serialized object */
@@ -143,3 +177,14 @@ export async function getLogs(key: string, count: number = 100): Promise<any[]> 
 
 // Legacy export — kept for compatibility
 export const kv = null;
+
+/**
+ * Cached version of getValue — safe to use in ISR pages (revalidate = 3600).
+ * Wraps the Upstash KV fetch in unstable_cache so Next.js can participate in ISR.
+ * Cache is keyed by the KV key and revalidated every hour.
+ */
+export const cachedGetValue = unstable_cache(
+  async (key: string): Promise<string | null> => getValue(key),
+  ["kv-value"],
+  { revalidate: 3600 }
+);

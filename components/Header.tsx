@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getAllCities } from "@/lib/data/locations";
 import CitySearch from "./CitySearch";
+import LanguageSelector from "./LanguageSelector";
 
 export default function Header() {
   return (
@@ -17,6 +18,9 @@ export default function Header() {
           <span className="text-xl">🇮🇳</span>
           <span className="text-[10px] md:text-xs font-black tracking-widest text-gray-800 uppercase">India</span>
         </div>
+
+        {/* Language Selector Dropdown */}
+        <LanguageSelector />
 
         {/* Search */}
         <div className="flex-1 max-w-[120px] xs:max-w-[200px] md:max-w-md ml-auto">

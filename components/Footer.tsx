@@ -27,7 +27,7 @@ export default function Footer() {
         <div className="flex gap-4 text-sm text-gray-600">
           <span>Follow us:</span>
           <a href="#">Youtube</a>
-          <a href="#">Blog</a>
+          <Link href="/blog">Blog</Link>
         </div>
 
         {/* Badges */}

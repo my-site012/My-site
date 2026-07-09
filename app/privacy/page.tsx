@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | CallGirl4U",
+  title: "Privacy Policy | CallGirl4U India",
+  description: "CallGirl4U Privacy Policy. Learn how we collect, store, and protect user data and ensure privacy across our adult classifieds platform in India.",
   robots: { index: false, follow: true },
+  alternates: { canonical: "https://callgirl4u.com/privacy" }
 };
 
 export default function PrivacyPage() {

@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   }
 };
 
+import ServiceStateGrid from "@/components/ServiceStateGrid";
+
 export default function MassageDirectory() {
   const states = getAllStates();
   const allCities = getAllCities();
@@ -58,41 +60,8 @@ export default function MassageDirectory() {
         </div>
       </section>
 
-      {/* States Grid */}
-      <section className="max-w-7xl mx-auto px-4 py-16">
-        <h2 className="text-2xl text-gray-900 mb-10 border-l-4 border-purple-600 pl-4 uppercase tracking-tight">
-          Find Massage Service by City & State
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {states.map((state) => (
-            <div key={state} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
-              <div className="bg-gray-900 px-6 py-4 flex justify-between items-center">
-                <h3 className="text-white text-lg">{state}</h3>
-              </div>
-
-              <div className="p-6">
-                <div className="flex flex-wrap gap-2">
-                  {locations[state].slice(0, 10).map((city) => (
-                    <Link
-                      key={city}
-                      href={`/massage/${getCitySlug(city)}`}
-                      className="px-3 py-1.5 bg-gray-50 text-gray-700 text-sm rounded-lg border border-gray-200 hover:border-purple-400 hover:text-purple-600 transition-colors"
-                    >
-                      {city}
-                    </Link>
-                  ))}
-                  {locations[state].length > 10 && (
-                    <span className="px-3 py-1.5 bg-purple-50 text-purple-600 text-sm font-bold rounded-lg border border-purple-100">
-                      +{locations[state].length - 10} More Cities
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Full States & Cities Grid */}
+      <ServiceStateGrid category="massage" />
 
       {/* Service Types */}
       <section className="max-w-4xl mx-auto px-4 py-12 border-t text-gray-800">

@@ -295,7 +295,7 @@ export const imagePool = [
     "imgi_17_47566IMG-20260219-WA0022.webp",
     "imgi_17_50019IMG-20260203-WA0023.webp",
     "imgi_17_51146IMG-20260110-WA0070.webp",
-    "imgi_17_69283IMG-20260312-WA0098.webp",
+    "imgi_17_155097636300.webp",
     "imgi_17_92149IMG_20260207_102319_783.webp",
     "imgi_17_SCH-63903472228638-2103213618.webp",
     "imgi_182_219129.webp",
@@ -807,7 +807,8 @@ export function getPriceFromId(seed: string): number {
 export function getDeterministicImagesPool(seed: string, count: number): string[] {
   if (imagePool.length === 0) return [];
 
-  const hash = getHash(seed);
+  // Append salt to seed to completely shuffle the image pool assignments while keeping names/prices consistent
+  const hash = getHash(seed + "-shuffled-salt-v3");
   const result: string[] = [];
   const usedIndices = new Set<number>();
   
@@ -840,9 +841,82 @@ export function getDeterministicImagesPool(seed: string, count: number): string[
   return result;
 }
 
+// ── CALL BOY SPECIFIC IMAGE POOL (Indian male photos) ─────────────────────────
+export const boyImagePool = [
+  "Call Boys/photo-1508341591423-4347099e1f19.avif",
+  "Call Boys/photo-1533831930057-6aa5b6988581.avif",
+  "Call Boys/photo-1542882038-6090d99603ac.avif",
+  "Call Boys/photo-1571366992791-2ad2078656cb.avif",
+  "Call Boys/photo-1571367034861-e6729ad9c2d5.avif",
+  "Call Boys/photo-1572853366277-ecbf6650ad8e.avif",
+  "Call Boys/photo-1591278169022-4eac0c7d1e3f.avif",
+  "Call Boys/photo-1607081692251-d689f1b9af84.avif",
+  "Call Boys/photo-1607346256330-dee7af15f7c5.avif",
+  "Call Boys/photo-1609770653328-a4d1dd377970.avif",
+  "Call Boys/photo-1612681051163-6c1ad652d143.avif",
+  "Call Boys/photo-1615712051258-7eb1af053a99.avif",
+  "Call Boys/photo-1616002851413-ebcc9611139d.avif",
+  "Call Boys/photo-1618926749434-0578ceecdfab.avif",
+  "Call Boys/photo-1620730389901-ba3d6070c45c.avif",
+  "Call Boys/photo-1625327009034-039a65fa3153.avif",
+  "Call Boys/photo-1629301085299-a0b879255825.avif",
+  "Call Boys/photo-1637651808680-d054b0744fe8.avif",
+  "Call Boys/photo-1642152654273-5d11f9d3de3b.avif",
+  "Call Boys/photo-1662145349402-f78c521eccb0.avif",
+  "Call Boys/photo-1670110531916-41045e83cb0a.avif",
+  "Call Boys/photo-1694871420544-e13a86f35772.avif",
+  "Call Boys/photo-1694871420556-818ab550ba95.avif",
+  "Call Boys/photo-1722536626315-9f9426b021da.avif",
+  "Call Boys/photo-1727278465739-b3b5266e18de.avif",
+  "Call Boys/photo-1729157661483-ed21901ed892.avif",
+  "Call Boys/premium_photo-1681409179337-990eec9f2fd4.avif",
+  "Call Boys/premium_photo-1682089869602-2ec199cc501a.avif",
+  "Call Boys/premium_photo-1682092093534-c16eb3ea13c8.avif",
+  "Call Boys/premium_photo-1691032055358-74e1a0128a8b.avif",
+  "Call Boys/premium_photo-1691030254390-aa56b22e6a45.avif",
+  "Call Boys/premium_photo-1722889137160-c1ca17ae0084.avif",
+  "Call Boys/premium_photo-1725021059049-0b00286ae855.avif",
+];
+
+export const boyNames = [
+  "Rahul", "Arjun", "Vikram", "Rohan", "Karan",
+  "Aditya", "Siddharth", "Nikhil", "Ravi", "Suresh",
+  "Deepak", "Amit", "Vishal", "Ajay", "Pankaj",
+  "Manish", "Sandeep", "Rajesh", "Varun", "Tarun",
+  "Akash", "Sachin", "Mohit", "Sumit", "Vivek",
+  "Gaurav", "Ankit", "Harsh", "Kunal", "Sunny",
+  "Dev", "Aman", "Abhi", "Rajan", "Saurav",
+  "Prateek", "Shivam", "Pranav", "Anand", "Kartik",
+  "Tushar", "Yogesh", "Ashish", "Neeraj", "Praveen",
+  "Kapil", "Rakesh", "Dinesh", "Mukesh", "Sunil",
+];
+
+export function getBoyNameFromId(seed: string): string {
+  const hash = getHash(seed);
+  return boyNames[hash % boyNames.length];
+}
+
+export function getDeterministicBoyImagesPool(seed: string, count: number): string[] {
+  if (boyImagePool.length === 0) return [];
+  const hash = getHash(seed + "-boy-salt-v1");
+  const result: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const index = (hash + (i * 7)) % boyImagePool.length;
+    const parts = boyImagePool[index].split('/');
+    const encodedPath = parts.map(p => encodeURIComponent(p)).join('/');
+    result.push(`/images/${encodedPath}`);
+  }
+  return result;
+}
+
 export const CONTACT_PHONE = "+918905586425";
 
-export function getContactNumber(seed: string): string {
-  // Currently one central number, but can be scaled per seed/city
+export function getContactNumber(seed: string, globalPhoneValue?: string | null): string {
+  const rawPhones = globalPhoneValue || CONTACT_PHONE;
+  const phonesList = rawPhones.split(",").map(p => p.trim()).filter(Boolean);
+  if (phonesList.length > 0) {
+    const hash = getHash(seed);
+    return phonesList[hash % phonesList.length];
+  }
   return CONTACT_PHONE;
 }

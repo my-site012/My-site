@@ -2,10 +2,11 @@ import { getAllCities, getCitySlug, getStateFromCity } from "@/lib/data/location
 import AdCard from "@/components/AdCard";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getDeterministicImagesPool, getNameFromId, getPriceFromId } from "@/lib/ad-logic";
-import { getValue } from "@/lib/kv";
+import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
+import { cachedGetValue } from "@/lib/kv";
 
-export const dynamic = 'force-dynamic';
+// ISR: revalidate every hour — content is deterministic, no need to re-render on every request
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return getAllCities().map(city => ({
@@ -197,7 +198,7 @@ export default async function MassageCityPage({ params, searchParams }: { params
 
   const totalPages = Math.ceil(totalAdsToShow / adsPerPage);
 
-  const globalPhone = await getValue("contact_phone");
+  const globalPhone = await cachedGetValue("contact_phone");
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -220,11 +221,14 @@ export default async function MassageCityPage({ params, searchParams }: { params
             "@type": "LocalBusiness",
             "name": `${adName} - Massage Therapist`,
             "image": `https://callgirl4u.com${imgPath}`,
+            "telephone": getContactNumber(adId, globalPhone),
             "priceRange": `INR ${price}`,
             "address": {
               "@type": "PostalAddress",
               "addressLocality": cityName,
               "addressRegion": state,
+              "postalCode": (110001 + (getHash(cityName) % 889999)).toString(),
+              "streetAddress": `${cityName} City Center`,
               "addressCountry": "IN"
             }
           }
@@ -233,13 +237,59 @@ export default async function MassageCityPage({ params, searchParams }: { params
     }
   };
 
+  // FAQ Schema for Google Rich Results (Massage)
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Is massage service in ${cityName} available at home or hotel?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes. Most massage therapists listed in ${cityName} offer both home delivery and hotel room service. You can confirm the location directly with the therapist via WhatsApp. Services are available 24/7.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to pay any advance booking fee for massage service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No advance payment is required. All massage services listed follow a strict Cash on Delivery policy. Pay only in cash after the session is complete. Never transfer money online to any massage provider."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What types of massage are available in ${cityName}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Our ${cityName} massage directory includes Full Body Massage, B2B (Body to Body) Massage, Swedish Massage, Aromatherapy Spa, Deep Tissue Massage, and Female to Male Massage. All services are offered by trained professionals.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What is the approximate rate for massage service in ${cityName}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Massage service rates in ${cityName} vary by session type and duration. Standard full body massage starts from approximately INR 1,500 per hour. B2B and special sessions may range from INR 2,500 to INR 6,000. Always confirm rates directly with the therapist.`
+        }
+      }
+    ]
+  };
+
   return (
     <div className="bg-gray-50 pb-12">
-      {/* Dynamic SEO JSON-LD */}
+      {/* Dynamic SEO JSON-LD — CollectionPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* FAQ Schema — Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
 
       <section className="bg-white py-10 border-b">
         <div className="max-w-4xl mx-auto px-4 text-center">
@@ -511,6 +561,33 @@ export default async function MassageCityPage({ params, searchParams }: { params
                 )}
               </span>
             ))}
+          </div>
+        </div>
+
+        {/* Cross-Service Interlinking Section */}
+        <div className="max-w-4xl mx-auto px-4 mt-8 pt-8 border-t border-gray-200">
+          <h3 className="text-lg font-bold text-gray-900 mb-4 uppercase tracking-wider text-center">
+            Other Adult Services Available in {cityName}
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href={`/call-girls/${city}`}
+              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
+            >
+              💃 Call Girls in {cityName}
+            </Link>
+            <Link
+              href={`/call-boys/${city}`}
+              className="px-4 py-2 bg-blue-50 text-blue-600 text-sm font-bold rounded-xl border border-blue-100 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
+            >
+              👨 Call Boys in {cityName}
+            </Link>
+            <Link
+              href={`/massage`}
+              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm"
+            >
+              📍 All India Massage Directory
+            </Link>
           </div>
         </div>
       </section>

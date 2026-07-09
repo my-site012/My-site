@@ -16,9 +16,8 @@ export default function CitySearch({ cities, layout = "header" }: CitySearchProp
 
   // Initialize category based on URL path
   const getInitialCategory = () => {
-    if (pathname?.startsWith("/massage")) {
-      return "massage";
-    }
+    if (pathname?.startsWith("/massage")) return "massage";
+    if (pathname?.startsWith("/call-boys")) return "call-boys";
     return "call-girls";
   };
 
@@ -41,15 +40,19 @@ export default function CitySearch({ cities, layout = "header" }: CitySearchProp
     router.push(`/${category}/${slug}`);
   };
 
-  const categories = ["Category: Call Girls", "Category: Massage"];
+  const categories = ["Category: Call Girls", "Category: Call Boys", "Category: Massage"];
   
   const getCategoryDisplay = (catVal: string) => {
-    return catVal === "massage" ? "Category: Massage" : "Category: Call Girls";
+    if (catVal === "massage") return "Category: Massage";
+    if (catVal === "call-boys") return "Category: Call Boys";
+    return "Category: Call Girls";
   };
 
   const handleCategoryChange = (displayVal: string) => {
     if (displayVal.includes("Massage")) {
       setCategory("massage");
+    } else if (displayVal.includes("Call Boys")) {
+      setCategory("call-boys");
     } else {
       setCategory("call-girls");
     }

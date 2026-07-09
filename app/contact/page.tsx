@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | CallGirl4U",
+  title: "Contact Us | CallGirl4U Support",
+  description: "Get in touch with CallGirl4U support for assistance, ad inquiries, or platform feedback. 24/7 customer support via email.",
   robots: { index: false, follow: true },
+  alternates: { canonical: "https://callgirl4u.com/contact" }
 };
 
 export default function ContactPage() {

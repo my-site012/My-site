@@ -2,22 +2,54 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getAllCities, getCitySlug } from './lib/data/locations';
 
-// A regex containing common search engine and crawling bots to exclude them from redirection.
-// This allows bots (like Googlebot) to crawl and index the homepage '/' normally.
-const BOTS_REGEX = /bot|googlebot|bingbot|crawler|spider|robot|crawling/i;
+const BOTS_REGEX = /bot|googlebot|bingbot|crawler|spider|robot|crawling|ahrefs|siteaudit|semrush|screaming|gtmetrix/i;
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
-  // Only apply geolocation-based redirect when visiting the homepage '/'
+  // 1. MAINTENANCE MODE CHECK
+  const isExempt = 
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/api/admin') ||
+    pathname.startsWith('/maintenance') ||
+    pathname.startsWith('/_next') ||
+    pathname.includes('.') || 
+    pathname.startsWith('/images') ||
+    pathname.startsWith('/api/report') ||
+    pathname.startsWith('/api/whatsapp-click');
+
+  if (!isExempt) {
+    try {
+      const KV_URL = process.env.KV_REST_API_URL || "https://balanced-ibex-111880.upstash.io";
+      const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
+
+      const res = await fetch(`${KV_URL}/get/maintenance_mode`, {
+        headers: { Authorization: `Bearer ${KV_TOKEN}` },
+        cache: 'no-store',
+        signal: AbortSignal.timeout(500),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const isMaintenance = data?.result === "true";
+        if (isMaintenance) {
+          const maintenanceUrl = new URL('/maintenance', request.url);
+          return NextResponse.redirect(maintenanceUrl, 307);
+        }
+      }
+    } catch (e) {
+      // Quietly ignore timeout/network errors to prevent breaking user/bot traffic
+    }
+  }
+
+  // 2. GEOLOCATION REDIRECT FOR HOME PAGE
   if (pathname === '/') {
-    // 1. Skip redirect for search engine crawlers to ensure homepage indexes perfectly on Google
+    // Skip redirect for search engine crawlers
     const userAgent = request.headers.get('user-agent') || '';
     if (BOTS_REGEX.test(userAgent)) {
       return NextResponse.next();
     }
 
-    // 2. Skip redirect if request is internal (e.g. user clicked logo/home link from within the site)
+    // Skip redirect if request is internal
     const referer = request.headers.get('referer');
     const isInternal = referer && (
       referer.includes('callgirl4u.com') || 
@@ -25,14 +57,13 @@ export function middleware(request: NextRequest) {
       referer.includes('vercel.app')
     );
     
-    // Also support an explicit query parameter bypass
     const hasBypassParam = searchParams.get('noredirect') === 'true';
 
     if (isInternal || hasBypassParam) {
       return NextResponse.next();
     }
 
-    // 3. Check for cookie-based user choice (e.g. if logo is clicked)
+    // Check for cookie-based user choice
     const cookieCity = request.cookies.get('user-city')?.value;
     const cookieCategory = request.cookies.get('user-category')?.value || 'call-girls';
 
@@ -47,7 +78,7 @@ export function middleware(request: NextRequest) {
       }
     }
 
-    // 3. Fallback to Vercel edge IP geolocation headers
+    // Geolocation headers
     const vercelCity = request.headers.get('x-vercel-ip-city');
 
     if (vercelCity) {
@@ -55,15 +86,12 @@ export function middleware(request: NextRequest) {
         const decodedCity = decodeURIComponent(vercelCity);
         const allCities = getAllCities();
 
-        // Perform a case-insensitive check to see if the city is in our supported locations
         const matchingCity = allCities.find(
           (c) => c.toLowerCase() === decodedCity.toLowerCase()
         );
 
         if (matchingCity) {
           const citySlug = getCitySlug(matchingCity);
-          
-          // Redirect to the detected local city page (defaulting to call-girls category)
           const redirectUrl = new URL(`/call-girls/${citySlug}`, request.url);
           return NextResponse.redirect(redirectUrl, 307);
         }
@@ -76,7 +104,9 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Only match the home route '/' for redirection
 export const config = {
-  matcher: ['/'],
+  matcher: [
+    // Match all routes except static assets
+    '/((?!_next/static|_next/image|favicon.ico|images|apple-icon.png|icon.png|icon.svg).*)',
+  ],
 };

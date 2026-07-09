@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-
 import Link from "next/link";
 import { getContactNumber } from "@/lib/ad-logic";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import WhatsAppButton from "./WhatsAppButton";
 
 interface AdCardProps {
@@ -18,35 +17,29 @@ interface AdCardProps {
 }
 
 export default function AdCard({ id, title, location, price, imagePath, index = 0, phone }: AdCardProps) {
-  const [imgSrc, setImgSrc] = useState(imagePath);
   const [hasError, setHasError] = useState(false);
-  
-  const displayPhone = phone || getContactNumber(id);
 
-  // Ensure state updates when props change
-  useEffect(() => {
-    setImgSrc(imagePath);
-    setHasError(false);
-  }, [imagePath]);
+  const displayPhone = getContactNumber(id, phone);
 
-  // FALLBACK IMAGE IN CASE OF MISSING ASSETS
-  const fallbackImage = "https://images.unsplash.com/photo-1594465919760-441fe5908ab0?q=80&w=800&auto=format&fit=crop";
-
+  const isBoy = id.startsWith('boy-');
   const isMassage = id.startsWith('msg-');
+
+  // Use a local placeholder to avoid external Unsplash fetch on error (saves JS + network)
+  const imgSrc = hasError ? '/images/placeholder.webp' : imagePath;
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full active:scale-[0.98]">
       <Link href={`/ad/${id}`} className="block relative aspect-[3/4] overflow-hidden">
-        <Image 
-          src={hasError ? fallbackImage : imgSrc} 
-          alt={title} 
+        <Image
+          src={imgSrc}
+          alt={title}
           fill
-          priority={index < 4}
-          unoptimized={true}
+          // First 2 cards are LCP candidates — mark as high priority for preload
+          priority={index < 2}
+          // Image optimization ON — Next.js serves resized WebP
           className={`object-cover transition-transform duration-700 group-hover:scale-110 ${hasError ? 'opacity-50 grayscale' : ''}`}
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           onError={() => {
-            console.warn(`Image failed to load: ${imgSrc}`);
             setHasError(true);
           }}
         />
@@ -56,7 +49,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-        
+
         <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 text-white">
           <div className="flex justify-between items-end gap-2">
             <div>
@@ -72,12 +65,14 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
           </div>
         </div>
       </Link>
-      
+
       <div className="p-2 md:p-3 grid grid-cols-2 gap-2 bg-gray-50 mt-auto border-t border-gray-100">
-        <WhatsAppButton 
+        <WhatsAppButton
           phone={displayPhone}
-          message={isMassage 
+          message={isMassage
             ? `Hi, My name is ___, I am in ${location} and I need a massage service. Please share details. (${title})`
+            : isBoy
+            ? `Hi, My name is ___, I am in ${location} and I need a call boy. Please share details. (${title})`
             : `Hi, My name is ___, I am in ${location} and I need a call girl. Please share a photo. (${title})`
           }
           adContext={{ profileName: title, location: location, pageUrl: `/ad/${id}` }}
@@ -85,7 +80,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
         >
           <span className="text-xs md:text-lg">💬</span> WhatsApp
         </WhatsAppButton>
-        <a 
+        <a
           href={`tel:${displayPhone}`}
           className="flex-1 bg-[#007bff] hover:bg-[#0069d9] text-white text-[10px] md:text-sm font-bold py-2 rounded-lg transition-all shadow-sm active:scale-95"
         >
@@ -95,4 +90,3 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
     </div>
   );
 }
-

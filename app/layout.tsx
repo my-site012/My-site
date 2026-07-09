@@ -9,9 +9,6 @@ export const metadata: Metadata = {
   title: "CallGirl4U India – #1 Adult Classified Ads & Escort Directory",
   description: "CallGirl4U is the #1 adult classifieds website in India. Browse local listings for independent call girls, massages, male escorts, and shemale dating in your city. Post your adult ad absolutely FREE!",
   keywords: "adult classifieds india, adult classified website, escorts in india, call girls india, male escorts, massages, shemale escorts, post free adult ads",
-  alternates: {
-    canonical: "/",
-  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -36,6 +33,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="4q9gLbRNwfJE0crAutXcsgeVLQloYZ6L7aSihfNXfo8" />
+        {/* DNS prefetch for WhatsApp redirect domain */}
+        <link rel="dns-prefetch" href="https://api.whatsapp.com" />
+        <link rel="dns-prefetch" href="https://wa.me" />
       </head>
       <body className="antialiased">
         <AgeVerification />

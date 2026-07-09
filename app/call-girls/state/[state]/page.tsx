@@ -3,10 +3,11 @@ import AdCard from "@/components/AdCard";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCitySeo, getDefaultSeoData } from "@/lib/seo-templates";
-import { getDeterministicImagesPool } from "@/lib/ad-logic";
-import { getValue } from "@/lib/kv";
+import { getDeterministicImagesPool, getContactNumber, getHash } from "@/lib/ad-logic";
+import { cachedGetValue } from "@/lib/kv";
 
-export const dynamic = 'force-dynamic';
+// ISR: revalidate every hour — content is deterministic, no need to re-render on every request
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return getAllStates().map(state => ({
@@ -44,7 +45,7 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
   const defaultNames = ["Priya", "Neha", "Kajal", "Simran", "Riya", "Pooja", "Deepika", "Nisha", "Aarti", "Meera"];
 
   // Fetch global phone from KV
-  const globalPhone = await getValue("contact_phone");
+  const globalPhone = await cachedGetValue("contact_phone");
 
   // Get rich SEO content
   const seoData = getDefaultSeoData(stateName, "India");
@@ -70,11 +71,14 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
             "@type": "LocalBusiness",
             "name": `${adName} - ${stateName} Elite`,
             "image": `https://callgirl4u.com${imgPath}`,
+            "telephone": getContactNumber(adId, globalPhone),
             "priceRange": `INR ${price}`,
             "address": {
               "@type": "PostalAddress",
               "addressLocality": cities[index % cities.length] || stateName,
               "addressRegion": stateName,
+              "postalCode": (110001 + (getHash(cities[index % cities.length] || stateName) % 889999)).toString(),
+              "streetAddress": `${cities[index % cities.length] || stateName} City Center`,
               "addressCountry": "IN"
             }
           }
@@ -83,12 +87,34 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
     }
   };
 
+  // Helper: strip HTML tags for schema plain text
+  const stripHtml = (html: string) => html.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").trim();
+
+  // FAQ Schema for Google Rich Results
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": seoData.faqs.map((faq: { q: string; a: string }) => ({
+      "@type": "Question",
+      "name": stripHtml(faq.q),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": stripHtml(faq.a)
+      }
+    }))
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Dynamic SEO JSON-LD */}
+      {/* Dynamic SEO JSON-LD — CollectionPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* FAQ Schema — Google Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Hero */}
