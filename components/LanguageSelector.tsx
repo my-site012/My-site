@@ -11,7 +11,6 @@ export default function LanguageSelector() {
           {
             pageLanguage: "en",
             includedLanguages: "en,hi", // English and Hindi
-            layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false,
           },
           "google_translate_element"
@@ -30,7 +29,7 @@ export default function LanguageSelector() {
     <div className="flex items-center shrink-0">
       <div 
         id="google_translate_element" 
-        className="translate-widget border border-gray-200 rounded-md bg-gray-50 text-[10px] md:text-xs"
+        className="translate-widget text-[10px] md:text-xs"
       />
       <Script
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
