@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { incrementCounter, pushLog, setNx, getValue, incrementDailyCounter } from "@/lib/kv";
+import { isRequestAllowed } from "@/lib/security";
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
+    if (!isRequestAllowed(req)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
     const body = await req.json().catch(() => ({}));
     const { adContext } = body;
     

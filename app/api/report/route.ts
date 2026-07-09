@@ -1,8 +1,13 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { isRequestAllowed } from "@/lib/security";
 
-export async function POST(request: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
+    if (!isRequestAllowed(req)) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const body = await req.json();
     const { adId, adTitle, reason, reporterEmail, message } = body;
 
     // IN A PRODUCTION ENVIRONMENT:

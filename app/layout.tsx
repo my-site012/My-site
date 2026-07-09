@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AgeVerification from "@/components/AgeVerification";
+import SecurityProvider from "@/components/SecurityProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://callgirl4u.com"),
@@ -38,6 +39,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://wa.me" />
       </head>
       <body className="antialiased">
+        <SecurityProvider />
         <AgeVerification />
         <Header />
         <main className="min-h-screen">
