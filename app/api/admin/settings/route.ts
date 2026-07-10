@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
   
   return NextResponse.json({ 
     clicks: Number(clicks) || 0, 
-    phone: phone || "+918905586425",
+    phone: phone || "+91 8058506045",
     callBoyPhone: callBoyPhone || "",
     logs: logs || [],
     maintenance: maintenance,

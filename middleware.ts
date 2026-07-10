@@ -4,6 +4,10 @@ import { getAllCities, getCitySlug } from './lib/data/locations';
 
 const BOTS_REGEX = /bot|googlebot|bingbot|crawler|spider|robot|crawling|ahrefs|siteaudit|semrush|screaming|gtmetrix/i;
 
+let cachedMaintenance = false;
+let lastChecked = 0;
+const CACHE_TTL = 30000; // 30 seconds
+
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
@@ -19,25 +23,30 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith('/api/whatsapp-click');
 
   if (!isExempt) {
-    try {
-      const KV_URL = process.env.KV_REST_API_URL || "https://balanced-ibex-111880.upstash.io";
-      const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
+    const now = Date.now();
+    if (now - lastChecked > CACHE_TTL) {
+      try {
+        const KV_URL = process.env.KV_REST_API_URL || "https://balanced-ibex-111880.upstash.io";
+        const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
 
-      const res = await fetch(`${KV_URL}/get/maintenance_mode`, {
-        headers: { Authorization: `Bearer ${KV_TOKEN}` },
-        cache: 'no-store',
-        signal: AbortSignal.timeout(500),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        const isMaintenance = data?.result === "true";
-        if (isMaintenance) {
-          const maintenanceUrl = new URL('/maintenance', request.url);
-          return NextResponse.redirect(maintenanceUrl, 307);
+        const res = await fetch(`${KV_URL}/get/maintenance_mode`, {
+          headers: { Authorization: `Bearer ${KV_TOKEN}` },
+          cache: 'no-store',
+          signal: AbortSignal.timeout(500),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          cachedMaintenance = data?.result === "true";
+          lastChecked = now;
         }
+      } catch (e) {
+        // Quietly ignore timeout/network errors to prevent breaking user/bot traffic
       }
-    } catch (e) {
-      // Quietly ignore timeout/network errors to prevent breaking user/bot traffic
+    }
+
+    if (cachedMaintenance) {
+      const maintenanceUrl = new URL('/maintenance', request.url);
+      return NextResponse.redirect(maintenanceUrl, 307);
     }
   }
 
