@@ -4,8 +4,8 @@
  */
 import { unstable_cache } from "next/cache";
 
-const KV_URL = process.env.KV_REST_API_URL || "https://balanced-ibex-111880.upstash.io";
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
+const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "https://balanced-ibex-111880.upstash.io";
+const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
 
 export function isKvAvailable(): boolean {
   return !!(KV_URL && KV_TOKEN);
