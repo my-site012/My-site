@@ -4,9 +4,12 @@ import { Metadata } from "next";
 import AdCard from "@/components/AdCard";
 import ReportModal from "@/components/ReportModal";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getHash, getContactNumber, getBoyNameFromId, getDeterministicBoyImagesPool } from "@/lib/ad-logic";
-import { getValue } from "@/lib/kv";
+import { cachedGetValue } from "@/lib/kv";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { getAllStates, getStateSlug } from "@/lib/data/locations";
+
+// ISR: revalidate every hour — content is deterministic, no need to re-render on every request
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -81,8 +84,8 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   const location = rawLocation.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const price = getPriceFromId(id);
 
-  const boyPhone = await getValue("call_boy_phone");
-  const girlPhone = await getValue("contact_phone");
+  const boyPhone = await cachedGetValue("call_boy_phone");
+  const girlPhone = await cachedGetValue("contact_phone");
   const globalPhone = isBoy ? (boyPhone || girlPhone) : girlPhone;
   const displayPhone = getContactNumber(id, globalPhone);
   

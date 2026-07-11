@@ -1662,17 +1662,127 @@ const rawBlogPosts: BlogPost[] = [
   },
 ];
 
-export const blogPosts = rawBlogPosts.map(post => {
-  // If the post is already long and detailed (e.g., Delhi, Mumbai, etc.), keep it as is
-  if (post.content.length > 2000) {
-    return post;
+interface InterlinkRule {
+  keyword: string;
+  url: string;
+  excludeSlugs: string[];
+}
+
+const interlinkRules: InterlinkRule[] = [
+  // Delhi
+  { keyword: "call girls in Delhi", url: "/call-girls/delhi", excludeSlugs: ["call-girls-in-delhi"] },
+  { keyword: "Delhi call girls", url: "https://kokasite.com/call-girls/delhi/delhi", excludeSlugs: ["call-girls-in-delhi"] },
+  { keyword: "call boys in Delhi", url: "/call-boys/delhi", excludeSlugs: ["call-boys-in-delhi"] },
+  { keyword: "body massage in Delhi", url: "/massage/delhi", excludeSlugs: ["massage-in-delhi"] },
+
+  // Mumbai
+  { keyword: "call girls in Mumbai", url: "/call-girls/mumbai", excludeSlugs: ["call-girls-in-mumbai"] },
+  { keyword: "Mumbai call girls", url: "https://kokasite.com/call-girls/maharashtra/mumbai", excludeSlugs: ["call-girls-in-mumbai"] },
+  { keyword: "call boys in Mumbai", url: "/call-boys/mumbai", excludeSlugs: ["call-boys-in-mumbai"] },
+  { keyword: "body massage in Mumbai", url: "/massage/mumbai", excludeSlugs: ["massage-in-mumbai"] },
+
+  // Bangalore
+  { keyword: "call girls in Bangalore", url: "/call-girls/bengaluru", excludeSlugs: ["call-girls-in-bangalore"] },
+  { keyword: "call girls in Bengaluru", url: "/call-girls/bengaluru", excludeSlugs: ["call-girls-in-bangalore"] },
+  { keyword: "Bangalore call girls", url: "https://kokasite.com/call-girls/karnataka/bangalore", excludeSlugs: ["call-girls-in-bangalore"] },
+  { keyword: "call boys in Bangalore", url: "/call-boys/bengaluru", excludeSlugs: ["call-boys-in-bangalore"] },
+  { keyword: "body massage in Bangalore", url: "/massage/bengaluru", excludeSlugs: ["massage-in-bangalore"] },
+
+  // Goa
+  { keyword: "call girls in Goa", url: "/call-girls/goa", excludeSlugs: ["call-girls-in-goa"] },
+  { keyword: "Goa call girls", url: "https://kokasite.com/call-girls/goa/goa", excludeSlugs: ["call-girls-in-goa"] },
+  { keyword: "call boys in Goa", url: "/call-boys/goa", excludeSlugs: ["call-boys-in-goa"] },
+  { keyword: "body massage in Goa", url: "/massage/goa", excludeSlugs: ["massage-in-goa"] },
+
+  // Jaipur
+  { keyword: "call girls in Jaipur", url: "/call-girls/jaipur", excludeSlugs: ["call-girls-in-jaipur"] },
+  { keyword: "Jaipur call girls", url: "https://kokasite.com/call-girls/rajasthan/jaipur", excludeSlugs: ["call-girls-in-jaipur"] },
+  { keyword: "call boys in Jaipur", url: "/call-boys/jaipur", excludeSlugs: ["call-boys-in-jaipur"] },
+  { keyword: "body massage in Jaipur", url: "/massage/jaipur", excludeSlugs: ["massage-in-jaipur"] },
+
+  // Pune
+  { keyword: "call girls in Pune", url: "/call-girls/pune", excludeSlugs: ["call-girls-in-pune"] },
+  { keyword: "Pune call girls", url: "https://kokasite.com/call-girls/maharashtra/pune", excludeSlugs: ["call-girls-in-pune"] },
+  { keyword: "body massage in Pune", url: "/massage/pune", excludeSlugs: ["massage-in-pune"] },
+
+  // Noida
+  { keyword: "call girls in Noida", url: "/call-girls/noida", excludeSlugs: ["call-girls-in-noida"] },
+  { keyword: "Noida call girls", url: "https://kokasite.com/call-girls/uttar-pradesh/noida", excludeSlugs: ["call-girls-in-noida"] },
+
+  // Gurgaon
+  { keyword: "call girls in Gurgaon", url: "/call-girls/gurgaon", excludeSlugs: ["call-girls-in-gurgaon"] },
+  { keyword: "Gurgaon call girls", url: "https://kokasite.com/call-girls/haryana/gurgaon", excludeSlugs: ["call-girls-in-gurgaon"] },
+
+  // Hyderabad
+  { keyword: "call girls in Hyderabad", url: "/call-girls/hyderabad", excludeSlugs: ["call-girls-in-hyderabad"] },
+  { keyword: "Hyderabad call girls", url: "https://kokasite.com/call-girls/telangana/hyderabad", excludeSlugs: ["call-girls-in-hyderabad"] },
+
+  // Kolkata
+  { keyword: "call girls in Kolkata", url: "/call-girls/kolkata", excludeSlugs: ["call-girls-in-kolkata"] },
+  { keyword: "Kolkata call girls", url: "https://kokasite.com/call-girls/west-bengal/kolkata", excludeSlugs: ["call-girls-in-kolkata"] },
+
+  // Ahmedabad
+  { keyword: "call girls in Ahmedabad", url: "/call-girls/ahmedabad", excludeSlugs: ["call-girls-in-ahmedabad"] },
+
+  // Chennai
+  { keyword: "call girls in Chennai", url: "/call-girls/chennai", excludeSlugs: ["call-girls-in-chennai"] },
+
+  // Lucknow
+  { keyword: "call girls in Lucknow", url: "/call-girls/lucknow", excludeSlugs: ["call-girls-in-lucknow"] },
+];
+
+function injectInterlinks(html: string, currentSlug: string): string {
+  const parts = html.split(/(<\/?[a-zA-Z0-9]+[^>]*>)/g);
+  let insideLink = false;
+  let linksInjected = 0;
+  const maxLinksPerPost = 3;
+  const linkedUrls = new Set<string>();
+
+  for (let i = 0; i < parts.length; i++) {
+    if (parts[i].startsWith('<')) {
+      const tag = parts[i].toLowerCase();
+      if (tag.startsWith('<a ') || tag === '<a>') {
+        insideLink = true;
+      } else if (tag === '</a>') {
+        insideLink = false;
+      }
+      continue;
+    }
+
+    if (insideLink) {
+      continue;
+    }
+
+    let nodeText = parts[i];
+    for (const rule of interlinkRules) {
+      if (linksInjected >= maxLinksPerPost) break;
+      if (rule.excludeSlugs.includes(currentSlug)) continue;
+      if (linkedUrls.has(rule.url)) continue;
+
+      const escapedKeyword = rule.keyword.replace(/[-/\\^$*+?.()|[\\\]{}]/g, '\\$&');
+      const regex = new RegExp(`\\b(${escapedKeyword})\\b`, 'i');
+
+      if (regex.test(nodeText)) {
+        nodeText = nodeText.replace(regex, `<a href="${rule.url}" target="_blank" rel="noopener noreferrer">$1</a>`);
+        linksInjected++;
+        linkedUrls.add(rule.url);
+      }
+    }
+    parts[i] = nodeText;
   }
 
-  const { cityName, citySlug, category } = post;
-  let expandedContent = "";
+  return parts.join('');
+}
 
-  if (category === "call-girls") {
-    expandedContent = `
+export const blogPosts = rawBlogPosts.map(post => {
+  let content = post.content;
+
+  if (post.content.length <= 2000) {
+    const { cityName, citySlug, category } = post;
+    let expandedContent = "";
+
+    if (category === "call-girls") {
+      expandedContent = `
 <h2>Call Girls in ${cityName} – Pure Romantic &amp; Sensual Companionship</h2>
 <p>${cityName} ki busy streets aur fast lifestyle me, jab aap pure din ke kaam se thak jaate hain, toh aapko chahiye ek aisi warm aur passionate companion jo aapke saare stress ko ek hi moment me door kar de. Hamaare verified directory me aapko milengi sabse gorgeous, independent aur educated escorts. Inke saath bitaaya gaya har ek pal behad romantic, exciting aur relaxing hone waala hai.</p>
 
@@ -1714,9 +1824,9 @@ export const blogPosts = rawBlogPosts.map(post => {
 <p>Agar aap dynamic profiles dhoondh rahe hain, toh browse karein humara <a href="/call-boys/${citySlug}">${cityName} call boys</a> section ko ya fir body relaxation ke liye <a href="/massage/${citySlug}">${cityName} massage services</a> section ko. Sabhi pages par active details update kar di gayi hain.</p>
 
 <p>Toh wait kis baat ka? ${cityName} ki gorgeous companions aapki call ka wait kar rahi hain. Select your favorite companion now!</p>
-    `;
-  } else if (category === "call-boys") {
-    expandedContent = `
+      `;
+    } else if (category === "call-boys") {
+      expandedContent = `
 <h2>Call Boys in ${cityName} – Premium Male Companions for Elite Ladies &amp; Couples</h2>
 <p>${cityName} ki modern, independent aur high-profile women jo apni choice aur pleasure ko top par rakhti hain, unke liye hum laye hain verified <a href="/call-boys/${citySlug}">${cityName} call boys directory</a>. Yahan aapko milenge smart, well-groomed, handsome aur highly fit male companions jo aapki nights ko thrilling banane me expert hain.</p>
 
@@ -1744,7 +1854,7 @@ export const blogPosts = rawBlogPosts.map(post => {
   <li><strong>VIP Overnight Package:</strong> ₹12,000 – ₹25,000 full night. Unlimited pampering aur ultimate romantic session.</li>
 </ul>
 
-<h3>Safety Rules for Female Bookings</h3>
+<h3>Safe Companion Booking Guidelines</h3>
 <ol>
   <li>Profile text aur matching photo directly call ke zariye cross-check karein.</li>
   <li>Registration ya card charges ke naam par advance payment bilkul na karein.</li>
@@ -1752,9 +1862,9 @@ export const blogPosts = rawBlogPosts.map(post => {
 </ol>
 
 <p>Aapki physical aur mental relaxation aapke control me hai. Connect directly to our verified <a href="/call-boys/${citySlug}">${cityName} call boys</a> page and book your session!</p>
-    `;
-  } else if (category === "massage") {
-    expandedContent = `
+      `;
+    } else if (category === "massage") {
+      expandedContent = `
 <h2>Massage Service in ${cityName} – Professional Body Massage &amp; Spa Therapy</h2>
 <p>Corporate strain, daily commute aur screen work ke baad muscle stress aur mental fatigue natural hain. Agar aap ${cityName} me hain aur relaxing therapeutic comfort chahte hain, toh humari <a href="/massage/${citySlug}">${cityName} massage services</a> list aapko premium relaxation target degi. Humare verified, skilled therapists aapki body muscles ko revitalize karne me trained hain.</p>
 
@@ -1783,14 +1893,18 @@ export const blogPosts = rawBlogPosts.map(post => {
 </ul>
 
 <p>Relaxation is necessary. Connect directly on our verified spa therapists page and schedule your therapeutic slot today!</p>
-    `;
-  } else {
-    expandedContent = post.content;
+      `;
+    } else {
+      expandedContent = content;
+    }
+    content = expandedContent;
   }
+
+  const finalContent = injectInterlinks(content, post.slug);
 
   return {
     ...post,
-    content: expandedContent,
+    content: finalContent,
     readTime: "6 min read"
   };
 });
