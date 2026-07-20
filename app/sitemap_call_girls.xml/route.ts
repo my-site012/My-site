@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAllCities, getCitySlug, getAllStates, getStateSlug } from '@/lib/data/locations';
+import { getAllCities, getCitySlug, getAllStates, getStateSlug, getCallGirlsSlug } from '@/lib/data/locations';
 
 export const dynamic = 'force-static';
 
@@ -17,7 +17,7 @@ export async function GET() {
   }));
 
   const cityUrls = cities.map(city => ({
-    loc: `${baseUrl}/call-girls/${getCitySlug(city)}`,
+    loc: `${baseUrl}/call-girls/${getCallGirlsSlug(city)}`,
     changefreq: 'daily',
     priority: '0.8'
   }));

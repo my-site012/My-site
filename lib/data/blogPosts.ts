@@ -31,7 +31,7 @@ const rawBlogPosts: BlogPost[] = [
 <h2>Delhi Ki Sabse Popular Escort Locations</h2>
 <p>Delhi ek vast city hai aur har area ka apna ek alag charm hai. Hamare directory mein aapko milti hain:</p>
 <ul>
-  <li><a href="/call-girls/aerocity"><strong>Aerocity Call Girls</strong></a> — Airport ke paas, travelers aur business visitors ke liye perfect. Ek flight ke baad ek warm, soothing companion — sochiye zara!</li>
+  <li><a href="/call-girls/aerocity"><strong>Aerocity Call Girls</strong></a> — Airport ke paas, travelers aur business visitors ke liye perfect. If you are looking for Aerocity call girls for elite companion service, check out verified listings. Ek flight ke baad ek warm, soothing companion — sochiye zara!</li>
   <li><a href="/call-girls/connaught-place"><strong>Connaught Place Escorts</strong></a> — Delhi ka dil, aur yahan ki escorts bhi utni hi dil ko chhu lene wali hain. Premium profiles, real looks.</li>
   <li><a href="/call-girls/mahipalpur"><strong>Mahipalpur</strong></a> — Airport road par, affordable rates aur genuine profiles.</li>
   <li><a href="/call-girls/karol-bagh"><strong>Karol Bagh</strong></a> — Central Delhi mein best value companions.</li>
@@ -106,7 +106,7 @@ const rawBlogPosts: BlogPost[] = [
 <p>Mumbai mein safety essential hai. Hamesha ek reputable hotel choose karein milne ke liye, profile ki photo verify karein pehle, aur kabhi bhi online paise transfer mat karein. Hamare platform par report button available hai — agar koi suspicious lage toh use zaroor karein.</p>
 
 <h2>Maharashtra Mein Aur Options</h2>
-<p>Mumbai se bahar explore karein <a href="/call-girls/state/maharashtra">Maharashtra call girls directory</a> — <a href="/call-girls/pune">Pune escorts</a>, <a href="/call-girls/nashik">Nashik companions</a>, aur <a href="/call-girls/nagpur">Nagpur call girls</a> sab available hain. Male companionship ke liye <a href="/call-boys/mumbai">Mumbai call boys</a> browse karein, ya enjoy karein ek <a href="/massage/mumbai">professional massage in Mumbai</a>.</p>
+<p>Mumbai se bahar explore karein <a href="/call-girls/state/maharashtra">Maharashtra call girls directory</a> — <a href="/call-girls/pune">Pune escorts</a>, <a href="/call-girls/nashik">Nashik companions</a>, aur <a href="/call-girls/nagpur">Nagpur call girls</a> sab available hain. You can find independent Maharashtra call girls across all major cities of the state. Male companionship ke liye <a href="/call-boys/mumbai">Mumbai call boys</a> browse karein, ya enjoy karein ek <a href="/massage/mumbai">professional massage in Mumbai</a>.</p>
 `
   },
   {
@@ -1674,12 +1674,14 @@ const interlinkRules: InterlinkRule[] = [
   { keyword: "Delhi call girls", url: "https://kokasite.com/call-girls/delhi/delhi", excludeSlugs: ["call-girls-in-delhi"] },
   { keyword: "call boys in Delhi", url: "/call-boys/delhi", excludeSlugs: ["call-boys-in-delhi"] },
   { keyword: "body massage in Delhi", url: "/massage/delhi", excludeSlugs: ["massage-in-delhi"] },
+  { keyword: "Aerocity call girls", url: "https://kokasite.com/call-girls/delhi-ncr/aerocity", excludeSlugs: [] },
 
   // Mumbai
   { keyword: "call girls in Mumbai", url: "/call-girls/mumbai", excludeSlugs: ["call-girls-in-mumbai"] },
   { keyword: "Mumbai call girls", url: "https://kokasite.com/call-girls/maharashtra/mumbai", excludeSlugs: ["call-girls-in-mumbai"] },
   { keyword: "call boys in Mumbai", url: "/call-boys/mumbai", excludeSlugs: ["call-boys-in-mumbai"] },
   { keyword: "body massage in Mumbai", url: "/massage/mumbai", excludeSlugs: ["massage-in-mumbai"] },
+  { keyword: "Maharashtra call girls", url: "https://kokasite.com/call-girls/maharashtra", excludeSlugs: [] },
 
   // Bangalore
   { keyword: "call girls in Bangalore", url: "/call-girls/bengaluru", excludeSlugs: ["call-girls-in-bangalore"] },

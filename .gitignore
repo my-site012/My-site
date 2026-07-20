@@ -49,3 +49,4 @@ task.md
 /scratch/
 
 .vercel
+.env*.local

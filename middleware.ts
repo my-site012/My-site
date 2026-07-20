@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getAllCities, getCitySlug } from './lib/data/locations';
+import { getAllCities, getCitySlug, getAllStates, getStateSlug } from './lib/data/locations';
 
 const BOTS_REGEX = /bot|googlebot|bingbot|crawler|spider|robot|crawling|ahrefs|siteaudit|semrush|screaming|gtmetrix/i;
 
@@ -10,6 +10,42 @@ const CACHE_TTL = 30000; // 30 seconds
 
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
+
+  // 0. LEGACY URL REDIRECTS
+  const CATEGORIES = ['call-girls', 'call-boys', 'massage'];
+  const parts = pathname.split('/').filter(Boolean);
+  if (parts.length > 0 && CATEGORIES.includes(parts[0])) {
+    // 3-part URL: /[category]/[state]/[city] -> /[category]/[city]
+    if (parts.length === 3 && parts[1] !== 'state') {
+      const targetUrl = new URL(`/${parts[0]}/${parts[2]}`, request.url);
+      searchParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+      return NextResponse.redirect(targetUrl, 301);
+    }
+
+    // 2-part URL: /[category]/[state] -> /[category]/state/[state]
+    if (parts.length === 2) {
+      const realStates = getAllStates().filter(
+        (s) => !s.endsWith(" Locations") && s !== "Other Locations"
+      );
+      const stateSlugs = realStates.map(getStateSlug);
+      if (stateSlugs.includes(parts[1])) {
+        const targetUrl = new URL(`/${parts[0]}/state/${parts[1]}`, request.url);
+        searchParams.forEach((value, key) => {
+          targetUrl.searchParams.set(key, value);
+        });
+        return NextResponse.redirect(targetUrl, 301);
+      }
+    }
+  }
+
+  // 0.5. BOT EARLY-EXIT (Bypasses maintenance check & geo redirects for search engine crawlers)
+  const userAgent = request.headers.get('user-agent') || '';
+  const isBot = BOTS_REGEX.test(userAgent);
+  if (isBot) {
+    return NextResponse.next();
+  }
 
   // 1. MAINTENANCE MODE CHECK
   const isExempt = 

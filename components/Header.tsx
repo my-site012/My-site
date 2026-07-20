@@ -1,9 +1,52 @@
+"use client";
+
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { getAllCities } from "@/lib/data/locations";
 import CitySearch from "./CitySearch";
 import LanguageSelector from "./LanguageSelector";
 
 export default function Header() {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  const checkAuth = async () => {
+    try {
+      const res = await fetch("/api/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data.user);
+      } else {
+        setUser(null);
+      }
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+      if (res.ok) {
+        setUser(null);
+        router.push("/");
+        router.refresh();
+      }
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
+
   return (
     <header className="bg-white border-b-2 border-red-600 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-1 md:gap-3">
@@ -30,10 +73,26 @@ export default function Header() {
         {/* Auth & Post */}
         <div className="flex items-center gap-2 md:gap-4 shrink-0">
           {/* Auth Links */}
-          <div className="flex gap-1 text-[10px] md:text-sm font-bold items-center">
-            <Link href="/login" className="text-gray-800 bg-white border border-gray-300 px-1.5 py-1 rounded-md hover:bg-gray-50 transition-all shadow-sm active:scale-95 whitespace-nowrap">Login</Link>
-            <Link href="/signup" className="text-white bg-gradient-to-r from-red-600 to-red-700 px-2 py-1 rounded-md hover:from-red-700 hover:to-red-800 transition-all shadow-md border border-red-700 active:scale-95 whitespace-nowrap">Sign Up</Link>
-          </div>
+          {!loading && (
+            <div className="flex gap-1 text-[10px] md:text-sm font-bold items-center">
+              {user ? (
+                <>
+                  <span className="text-gray-700 hidden md:inline mr-1">Hi, {user.name}</span>
+                  <button 
+                    onClick={handleLogout} 
+                    className="text-gray-800 bg-white border border-gray-300 px-2 py-1 rounded-md hover:bg-gray-50 transition-all shadow-sm active:scale-95 whitespace-nowrap"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="text-gray-800 bg-white border border-gray-300 px-1.5 py-1 rounded-md hover:bg-gray-50 transition-all shadow-sm active:scale-95 whitespace-nowrap">Login</Link>
+                  <Link href="/signup" className="text-white bg-gradient-to-r from-red-600 to-red-700 px-2 py-1 rounded-md hover:from-red-700 hover:to-red-800 transition-all shadow-md border border-red-700 active:scale-95 whitespace-nowrap">Sign Up</Link>
+                </>
+              )}
+            </div>
+          )}
 
           {/* Post Ad - Compact on mobile */}
           <Link href="/ad/post" className="bg-red-600 text-white px-2 py-1 rounded-md text-[10px] md:text-sm font-bold hover:bg-black transition shadow-md flex items-center gap-0.5">

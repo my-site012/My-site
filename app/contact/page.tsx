@@ -20,8 +20,13 @@ export default function ContactPage() {
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">Email Support</h3>
-            <p className="text-2xl font-bold text-red-600">support@escortservicegbroad.com</p>
+            <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Site For Rent</h3>
+            <a
+              href="mailto:worksunil26@gmail.com"
+              className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition-all hover:shadow-lg active:scale-95"
+            >
+              📧 For Rent — Contact Us
+            </a>
           </div>
 
           <div>

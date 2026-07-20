@@ -4,9 +4,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getDeterministicBoyImagesPool, getPriceFromId, getBoyNameFromId } from "@/lib/ad-logic";
 import { cachedGetValue } from "@/lib/kv";
+import { notFound } from "next/navigation";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getAllStates().map(state => ({
@@ -17,7 +19,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ state: string }> }): Promise<Metadata> {
   const { state } = await params;
   const allStates = getAllStates();
-  const stateName = allStates.find(s => getStateSlug(s) === state) || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const matchedState = allStates.find(s => getStateSlug(s) === state);
+  if (!matchedState) return {};
+  const stateName = matchedState;
 
   return {
     title: `Call Boys in ${stateName} | Verified Male Companions | CallGirl4U`,
@@ -33,7 +37,11 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
   const { state } = await params;
 
   const allStates = getAllStates();
-  const stateName = allStates.find(s => getStateSlug(s) === state) || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const matchedState = allStates.find(s => getStateSlug(s) === state);
+  if (!matchedState) {
+    notFound();
+  }
+  const stateName = matchedState;
 
   const cities = locations[stateName] || [];
   const profileImages = getDeterministicBoyImagesPool(state + "-boy", 12);

@@ -1,4 +1,4 @@
-import { locations, getCitySlug, getStateSlug } from "@/lib/data/locations";
+import { locations, getCitySlug, getStateSlug, getCallGirlsSlug } from "@/lib/data/locations";
 import Link from "next/link";
 
 export default function StateGrid() {
@@ -14,7 +14,7 @@ export default function StateGrid() {
               {cities.map(city => (
                 <li key={city}>
                   <Link
-                    href={`/call-girls/${getCitySlug(city)}`}
+                    href={`/call-girls/${getCallGirlsSlug(city)}`}
                     className="text-blue-600 hover:underline text-sm"
                   >
                     {city} Call Girls

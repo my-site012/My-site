@@ -1,35 +1,97 @@
-import { getAllCities, getCitySlug, getStateFromCity } from "@/lib/data/locations";
+import { getAllCities, getCitySlug, getStateFromCity, locations, getCallGirlsSlug } from "@/lib/data/locations";
 import { cityContentData, CitySEOContent } from "@/lib/data/cityContent";
 import AdCard from "@/components/AdCard";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
 import { cachedGetValue } from "@/lib/kv";
+import { notFound } from "next/navigation";
+import { blogPosts } from "@/lib/data/blogPosts";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getAllCities().map(city => ({
-    city: getCitySlug(city)
+  const cities = getAllCities().map(city => getCitySlug(city));
+  const overrides = Object.keys(CITY_DISPLAY_OVERRIDES);
+  return [...cities, ...overrides].map(city => ({
+    city
   }));
 }
 
 import { getCitySeo, getDefaultSeoData } from "@/lib/seo-templates";
 
+// Jaipur sub-areas — slug → raw area name mapping
+const JAIPUR_SUB_SLUGS: Record<string, string> = {
+  "jagatpura":             "Jagatpura",
+  "gopalpura":             "Gopalpura",
+  "sitapura":              "Sitapura",
+  "sanganer":              "Sanganer",
+  "200-feet-bypass":       "200 Feet Bypass",
+  "chandpole":             "Chandpole",
+  "jaipur-malviya-nagar":  "Malviya Nagar",
+  "jaipur-vaishali-nagar": "Vaishali Nagar",
+};
+
+// DMCA alternate slugs — same city content, new URL, display as original city name
+const CITY_DISPLAY_OVERRIDES: Record<string, string> = {
+  "jaipur-2":    "Jaipur",
+  "surat-2":     "Surat",
+  "jodhpur-2":   "Jodhpur",
+  "ghaziabad-2": "Ghaziabad",
+};
+
+const validSlugs = new Set([
+  ...getAllCities().map(city => getCitySlug(city)),
+  ...Object.keys(CITY_DISPLAY_OVERRIDES)
+]);
+
+/**
+ * For Jaipur sub-areas returns "Sitapura Jaipur" (area first, then Jaipur).
+ * For DMCA alternate slugs returns the original city name (e.g. jaipur-2 → "Jaipur").
+ * For regular cities returns normal title-cased name.
+ */
+function getDisplayCityName(city: string): string {
+  if (CITY_DISPLAY_OVERRIDES[city]) return CITY_DISPLAY_OVERRIDES[city];
+  if (JAIPUR_SUB_SLUGS[city]) return `${JAIPUR_SUB_SLUGS[city]} Jaipur`;
+  return city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
   const { city } = await params;
-  const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!validSlugs.has(city)) return {};
+  const cityName = getDisplayCityName(city);           // e.g. "Sitapura Jaipur"
+  const areaName = JAIPUR_SUB_SLUGS[city] ?? cityName; // e.g. "Sitapura"
+  const isJaipurSub = !!JAIPUR_SUB_SLUGS[city];
+
   const state = getStateFromCity(city) || "India";
   const seoData = cityContentData[city] || getDefaultSeoData(cityName, state);
-  
-  // Get custom SEO templates
-  const customSeo = getCitySeo(city);
-  
+
+  // For DMCA alternate slugs (e.g. jaipur-2), use original city slug as SEO seed
+  const seoSeed = CITY_DISPLAY_OVERRIDES[city]
+    ? city.replace(/-\d+$/, "")  // strip trailing -2, -3 etc → "jaipur"
+    : (isJaipurSub ? (city.startsWith("jaipur-") ? city : `jaipur-${city}`) : city);
+  const customSeo = getCitySeo(seoSeed);
+  // rawName must match what's inside the template so replace works correctly
+  const rawName = CITY_DISPLAY_OVERRIDES[city]
+    ? CITY_DISPLAY_OVERRIDES[city]  // e.g. "Jaipur"
+    : city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const title       = customSeo.title.replace(rawName, cityName);
+  const description = customSeo.description.replace(rawName, cityName);
+
+  // Extra Jaipur-specific keywords for sub-areas
+  const extraKeywords = isJaipurSub
+    ? `Call girl ${areaName} Jaipur, Jaipur Call girl ${areaName}, Jaipur ${areaName} Escort service, ` +
+      `Escort service ${areaName} Jaipur, ${areaName} Jaipur Call Girl Number, ` +
+      `Call Girls in ${areaName} Jaipur, Jaipur ${areaName} Call Girls, ` +
+      `${areaName} Jaipur Escorts, Jaipur ${areaName} Call Girl, `
+    : "";
+
   return {
-    title: customSeo.title,
-    description: customSeo.description,
-    keywords: seoData.metaKeywords,
+    title,
+    description,
+    keywords: extraKeywords + seoData.metaKeywords,
     alternates: {
       canonical: `https://callgirl4u.com/call-girls/${city}`,
     }
@@ -37,16 +99,36 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 }
 
 
+
 export default async function CityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
+  if (!validSlugs.has(city)) {
+    notFound();
+  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;
   
-  const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const cityName = getDisplayCityName(city);
   const state = getStateFromCity(city) || "India";
+
+  // Find related blog posts for this city or category
+  const relatedBlogs = blogPosts
+    .filter(post => post.category === "call-girls" && (post.citySlug === city || getCitySlug(post.cityName) === city))
+    .slice(0, 3);
   
-  const seoData = cityContentData[city] || getDefaultSeoData(cityName, state);
+  const fallbackBlogs = relatedBlogs.length > 0 
+    ? relatedBlogs 
+    : blogPosts.filter(post => post.category === "call-girls").slice(0, 3);
+  
+  const seoDataKey = CITY_DISPLAY_OVERRIDES[city]
+    ? city.replace(/-\d+$/, "") // e.g. jaipur-2 -> jaipur
+    : city;
+  const seoData = cityContentData[seoDataKey] || getDefaultSeoData(cityName, state);
+
+  // Sub-areas for this city (e.g. Jaipur Locations, Mumbai Locations, Delhi Locations)
+  const cityLocationsKey = `${cityName} Locations`;
+  const citySubAreas: string[] = locations[cityLocationsKey] || [];
   
   const totalAdsToShow = 48; 
   
@@ -58,6 +140,18 @@ export default async function CityPage({ params, searchParams }: { params: Promi
 
   // Fetch global phone from KV
   const globalPhone = await cachedGetValue("contact_phone");
+
+  // Jaipur dedicated phone — covers Jaipur main city + all sub-areas
+  const JAIPUR_CITIES = new Set([
+    "jaipur", "jagatpura", "gopalpura", "sitapura",
+    "sanganer", "200-feet-bypass", "chandpole",
+    "jaipur-malviya-nagar", "jaipur-vaishali-nagar",
+    "jaipur-2",
+  ]);
+  const jaipurPhone = await cachedGetValue("jaipur_phone");
+  // Use jaipurPhone if set and this city is Jaipur or a Jaipur sub-area
+  const effectivePhone = (JAIPUR_CITIES.has(city) && jaipurPhone) ? jaipurPhone : (globalPhone || undefined);
+
 
   // Helper: strip HTML tags for schema plain text
   const stripHtml = (html: string) => html.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").trim();
@@ -134,6 +228,48 @@ export default async function CityPage({ params, searchParams }: { params: Promi
         </div>
       </section>
 
+      {/* Sub-areas sidebar layout — shown only when city has sub-areas (e.g. Jaipur) */}
+      {citySubAreas.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 pt-8">
+          <div className="flex gap-6">
+            {/* Sidebar */}
+            <aside className="hidden lg:block w-56 shrink-0">
+              <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm sticky top-24">
+                <h3 className="font-bold text-base mb-3 text-gray-900 border-b pb-2">Areas in {cityName}</h3>
+                <div className="flex flex-col gap-1">
+                  {citySubAreas.map((area) => (
+                    <Link
+                      key={area}
+                      href={`/call-girls/${getCitySlug(area)}`}
+                      className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium"
+                    >
+                      {area} Call Girls
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </aside>
+            {/* Mobile: horizontal scroll for areas */}
+            <div className="lg:hidden w-full mb-4">
+              <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <h3 className="font-bold text-sm mb-2 text-gray-900">Areas in {cityName}</h3>
+                <div className="flex gap-2 overflow-x-auto pb-1">
+                  {citySubAreas.map((area) => (
+                    <Link
+                      key={area}
+                      href={`/call-girls/${getCitySlug(area)}`}
+                      className="whitespace-nowrap text-xs bg-red-50 text-red-600 border border-red-100 px-3 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition font-medium"
+                    >
+                      {area}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl text-gray-900">Featured Profiles in {cityName}</h2>
@@ -159,7 +295,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
                     price={price}
                     imagePath={imgPath}
                     index={index}
-                    phone={globalPhone || undefined}
+                    phone={effectivePhone}
                   />
                  );
               })}
@@ -388,8 +524,56 @@ export default async function CityPage({ params, searchParams }: { params: Promi
           </div>
         </div>
 
+        {/* Nearby Cities / Localities in State */}
+        {state && locations[state] && locations[state].length > 1 && (
+          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
+              Other Cities & Locations in {state}
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-center">
+              {locations[state]
+                .filter(c => getCitySlug(c) !== city)
+                .slice(0, 16)
+                .map(c => (
+                  <Link
+                    key={c}
+                    href={`/call-girls/${getCallGirlsSlug(c)}`}
+                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize"
+                  >
+                    {c.toLowerCase()} Escorts
+                  </Link>
+                ))}
+            </div>
+          </div>
+        )}
+
+        {/* Recent Blogs & Guides */}
+        {fallbackBlogs.length > 0 && (
+          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
+              Latest Call Girl Guides & Articles
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {fallbackBlogs.map(post => (
+                <div key={post.slug} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                  <div className="p-5 flex flex-col h-full">
+                    <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
+                    <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
+                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                    </h4>
+                    <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
+                    <Link href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
+                      Read Article →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Cross-Service Interlinking Section */}
-        <div className="max-w-4xl mx-auto px-4 mt-8 pt-8 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
           <h3 className="text-lg font-bold text-gray-900 mb-4 uppercase tracking-wider text-center">
             Other Adult Services Available in {cityName}
           </h3>

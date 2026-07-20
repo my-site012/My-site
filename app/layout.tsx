@@ -34,9 +34,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="4q9gLbRNwfJE0crAutXcsgeVLQloYZ6L7aSihfNXfo8" />
-        {/* DNS prefetch for WhatsApp redirect domain */}
+        {/* DNS prefetch + preconnect for faster resource loading */}
         <link rel="dns-prefetch" href="https://api.whatsapp.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
+        {/* Preconnect to self-origin for image optimization */}
+        <link rel="preconnect" href="https://callgirl4u.com" />
       </head>
       <body className="antialiased">
         <SecurityProvider />

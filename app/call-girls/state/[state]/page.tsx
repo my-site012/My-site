@@ -1,13 +1,15 @@
-import { locations, getAllStates, getStateSlug, getCitySlug } from "@/lib/data/locations";
+import { locations, getAllStates, getStateSlug, getCitySlug, getCallGirlsSlug } from "@/lib/data/locations";
 import AdCard from "@/components/AdCard";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCitySeo, getDefaultSeoData } from "@/lib/seo-templates";
 import { getDeterministicImagesPool, getContactNumber, getHash } from "@/lib/ad-logic";
 import { cachedGetValue } from "@/lib/kv";
+import { notFound } from "next/navigation";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getAllStates().map(state => ({
@@ -18,7 +20,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ state: string }> }): Promise<Metadata> {
   const { state } = await params;
   const allStates = getAllStates();
-  const stateName = allStates.find(s => getStateSlug(s) === state) || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const matchedState = allStates.find(s => getStateSlug(s) === state);
+  if (!matchedState) return {};
+  const stateName = matchedState;
   
   const seoData = getDefaultSeoData(stateName, "India");
   const customSeo = getCitySeo(state);
@@ -38,7 +42,11 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
   
   // Find original state name from slug
   const allStates = getAllStates();
-  const stateName = allStates.find(s => getStateSlug(s) === state) || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  const matchedState = allStates.find(s => getStateSlug(s) === state);
+  if (!matchedState) {
+    notFound();
+  }
+  const stateName = matchedState;
   
   const cities = locations[stateName] || [];
   const profileImages = getDeterministicImagesPool(state, 12);
@@ -137,7 +145,7 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
               {cities.map((city) => (
                 <Link 
                   key={city} 
-                  href={`/call-girls/${getCitySlug(city)}`}
+                  href={`/call-girls/${getCallGirlsSlug(city)}`}
                   className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium"
                 >
                   {city} Escorts

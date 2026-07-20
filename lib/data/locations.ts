@@ -267,6 +267,10 @@ export const locations: Record<string, string[]> = {
     "Ladnun", "Laxmangarh", "Merta", "Nawalgarh", "Neemrana", "Niwai",
     "Nohar", "Ranakpur", "Rawatbhata", "Shekhawati", "Sojat"
   ],
+  "Jaipur Locations": [
+    "Jagatpura", "Gopalpura", "Sitapura", "Sanganer", "200 Feet Bypass", "Chandpole",
+    "Jaipur Malviya Nagar", "Jaipur Vaishali Nagar"
+  ],
   "Uttar Pradesh Locations": [
     "Ambedkar Nagar", "Amethi", "Arwal", "Azamgarh", "Badaun", "Baghpat",
     "Bahraich", "Bakhtiyarpur", "Ballia", "Basti", "Bijnor", "Chandauli",
@@ -405,6 +409,18 @@ export function getCitySlug(city: string): string {
   return city.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
 }
 
+// Helper: get call girls slug with DMCA overrides
+export function getCallGirlsSlug(city: string): string {
+  const slug = city.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+  const OVERRIDES: Record<string, string> = {
+    "jaipur": "jaipur-2",
+    "surat": "surat-2",
+    "jodhpur": "jodhpur-2",
+    "ghaziabad": "ghaziabad-2"
+  };
+  return OVERRIDES[slug] || slug;
+}
+
 // Helper: get all cities flat list (alphabetical) for dropdown
 export function getAllCities(): string[] {
   const all = Object.values(locations).flat();
@@ -413,8 +429,26 @@ export function getAllCities(): string[] {
 
 // Helper: get state from city
 export function getStateFromCity(citySlug: string): string | null {
+  let cleanSlug = citySlug.replace(/-\d+$/, ""); // e.g. jaipur-2 -> jaipur
+
+  // Normalize Jaipur sub-areas to jaipur so they map to Rajasthan
+  const JAIPUR_SUBS = new Set([
+    "jagatpura", "gopalpura", "sitapura", "sanganer", "200-feet-bypass", "chandpole",
+    "jaipur-malviya-nagar", "jaipur-vaishali-nagar"
+  ]);
+  if (JAIPUR_SUBS.has(cleanSlug)) {
+    cleanSlug = "jaipur";
+  }
+
   for (const [state, cities] of Object.entries(locations)) {
-    if (cities.some(c => getCitySlug(c) === citySlug)) return state;
+    // Skip sub-location keys like "Jaipur Locations" when looking for the state
+    if (state.endsWith(" Locations") && state !== "Other Locations") continue;
+    if (cities.some(c => getCitySlug(c) === cleanSlug)) return state;
+  }
+
+  // Fallback to searching all keys if not found
+  for (const [state, cities] of Object.entries(locations)) {
+    if (cities.some(c => getCitySlug(c) === cleanSlug)) return state;
   }
   return null;
 }

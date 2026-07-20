@@ -84,8 +84,18 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   const location = rawLocation.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const price = getPriceFromId(id);
 
+  const JAIPUR_CITIES = new Set([
+    "jaipur", "jagatpura", "gopalpura", "sitapura",
+    "sanganer", "200-feet-bypass", "chandpole",
+    "jaipur-malviya-nagar", "jaipur-vaishali-nagar",
+    "jaipur-2",
+  ]);
+
+  const jaipurPhone = await cachedGetValue("jaipur_phone");
+  const isJaipurAd = JAIPUR_CITIES.has(rawLocation.toLowerCase());
+
   const boyPhone = await cachedGetValue("call_boy_phone");
-  const girlPhone = await cachedGetValue("contact_phone");
+  const girlPhone = (isJaipurAd && jaipurPhone) ? jaipurPhone : await cachedGetValue("contact_phone");
   const globalPhone = isBoy ? (boyPhone || girlPhone) : girlPhone;
   const displayPhone = getContactNumber(id, globalPhone);
   

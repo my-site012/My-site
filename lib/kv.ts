@@ -4,8 +4,49 @@
  */
 import { unstable_cache } from "next/cache";
 
-const KV_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "https://balanced-ibex-111880.upstash.io";
-const KV_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
+/** Parse REDIS_URL to derive Upstash REST API credentials.
+ * Handles both old (*.upstash.io) and new (*.db.redis.io) Upstash endpoint formats.
+ */
+function parseRedisUrl(redisUrl: string): { url: string; token: string } | null {
+  try {
+    // Format: rediss://default:TOKEN@HOST:PORT
+    const match = redisUrl.match(/rediss?:\/\/(?:[^:]*:)?([^@]+)@([^:/]+)/);
+    if (match) {
+      const token = match[1].trim();
+      let host = match[2].trim();
+      // Convert Upstash new endpoint format: *.db.redis.io → *.upstash.io
+      if (host.endsWith(".db.redis.io")) {
+        host = host.replace(/\.db\.redis\.io$/, ".upstash.io");
+      }
+      // Only proceed if it's an Upstash endpoint
+      if (host.includes("upstash.io")) {
+        return { token, url: `https://${host}` };
+      }
+    }
+  } catch {}
+  return null;
+}
+
+const _redisUrlParsed = process.env.REDIS_URL ? parseRedisUrl(process.env.REDIS_URL) : null;
+
+// Priority: explicit KV vars > mysite_ prefixed vars (Vercel Storage) > REDIS_URL parsed > hardcoded fallback
+const KV_URL = (
+  process.env.KV_REST_API_URL ||
+  process.env.UPSTASH_REDIS_REST_URL ||
+  process.env.mysite_KV_REST_API_URL ||
+  process.env.MYSITE_KV_REST_API_URL ||
+  _redisUrlParsed?.url ||
+  "https://balanced-ibex-111880.upstash.io"
+).trim();
+
+const KV_TOKEN = (
+  process.env.KV_REST_API_TOKEN ||
+  process.env.UPSTASH_REDIS_REST_TOKEN ||
+  process.env.mysite_KV_REST_API_TOKEN ||
+  process.env.MYSITE_KV_REST_API_TOKEN ||
+  _redisUrlParsed?.token ||
+  "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ"
+).trim();
 
 export function isKvAvailable(): boolean {
   return !!(KV_URL && KV_TOKEN);
@@ -15,7 +56,7 @@ export function isKvAvailable(): boolean {
  * Execute a Redis command by POSTing a JSON array of arguments to the root Upstash endpoint.
  * This is the standard, safest way to send commands and handles all argument serialization.
  */
-async function kvCommand(args: any[]): Promise<any> {
+export async function kvCommand(args: any[]): Promise<any> {
   if (!KV_URL || !KV_TOKEN) {
     console.error("KV env vars missing: KV_REST_API_URL or KV_REST_API_TOKEN not set");
     return null;

@@ -2,10 +2,48 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400,
+  },
+  async headers() {
+    return [
+      {
+        // Prevent image hotlinking from external sites
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        // Security headers for all pages
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+        ],
+      },
+    ];
   },
   async redirects() {
     return [
+      // DMCA redirects removed to prevent Google penalty transfer to -2 URLs (they will now 404 cleanly)
       { source: '/ujjain-call-girl', destination: '/call-girls/ujjain', permanent: true },
       { source: '/jhansi-call-girl', destination: '/call-girls/jhansi', permanent: true },
       { source: '/call-girls-in-belgaum', destination: '/call-girls/belgaum', permanent: true },
@@ -28,12 +66,12 @@ const nextConfig: NextConfig = {
       { source: '/pune-call-girls', destination: '/call-girls/pune', permanent: true },
       { source: '/digha-call-girl', destination: '/call-girls/digha', permanent: true },
       { source: '/call-girl-in-mohali', destination: '/call-girls/mohali', permanent: true },
-      { source: '/call-girl-jodhpur', destination: '/call-girls/jodhpur', permanent: true },
-      { source: '/call-girl-service-in-surat', destination: '/call-girls/surat', permanent: true },
-      { source: '/call-girl-in-ghaziabad', destination: '/call-girls/ghaziabad', permanent: true },
+      { source: '/call-girl-jodhpur', destination: '/call-girls/jodhpur-2', permanent: true },
+      { source: '/call-girl-service-in-surat', destination: '/call-girls/surat-2', permanent: true },
+      { source: '/call-girl-in-ghaziabad', destination: '/call-girls/ghaziabad-2', permanent: true },
       { source: '/tirupati-call-girls', destination: '/call-girls/tirupati', permanent: true },
       { source: '/call-girls-in-coimbatore', destination: '/call-girls/coimbatore', permanent: true },
-      { source: '/call-girl-in-jaipur', destination: '/call-girls/jaipur', permanent: true },
+      { source: '/call-girl-in-jaipur', destination: '/call-girls/jaipur-2', permanent: true },
       { source: '/hoskote-call-girls', destination: '/call-girls/bengaluru', permanent: true }, // Near Bengaluru
       { source: '/hassan-call-girls', destination: '/call-girls/hassan', permanent: true },
       { source: '/ludhiana-call-girl', destination: '/call-girls/ludhiana', permanent: true },

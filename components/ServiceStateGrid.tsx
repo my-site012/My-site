@@ -1,4 +1,4 @@
-import { locations, getCitySlug, getStateSlug } from "@/lib/data/locations";
+import { locations, getCitySlug, getStateSlug, getCallGirlsSlug } from "@/lib/data/locations";
 import Link from "next/link";
 
 interface ServiceStateGridProps {
@@ -32,7 +32,7 @@ export default function ServiceStateGrid({ category, titlePrefix }: ServiceState
               {cities.map(city => (
                 <li key={city}>
                   <Link
-                    href={`/${category}/${getCitySlug(city)}`}
+                    href={`/${category}/${category === "call-girls" ? getCallGirlsSlug(city) : getCitySlug(city)}`}
                     className="text-blue-600 hover:underline text-sm capitalize"
                   >
                     {city} {label}

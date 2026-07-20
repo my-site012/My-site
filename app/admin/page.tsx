@@ -11,6 +11,37 @@ export default function AdminPage() {
   const [fetchError, setFetchError] = useState("");
   const [phones, setPhones] = useState<string[]>(["", "", "", "", "", ""]);
   const [boyPhones, setBoyPhones] = useState<string[]>(["", "", "", "", "", ""]);
+  const [jaipurPhone, setJaipurPhone] = useState("");
+  const [pendingAds, setPendingAds] = useState<any[]>([]);
+
+  const fetchPendingAds = useCallback(async () => {
+    try {
+      const res = await fetch("/api/admin/ads/pending");
+      if (res.ok) {
+        const data = await res.json();
+        setPendingAds(data.ads || []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch pending ads", err);
+    }
+  }, []);
+
+  const handleAdAction = async (adId: string, action: "approve" | "reject") => {
+    try {
+      const res = await fetch("/api/admin/ads/pending", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adId, action }),
+      });
+      if (res.ok) {
+        setPendingAds(prev => prev.filter(ad => ad.id !== adId));
+      } else {
+        alert("Failed to update ad");
+      }
+    } catch {
+      alert("Error updating ad");
+    }
+  };
 
   useEffect(() => {
     if (stats.phone) {
@@ -30,6 +61,10 @@ export default function AdminPage() {
     }
   }, [(stats as any).callBoyPhone]);
 
+  useEffect(() => {
+    setJaipurPhone((stats as any).jaipurPhone || "");
+  }, [(stats as any).jaipurPhone]);
+
   const fetchStats = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/settings");
@@ -37,6 +72,7 @@ export default function AdminPage() {
         const data = await res.json();
         setStats(data);
         setFetchError("");
+        fetchPendingAds();
       } else if (res.status === 401) {
         // Session expired, go back to login
         setIsLoggedIn(false);
@@ -46,7 +82,7 @@ export default function AdminPage() {
     } catch (err) {
       setFetchError("Network error. Check connection.");
     }
-  }, []);
+  }, [fetchPendingAds]);
 
   // On mount: check if session cookie exists by trying to fetch stats
   useEffect(() => {
@@ -56,12 +92,13 @@ export default function AdminPage() {
         const data = await res.json();
         setStats(data);
         setIsLoggedIn(true);
+        fetchPendingAds();
       } else {
         setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, []);
+  }, [fetchPendingAds]);
 
   // Auto-refresh every 30 seconds when logged in
   useEffect(() => {
@@ -80,6 +117,7 @@ export default function AdminPage() {
     if (res.ok) {
       setIsLoggedIn(true);
       fetchStats();
+      fetchPendingAds();
     } else {
       alert("Invalid Email");
     }
@@ -98,11 +136,11 @@ export default function AdminPage() {
     const res = await fetch("/api/admin/settings", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ phone: phoneString, callBoyPhone: boyPhoneString }),
+      body: JSON.stringify({ phone: phoneString, callBoyPhone: boyPhoneString, jaipurPhone: jaipurPhone.trim() }),
     });
     setLoading(false);
     if (res.ok) {
-      setStats(prev => ({ ...prev, phone: phoneString, callBoyPhone: boyPhoneString } as any));
+      setStats(prev => ({ ...prev, phone: phoneString, callBoyPhone: boyPhoneString, jaipurPhone: jaipurPhone.trim() } as any));
       setMessage("Phone numbers updated successfully!");
       setTimeout(() => setMessage(""), 3000);
     }
@@ -293,6 +331,80 @@ export default function AdminPage() {
           );
         })()}
 
+        {/* Pending Ads Section */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+          <div className="p-6 border-b border-gray-50 flex justify-between items-center">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 uppercase tracking-tight">
+                📢 Pending Ads for Review ({pendingAds.length})
+              </h3>
+              <p className="text-xs text-gray-400 mt-1">Users dwara submit kiye gaye ads jo approval ka wait kar rahe hain</p>
+            </div>
+            <button 
+              onClick={fetchPendingAds}
+              className="text-xs bg-gray-50 border px-3 py-1.5 rounded-lg text-gray-600 hover:bg-gray-100 font-bold transition"
+            >
+              🔄 Refresh List
+            </button>
+          </div>
+          <div className="p-6">
+            {pendingAds.length === 0 ? (
+              <div className="py-12 text-center text-gray-400 font-medium">
+                🎉 Koi pending ads nahi hain review ke liye!
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {pendingAds.map((ad) => (
+                  <div key={ad.id} className="bg-gray-50 border border-gray-100 p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start gap-2 mb-3">
+                        <span className="bg-red-100 text-red-700 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                          {ad.category}
+                        </span>
+                        <span className="text-gray-900 font-extrabold text-sm">
+                          ₹{ad.price} / Hr
+                        </span>
+                      </div>
+                      <h4 className="font-extrabold text-gray-900 text-base mb-2">{ad.title}</h4>
+                      <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-4">{ad.description}</p>
+                      
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs border-t border-gray-200/60 pt-4 mb-4">
+                        <div>
+                          <span className="text-gray-400 font-semibold uppercase block">Location</span>
+                          <span className="text-gray-800 font-bold">{ad.city}, {ad.state}</span>
+                        </div>
+                        <div>
+                          <span className="text-gray-400 font-semibold uppercase block">Contact Phone</span>
+                          <span className="text-gray-800 font-bold">{ad.phone}</span>
+                        </div>
+                        <div className="col-span-2">
+                          <span className="text-gray-400 font-semibold uppercase block">Submitted By</span>
+                          <span className="text-gray-800 font-bold truncate block">{ad.userEmail}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-3 mt-2">
+                      <button
+                        onClick={() => handleAdAction(ad.id, "approve")}
+                        className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm"
+                      >
+                        Approve Ad
+                      </button>
+                      <button
+                        onClick={() => handleAdAction(ad.id, "reject")}
+                        className="flex-1 bg-white hover:bg-red-50 hover:text-red-600 text-gray-600 border font-bold py-2 rounded-xl text-xs uppercase tracking-wider transition shadow-sm"
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Settings Section */}
 
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
@@ -352,6 +464,32 @@ export default function AdminPage() {
                 </div>
                 <p className="mt-3 text-[10px] text-gray-400">
                   Dedicated numbers only used for the Call Boy category. If empty, it will fall back to general rotated numbers.
+                </p>
+              </div>
+
+              {/* ─── Jaipur Dedicated Number ─── */}
+              <div className="border-t border-gray-100 pt-6">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-base">🗺️</span>
+                  <label className="text-sm font-bold text-gray-700">
+                    Jaipur City &amp; Sub-Areas — Dedicated Number
+                  </label>
+                </div>
+                <p className="text-xs text-gray-400 mb-4">
+                  Ye number Jaipur aur uske sare sub-areas pe lagega: <span className="font-semibold text-gray-600">Jagatpura · Gopalpura · Sitapura · Sanganer · 200 Feet Bypass · Chandpole</span>. Agar ye number empty hai toh Global number use hoga.
+                </p>
+                <div className="relative max-w-sm">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm select-none">📞</span>
+                  <input
+                    type="text"
+                    value={jaipurPhone}
+                    onChange={(e) => setJaipurPhone(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2.5 bg-amber-50 border border-amber-300 rounded-xl focus:ring-2 focus:ring-amber-400 outline-none transition text-sm font-medium placeholder:text-gray-400"
+                    placeholder="e.g. 918905822138"
+                  />
+                </div>
+                <p className="mt-2 text-[10px] text-gray-400">
+                  Country code include karo (e.g. 91 for India). Sirf ek number enter karo.
                 </p>
               </div>
 

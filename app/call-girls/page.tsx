@@ -1,4 +1,4 @@
-import { getAllStates, locations, getCitySlug, getStateSlug } from "@/lib/data/locations";
+import { getAllStates, locations, getCitySlug, getStateSlug, getCallGirlsSlug } from "@/lib/data/locations";
 import Link from "next/link";
 import type { Metadata } from "next";
 import CitySearch from "@/components/CitySearch";
@@ -82,7 +82,7 @@ export default function CallGirlsDirectory() {
                   {locations[state].slice(0, 10).map((city) => (
                     <Link
                       key={city}
-                      href={`/call-girls/${getCitySlug(city)}`}
+                      href={`/call-girls/${getCallGirlsSlug(city)}`}
                       className="px-3 py-1.5 bg-gray-50 text-gray-700 text-sm rounded-lg border border-gray-200 hover:border-red-400 hover:text-red-600 transition-colors"
                     >
                       {city}

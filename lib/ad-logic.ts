@@ -808,7 +808,7 @@ export function getDeterministicImagesPool(seed: string, count: number): string[
   if (imagePool.length === 0) return [];
 
   // Append salt to seed to completely shuffle the image pool assignments while keeping names/prices consistent
-  const hash = getHash(seed + "-shuffled-salt-v3");
+  const hash = getHash(seed + "-shuffled-salt-v4");
   const result: string[] = [];
   const usedIndices = new Set<number>();
   
@@ -909,7 +909,7 @@ export function getDeterministicBoyImagesPool(seed: string, count: number): stri
   return result;
 }
 
-export const CONTACT_PHONE = "+91 8058506045";
+export const CONTACT_PHONE = "+91 9232504628";
 
 export function getContactNumber(seed: string, globalPhoneValue?: string | null): string {
   const rawPhones = globalPhoneValue || CONTACT_PHONE;

@@ -1,12 +1,17 @@
-import { getAllCities, getCitySlug, getStateFromCity } from "@/lib/data/locations";
+import { getAllCities, getCitySlug, getStateFromCity, locations } from "@/lib/data/locations";
 import AdCard from "@/components/AdCard";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
 import { cachedGetValue } from "@/lib/kv";
+import { notFound } from "next/navigation";
+import { blogPosts } from "@/lib/data/blogPosts";
+
+const validSlugs = new Set(getAllCities().map(city => getCitySlug(city)));
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getAllCities().map(city => ({
@@ -164,6 +169,7 @@ function getMassageSeoData(cityName: string, state: string) {
 
 export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
   const { city } = await params;
+  if (!validSlugs.has(city)) return {};
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
   const seoData = getMassageSeoData(cityName, state);
@@ -180,12 +186,24 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 export default async function MassageCityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
+  if (!validSlugs.has(city)) {
+    notFound();
+  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;
 
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
+
+  // Find related blog posts for this city or category
+  const relatedBlogs = blogPosts
+    .filter(post => post.category === "massage" && (post.citySlug === city || getCitySlug(post.cityName) === city))
+    .slice(0, 3);
+  
+  const fallbackBlogs = relatedBlogs.length > 0 
+    ? relatedBlogs 
+    : blogPosts.filter(post => post.category === "massage").slice(0, 3);
 
   const seoData = getMassageSeoData(cityName, state);
 
@@ -564,8 +582,56 @@ export default async function MassageCityPage({ params, searchParams }: { params
           </div>
         </div>
 
+        {/* Nearby Cities / Localities in State */}
+        {state && locations[state] && locations[state].length > 1 && (
+          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
+              Other Cities & Locations in {state}
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-center">
+              {locations[state]
+                .filter(c => getCitySlug(c) !== city)
+                .slice(0, 16)
+                .map(c => (
+                  <Link
+                    key={c}
+                    href={`/massage/${getCitySlug(c)}`}
+                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize"
+                  >
+                    {c.toLowerCase()} Massage
+                  </Link>
+                ))}
+            </div>
+          </div>
+        )}
+
+        {/* Recent Blogs & Guides */}
+        {fallbackBlogs.length > 0 && (
+          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
+              Latest Massage Guides & Articles
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {fallbackBlogs.map(post => (
+                <div key={post.slug} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+                  <div className="p-5 flex flex-col h-full">
+                    <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
+                    <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
+                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                    </h4>
+                    <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
+                    <Link href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
+                      Read Article →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Cross-Service Interlinking Section */}
-        <div className="max-w-4xl mx-auto px-4 mt-8 pt-8 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
           <h3 className="text-lg font-bold text-gray-900 mb-4 uppercase tracking-wider text-center">
             Other Adult Services Available in {cityName}
           </h3>

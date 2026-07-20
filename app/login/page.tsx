@@ -2,10 +2,40 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || "Something went wrong");
+      } else {
+        router.push("/ad/post");
+        router.refresh();
+      }
+    } catch (err) {
+      setError("Failed to connect to server");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden bg-[#0a0a0a] flex items-center justify-center px-4 py-12">
@@ -26,7 +56,13 @@ export default function LoginPage() {
             <p className="text-gray-400 text-sm">Access your premium profile and ads</p>
           </div>
 
-          <form className="space-y-6">
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-2xl text-sm font-bold text-center">
+              ⚠️ {error}
+            </div>
+          )}
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <label className="text-sm font-bold text-gray-300 ml-1">EMAIL ADDRESS</label>
               <input 
@@ -36,13 +72,13 @@ export default function LoginPage() {
                 placeholder="name@example.com"
                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-white placeholder:text-gray-600 outline-none focus:border-red-500/50 focus:bg-white/10 transition-all font-medium"
                 required
+                disabled={loading}
               />
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between items-center ml-1">
                 <label className="text-sm font-bold text-gray-300">PASSWORD</label>
-                <Link href="#" className="text-[10px] md:text-xs text-red-500 hover:text-red-400 font-bold uppercase transition-colors">Forgot?</Link>
               </div>
               <input 
                 type="password" 
@@ -51,38 +87,22 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-3.5 text-white placeholder:text-gray-600 outline-none focus:border-red-500/50 focus:bg-white/10 transition-all font-medium"
                 required
+                disabled={loading}
               />
             </div>
 
             <button 
               type="submit" 
-              className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-black py-4 rounded-2xl shadow-lg shadow-red-600/20 transform active:scale-[0.98] transition-all tracking-widest uppercase text-sm"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 text-white font-black py-4 rounded-2xl shadow-lg shadow-red-600/20 transform active:scale-[0.98] transition-all tracking-widest uppercase text-sm"
             >
-              Sign In Now
+              {loading ? "Signing In..." : "Sign In Now"}
             </button>
           </form>
 
-          <div className="mt-8">
-            <div className="relative flex items-center justify-center mb-6">
-              <div className="absolute w-full border-t border-white/5"></div>
-              <span className="relative bg-[#121212] px-4 text-[10px] text-gray-500 font-bold uppercase tracking-widest">or continue with</span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white p-3 rounded-2xl transition-all">
-                <span className="text-lg">G</span>
-                <span className="text-xs font-bold font-sans">Google</span>
-              </button>
-              <button className="flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white p-3 rounded-2xl transition-all">
-                <span className="text-lg">𝕏</span>
-                <span className="text-xs font-bold font-sans">Twitter</span>
-              </button>
-            </div>
-          </div>
-
           <p className="text-center mt-8 text-sm text-gray-400">
             Don't have an account?{" "}
-            <Link href="#" className="text-red-500 hover:text-red-400 font-bold transition-colors underline underline-offset-4">Sign Up</Link>
+            <Link href="/signup" className="text-red-500 hover:text-red-400 font-bold transition-colors underline underline-offset-4">Sign Up</Link>
           </p>
         </div>
       </div>

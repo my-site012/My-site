@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { getCitySlug } from "@/lib/data/locations";
+import { getCitySlug, getCallGirlsSlug } from "@/lib/data/locations";
 import SearchableSelect from "./SearchableSelect";
 
 interface CitySearchProps {
@@ -32,12 +32,13 @@ export default function CitySearch({ cities, layout = "header" }: CitySearchProp
   const handleSearch = () => {
     if (!selectedCity || selectedCity === "Select City") return;
     const slug = getCitySlug(selectedCity);
+    const finalSlug = category === "call-girls" ? getCallGirlsSlug(selectedCity) : slug;
     
     // Save selected city and category in cookies (valid for 1 year)
-    document.cookie = `user-city=${slug}; path=/; max-age=31536000`;
+    document.cookie = `user-city=${finalSlug}; path=/; max-age=31536000`;
     document.cookie = `user-category=${category}; path=/; max-age=31536000`;
 
-    router.push(`/${category}/${slug}`);
+    router.push(`/${category}/${finalSlug}`);
   };
 
   const categories = ["Category: Call Girls", "Category: Call Boys", "Category: Massage"];
