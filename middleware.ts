@@ -62,8 +62,8 @@ export async function middleware(request: NextRequest) {
     const now = Date.now();
     if (now - lastChecked > CACHE_TTL) {
       try {
-        const KV_URL = process.env.KV_REST_API_URL || "https://balanced-ibex-111880.upstash.io";
-        const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ";
+        const KV_URL = process.env.KV_REST_API_URL || "https://logical-gnu-171787.upstash.io";
+        const KV_TOKEN = process.env.KV_REST_API_TOKEN || "gQAAAAAAAp8LAAIgcDJiZDg5ZDlmNDA0MTY0MjhkYTJmY2Y1ZmY5ZDMyYTk5MA";
 
         const res = await fetch(`${KV_URL}/get/maintenance_mode`, {
           headers: { Authorization: `Bearer ${KV_TOKEN}` },

@@ -36,7 +36,7 @@ const KV_URL = (
   process.env.mysite_KV_REST_API_URL ||
   process.env.MYSITE_KV_REST_API_URL ||
   _redisUrlParsed?.url ||
-  "https://balanced-ibex-111880.upstash.io"
+  "https://logical-gnu-171787.upstash.io"
 ).trim();
 
 const KV_TOKEN = (
@@ -45,7 +45,7 @@ const KV_TOKEN = (
   process.env.mysite_KV_REST_API_TOKEN ||
   process.env.MYSITE_KV_REST_API_TOKEN ||
   _redisUrlParsed?.token ||
-  "gQAAAAAAAbUIAAIgcDJmMmE1N2NiMzM1NTM0NDAyYWUzYmRlMjE5OGQwOTljNQ"
+  "gQAAAAAAAp8LAAIgcDJiZDg5ZDlmNDA0MTY0MjhkYTJmY2Y1ZmY5ZDMyYTk5MA"
 ).trim();
 
 export function isKvAvailable(): boolean {
