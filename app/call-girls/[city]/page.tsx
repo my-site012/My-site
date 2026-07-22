@@ -40,6 +40,7 @@ const CITY_DISPLAY_OVERRIDES: Record<string, string> = {
   "surat-2":     "Surat",
   "jodhpur-2":   "Jodhpur",
   "ghaziabad-2": "Ghaziabad",
+  "varanasi-2":  "Varanasi",
 };
 
 const validSlugs = new Set([

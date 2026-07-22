@@ -31,7 +31,8 @@ export async function middleware(request: NextRequest) {
         'jaipur': 'jaipur-2',
         'surat': 'surat-2',
         'jodhpur': 'jodhpur-2',
-        'ghaziabad': 'ghaziabad-2'
+        'ghaziabad': 'ghaziabad-2',
+        'varanasi': 'varanasi-2'
       };
       if (DMCA_REDIRECTS[parts[1]]) {
         const targetUrl = new URL(`/call-girls/${DMCA_REDIRECTS[parts[1]]}`, request.url);

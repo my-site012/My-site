@@ -416,7 +416,8 @@ export function getCallGirlsSlug(city: string): string {
     "jaipur": "jaipur-2",
     "surat": "surat-2",
     "jodhpur": "jodhpur-2",
-    "ghaziabad": "ghaziabad-2"
+    "ghaziabad": "ghaziabad-2",
+    "varanasi": "varanasi-2"
   };
   return OVERRIDES[slug] || slug;
 }
