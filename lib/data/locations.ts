@@ -423,8 +423,11 @@ export function getCallGirlsSlug(city: string): string {
 
 // Helper: get all cities flat list (alphabetical) for dropdown
 export function getAllCities(): string[] {
+  const allStatesSet = new Set(getAllStates());
   const all = Object.values(locations).flat();
-  return [...new Set(all)].sort();
+  return [...new Set(all)]
+    .filter(city => !allStatesSet.has(city))
+    .sort();
 }
 
 // Helper: get state from city
@@ -455,7 +458,9 @@ export function getStateFromCity(citySlug: string): string | null {
 
 // Helper: get all states
 export function getAllStates(): string[] {
-  return Object.keys(locations).sort();
+  return Object.keys(locations)
+    .filter(state => !state.endsWith(" Locations") && state !== "Other Locations")
+    .sort();
 }
 
 // Helper: get slug from state name

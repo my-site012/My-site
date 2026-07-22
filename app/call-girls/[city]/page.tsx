@@ -13,7 +13,7 @@ export const revalidate = 3600;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  const cities = getAllCities().map(city => getCitySlug(city));
+  const cities = getAllCities().map(city => getCallGirlsSlug(city));
   const overrides = Object.keys(CITY_DISPLAY_OVERRIDES);
   return [...cities, ...overrides].map(city => ({
     city
@@ -43,7 +43,7 @@ const CITY_DISPLAY_OVERRIDES: Record<string, string> = {
 };
 
 const validSlugs = new Set([
-  ...getAllCities().map(city => getCitySlug(city)),
+  ...getAllCities().map(city => getCallGirlsSlug(city)),
   ...Object.keys(CITY_DISPLAY_OVERRIDES)
 ]);
 

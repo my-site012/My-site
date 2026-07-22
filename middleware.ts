@@ -15,6 +15,33 @@ export async function middleware(request: NextRequest) {
   const CATEGORIES = ['call-girls', 'call-boys', 'massage'];
   const parts = pathname.split('/').filter(Boolean);
   if (parts.length > 0 && CATEGORIES.includes(parts[0])) {
+    // Redirect /[category]/state/[state]-locations -> /[category]/state/[state]
+    if (parts.length === 3 && parts[1] === 'state' && parts[2].endsWith('-locations')) {
+      const cleanState = parts[2].replace(/-locations$/, '');
+      const targetUrl = new URL(`/${parts[0]}/state/${cleanState}`, request.url);
+      searchParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+      return NextResponse.redirect(targetUrl, 301);
+    }
+
+    // Redirect DMCA original city slugs to their -2 overrides for call-girls
+    if (parts.length === 2 && parts[0] === 'call-girls') {
+      const DMCA_REDIRECTS: Record<string, string> = {
+        'jaipur': 'jaipur-2',
+        'surat': 'surat-2',
+        'jodhpur': 'jodhpur-2',
+        'ghaziabad': 'ghaziabad-2'
+      };
+      if (DMCA_REDIRECTS[parts[1]]) {
+        const targetUrl = new URL(`/call-girls/${DMCA_REDIRECTS[parts[1]]}`, request.url);
+        searchParams.forEach((value, key) => {
+          targetUrl.searchParams.set(key, value);
+        });
+        return NextResponse.redirect(targetUrl, 301);
+      }
+    }
+
     // 3-part URL: /[category]/[state]/[city] -> /[category]/[city]
     if (parts.length === 3 && parts[1] !== 'state') {
       const targetUrl = new URL(`/${parts[0]}/${parts[2]}`, request.url);
@@ -26,10 +53,7 @@ export async function middleware(request: NextRequest) {
 
     // 2-part URL: /[category]/[state] -> /[category]/state/[state]
     if (parts.length === 2) {
-      const realStates = getAllStates().filter(
-        (s) => !s.endsWith(" Locations") && s !== "Other Locations"
-      );
-      const stateSlugs = realStates.map(getStateSlug);
+      const stateSlugs = getAllStates().map(getStateSlug);
       if (stateSlugs.includes(parts[1])) {
         const targetUrl = new URL(`/${parts[0]}/state/${parts[1]}`, request.url);
         searchParams.forEach((value, key) => {
