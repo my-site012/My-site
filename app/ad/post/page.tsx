@@ -21,6 +21,8 @@ export default function PostAdPage() {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [phone, setPhone] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   // Get clean list of states (filter out keys ending with " Locations")
   const statesList = Object.keys(locations)
@@ -49,13 +51,23 @@ export default function PostAdPage() {
     checkAuth();
   }, [router]);
 
+  const handleOpenPaymentModal = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    if (!selectedState || !selectedCity) {
+      setError("Please select both State and City");
+      return;
+    }
+    setShowPaymentModal(true);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSubmitting(true);
 
-    if (!selectedState || !selectedCity) {
-      setError("Please select both State and City");
+    if (!transactionId.trim()) {
+      setError("Please enter the UTR / Transaction ID");
       setSubmitting(false);
       return;
     }
@@ -72,6 +84,7 @@ export default function PostAdPage() {
           state: selectedState,
           city: selectedCity,
           phone,
+          transactionId,
         }),
       });
 
@@ -80,6 +93,7 @@ export default function PostAdPage() {
         setError(data.error || "Failed to submit ad");
       } else {
         setSuccess(true);
+        setShowPaymentModal(false);
         // Reset form
         setTitle("");
         setDescription("");
@@ -87,6 +101,7 @@ export default function PostAdPage() {
         setSelectedState("");
         setSelectedCity("");
         setPhone("");
+        setTransactionId("");
       }
     } catch {
       setError("Failed to connect to server");
@@ -153,7 +168,7 @@ export default function PostAdPage() {
               </div>
             </div>
           ) : (
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleOpenPaymentModal}>
               {error && (
                 <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 rounded-2xl text-sm font-bold text-center">
                   ⚠️ {error}
@@ -280,6 +295,80 @@ export default function PostAdPage() {
           )}
         </div>
       </div>
+
+      {/* Payment / QR Code Modal */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+          <div className="bg-[#121212] border border-white/10 p-6 md:p-8 rounded-3xl max-w-md w-full text-center space-y-6 relative animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setShowPaymentModal(false)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-white font-bold text-xl outline-none"
+            >
+              ✕
+            </button>
+            
+            <div className="space-y-1">
+              <h2 className="text-xl font-black text-white tracking-tighter uppercase">
+                Payment Required <span className="text-red-500">₹100</span>
+              </h2>
+              <p className="text-xs text-gray-400">
+                Scan the QR code below to pay ₹100 for 24 hours ad listing.
+              </p>
+            </div>
+
+            {/* QR Code Container */}
+            <div className="relative w-56 h-56 mx-auto bg-white p-2 rounded-2xl overflow-hidden shadow-inner">
+              <img 
+                src="/Qr code.jpeg" 
+                alt="Payment QR Code" 
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <div className="text-[10px] text-amber-500/80 font-bold bg-amber-500/5 border border-amber-500/10 py-2.5 px-4 rounded-xl leading-relaxed">
+              ⚠️ UTR / UPI Ref No. is mandatory. Our admin will check the transaction history against this UTR to approve your ad.
+            </div>
+
+            {/* Transaction ID / UTR Input Field */}
+            <div className="space-y-2 text-left">
+              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                Transaction ID / UTR Number / UPI Ref No.
+              </label>
+              <input 
+                type="text" 
+                value={transactionId}
+                onChange={(e) => setTransactionId(e.target.value)}
+                placeholder="e.g. 615400004136..."
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder:text-gray-600 outline-none focus:border-red-500/50 focus:bg-white/10 transition-all font-semibold text-sm"
+                required
+              />
+            </div>
+
+            {error && (
+              <div className="text-xs text-red-500 font-bold bg-red-500/10 p-2.5 rounded-xl border border-red-500/20">
+                ⚠️ {error}
+              </div>
+            )}
+
+            <div className="flex gap-4">
+              <button 
+                onClick={() => setShowPaymentModal(false)}
+                className="flex-1 bg-white/5 hover:bg-white/10 text-white font-bold py-3 rounded-xl border border-white/10 transition text-sm"
+                disabled={submitting}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleSubmit}
+                disabled={submitting}
+                className="flex-1 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold py-3 rounded-xl shadow-lg shadow-red-600/20 transition text-sm uppercase tracking-wider"
+              >
+                {submitting ? "Submitting..." : "Confirm & Submit"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

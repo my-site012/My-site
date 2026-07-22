@@ -3,7 +3,7 @@ import AdCard from "@/components/AdCard";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
-import { cachedGetValue } from "@/lib/kv";
+import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data/blogPosts";
 
@@ -209,14 +209,75 @@ export default async function MassageCityPage({ params, searchParams }: { params
 
   const totalAdsToShow = 48;
 
+  const globalPhone = await cachedGetValue("contact_phone");
+  const effectivePhone = globalPhone || undefined;
+
+  // Fetch approved ads from KV
+  let approvedAds: any[] = [];
+  try {
+    const approvedAdIds = await lRange(`ads:approved:massage:${city}`, 0, -1);
+    const expiredIds: string[] = [];
+    
+    for (const adId of approvedAdIds) {
+      const ad = await getJson(`ad:${adId}`);
+      if (ad && ad.status === "approved") {
+        approvedAds.push(ad);
+      } else {
+        expiredIds.push(adId);
+      }
+    }
+    
+    // Asynchronously clean up expired in background
+    if (expiredIds.length > 0) {
+      for (const adId of expiredIds) {
+        await kvCommand(["LREM", `ads:approved:massage:${city}`, 0, adId]);
+      }
+    }
+  } catch (err) {
+    console.error("Failed to load approved ads:", err);
+  }
+
   // Use different seed prefix for massage to show different images than call-girls
   const seedKey = `msg-${city}`;
   const cityImages = getDeterministicImagesPool(seedKey, totalAdsToShow);
-  const paginatedImages = cityImages.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage);
 
-  const totalPages = Math.ceil(totalAdsToShow / adsPerPage);
+  // Map approved ads to Card format
+  const approvedCards = approvedAds.map((ad) => {
+    const imgPath = getDeterministicImagesPool(ad.id, 12)[0];
+    return {
+      id: ad.id,
+      title: ad.title,
+      price: ad.price,
+      imagePath: imgPath,
+      location: cityName,
+      phone: ad.phone,
+      isMassage: true
+    };
+  });
 
-  const globalPhone = await cachedGetValue("contact_phone");
+  // Map deterministic ads to Card format
+  const deterministicCards = cityImages.map((imgPath, index) => {
+    const overallIndex = index;
+    const adId = `msg-${city}-${overallIndex}`;
+    const adName = getNameFromId(adId);
+    const adTitle = `${adName} - Massage Therapist`;
+    const price = getPriceFromId(adId);
+    return {
+      id: adId,
+      title: adTitle,
+      price: price,
+      imagePath: imgPath,
+      location: cityName,
+      phone: effectivePhone,
+      isMassage: true
+    };
+  });
+
+  // Merge approved ads at the beginning
+  const allCards = [...approvedCards, ...deterministicCards];
+  const paginatedCards = allCards.slice((currentPage - 1) * adsPerPage, currentPage * adsPerPage);
+  
+  const totalPages = Math.max(1, Math.ceil(allCards.length / adsPerPage));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -226,21 +287,17 @@ export default async function MassageCityPage({ params, searchParams }: { params
     "url": `https://callgirl4u.com/massage/${city}`,
     "mainEntity": {
       "@type": "ItemList",
-      "numberOfItems": paginatedImages.length,
-      "itemListElement": paginatedImages.map((imgPath, index) => {
-        const overallIndex = ((currentPage - 1) * adsPerPage) + index;
-        const adId = `msg-${city}-${overallIndex}`;
-        const adName = getNameFromId(adId);
-        const price = getPriceFromId(adId);
+      "numberOfItems": paginatedCards.length,
+      "itemListElement": paginatedCards.map((card, index) => {
         return {
           "@type": "ListItem",
           "position": index + 1,
           "item": {
             "@type": "LocalBusiness",
-            "name": `${adName} - Massage Therapist`,
-            "image": `https://callgirl4u.com${imgPath}`,
-            "telephone": getContactNumber(adId, globalPhone),
-            "priceRange": `INR ${price}`,
+            "name": card.title,
+            "image": `https://callgirl4u.com${card.imagePath}`,
+            "telephone": card.phone || "N/A",
+            "priceRange": `INR ${card.price}`,
             "address": {
               "@type": "PostalAddress",
               "addressLocality": cityName,
@@ -331,28 +388,23 @@ export default async function MassageCityPage({ params, searchParams }: { params
           <span className="text-gray-500 text-sm">{totalAdsToShow} Profiles (Page {currentPage}/{totalPages})</span>
         </div>
 
-        {paginatedImages.length > 0 ? (
+        {paginatedCards.length > 0 ? (
           <>
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-              {paginatedImages.map((imgPath, index) => {
-                const overallIndex = ((currentPage - 1) * adsPerPage) + index;
-                const adId = `msg-${city}-${overallIndex}`;
-                const adName = getNameFromId(adId);
-                const adTitle = `${adName} - Massage Therapist`;
-                const price = getPriceFromId(adId);
-
-                return (
-                  <AdCard
-                    key={overallIndex}
-                    id={adId}
-                    title={adTitle}
-                    location={cityName}
-                    price={price}
-                    imagePath={imgPath}
-                    index={index}
-                    phone={globalPhone || undefined}
-                  />
-                );
+              {paginatedCards.map((card, index) => {
+                 return (
+                   <AdCard
+                     key={card.id}
+                     id={card.id}
+                     title={card.title}
+                     location={card.location}
+                     price={card.price}
+                     imagePath={card.imagePath}
+                     index={index}
+                     phone={card.phone}
+                     isMassage={true}
+                   />
+                 );
               })}
             </div>
 

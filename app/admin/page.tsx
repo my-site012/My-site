@@ -381,6 +381,10 @@ export default function AdminPage() {
                           <span className="text-gray-400 font-semibold uppercase block">Submitted By</span>
                           <span className="text-gray-800 font-bold truncate block">{ad.userEmail}</span>
                         </div>
+                        <div className="col-span-2 bg-yellow-50 border border-yellow-200 p-2.5 rounded-xl mt-1">
+                          <span className="text-yellow-700 font-bold uppercase tracking-wider text-[9px] block">UPI Transaction ID / UTR</span>
+                          <span className="text-gray-900 font-black text-sm select-all block font-mono">{ad.transactionId || "No UTR provided"}</span>
+                        </div>
                       </div>
                     </div>
                     

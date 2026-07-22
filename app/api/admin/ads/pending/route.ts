@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getJson, setJson, lRange, kvCommand } from "@/lib/kv";
+import { getCallGirlsSlug, getCitySlug } from "@/lib/data/locations";
+import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
 
@@ -46,10 +48,30 @@ export async function POST(req: NextRequest) {
 
     // Update status
     ad.status = action === "approve" ? "approved" : "rejected";
+    ad.approvedAt = new Date().toISOString();
     await setJson(adKey, ad);
 
     // Remove from pending queue using the unified connection
     await kvCommand(["LREM", "ads:pending", 0, adId]);
+
+    if (action === "approve") {
+      const categorySlug = ad.category.toLowerCase().includes("girl") ? "call-girls" : (ad.category.toLowerCase().includes("boy") ? "call-boys" : "massage");
+      const citySlug = categorySlug === "call-girls" ? getCallGirlsSlug(ad.city) : getCitySlug(ad.city);
+      const approvedKey = `ads:approved:${categorySlug}:${citySlug}`;
+
+      // Push to the approved ads list
+      await kvCommand(["LPUSH", approvedKey, adId]);
+
+      // Set TTL to 24 hours (86400 seconds) on the ad content key
+      await kvCommand(["EXPIRE", adKey, 86400]);
+
+      // Revalidate path so the newly approved ad shows up instantly
+      try {
+        revalidatePath(`/${categorySlug}/${citySlug}`);
+      } catch (e) {
+        console.error("Failed to revalidate path on approval:", e);
+      }
+    }
 
     return NextResponse.json({ success: true });
   } catch {

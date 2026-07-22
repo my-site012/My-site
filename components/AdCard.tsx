@@ -14,15 +14,17 @@ interface AdCardProps {
   imagePath: string;
   index?: number;
   phone?: string;
+  isBoy?: boolean;
+  isMassage?: boolean;
 }
 
-export default function AdCard({ id, title, location, price, imagePath, index = 0, phone }: AdCardProps) {
+export default function AdCard({ id, title, location, price, imagePath, index = 0, phone, isBoy: propIsBoy, isMassage: propIsMassage }: AdCardProps) {
   const [hasError, setHasError] = useState(false);
 
   const displayPhone = getContactNumber(id, phone);
 
-  const isBoy = id.startsWith('boy-');
-  const isMassage = id.startsWith('msg-');
+  const isBoy = propIsBoy !== undefined ? propIsBoy : id.startsWith('boy-');
+  const isMassage = propIsMassage !== undefined ? propIsMassage : id.startsWith('msg-');
 
   // Use a local placeholder to avoid external Unsplash fetch on error (saves JS + network)
   const imgSrc = hasError ? '/images/placeholder.webp' : imagePath;

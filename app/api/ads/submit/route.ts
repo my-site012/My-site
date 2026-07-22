@@ -17,10 +17,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid session" }, { status: 400 });
     }
 
-    const { title, description, category, price, state, city, phone } = await req.json();
+    const { title, description, category, price, state, city, phone, transactionId } = await req.json();
 
-    if (!title || !description || !category || !price || !state || !city || !phone) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    if (!title || !description || !category || !price || !state || !city || !phone || !transactionId) {
+      return NextResponse.json({ error: "All fields including Transaction ID / UTR Number are required" }, { status: 400 });
     }
 
     const adId = crypto.randomUUID();
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
       state,
       city,
       phone,
+      transactionId,
       userEmail: email.toLowerCase(),
       status: "pending",
       createdAt: new Date().toISOString(),

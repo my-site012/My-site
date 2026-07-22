@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import AdCard from "@/components/AdCard";
 import ReportModal from "@/components/ReportModal";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getHash, getContactNumber, getBoyNameFromId, getDeterministicBoyImagesPool } from "@/lib/ad-logic";
-import { cachedGetValue } from "@/lib/kv";
+import { cachedGetValue, getJson } from "@/lib/kv";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { getAllStates, getStateSlug } from "@/lib/data/locations";
 
@@ -46,30 +46,39 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   const { id } = await params;
   
   // Parse ID details
-  const locationParts = id.split('-');
-  const isMassage = id.startsWith('msg-');
-  const isFeatured = id.startsWith('featured');
-  const isBoy = id.startsWith('boy-');
+  const userAd = await getJson(`ad:${id}`);
+
+  const isMassage = userAd
+    ? userAd.category.toLowerCase().includes("massage")
+    : id.startsWith('msg-');
+
+  const isFeatured = userAd
+    ? false
+    : id.startsWith('featured');
+
+  const isBoy = userAd
+    ? userAd.category.toLowerCase().includes("boy")
+    : id.startsWith('boy-');
 
   let rawLocation = "Mumbai";
   let adIndex = 0;
 
-  if (isFeatured) {
+  if (userAd) {
+    rawLocation = userAd.city;
+  } else if (isFeatured) {
+    const locationParts = id.split('-');
     rawLocation = "featured";
     adIndex = locationParts.length > 1 ? parseInt(locationParts[locationParts.length - 1]) : 0;
   } else if (isMassage) {
-    // ID format: msg-city-slug-index (e.g., msg-aerocity-0 or msg-new-delhi-0)
-    // First element is "msg", last element is the index, middle elements are the city slug
+    const locationParts = id.split('-');
     rawLocation = locationParts.slice(1, -1).join('-');
     adIndex = locationParts.length > 2 ? parseInt(locationParts[locationParts.length - 1]) : 0;
   } else if (isBoy) {
-    // ID format: boy-city-slug-index (e.g., boy-mumbai-0 or boy-delhi-0)
-    // First element is "boy", last element is the index, middle elements are the city/state slug
+    const locationParts = id.split('-');
     rawLocation = locationParts.slice(1, -1).join('-');
     adIndex = locationParts.length > 2 ? parseInt(locationParts[locationParts.length - 1]) : 0;
   } else {
-    // ID format: city-slug-index (e.g., aerocity-0 or new-delhi-0)
-    // Last element is the index, elements before that are the city slug
+    const locationParts = id.split('-');
     rawLocation = locationParts.slice(0, -1).join('-');
     adIndex = locationParts.length > 1 ? parseInt(locationParts[locationParts.length - 1]) : 0;
     if (!rawLocation) {
@@ -81,8 +90,12 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   const name = isBoy ? getBoyNameFromId(id) : getNameFromId(id);
   const hash = getHash(id);
   const age = 21 + (hash % 8); 
-  const location = rawLocation.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-  const price = getPriceFromId(id);
+  const location = userAd
+    ? userAd.city
+    : rawLocation.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  
+  const price = userAd ? userAd.price : getPriceFromId(id);
+  const customDescription = userAd ? userAd.description : "";
 
   const JAIPUR_CITIES = new Set([
     "jaipur", "jagatpura", "gopalpura", "sitapura",
@@ -97,7 +110,13 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
   const boyPhone = await cachedGetValue("call_boy_phone");
   const girlPhone = (isJaipurAd && jaipurPhone) ? jaipurPhone : await cachedGetValue("contact_phone");
   const globalPhone = isBoy ? (boyPhone || girlPhone) : girlPhone;
-  const displayPhone = getContactNumber(id, globalPhone);
+
+  let displayPhone = "";
+  if (userAd) {
+    displayPhone = userAd.phone;
+  } else {
+    displayPhone = getContactNumber(id, globalPhone);
+  }
   
   const girlServices = [
     services[hash % services.length],
@@ -112,7 +131,9 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
 
   // Image Selection (Must match CityPage / MassageCityPage / CallBoyCityPage exactly)
   let profileImages: string[] = [];
-  if (isFeatured) {
+  if (userAd) {
+    profileImages = getDeterministicImagesPool(id, 4);
+  } else if (isFeatured) {
     profileImages = getDeterministicImagesPool(id, 4); 
   } else if (isMassage) {
     const seedKey = `msg-${rawLocation}`;
@@ -258,19 +279,21 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
 
               <div className="mb-8">
                  <h3 className="font-bold text-lg mb-2 text-gray-900 uppercase text-sm border-b pb-1">About Profile</h3>
-                 <p className="text-gray-700 text-sm leading-relaxed">
-                   {isMassage ? (
-                     <>
-                       Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Massage Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Massage Therapist in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Massage Therapist WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
-                     </>
-                   ) : isBoy ? (
-                     <>
-                       Hello, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Call Boy / Male Escort Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Call Boy in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Boy WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
-                     </>
-                   ) : (
-                     <>
-                       Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Escort Service in {location}</strong>. If you are looking for <strong className="font-bold">Verified Call Girls in {location}</strong> who value your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Girl WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
-                     </>
+                 <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
+                   {customDescription || (
+                     isMassage ? (
+                       <>
+                         Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Massage Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Massage Therapist in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Massage Therapist WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
+                       </>
+                     ) : isBoy ? (
+                       <>
+                         Hello, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Call Boy / Male Escort Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Call Boy in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Boy WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
+                       </>
+                     ) : (
+                       <>
+                         Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Escort Service in {location}</strong>. If you are looking for <strong className="font-bold">Verified Call Girls in {location}</strong> who value your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Girl WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
+                       </>
+                     )
                    )}
                  </p>
               </div>
