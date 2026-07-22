@@ -203,13 +203,7 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
             <div>
               <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-md bg-gray-200">
                 {mainImage ? (
-                  <>
-                    <Image src={mainImage} alt={`Profile of ${name} in ${location}`} fill className="object-cover" priority unoptimized={true} />
-                    {/* Soft aesthetic glassmorphic mask to smooth out pixelated blurs */}
-                    {!isBoy && !isMassage && (
-                      <div className="absolute top-[6%] left-[28%] w-[44%] h-[30%] rounded-full bg-white/5 backdrop-blur-[14px] border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.2),inset_0_0_10px_rgba(255,255,255,0.1)] pointer-events-none" />
-                    )}
-                  </>
+                  <Image src={mainImage} alt={`Profile of ${name} in ${location}`} fill className="object-cover" priority unoptimized={true} />
                 ) : (
                    <div className="w-full h-full flex items-center justify-center text-gray-400 font-bold uppercase">No Photo</div>
                 )}

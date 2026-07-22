@@ -36,7 +36,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
           fill
           // First 2 cards are LCP candidates — mark as high priority for preload
           priority={index < 2}
-          // Image optimization ON — Next.js serves resized WebP
+          unoptimized={true}
           className={`object-cover transition-transform duration-700 group-hover:scale-110 ${hasError ? 'opacity-50 grayscale' : ''}`}
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           onError={() => {
@@ -47,10 +47,6 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100/80 backdrop-blur-sm">
             <span className="text-gray-500 font-bold uppercase tracking-widest text-xs">Premium Profile</span>
           </div>
-        )}
-        {/* Soft aesthetic glassmorphic mask to smooth out pixelated blurs */}
-        {!isBoy && !isMassage && !hasError && (
-          <div className="absolute top-[6%] left-[28%] w-[44%] h-[30%] rounded-full bg-white/5 backdrop-blur-[14px] border border-white/10 shadow-[0_0_15px_rgba(255,255,255,0.2),inset_0_0_10px_rgba(255,255,255,0.1)] pointer-events-none" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
