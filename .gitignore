@@ -43,6 +43,11 @@ next-env.d.ts
 .vercel
 .env*.local
 
+# wrangler / cloudflare pages
+.open-next/
+.wrangler/
+.dev.vars
+
 # local logs and scratch
 vercel_login_out.log
 task.md
