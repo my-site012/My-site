@@ -1,4 +1,4 @@
-import { getAllCities, getCitySlug, getStateFromCity, locations } from "@/lib/data/locations";
+import { getAllCities, getCitySlug, getStateFromCity, locations, EXTENDED_CITIES, isExtendedCity } from "@/lib/data/locations";
 import AdCard from "@/components/AdCard";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -7,16 +7,19 @@ import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data/blogPosts";
 
-const validSlugs = new Set(getAllCities().map(city => getCitySlug(city)));
+const validSlugs = new Set([
+  ...getAllCities().map(city => getCitySlug(city)),
+  ...EXTENDED_CITIES.map(city => getCitySlug(city)),
+]);
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return getAllCities().map(city => ({
-    city: getCitySlug(city)
-  }));
+  const main = getAllCities().map(city => ({ city: getCitySlug(city) }));
+  const extended = EXTENDED_CITIES.map(city => ({ city: getCitySlug(city) }));
+  return [...main, ...extended];
 }
 
 function getCityHash(name: string): number {
@@ -172,8 +175,18 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   if (!validSlugs.has(city)) return {};
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
-  const seoData = getMassageSeoData(cityName, state);
 
+  // Extended cities — different meta wording
+  if (isExtendedCity(city)) {
+    return {
+      title: `Massage Service in ${cityName} | Body Spa | CallGirl4U`,
+      description: `Find verified massage therapists in ${cityName} with direct WhatsApp contact. Full body massage, B2B spa, and home delivery available in ${cityName}, ${state}. Cash on delivery only.`,
+      keywords: `Massage in ${cityName}, ${cityName} Massage Service, Body Massage ${cityName}, Female Massage ${cityName}, Spa ${cityName}`,
+      alternates: { canonical: `https://callgirl4u.com/massage/${city}` },
+    };
+  }
+
+  const seoData = getMassageSeoData(cityName, state);
   return {
     title: seoData.metaTitle,
     description: seoData.metaDescription,
@@ -206,6 +219,7 @@ export default async function MassageCityPage({ params, searchParams }: { params
     : blogPosts.filter(post => post.category === "massage").slice(0, 3);
 
   const seoData = getMassageSeoData(cityName, state);
+  const isExt = isExtendedCity(city);
 
   const totalAdsToShow = 48;
 
@@ -368,16 +382,28 @@ export default async function MassageCityPage({ params, searchParams }: { params
 
       <section className="bg-white py-10 border-b">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl text-gray-900 mb-4">{seoData.h1}</h1>
-          <p className="text-gray-600 text-lg" dangerouslySetInnerHTML={{ __html: seoData.heroSubtext }} />
+          {isExt ? (
+            <>
+              <h1 className="text-3xl text-gray-900 mb-4">Massage Service Available in {cityName}</h1>
+              <p className="text-gray-600 text-lg">
+                Find <strong>verified massage therapists in {cityName}</strong>, {state} with direct WhatsApp contact.
+                Full body massage, B2B spa &amp; home delivery available 24/7. <strong>Cash on delivery</strong> — no advance payment.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-3xl text-gray-900 mb-4">{seoData.h1}</h1>
+              <p className="text-gray-600 text-lg" dangerouslySetInnerHTML={{ __html: seoData.heroSubtext }} />
+            </>
+          )}
         </div>
       </section>
 
       {/* Breadcrumb */}
       <section className="max-w-7xl mx-auto px-4 py-3 text-sm text-gray-500">
-        <Link href="/" className="hover:text-red-600">Home</Link>
+        <Link prefetch={false} href="/" className="hover:text-red-600">Home</Link>
         <span className="mx-2">›</span>
-        <Link href="/massage" className="hover:text-red-600">Massage Service</Link>
+        <Link prefetch={false} href="/massage" className="hover:text-red-600">Massage Service</Link>
         <span className="mx-2">›</span>
         <span className="text-gray-700">{cityName}</span>
       </section>
@@ -411,17 +437,13 @@ export default async function MassageCityPage({ params, searchParams }: { params
             {/* Pagination */}
             <div className="mt-12 flex justify-center">
               {currentPage < totalPages ? (
-                <Link
-                  href={`/massage/${city}?page=${currentPage + 1}`}
-                  className="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center gap-2"
-                >
+                <Link prefetch={false} href={`/massage/${city}?page=${currentPage + 1}`}
+                  className="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center gap-2">
                   Show More Profiles (Page {currentPage + 1}) →
                 </Link>
               ) : (
-                <Link
-                  href={`/massage/${city}?page=1`}
-                  className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition shadow-lg"
-                >
+                <Link prefetch={false} href={`/massage/${city}?page=1`}
+                  className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition shadow-lg">
                   ← Back to First Page
                 </Link>
               )}
@@ -544,12 +566,10 @@ export default async function MassageCityPage({ params, searchParams }: { params
               'bg-teal-600','bg-purple-600',
             ];
             return (
-              <Link
-                key={i}
+              <Link prefetch={false} key={i}
                 href={`/massage/${city}`}
                 title={tag}
-                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}
-              >
+                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
                 {tag} <span aria-hidden>&#10148;</span>
               </Link>
             );
@@ -617,11 +637,9 @@ export default async function MassageCityPage({ params, searchParams }: { params
               `Spa Massage Center ${cityName}`,
             ] as string[]).map((tag, idx, arr) => (
               <span key={idx}>
-                <Link
-                  href={`/massage/${city}`}
+                <Link prefetch={false} href={`/massage/${city}`}
                   title={tag}
-                  className="hover:underline hover:text-black/80 transition-colors"
-                >
+                  className="hover:underline hover:text-black/80 transition-colors">
                   {tag}
                 </Link>
                 {idx < arr.length - 1 && (
@@ -645,11 +663,9 @@ export default async function MassageCityPage({ params, searchParams }: { params
                 .filter(c => getCitySlug(c) !== city)
                 .slice(0, 16)
                 .map(c => (
-                  <Link
-                    key={c}
+                  <Link prefetch={false} key={c}
                     href={`/massage/${getCitySlug(c)}`}
-                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize"
-                  >
+                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize">
                     {c.toLowerCase()} Massage
                   </Link>
                 ))}
@@ -669,10 +685,10 @@ export default async function MassageCityPage({ params, searchParams }: { params
                   <div className="p-5 flex flex-col h-full">
                     <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
                     <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link prefetch={false} href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h4>
                     <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
-                    <Link href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
+                    <Link prefetch={false} href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
                       Read Article →
                     </Link>
                   </div>
@@ -688,22 +704,16 @@ export default async function MassageCityPage({ params, searchParams }: { params
             Other Adult Services Available in {cityName}
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={`/call-girls/${city}`}
-              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/call-girls/${city}`}
+              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm">
               💃 Call Girls in {cityName}
             </Link>
-            <Link
-              href={`/call-boys/${city}`}
-              className="px-4 py-2 bg-blue-50 text-blue-600 text-sm font-bold rounded-xl border border-blue-100 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/call-boys/${city}`}
+              className="px-4 py-2 bg-blue-50 text-blue-600 text-sm font-bold rounded-xl border border-blue-100 hover:bg-blue-600 hover:text-white transition-all shadow-sm">
               👨 Call Boys in {cityName}
             </Link>
-            <Link
-              href={`/massage`}
-              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/massage`}
+              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm">
               📍 All India Massage Directory
             </Link>
           </div>

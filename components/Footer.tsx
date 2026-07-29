@@ -15,12 +15,12 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap gap-4 text-sm text-blue-600 mb-4">
-          <Link href="/privacy">Privacy Policy</Link>
-          <Link href="/dmca">DMCA Policy</Link>
-          <Link href="/terms">Terms and Conditions</Link>
-          <Link href="/contact">Contact Us</Link>
-          <Link href="/forums">Adult Forums</Link>
+        <div className="flex flex-wrap gap-4 text-sm text-blue-700 mb-4">
+          <Link prefetch={false} href="/privacy">Privacy Policy</Link>
+          <Link prefetch={false} href="/dmca">DMCA Policy</Link>
+          <Link prefetch={false} href="/terms">Terms and Conditions</Link>
+          <Link prefetch={false} href="/contact">Contact Us</Link>
+          <Link prefetch={false} href="/forums">Adult Forums</Link>
         </div>
 
         {/* For Rent Button */}
@@ -37,18 +37,18 @@ export default function Footer() {
         <div className="flex gap-4 text-sm text-gray-600">
           <span>Follow us:</span>
           <a href="#">Youtube</a>
-          <Link href="/blog">Blog</Link>
+          <Link prefetch={false} href="/blog">Blog</Link>
         </div>
 
         {/* DMCA Safe Harbor Notice */}
         <div className="mt-4 p-3 bg-gray-200 rounded-lg text-xs text-gray-600 max-w-2xl">
           <span className="font-bold text-gray-800">⚖️ DMCA Safe Harbor:</span> CallGirl4U operates under 17 U.S.C. § 512 Safe Harbor provisions.
           To report copyright infringement, contact our Designated Agent:{" "}
-          <a href="mailto:worksunil26@gmail.com" className="text-blue-600 hover:underline font-medium">
+          <a href="mailto:worksunil26@gmail.com" className="text-blue-700 hover:underline font-medium">
             worksunil26@gmail.com
           </a>{" "}
           |{" "}
-          <a href="/dmca" className="text-blue-600 hover:underline">DMCA Policy &amp; Counter-Notice</a>
+          <a href="/dmca" className="text-blue-700 hover:underline">DMCA Policy &amp; Counter-Notice</a>
         </div>
 
         {/* Partner Links */}
@@ -56,7 +56,7 @@ export default function Footer() {
           <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
             Partner Directories
           </h4>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-blue-600">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-blue-700">
             <a href="https://kokasite.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">KokaSite</a>
             <a href="https://kokasite.com/massage/andhra-pradesh/vuyyuru" target="_blank" rel="noopener noreferrer" className="hover:underline">Vuyyuru Massage</a>
             <a href="https://kokasite.com/call-girls/assam/rangia" target="_blank" rel="noopener noreferrer" className="hover:underline">Rangia Call Girls</a>

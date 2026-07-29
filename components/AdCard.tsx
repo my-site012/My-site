@@ -31,7 +31,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-gray-100 flex flex-col h-full active:scale-[0.98]">
-      <Link href={`/ad/${id}`} className="block relative aspect-[3/4] overflow-hidden">
+      <Link prefetch={false} href={`/ad/${id}`} className="block relative aspect-[3/4] overflow-hidden">
         <Image
           src={imgSrc}
           alt={title}

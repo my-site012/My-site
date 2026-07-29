@@ -69,10 +69,8 @@ export default function CallGirlsDirectory() {
             <div key={state} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
               <div className="bg-gray-900 px-6 py-4 flex justify-between items-center">
                 <h3 className="text-white text-lg">{state}</h3>
-                <Link 
-                  href={`/call-girls/state/${getStateSlug(state)}`}
-                  className="text-red-400 text-xs font-bold uppercase hover:text-red-300 transition"
-                >
+                <Link prefetch={false} href={`/call-girls/state/${getStateSlug(state)}`}
+                  className="text-red-400 text-xs font-bold uppercase hover:text-red-300 transition">
                   View All →
                 </Link>
               </div>
@@ -80,19 +78,15 @@ export default function CallGirlsDirectory() {
               <div className="p-6">
                 <div className="flex flex-wrap gap-2">
                   {locations[state].slice(0, 10).map((city) => (
-                    <Link
-                      key={city}
+                    <Link prefetch={false} key={city}
                       href={`/call-girls/${getCallGirlsSlug(city)}`}
-                      className="px-3 py-1.5 bg-gray-50 text-gray-700 text-sm rounded-lg border border-gray-200 hover:border-red-400 hover:text-red-600 transition-colors"
-                    >
+                      className="px-3 py-1.5 bg-gray-50 text-gray-700 text-sm rounded-lg border border-gray-200 hover:border-red-400 hover:text-red-600 transition-colors">
                       {city}
                     </Link>
                   ))}
                   {locations[state].length > 10 && (
-                    <Link
-                      href={`/call-girls/state/${getStateSlug(state)}`}
-                      className="px-3 py-1.5 bg-red-50 text-red-600 text-sm font-bold rounded-lg border border-red-100 hover:bg-red-100 transition-colors"
-                    >
+                    <Link prefetch={false} href={`/call-girls/state/${getStateSlug(state)}`}
+                      className="px-3 py-1.5 bg-red-50 text-red-600 text-sm font-bold rounded-lg border border-red-100 hover:bg-red-100 transition-colors">
                       +{locations[state].length - 10} More Cities
                     </Link>
                   )}

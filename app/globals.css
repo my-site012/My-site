@@ -117,3 +117,10 @@ body {
   cursor: pointer;
 }
 
+/* Age Verification Modal Optimization */
+#age-verification-overlay {
+  display: none;
+}
+html.age-unverified #age-verification-overlay {
+  display: flex !important;
+}

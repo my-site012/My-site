@@ -137,10 +137,8 @@ export default function PostAdPage() {
               </h1>
               <p className="text-gray-400 text-xs mt-1">Hello, {user?.name || "Advertiser"}</p>
             </div>
-            <Link 
-              href="/"
-              className="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-wider transition"
-            >
+            <Link prefetch={false} href="/"
+              className="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-wider transition">
               ← Back
             </Link>
           </div>
@@ -159,10 +157,8 @@ export default function PostAdPage() {
                 >
                   Post Another Ad
                 </button>
-                <Link 
-                  href="/"
-                  className="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-3 rounded-xl transition text-sm"
-                >
+                <Link prefetch={false} href="/"
+                  className="bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-3 rounded-xl transition text-sm">
                   Go to Home
                 </Link>
               </div>

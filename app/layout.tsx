@@ -39,6 +39,20 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://wa.me" />
         {/* Preconnect to self-origin for image optimization */}
         <link rel="preconnect" href="https://callgirl4u.com" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var verified = localStorage.getItem('age-verified');
+                  if (!verified) {
+                    document.documentElement.classList.add('age-unverified');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className="antialiased">
         <SecurityProvider />

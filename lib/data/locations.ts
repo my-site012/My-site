@@ -468,3 +468,141 @@ export function getAllStates(): string[] {
 export function getStateSlug(state: string): string {
   return state.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-9-]/g, "");
 }
+
+// ============================================================
+// EXTENDED CITIES — used ONLY in call-girls & massage pages
+// NOT included in getAllCities(), so call-boys is unaffected
+// ============================================================
+export const EXTENDED_CITIES: string[] = [
+  // Andhra Pradesh extras
+  "Akividu", "Bapatla", "Bobbili", "Jangareddygudem", "Kavali", "Kovvur",
+  "Markapur", "Narsapuram", "Nidadavole", "Palacole", "Palasa", "Pithapuram",
+  "Puttaparthi", "Rajam", "Sullurpeta", "Tadipatri", "Tuni", "Vinukonda",
+
+  // Arunachal Pradesh extras
+  "Along", "Anini", "Bhalukpong", "Changlang", "Daporijo", "Deomali",
+  "Dirang", "Khonsa", "Koloriang", "Miao", "Naharlagun", "Namsai",
+  "Roing", "Sagalee", "Seppa", "Yingkiong",
+
+  // Assam extras
+  "Baksa", "Biswanath", "Chirang", "Darrang", "Diphu", "Haflong",
+  "Hojai", "Majuli", "Mangaldoi", "Sonitpur", "Udalguri",
+
+  // Bihar extras
+  "Chapra", "Danapur", "Dehri", "Bhabua",
+
+  // Chhattisgarh extras
+  "Baikunthpur", "Bhatapara", "Dantewada", "Dongargarh", "Jashpur",
+  "Kanker", "Kawardha", "Kondagaon", "Manendragarh", "Narayanpur",
+  "Sukma", "Surajpur",
+
+  // Goa extras
+  "Benaulim", "Curchorem", "Dona Paula", "Miramar", "Old Goa",
+  "Quepem", "Sanquelim", "Sinquerim", "Vagator",
+
+  // Gujarat extras
+  "Ankleshwar", "Himmatnagar", "Mundra",
+
+  // Haryana extras
+  "Gurugram", "Hodal", "Jhajjar", "Manesar", "Nuh", "Pataudi",
+  "Pehowa", "Pinjore",
+
+  // Himachal Pradesh extras
+  "Kaza", "Keylong", "Khajjiar", "Paonta Sahib",
+
+  // Jharkhand extras
+  "Chaibasa", "Daltonganj", "Dumka", "Ghatsila", "Gumla",
+  "Jhumri Tilaiya", "Khunti", "Lohardaga", "Medininagar",
+  "Pakur", "Phusro", "Sahibganj", "Simdega",
+
+  // Karnataka extras
+  "Ballari", "Bantwal", "Channapatna", "Chikkamagaluru", "Hospet",
+  "Kaup", "Kumta", "Kundapur", "Moodbidri", "Puttur",
+  "Ramanagara", "Shivamogga", "Tumakuru", "Vijayapura",
+
+  // Kerala extras
+  "Changanacherry", "Cherthala", "Kalpetta", "Kayamkulam",
+  "Koyilandy", "Neyyattinkara", "Tirur", "Tiruvalla", "Vatakara",
+
+  // Maharashtra extras
+  "Bhandara", "Buldhana", "Gadchiroli", "Hingoli", "Mira-Bhayandar",
+  "Miraj", "Pimpri-Chinchwad", "Sindhudurg", "Ulhasnagar", "Vasai-Virar",
+
+  // Meghalaya extras
+  "Baghmara", "Cherrapunji", "Mawsynram", "Nongpoh", "Williamnagar",
+
+  // Manipur extras
+  "Bishnupur", "Jiribam", "Moirang", "Moreh",
+
+  // Mizoram extras (most already covered via Aizawl etc)
+  "Champhai", "Kolasib", "Lawngtlai", "Lunglei", "Mamit", "Saiha", "Serchhip",
+
+  // Nagaland extras
+  "Kiphire", "Longleng", "Peren", "Tuensang",
+
+  // Odisha extras
+  "Bargarh", "Baripada", "Bolangir", "Brahmapur", "Kendrapara",
+  "Paradip", "Phulbani", "Titilagarh", "Rayagada", "Bhawanipatna",
+
+  // Punjab extras
+  "Derabassi", "Kharar", "Khanna", "Morinda", "Nangal",
+  "Ropar", "Sirhind", "Sultanpur Lodhi",
+
+  // Rajasthan extras
+  "Abu Road", "Gangapur City", "Kankroli", "Karauli", "Rajsamand",
+
+  // Sikkim extras
+  "Gyalshing", "Jorethang", "Pelling", "Rangpo", "Ravangla", "Yuksom",
+
+  // Tamil Nadu extras
+  "Ambattur", "Arakkonam", "Aruppukkottai", "Avadi", "Chengalpattu",
+  "Chidambaram", "Coonoor", "Devakottai", "Gudiyatham", "Kotagiri",
+  "Kovilpatti", "Lalgudi", "Manapparai", "Marthandam", "Mayiladuthurai",
+  "Mettupalayam", "Mettur", "Neyveli", "Padmanabhapuram", "Palani",
+  "Papanasam", "Pattukottai", "Rameswaram", "Ranipet", "Sattur",
+  "Srirangam", "Tambaram", "Tenkasi", "Tirupattur", "Udhagamandalam",
+  "Usilampatti", "Vaniyambadi", "Villupuram",
+
+  // Telangana extras
+  "Bhongir", "Bodhan", "Bhadrachalam", "Hanamkonda", "Huzurnagar",
+  "Jadcherla", "Kamareddy", "Kazipet", "Kothagudem", "Mancherial",
+  "Nagarkurnool", "Nirmal", "Peddapalli", "Sangareddy", "Shadnagar",
+  "Sircilla", "Wanaparthy", "Zaheerabad",
+
+  // Tripura extras
+  "Ambassa", "Belonia", "Bishalgarh", "Kailasahar", "Sabroom",
+  "Sonamura", "Teliamura",
+
+  // Uttar Pradesh extras
+  "Akbarpur", "Ghazipur", "Hathras", "Khurja", "Tanda", "Vrindavan",
+
+  // Uttarakhand extras
+  "Badrinath", "Chamoli", "Jaspur", "Kedarnath", "Kichha",
+  "Manglaur", "Pauri", "Tehri",
+
+  // West Bengal extras
+  "Bardhaman", "Habra", "Haldia", "Kalyani", "Krishnanagar",
+  "Midnapore", "Nabadwip",
+
+  // Delhi areas extras
+  "Chanakyapuri", "Defence Colony", "Greater Kailash", "Lajpat Nagar",
+  "Mehrauli", "Okhla", "Pitampura", "Sarita Vihar",
+
+  // J&K extras
+  "Kathua", "Kulgam", "Poonch", "Pulwama", "Rajouri", "Sopore", "Udhampur",
+
+  // Ladakh extras
+  "Diskit", "Kargil", "Nubra", "Padum", "Turtuk", "Zanskar",
+
+  // Puducherry extras
+  "Auroville", "Puducherry",
+
+  // Chandigarh extras
+  "Manimajra",
+];
+
+// Helper: check if a city slug belongs to extended cities list
+export function isExtendedCity(citySlug: string): boolean {
+  return EXTENDED_CITIES.some(c => getCitySlug(c) === citySlug);
+}
+

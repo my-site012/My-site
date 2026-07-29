@@ -46,8 +46,7 @@ export default function BlogPage() {
       <section className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-wrap gap-3 mb-10">
           {categories.map((cat) => (
-            <Link
-              key={cat}
+            <Link prefetch={false} key={cat}
               href={cat === "all" ? "/blog" : `/blog?category=${cat}`}
               className={`px-4 py-2 rounded-full text-sm font-bold uppercase border transition-colors ${
                 cat === "all"
@@ -57,8 +56,7 @@ export default function BlogPage() {
                   : cat === "call-boys"
                   ? "bg-blue-700 text-white border-blue-700"
                   : "bg-green-700 text-white border-green-700"
-              } hover:opacity-80`}
-            >
+              } hover:opacity-80`}>
               {cat === "all" ? "All Posts" : categoryLabels[cat]}
             </Link>
           ))}
@@ -67,11 +65,9 @@ export default function BlogPage() {
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
-            <Link
-              key={post.slug}
+            <Link prefetch={false} key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col"
-            >
+              className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col">
               {/* Card Top */}
               <div className="bg-gray-900 px-6 py-8 flex-1">
                 <div className="flex items-center gap-2 mb-4">

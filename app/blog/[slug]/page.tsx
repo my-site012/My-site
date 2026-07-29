@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <section className="bg-gray-900 py-14">
         <div className="max-w-4xl mx-auto px-4">
           <div className="flex items-center gap-3 mb-5">
-            <Link href="/blog" className="text-gray-400 text-sm hover:text-white transition">
+            <Link prefetch={false} href="/blog" className="text-gray-400 text-sm hover:text-white transition">
               ← Blog
             </Link>
             <span className="text-gray-600">/</span>
@@ -134,22 +134,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               Real photos, no advance payment. Connect directly with verified companions in {post.cityName}.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <Link
-                href={`/call-girls/${post.citySlug}`}
-                className="bg-red-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-red-700 transition"
-              >
+              <Link prefetch={false} href={`/call-girls/${post.citySlug}`}
+                className="bg-red-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-red-700 transition">
                 Call Girls in {post.cityName}
               </Link>
-              <Link
-                href={`/call-boys/${post.citySlug}`}
-                className="bg-blue-700 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-800 transition"
-              >
+              <Link prefetch={false} href={`/call-boys/${post.citySlug}`}
+                className="bg-blue-700 text-white font-bold px-6 py-3 rounded-lg hover:bg-blue-800 transition">
                 Call Boys in {post.cityName}
               </Link>
-              <Link
-                href={`/massage/${post.citySlug}`}
-                className="bg-green-700 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-800 transition"
-              >
+              <Link prefetch={false} href={`/massage/${post.citySlug}`}
+                className="bg-green-700 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-800 transition">
                 Massage in {post.cityName}
               </Link>
             </div>
@@ -163,22 +157,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
             <h3 className="font-bold text-gray-900 text-lg mb-4 border-b pb-2">Browse by Category</h3>
             <div className="flex flex-col gap-3">
-              <Link
-                href="/call-girls"
-                className="flex items-center gap-3 p-3 bg-red-50 rounded-lg text-red-700 font-semibold text-sm hover:bg-red-100 transition"
-              >
+              <Link prefetch={false} href="/call-girls"
+                className="flex items-center gap-3 p-3 bg-red-50 rounded-lg text-red-700 font-semibold text-sm hover:bg-red-100 transition">
                 <span className="text-lg">💃</span> Call Girls India
               </Link>
-              <Link
-                href="/call-boys"
-                className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg text-blue-700 font-semibold text-sm hover:bg-blue-100 transition"
-              >
+              <Link prefetch={false} href="/call-boys"
+                className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg text-blue-700 font-semibold text-sm hover:bg-blue-100 transition">
                 <span className="text-lg">🕴️</span> Call Boys India
               </Link>
-              <Link
-                href="/massage"
-                className="flex items-center gap-3 p-3 bg-green-50 rounded-lg text-green-700 font-semibold text-sm hover:bg-green-100 transition"
-              >
+              <Link prefetch={false} href="/massage"
+                className="flex items-center gap-3 p-3 bg-green-50 rounded-lg text-green-700 font-semibold text-sm hover:bg-green-100 transition">
                 <span className="text-lg">💆</span> Massage Services
               </Link>
             </div>
@@ -190,11 +178,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <h3 className="font-bold text-gray-900 text-lg mb-4 border-b pb-2">Related Articles</h3>
               <div className="flex flex-col gap-4">
                 {related.map((p) => (
-                  <Link
-                    key={p.slug}
+                  <Link prefetch={false} key={p.slug}
                     href={`/blog/${p.slug}`}
-                    className="group block"
-                  >
+                    className="group block">
                     <span className={`${categoryColors[p.category]} text-white text-xs font-bold px-2 py-0.5 rounded uppercase mb-1 inline-block`}>
                       {categoryLabels[p.category]}
                     </span>
@@ -220,10 +206,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* All Blog Posts link */}
       <div className="text-center mt-8">
-        <Link
-          href="/blog"
-          className="inline-block bg-gray-900 text-white font-bold px-8 py-3 rounded-full hover:bg-black transition"
-        >
+        <Link prefetch={false} href="/blog"
+          className="inline-block bg-gray-900 text-white font-bold px-8 py-3 rounded-full hover:bg-black transition">
           ← View All Blog Posts
         </Link>
       </div>

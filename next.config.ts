@@ -115,6 +115,19 @@ const nextConfig: NextConfig = {
       { source: '/vashi-call-girls', destination: '/call-girls/navi-mumbai', permanent: true },
       { source: '/escort-service-in-dehradun', destination: '/call-girls/dehradun', permanent: true },
       { source: '/call-girls-in-gurgaon', destination: '/call-girls/gurgaon', permanent: true },
+
+      // City-as-state URL fixes — these cities are not states, redirect to correct state pages
+      { source: '/call-girls/state/mumbai', destination: '/call-girls/state/maharashtra', permanent: true },
+      { source: '/call-girls/state/delhi', destination: '/call-girls/state/delhi-ncr', permanent: true },
+      { source: '/call-girls/state/jaipur', destination: '/call-girls/state/rajasthan', permanent: true },
+
+      // Same fixes for call-boys and massage state pages (proactive)
+      { source: '/call-boys/state/mumbai', destination: '/call-boys/state/maharashtra', permanent: true },
+      { source: '/call-boys/state/delhi', destination: '/call-boys/state/delhi-ncr', permanent: true },
+      { source: '/call-boys/state/jaipur', destination: '/call-boys/state/rajasthan', permanent: true },
+      { source: '/massage/state/mumbai', destination: '/massage/state/maharashtra', permanent: true },
+      { source: '/massage/state/delhi', destination: '/massage/state/delhi-ncr', permanent: true },
+      { source: '/massage/state/jaipur', destination: '/massage/state/rajasthan', permanent: true },
     ];
   },
 };

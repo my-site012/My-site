@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAllCities, getCitySlug, getAllStates, getStateSlug, getCallGirlsSlug } from '@/lib/data/locations';
+import { getAllCities, getCitySlug, getAllStates, getStateSlug, getCallGirlsSlug, EXTENDED_CITIES } from '@/lib/data/locations';
 
 export const dynamic = 'force-static';
 
@@ -22,10 +22,17 @@ export async function GET() {
     priority: '0.8'
   }));
 
+  const extendedCityUrls = EXTENDED_CITIES.map(city => ({
+    loc: `${baseUrl}/call-girls/${getCitySlug(city)}`,
+    changefreq: 'weekly',
+    priority: '0.6'
+  }));
+
   const urls = [
     { loc: `${baseUrl}/call-girls`, changefreq: 'daily', priority: '0.9' },
     ...stateUrls,
-    ...cityUrls
+    ...cityUrls,
+    ...extendedCityUrls
   ];
 
   const urlElements = urls.map(u => `  <url>

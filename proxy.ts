@@ -8,7 +8,7 @@ let cachedMaintenance = false;
 let lastChecked = 0;
 const CACHE_TTL = 30000; // 30 seconds
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
   // 0. LEGACY URL REDIRECTS
@@ -176,7 +176,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all routes except static assets
-    '/((?!_next/static|_next/image|favicon.ico|images|apple-icon.png|icon.png|icon.svg).*)',
+    // Match all routes except static assets, APIs, sitemaps, and robots.txt
+    '/((?!_next/static|_next/image|favicon.ico|images|apple-icon.png|icon.png|icon.svg|api/|sitemap|robots.txt).*)',
   ],
 };

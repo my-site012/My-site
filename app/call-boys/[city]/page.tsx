@@ -255,17 +255,13 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
             {/* Pagination */}
             <div className="mt-12 flex justify-center">
               {currentPage < totalPages ? (
-                <Link
-                  href={`/call-boys/${city}?page=${currentPage + 1}`}
-                  className="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center gap-2"
-                >
+                <Link prefetch={false} href={`/call-boys/${city}?page=${currentPage + 1}`}
+                  className="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center gap-2">
                   Show More Profiles (Page {currentPage + 1}) →
                 </Link>
               ) : (
-                <Link
-                  href={`/call-boys/${city}?page=1`}
-                  className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition shadow-lg"
-                >
+                <Link prefetch={false} href={`/call-boys/${city}?page=1`}
+                  className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition shadow-lg">
                   ← Back to First Page
                 </Link>
               )}
@@ -400,12 +396,10 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
               'bg-green-600','bg-rose-600',
             ];
             return (
-              <Link
-                key={i}
+              <Link prefetch={false} key={i}
                 href={`/call-boys/${city}`}
                 title={tag}
-                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}
-              >
+                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
                 {tag} <span aria-hidden>&#10148;</span>
               </Link>
             );
@@ -452,11 +446,9 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
               `Cheapest Call Boy ${cityName}`,
             ] as string[]).map((tag, idx, arr) => (
               <span key={idx}>
-                <Link
-                  href={`/call-boys/${city}`}
+                <Link prefetch={false} href={`/call-boys/${city}`}
                   title={tag}
-                  className="hover:underline hover:text-black/80 transition-colors"
-                >
+                  className="hover:underline hover:text-black/80 transition-colors">
                   {tag}
                 </Link>
                 {idx < arr.length - 1 && (
@@ -480,11 +472,9 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
                 .filter(c => getCitySlug(c) !== city)
                 .slice(0, 16)
                 .map(c => (
-                  <Link
-                    key={c}
+                  <Link prefetch={false} key={c}
                     href={`/call-boys/${getCitySlug(c)}`}
-                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize"
-                  >
+                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize">
                     {c.toLowerCase()} Call Boys
                   </Link>
                 ))}
@@ -504,10 +494,10 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
                   <div className="p-5 flex flex-col h-full">
                     <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
                     <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link prefetch={false} href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h4>
                     <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
-                    <Link href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
+                    <Link prefetch={false} href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
                       Read Article →
                     </Link>
                   </div>
@@ -523,22 +513,16 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
             Other Adult Services Available in {cityName}
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={`/call-girls/${city}`}
-              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/call-girls/${city}`}
+              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm">
               💃 Call Girls in {cityName}
             </Link>
-            <Link
-              href={`/massage/${city}`}
-              className="px-4 py-2 bg-purple-50 text-purple-600 text-sm font-bold rounded-xl border border-purple-100 hover:bg-purple-600 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/massage/${city}`}
+              className="px-4 py-2 bg-purple-50 text-purple-600 text-sm font-bold rounded-xl border border-purple-100 hover:bg-purple-600 hover:text-white transition-all shadow-sm">
               💆 Massage Service in {cityName}
             </Link>
-            <Link
-              href={`/call-boys`}
-              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/call-boys`}
+              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm">
               📍 All India Call Boys Directory
             </Link>
           </div>

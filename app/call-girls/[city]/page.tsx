@@ -1,4 +1,4 @@
-import { getAllCities, getCitySlug, getStateFromCity, locations, getCallGirlsSlug } from "@/lib/data/locations";
+import { getAllCities, getCitySlug, getStateFromCity, locations, getCallGirlsSlug, EXTENDED_CITIES, isExtendedCity } from "@/lib/data/locations";
 import { cityContentData, CitySEOContent } from "@/lib/data/cityContent";
 import AdCard from "@/components/AdCard";
 import Link from "next/link";
@@ -15,9 +15,8 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const cities = getAllCities().map(city => getCallGirlsSlug(city));
   const overrides = Object.keys(CITY_DISPLAY_OVERRIDES);
-  return [...cities, ...overrides].map(city => ({
-    city
-  }));
+  const extended = EXTENDED_CITIES.map(city => getCitySlug(city));
+  return [...cities, ...overrides, ...extended].map(city => ({ city }));
 }
 
 import { getCitySeo, getDefaultSeoData } from "@/lib/seo-templates";
@@ -45,7 +44,8 @@ const CITY_DISPLAY_OVERRIDES: Record<string, string> = {
 
 const validSlugs = new Set([
   ...getAllCities().map(city => getCallGirlsSlug(city)),
-  ...Object.keys(CITY_DISPLAY_OVERRIDES)
+  ...Object.keys(CITY_DISPLAY_OVERRIDES),
+  ...EXTENDED_CITIES.map(city => getCitySlug(city)),
 ]);
 
 /**
@@ -65,9 +65,21 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const cityName = getDisplayCityName(city);           // e.g. "Sitapura Jaipur"
   const areaName = JAIPUR_SUB_SLUGS[city] ?? cityName; // e.g. "Sitapura"
   const isJaipurSub = !!JAIPUR_SUB_SLUGS[city];
+  const isExt = isExtendedCity(city);
 
   const state = getStateFromCity(city) || "India";
   const seoData = cityContentData[city] || getDefaultSeoData(cityName, state);
+
+  // Extended cities — different meta wording to avoid duplicate content
+  if (isExt) {
+    const extKeywords = `Call Girls in ${cityName}, ${cityName} Call Girl Number, Escort Service ${cityName}, ${cityName} Escort, Call Girl ${cityName} WhatsApp, Female Escort ${cityName}`;
+    return {
+      title: `Call Girls in ${cityName} | Contact Directly | CallGirl4U`,
+      description: `Find verified call girls in ${cityName} with direct WhatsApp contact. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery. No advance payment.`,
+      keywords: extKeywords,
+      alternates: { canonical: `https://callgirl4u.com/call-girls/${city}` },
+    };
+  }
 
   // For DMCA alternate slugs (e.g. jaipur-2), use original city slug as SEO seed
   const seoSeed = CITY_DISPLAY_OVERRIDES[city]
@@ -126,6 +138,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
     ? city.replace(/-\d+$/, "") // e.g. jaipur-2 -> jaipur
     : city;
   const seoData = cityContentData[seoDataKey] || getDefaultSeoData(cityName, state);
+  const isExt = isExtendedCity(city);
 
   // Sub-areas for this city (e.g. Jaipur Locations, Mumbai Locations, Delhi Locations)
   const cityLocationsKey = `${cityName} Locations`;
@@ -280,8 +293,20 @@ export default async function CityPage({ params, searchParams }: { params: Promi
 
       <section className="bg-white py-10 border-b">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl text-gray-900 mb-4">{seoData.h1}</h1>
-          <p className="text-gray-600 text-lg" dangerouslySetInnerHTML={{ __html: seoData.heroSubtext }} />
+          {isExt ? (
+            <>
+              <h1 className="text-3xl text-gray-900 mb-4">Call Girls Available in {cityName}</h1>
+              <p className="text-gray-600 text-lg">
+                Find <strong>verified call girls in {cityName}</strong>, {state} with direct WhatsApp contact.
+                Genuine female companions available 24/7. <strong>Cash on delivery</strong> — no advance payment required.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-3xl text-gray-900 mb-4">{seoData.h1}</h1>
+              <p className="text-gray-600 text-lg" dangerouslySetInnerHTML={{ __html: seoData.heroSubtext }} />
+            </>
+          )}
         </div>
       </section>
 
@@ -295,11 +320,9 @@ export default async function CityPage({ params, searchParams }: { params: Promi
                 <h3 className="font-bold text-base mb-3 text-gray-900 border-b pb-2">Areas in {cityName}</h3>
                 <div className="flex flex-col gap-1">
                   {citySubAreas.map((area) => (
-                    <Link
-                      key={area}
+                    <Link prefetch={false} key={area}
                       href={`/call-girls/${getCitySlug(area)}`}
-                      className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium"
-                    >
+                      className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium">
                       {area} Call Girls
                     </Link>
                   ))}
@@ -312,11 +335,9 @@ export default async function CityPage({ params, searchParams }: { params: Promi
                 <h3 className="font-bold text-sm mb-2 text-gray-900">Areas in {cityName}</h3>
                 <div className="flex gap-2 overflow-x-auto pb-1">
                   {citySubAreas.map((area) => (
-                    <Link
-                      key={area}
+                    <Link prefetch={false} key={area}
                       href={`/call-girls/${getCitySlug(area)}`}
-                      className="whitespace-nowrap text-xs bg-red-50 text-red-600 border border-red-100 px-3 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition font-medium"
-                    >
+                      className="whitespace-nowrap text-xs bg-red-50 text-red-600 border border-red-100 px-3 py-1.5 rounded-full hover:bg-red-600 hover:text-white transition font-medium">
                       {area}
                     </Link>
                   ))}
@@ -355,17 +376,13 @@ export default async function CityPage({ params, searchParams }: { params: Promi
             {/* Pagination Button */}
             <div className="mt-12 flex justify-center">
               {currentPage < totalPages ? (
-                <Link 
-                  href={`/call-girls/${city}?page=${currentPage + 1}`}
-                  className="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center gap-2"
-                >
+                <Link prefetch={false} href={`/call-girls/${city}?page=${currentPage + 1}`}
+                  className="bg-red-600 text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 transition shadow-lg flex items-center gap-2">
                   Show More Profiles (Page {currentPage + 1}) →
                 </Link>
               ) : (
-                <Link 
-                  href={`/call-girls/${city}?page=1`}
-                  className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition shadow-lg"
-                >
+                <Link prefetch={false} href={`/call-girls/${city}?page=1`}
+                  className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-black transition shadow-lg">
                   ← Back to First Page
                 </Link>
               )}
@@ -485,12 +502,10 @@ export default async function CityPage({ params, searchParams }: { params: Promi
               'bg-green-600','bg-rose-600','bg-indigo-700','bg-amber-600',
             ];
             return (
-              <Link
-                key={i}
+              <Link prefetch={false} key={i}
                 href={`/call-girls/${city}`}
                 title={tag}
-                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}
-              >
+                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
                 {tag} <span aria-hidden>&#10148;</span>
               </Link>
             );
@@ -558,11 +573,9 @@ export default async function CityPage({ params, searchParams }: { params: Promi
               `Cheapest Call Girl ${cityName}`,
             ] as string[]).map((tag, idx, arr) => (
               <span key={idx}>
-                <Link
-                  href={`/call-girls/${city}`}
+                <Link prefetch={false} href={`/call-girls/${city}`}
                   title={tag}
-                  className="hover:underline hover:text-black/80 transition-colors"
-                >
+                  className="hover:underline hover:text-black/80 transition-colors">
                   {tag}
                 </Link>
                 {idx < arr.length - 1 && (
@@ -586,11 +599,9 @@ export default async function CityPage({ params, searchParams }: { params: Promi
                 .filter(c => getCitySlug(c) !== city)
                 .slice(0, 16)
                 .map(c => (
-                  <Link
-                    key={c}
+                  <Link prefetch={false} key={c}
                     href={`/call-girls/${getCallGirlsSlug(c)}`}
-                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize"
-                  >
+                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize">
                     {c.toLowerCase()} Escorts
                   </Link>
                 ))}
@@ -610,10 +621,10 @@ export default async function CityPage({ params, searchParams }: { params: Promi
                   <div className="p-5 flex flex-col h-full">
                     <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
                     <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
-                      <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link prefetch={false} href={`/blog/${post.slug}`}>{post.title}</Link>
                     </h4>
                     <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
-                    <Link href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
+                    <Link prefetch={false} href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
                       Read Article →
                     </Link>
                   </div>
@@ -629,22 +640,16 @@ export default async function CityPage({ params, searchParams }: { params: Promi
             Other Adult Services Available in {cityName}
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href={`/call-boys/${city}`}
-              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/call-boys/${city}`}
+              className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm">
               👨 Call Boys in {cityName}
             </Link>
-            <Link
-              href={`/massage/${city}`}
-              className="px-4 py-2 bg-purple-50 text-purple-600 text-sm font-bold rounded-xl border border-purple-100 hover:bg-purple-600 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/massage/${city}`}
+              className="px-4 py-2 bg-purple-50 text-purple-600 text-sm font-bold rounded-xl border border-purple-100 hover:bg-purple-600 hover:text-white transition-all shadow-sm">
               💆 Massage Service in {cityName}
             </Link>
-            <Link
-              href={`/call-girls`}
-              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm"
-            >
+            <Link prefetch={false} href={`/call-girls`}
+              className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm">
               📍 All India Call Girls Directory
             </Link>
           </div>

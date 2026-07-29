@@ -40,7 +40,7 @@ const services = [
   "Condom Sex",
   "Without Condom Sex"
 ];
-const languages = ["English", "Hindi", "Punjabi", "Marathi"];
+const languages = ["Hindi", "English", "Hindi", "English"]; // always Hindi, English
 
 export default async function AdDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -125,7 +125,7 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
     services[(hash + 4) % services.length]
   ];
 
-  const spokenLanguages = `${languages[hash % languages.length]}, ${languages[(hash + 1) % languages.length]}`;
+  const spokenLanguages = "Hindi, English";
 
   const isState = getAllStates().some(s => getStateSlug(s) === rawLocation);
 
@@ -210,9 +210,9 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
       <div className="max-w-6xl mx-auto px-4">
         
         <div className="text-sm text-gray-500 mb-6 flex gap-2">
-          <Link href="/" className="hover:text-red-600">Home</Link>
+          <Link prefetch={false} href="/" className="hover:text-red-600">Home</Link>
           <span>›</span>
-          <Link href={isMassage ? `/massage/${rawLocation}` : isBoy ? `/call-boys/${rawLocation}` : `/call-girls/${rawLocation}`} className="hover:text-red-600">{location}</Link>
+          <Link prefetch={false} href={isMassage ? `/massage/${rawLocation}` : isBoy ? `/call-boys/${rawLocation}` : `/call-girls/${rawLocation}`} className="hover:text-red-600">{location}</Link>
           <span>›</span>
           <span className="text-gray-800 font-medium">{name} Profile</span>
         </div>

@@ -102,7 +102,7 @@ export default function LoginPage() {
 
           <p className="text-center mt-8 text-sm text-gray-400">
             Don't have an account?{" "}
-            <Link href="/signup" className="text-red-500 hover:text-red-400 font-bold transition-colors underline underline-offset-4">Sign Up</Link>
+            <Link prefetch={false} href="/signup" className="text-red-500 hover:text-red-400 font-bold transition-colors underline underline-offset-4">Sign Up</Link>
           </p>
         </div>
       </div>

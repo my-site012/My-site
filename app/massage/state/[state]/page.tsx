@@ -285,9 +285,9 @@ export default async function MassageStatePage({ params }: { params: Promise<{ s
 
       {/* Breadcrumb */}
       <section className="max-w-7xl mx-auto px-4 py-3 text-sm text-gray-500">
-        <Link href="/" className="hover:text-red-600">Home</Link>
+        <Link prefetch={false} href="/" className="hover:text-red-600">Home</Link>
         <span className="mx-2">›</span>
-        <Link href="/massage" className="hover:text-red-600">Massage Service</Link>
+        <Link prefetch={false} href="/massage" className="hover:text-red-600">Massage Service</Link>
         <span className="mx-2">›</span>
         <span className="text-gray-700">{stateName}</span>
       </section>
@@ -300,11 +300,9 @@ export default async function MassageStatePage({ params }: { params: Promise<{ s
             <h3 className="font-bold text-xl mb-4 text-gray-900 border-b pb-2">Cities in {stateName}</h3>
             <div className="flex flex-col gap-2 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
               {cities.map((city) => (
-                <Link 
-                  key={city} 
+                <Link prefetch={false} key={city} 
                   href={`/massage/${getCitySlug(city)}`}
-                  className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium"
-                >
+                  className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium">
                   {city} Massage
                 </Link>
               ))}
@@ -455,12 +453,10 @@ export default async function MassageStatePage({ params }: { params: Promise<{ s
                   'bg-green-600','bg-rose-600','bg-indigo-700','bg-amber-600',
                 ];
                 return (
-                  <Link
-                    key={i}
+                  <Link prefetch={false} key={i}
                     href={`/massage/state/${state}`}
                     title={tag}
-                    className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}
-                  >
+                    className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
                     {tag} <span aria-hidden>&#10148;</span>
                   </Link>
                 );
@@ -517,11 +513,9 @@ export default async function MassageStatePage({ params }: { params: Promise<{ s
                   `Cheapest Massage ${stateName}`,
                 ] as string[]).map((tag, idx, arr) => (
                   <span key={idx}>
-                    <Link
-                      href={`/massage/state/${state}`}
+                    <Link prefetch={false} href={`/massage/state/${state}`}
                       title={tag}
-                      className="hover:underline hover:text-black/80 transition-colors"
-                    >
+                      className="hover:underline hover:text-black/80 transition-colors">
                       {tag}
                     </Link>
                     {idx < arr.length - 1 && (

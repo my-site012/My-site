@@ -143,11 +143,9 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
             <h3 className="font-bold text-xl mb-4 text-gray-900 border-b pb-2">Cities in {stateName}</h3>
             <div className="flex flex-col gap-2 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
               {cities.map((city) => (
-                <Link 
-                  key={city} 
+                <Link prefetch={false} key={city} 
                   href={`/call-girls/${getCallGirlsSlug(city)}`}
-                  className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium"
-                >
+                  className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium">
                   {city} Escorts
                 </Link>
               ))}
@@ -295,12 +293,10 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
                   'bg-green-600','bg-rose-600','bg-indigo-700','bg-amber-600',
                 ];
                 return (
-                  <Link
-                    key={i}
+                  <Link prefetch={false} key={i}
                     href={`/call-girls/state/${state}`}
                     title={tag}
-                    className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}
-                  >
+                    className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
                     {tag} <span aria-hidden>&#10148;</span>
                   </Link>
                 );
@@ -368,11 +364,9 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
                   `Cheapest Call Girl ${stateName}`,
                 ] as string[]).map((tag, idx, arr) => (
                   <span key={idx}>
-                    <Link
-                      href={`/call-girls/state/${state}`}
+                    <Link prefetch={false} href={`/call-girls/state/${state}`}
                       title={tag}
-                      className="hover:underline hover:text-black/80 transition-colors"
-                    >
+                      className="hover:underline hover:text-black/80 transition-colors">
                       {tag}
                     </Link>
                     {idx < arr.length - 1 && (
