@@ -10,7 +10,7 @@ import { blogPosts } from "@/lib/data/blogPosts";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const cities = getAllCities().map(city => getCallGirlsSlug(city));
@@ -61,7 +61,6 @@ function getDisplayCityName(city: string): string {
 
 export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
   const { city } = await params;
-  if (!validSlugs.has(city)) return {};
   const cityName = getDisplayCityName(city);           // e.g. "Sitapura Jaipur"
   const areaName = JAIPUR_SUB_SLUGS[city] ?? cityName; // e.g. "Sitapura"
   const isJaipurSub = !!JAIPUR_SUB_SLUGS[city];
@@ -115,9 +114,6 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 export default async function CityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
-  if (!validSlugs.has(city)) {
-    notFound();
-  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;

@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return getAllStates().map(state => ({
@@ -21,15 +21,14 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
   const { state } = await params;
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  if (!matchedState) return {};
-  const stateName = matchedState;
+  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   
   const seoData = getDefaultSeoData(stateName, "India");
   const customSeo = getCitySeo(state);
 
   return {
-    title: customSeo.title,
-    description: customSeo.description,
+    title: customSeo.title || `Call Girls in ${stateName} State | Verified Companion Services`,
+    description: customSeo.description || `Find verified independent call girls across ${stateName}. Browse local female escort profiles with direct WhatsApp booking and cash on delivery.`,
     keywords: seoData.metaKeywords,
     alternates: {
       canonical: `https://callgirl4u.com/call-girls/state/${state}`,
@@ -43,10 +42,7 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
   // Find original state name from slug
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  if (!matchedState) {
-    notFound();
-  }
-  const stateName = matchedState;
+  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   
   const cities = locations[stateName] || [];
   const profileImages = getDeterministicImagesPool(state, 12);

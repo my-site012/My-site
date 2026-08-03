@@ -11,7 +11,7 @@ const validSlugs = new Set(getAllCities().map(city => getCitySlug(city)));
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return getAllCities().map(city => ({
@@ -21,7 +21,6 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
   const { city } = await params;
-  if (!validSlugs.has(city)) return {};
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
 
@@ -37,9 +36,6 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 export default async function CallBoyCityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
-  if (!validSlugs.has(city)) {
-    notFound();
-  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;

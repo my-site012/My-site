@@ -52,6 +52,36 @@ export async function middleware(request: NextRequest) {
   const CATEGORIES = ['call-girls', 'call-boys', 'massage'];
   const parts = pathname.split('/').filter(Boolean);
   if (parts.length > 0 && CATEGORIES.includes(parts[0])) {
+    // City name variant/alias 301 redirects to official slugs
+    const CITY_ALIASES: Record<string, string> = {
+      'bangalore': 'bengaluru',
+      'belgaum': 'belagavi',
+      'mysore': 'mysuru',
+      'gulbarga': 'kalaburagi',
+      'pondicherry': 'puducherry',
+      'trivandrum': 'thiruvananthapuram',
+      'calicut': 'kozhikode',
+      'cochin': 'kochi',
+      'mangalore': 'mangaluru',
+      'shimoga': 'shivamogga',
+      'hubli': 'hubballi',
+      'trichy': 'tiruchirappalli',
+      'baroda': 'vadodara',
+      'bombay': 'mumbai',
+      'calcutta': 'kolkata',
+      'madras': 'chennai',
+      'benaras': 'varanasi',
+      'benares': 'varanasi',
+      'gurgaon': 'gurugram'
+    };
+    if (parts.length === 2 && CITY_ALIASES[parts[1]]) {
+      const targetUrl = new URL(`/${parts[0]}/${CITY_ALIASES[parts[1]]}`, request.url);
+      searchParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+      return NextResponse.redirect(targetUrl, 301);
+    }
+
     // Redirect /[category]/state/[state]-locations -> /[category]/state/[state]
     if (parts.length === 3 && parts[1] === 'state' && parts[2].endsWith('-locations')) {
       const cleanState = parts[2].replace(/-locations$/, '');

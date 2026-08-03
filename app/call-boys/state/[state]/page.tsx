@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return getAllStates().map(state => ({
@@ -20,8 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
   const { state } = await params;
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  if (!matchedState) return {};
-  const stateName = matchedState;
+  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
   return {
     title: `Call Boys in ${stateName} | Verified Male Companions | CallGirl4U`,
@@ -38,10 +37,7 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
 
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  if (!matchedState) {
-    notFound();
-  }
-  const stateName = matchedState;
+  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
   const cities = locations[stateName] || [];
   const profileImages = getDeterministicBoyImagesPool(state + "-boy", 12);
