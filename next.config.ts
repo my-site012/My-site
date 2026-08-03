@@ -115,6 +115,10 @@ const nextConfig: NextConfig = {
       { source: '/vashi-call-girls', destination: '/call-girls/navi-mumbai', permanent: true },
       { source: '/escort-service-in-dehradun', destination: '/call-girls/dehradun', permanent: true },
       { source: '/call-girls-in-gurgaon', destination: '/call-girls/gurgaon', permanent: true },
+      { source: '/salem-call-girls-number', destination: '/call-girls/salem', permanent: true },
+      { source: '/call-girl-indore-romantic-sexy-girls', destination: '/call-girls/indore', permanent: true },
+      { source: '/call-girl-in-ameerpet', destination: '/call-girls/hyderabad', permanent: true },
+      { source: '/call-girls-in-gurgaon-2', destination: '/call-girls/gurgaon', permanent: true },
 
       // City-as-state URL fixes — these cities are not states, redirect to correct state pages
       { source: '/call-girls/state/mumbai', destination: '/call-girls/state/maharashtra', permanent: true },
