@@ -44,6 +44,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Legacy index entry points
+      { source: '/index.php', destination: '/', permanent: true },
+      { source: '/index.html', destination: '/', permanent: true },
+      { source: '/index.htm', destination: '/', permanent: true },
+      { source: '/home.php', destination: '/', permanent: true },
+      { source: '/home.html', destination: '/', permanent: true },
+
       // DMCA redirects removed to prevent Google penalty transfer to -2 URLs (they will now 404 cleanly)
       { source: '/ujjain-call-girl', destination: '/call-girls/ujjain', permanent: true },
       { source: '/jhansi-call-girl', destination: '/call-girls/jhansi', permanent: true },

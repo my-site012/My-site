@@ -8,8 +8,45 @@ let cachedMaintenance = false;
 let lastChecked = 0;
 const CACHE_TTL = 30000; // 30 seconds
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
+
+  // 0.1 INDEX / PHP URL REDIRECTS
+  const lowerPath = pathname.toLowerCase();
+  if (lowerPath === '/index.php' || lowerPath === '/index.html' || lowerPath === '/index.htm' || lowerPath === '/home.php' || lowerPath === '/home.html') {
+    const targetUrl = new URL('/', request.url);
+    return NextResponse.redirect(targetUrl, 301);
+  }
+
+  // 0.2 AD DETAIL REDIRECT TO SIMILAR CITY PAGE
+  const pathParts = pathname.split('/').filter(Boolean);
+  if (pathParts.length >= 2 && pathParts[0] === 'ad' && pathParts[1] !== 'post') {
+    const id = pathParts[1];
+    let category = 'call-girls';
+    let rawLocation = '';
+
+    if (id.startsWith('msg-')) {
+      category = 'massage';
+      const parts = id.split('-');
+      rawLocation = parts.slice(1, -1).join('-');
+    } else if (id.startsWith('boy-')) {
+      category = 'call-boys';
+      const parts = id.split('-');
+      rawLocation = parts.slice(1, -1).join('-');
+    } else if (id.startsWith('featured')) {
+      category = 'call-girls';
+      rawLocation = '';
+    } else {
+      category = 'call-girls';
+      const parts = id.split('-');
+      rawLocation = parts.slice(0, -1).join('-');
+    }
+
+    const cleanLocation = rawLocation.toLowerCase().trim();
+    const targetPath = cleanLocation ? `/${category}/${cleanLocation}` : `/${category}`;
+    const targetUrl = new URL(targetPath, request.url);
+    return NextResponse.redirect(targetUrl, 301);
+  }
 
   // 0. LEGACY URL REDIRECTS
   const CATEGORIES = ['call-girls', 'call-boys', 'massage'];
