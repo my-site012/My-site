@@ -121,7 +121,7 @@ const rawBlogPosts: BlogPost[] = [
     excerpt: "Jaipur ka royal charm aur yahan ki gorgeous call girls — ek unforgettable experience ke liye. Verified profiles, real photos, no advance.",
     content: `
 <h2>Call Girls in Jaipur – Pink City Ki Sबसे Hot Escorts</h2>
-<p>Jaipur — majestic palaces, vibrant bazaars, aur raat ka ek alag hi jadoo. Is Pink City mein jab suraj dhalta hai, toh ek romantic, sensual journey shuru hoti hai — aur hamare <a href="/call-girls/jaipur">Jaipur call girls directory</a> ke through aap is journey mein apna perfect companion dhundh sakte hain.</p>
+<p>Jaipur — majestic palaces, vibrant bazaars, aur raat ka ek alag hi jadoo. Is Pink City mein jab suraj dhalta hai, toh ek romantic, sensual journey shuru hoti hai — aur hamare <a href="https://jaipur.callgirl4u.com/">Jaipur call girls directory</a> ke through aap is journey mein apna perfect companion dhundh sakte hain.</p>
 
 <p>Jaipur mein tourism ka ek bada role hai — yahan aane waale visitors sirf Amber Fort ya Hawa Mahal nahi dekhna chahte, woh ek complete experience chahte hain. Aur yahan ki independent escorts woh experience dene mein mahir hain — charming, educated, aur completely professional.</p>
 
@@ -793,7 +793,7 @@ const rawBlogPosts: BlogPost[] = [
 </ul>
 
 <h2>Rajasthan Explore Karein</h2>
-<p>Browse <a href="/call-girls/jaipur">Jaipur escorts</a>, <a href="/call-girls/jodhpur">Jodhpur call girls</a>, full <a href="/call-girls/state/rajasthan">Rajasthan directory</a>. Male companions ke liye <a href="/call-boys/udaipur">Udaipur call boys</a>.</p>
+<p>Browse <a href="https://jaipur.callgirl4u.com/">Jaipur escorts</a>, <a href="/call-girls/jodhpur">Jodhpur call girls</a>, full <a href="/call-girls/state/rajasthan">Rajasthan directory</a>. Male companions ke liye <a href="/call-boys/udaipur">Udaipur call boys</a>.</p>
 `
   },
   {
@@ -1697,10 +1697,12 @@ const interlinkRules: InterlinkRule[] = [
   { keyword: "body massage in Goa", url: "/massage/goa", excludeSlugs: ["massage-in-goa"] },
 
   // Jaipur
-  { keyword: "call girls in Jaipur", url: "/call-girls/jaipur", excludeSlugs: ["call-girls-in-jaipur"] },
-  { keyword: "Jaipur call girls", url: "https://kokasite.com/call-girls/rajasthan/jaipur", excludeSlugs: ["call-girls-in-jaipur"] },
-  { keyword: "call boys in Jaipur", url: "/call-boys/jaipur", excludeSlugs: ["call-boys-in-jaipur"] },
-  { keyword: "body massage in Jaipur", url: "/massage/jaipur", excludeSlugs: ["massage-in-jaipur"] },
+  { keyword: "call girls in Jaipur", url: "https://jaipur.callgirl4u.com/", excludeSlugs: [] },
+  { keyword: "Jaipur call girls", url: "https://jaipur.callgirl4u.com/", excludeSlugs: [] },
+  { keyword: "Jaipur escorts", url: "https://jaipur.callgirl4u.com/", excludeSlugs: [] },
+  { keyword: "call boys in Jaipur", url: "https://jaipur.callgirl4u.com/", excludeSlugs: [] },
+  { keyword: "body massage in Jaipur", url: "https://jaipur.callgirl4u.com/", excludeSlugs: [] },
+  { keyword: "Jaipur", url: "https://jaipur.callgirl4u.com/", excludeSlugs: [] },
 
   // Pune
   { keyword: "call girls in Pune", url: "/call-girls/pune", excludeSlugs: ["call-girls-in-pune"] },

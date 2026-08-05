@@ -1,19 +1,19 @@
 import { CitySEOContent } from "./data/cityContent";
 
 export const metaTitles = [
-  "Call Girl in (City) | Hottest (City) call girl number",
-  "Call girl (City) ❤️ Premium (City) Escort service (COD)",
-  "Verified Call Girl in (City) | Escort service (City) COD",
-  "Hottest Call girl (City) | Get (City) call girl number 24/7",
-  "Top (City) Escort service | Independent Call girl (City) 24/7"
+  "Call Girls in (City) | Verified Companion Directory | CallGirl4U",
+  "Verified Independent Call Girls in (City) | Cash on Delivery",
+  "Call Girls in (City) - Direct WhatsApp Contact & Real Photos",
+  "Find Independent Companions in (City) | Zero Advance Fees",
+  "Call Girls Directory (City) | Genuine Independent Profiles"
 ];
 
 export const metaDescriptions = [
-  "Looking for a Call Girl in (City)? Get verified (City) call girl number. Hire independent Call girl (City) profiles with 100% privacy and cash on delivery.",
-  "Book premium independent Call Girl in (City) today. Browse real photos of gorgeous models and get direct (City) call girl number with zero advance payment.",
-  "Explore verified (City) Escort service. Connect with local independent Call girl (City) companions. 100% genuine profiles, cash payment on meeting.",
-  "Top-rated Escort service (City) with verified Call Girl in (City). Direct contact via WhatsApp, no upfront fees, safe hotel & home doorstep delivery 24/7.",
-  "Book verified Call girl (City) models. Reach out via (City) call girl number for a memorable companion experience. Safe (City) Escort service cash on delivery."
+  "Find verified independent call girls in (City). Browse authentic photos, direct WhatsApp contact, and cash on delivery booking with zero advance payment.",
+  "Looking for genuine companions in (City)? Connect directly with independent models and female escorts with complete privacy.",
+  "Explore active call girl listings in (City). Direct contact, transparent rates, and 100% cash-on-meeting policy for safe booking.",
+  "Browse verified female companions in (City). Direct WhatsApp booking with zero deposit or upfront charges. 24/7 doorstep service.",
+  "Connect with high-class independent call girls in (City). Verified profiles, discreet meetings, and cash payment upon arrival."
 ];
 
 /**
@@ -71,96 +71,83 @@ export function getDefaultSeoData(cityName: string, state: string): CitySEOConte
   const metaTitleTemplate = metaTitles[titleIndex].replace(/\(City\)/g, cityName);
   const metaDescriptionTemplate = metaDescriptions[descIndex].replace(/\(City\)/g, cityName);
 
-  const metaKeywordsTemplate = `${cityName} Call Girls, Call Girl in ${cityName}, ${cityName} call girl number, Call girl ${cityName}, ${cityName} Escort service, Escort service ${cityName}, Russian Escorts, Independent Escorts in ${cityName}, Call Girl WhatsApp Number, Cash on Delivery, Verified Call Girls`;
+  const metaKeywordsTemplate = `${cityName} Call Girls, Call Girl in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Verified Female Escorts, Cash on Delivery`;
 
   const h1Template = hash % 2 === 0 
-    ? `Call Girl in ${cityName} ❤️ Low Cost Verified Escorts` 
-    : `Independent Call Girl in ${cityName} | Hottest Escort Service`;
+    ? `Call Girls in ${cityName} — Verified Independent Companions` 
+    : `Verified Independent Call Girls in ${cityName} | Cash on Delivery`;
 
-  const heroSubtextTemplate = `{Discover|Explore|Find|Get access to} {verified|genuine|premium|elite} {adult classifieds and|independent} <strong class="font-bold">Call Girl in ${cityName}</strong>. {Connect safely and securely|Experience top-class companionship|Meet premium companions} with direct <strong class="font-bold">Call Girl WhatsApp Numbers</strong>. {Our independent directory covers|We list} {local college girls, professional models, and gorgeous Russian escorts|hottest VIP models, housewife companions, and local independent escorts} available {24/7|round-the-clock} for both {incall and outcall|home and hotel delivery} services. All {meetings|bookings} are {based on|conducted via} <strong class="font-bold">Cash on Delivery</strong> with absolutely {no advance payments|zero upfront fees|no deposit required}. {Your satisfaction and privacy are guaranteed|Enjoy discreet meetings with complete confidentiality}. {Browse through active lists, check photos, and choose the perfect lady for your needs.}`;
+  const heroSubtextTemplate = `{Discover|Explore|Find} {verified|genuine|premium} <strong class="font-bold">Call Girls in ${cityName}</strong> with direct WhatsApp contact. {Our directory features|We list} independent companions, local college models, and VIP escorts available for incall and outcall meetings across ${state}. All bookings operate on a strict <strong class="font-bold">Cash on Delivery</strong> policy with zero advance payment.`;
 
   const introHeadingTemplate = hash % 2 === 0 
-    ? `Verified Call Girl in ${cityName} — Cash Payment Service` 
-    : `Top ${cityName} Escort Service | Verified Companions`;
+    ? `Verified Companions in ${cityName}` 
+    : `Independent Call Girls in ${cityName} — Direct Booking`;
 
-  const introTemplate = `{Welcome to the ultimate|Welcome to the leading|Introducing the finest} directory for booking high-class <strong class="font-bold">Call Girl in ${cityName}</strong>. If you are {staying in the city|in town for a business trip|a local resident} and looking to {spend a passionate night|relax with a beautiful companion|enjoy romantic moments}, our platform is your {trusted guide|#1 choice}. We feature {100% verified|genuine and active} profiles of <strong class="font-bold">Independent Escorts in ${cityName}</strong> who manage their own listings. {Unlike other agencies|Unlike standard portals}, we do not ask for any {upfront booking fees|advance payments|online deposits}. You can browse through {real photos|verified images} of beautiful models, {select your preferred companion|choose your favorite girl}, and reach her directly on her <strong class="font-bold">Call Girl WhatsApp Number</strong>. Whether you prefer the {youthful charm of local College Girls|mature companionship of Housewife Call Girls|elite experience of premium Russian Escorts}, our directory has a wide selection of profiles tailored to your desires. Every companion listed here is {well-behaved, professional, and dedicated|charming, bold, and fully trained} to provide the ultimate {GFE (Girlfriend Experience)|pleasurable meeting}. Our directory covers all popular localities and hotels across the ${state} region, ensuring {fast delivery within 30 minutes|rapid doorstep service}. Experience an unforgettable night filled with {satisfaction, warmth, and absolute discretion|pleasure, romance, and comfort} with the finest companions. {Our focus is to provide you with verified companions, saving you from online prepayment traps. Relax and enjoy a premium time with gorgeous local ladies.}`;
+  const introTemplate = `{Welcome to CallGirl4U's directory for|Browse our verified listings of} <strong class="font-bold">Call Girls in ${cityName}</strong>. Whether you are visiting ${cityName} for business or residing locally, our portal helps you connect directly with genuine independent companions. All listings are managed directly by providers with verified photos and direct WhatsApp numbers. We strictly prohibit advance payments or deposit demands, ensuring a transparent and scam-free experience. Choose from diverse categories including college companions, mature ladies, and high-profile international models for discreet hotel or residential outcall service.`;
 
-  const whyChooseHeadingTemplate = `Why Choose CallGirl4U for Call Girl in ${cityName}`;
+  const whyChooseHeadingTemplate = `Why Choose CallGirl4U in ${cityName}`;
 
-  const whyChooseTemplate = `<p class="mb-4">{Choosing our directory for hiring a <strong class="font-bold">Call Girl in ${cityName}</strong> ensures a safe, premium, and scam-free experience. Here are the key highlights of our platform:}</p>
+  const whyChooseTemplate = `<p class="mb-4">Our platform prioritizes client safety, privacy, and direct communication. Here is why users choose our directory in ${cityName}:</p>
 <ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>{Verified Call Girls|Real Companions}:</strong> {We perform manual verification checks on all ads to ensure the images match the provider.|Every profile card features verified photos to save you from fake listings.}</li>
-  <li><strong>{Cash on Delivery (COD)|No Advance Payments}:</strong> {We strictly advise against paying any advance booking fees, medical card charges, or transport fees. You only pay cash face-to-face after meeting your companion.|Safeguard your money by paying only in cash after complete satisfaction.}</li>
-  <li><strong>{Direct WhatsApp Access|Fast Contact}:</strong> {Connect instantly using direct <strong class="font-bold">Call Girl WhatsApp Numbers</strong> without any middlemen or agency commissions.|Get direct phone and chat access to independent models immediately.}</li>
-  <li><strong>{Absolute Discretion & Privacy|100% Confidentiality}:</strong> {Your privacy is our command. We do not store browsing history, cookies, or user logs. Enjoy your private meetings with zero paper trails.|We guarantee 100% security for both clients and independent providers.}</li>
-</ul>
-<p class="leading-relaxed">{With these safety features, we stand out as the most trusted platform for <strong class="font-bold">Escort Service in ${cityName}</strong>. Whether you choose an incall meeting or request a hotel delivery, you can enjoy peace of mind knowing you are dealing with genuine providers who prioritize your satisfaction. Our verified profiles undergo rigorous checks to ensure complete alignment with customer demands, giving you a smooth, stress-free time.}</p>`;
+  <li><strong>Verified Profiles:</strong> Manual review of listings to ensure genuine photos and active contact details.</li>
+  <li><strong>Cash on Delivery (COD):</strong> Pay only in cash after meeting your companion in person. Never send advance deposits or registration fees online.</li>
+  <li><strong>Direct WhatsApp Contact:</strong> Connect directly with independent models without middleman commissions or agency markups.</li>
+  <li><strong>Complete Confidentiality:</strong> We enforce zero-log privacy protocols so your personal information remains 100% private.</li>
+</ul>`;
 
-  const typesHeadingTemplate = `Categories of Call Girl Available in ${cityName}`;
+  const typesHeadingTemplate = `Available Companion Categories in ${cityName}`;
 
-  const typesTemplate = `{Advertisers in ${cityName} offer diverse companionship styles to suit your personal desires. Our listings feature several categories of companions:}
+  const typesTemplate = `Companions in ${cityName} offer flexible date arrangements to match your preferences:
 <ul class="list-disc pl-5 space-y-2 mt-2">
-  <li><strong>{College Girls|Young Companions}:</strong> {Perfect for fun, bold, and energetic dates. These college call girls offer refreshing companionship and are open to fun conversations.|Charming and youthful girls who are ready to accompany you for night stays or club dates.}</li>
-  <li><strong>{Housewife Call Girls|Mature Ladies}:</strong> {For those who appreciate mature, voluptuous, and experienced women. Housewife escorts in ${cityName} provide a warm, relaxing, and satisfying GFE experience.|Mature companions who know exactly how to please and satisfy a gentleman with complete ease.}</li>
-  <li><strong>{Russian Escorts & Foreign Models|Elite VIP Companions}:</strong> {For a luxury, high-profile experience. Hire premium international VIP escorts who travel to luxury 5-star hotels in ${cityName}.|Gorgeous Russian call girls offering premium services for executive clients seeking elite company.}</li>
-  <li><strong>{Independent Call Girls|High-Profile Models}:</strong> {Sophisticated, educated, and elegant companions who can accompany you to corporate events, dinner dates, or private hotel sessions.|Independent providers who publish their own ads and offer customized services.}</li>
-</ul>
-<p class="mt-4">{Explore the listings to find the ideal match that fits your aesthetic preference, budget, and location. Our directory is continuously updated with new profiles so you can enjoy fresh choices every single day. Make the most of your private time in ${cityName} with elite ladies who are dedicated to your pleasure.}</p>`;
+  <li><strong>College Companions:</strong> Young, energetic ladies perfect for casual dates, evening outings, or social events.</li>
+  <li><strong>Mature & Housewife Companions:</strong> Warm and experienced women offering relaxing girlfriend experience (GFE) meetings.</li>
+  <li><strong>VIP & Russian Models:</strong> Premium international and high-profile models for luxury hotel dates and corporate events.</li>
+  <li><strong>Independent Escorts:</strong> Self-managed profiles offering customized date packages across ${cityName}.</li>
+</ul>`;
 
-  const bookingHeadingTemplate = `How to Safely Book Call Girl in ${cityName} — Step by Step`;
+  const bookingHeadingTemplate = `How to Book a Companion in ${cityName}`;
 
-  const bookingStepsTemplate = `<p class="mb-4">{Booking a verified <strong class="font-bold">Call Girl in ${cityName}</strong> is a straightforward and secure process. Just follow these steps:}</p>
+  const bookingStepsTemplate = `<p class="mb-4">Follow these simple steps for a secure date in ${cityName}:</p>
 <ol class="list-decimal pl-5 space-y-2">
-  <li><strong>{Browse & Select|Select a Profile}:</strong> {Look through our list of active, verified call girls in ${cityName} and pick the one that matches your tastes.|Explore local profiles, check photos, rates, and specifications on our site.}</li>
-  <li><strong>{Contact Directly|Start a Chat}:</strong> {Use the direct link to call or send a message on the companion's <strong class="font-bold">Call Girl WhatsApp Number</strong>.|Instantly initiate a conversation with the independent companion.}</li>
-  <li><strong>{Verify & Confirm|Confirm Booking Details}:</strong> {Discuss the meeting time, location (hotel or home), and services. Ask for voice or video verification if needed. Remember: never pay any booking fee online.|Agree on the location and package details without transferring any advance deposit.}</li>
-  <li><strong>{Meet & Pay Cash|Cash Payment}:</strong> {Meet in a secure environment. Once you verify the companion in person, pay the agreed rate directly in cash.|Enjoy your GFE session and make the payment face-to-face after meeting.}</li>
-</ol>
-<p class="mt-4">{These simple guidelines ensure that you can safely hire premium companions without falling prey to typical online prepaid card scams. Your safety is our primary focus, and we take pride in maintaining a highly trusted, direct-to-provider adult classifieds service.}</p>`;
+  <li><strong>Select a Profile:</strong> Browse active companion cards and review photos, service preferences, and rates.</li>
+  <li><strong>Contact via WhatsApp:</strong> Click the direct WhatsApp button to initiate a conversation with your chosen provider.</li>
+  <li><strong>Agree on Details:</strong> Confirm meeting time, location (hotel or home outcall), and agreed rates without transferring any deposit.</li>
+  <li><strong>Meet & Pay Cash:</strong> Meet in a safe venue and complete payment face-to-face in cash after verification.</li>
+</ol>`;
 
-  const areasHeadingTemplate = `Service Coverage Across ${cityName}`;
+  const areasHeadingTemplate = `Service Coverage in ${cityName}`;
 
-  const areasTemplate = `{Our verified directory covers all major neighbourhoods, commercial sectors, and residential zones across <strong class="font-bold">${cityName}</strong>. Whether you are staying at a luxury 5-star hotel, an executive guest house, or a private residence in the ${state} region, our companions are available for outcall doorstep delivery. Popular areas for hotel and home delivery include central business hubs, premium shopping streets, and major transit points near you. You can enjoy a fast 30-minute delivery time as most independent escorts live close to these prominent locations. Always confirm your exact address and room details directly with the companion via her <strong class="font-bold">Call Girl WhatsApp Number</strong> to avoid any delay. Our directory ensures that no matter where you are in the city, you can find a local companion within a short distance, saving you time and ensuring prompt service.}`;
+  const areasTemplate = `Our directory covers major commercial, residential, and hotel zones across ${cityName}. Whether staying at a central hotel or private residence in ${state}, companions are available for prompt outcall delivery. Always confirm exact location details directly with your companion via WhatsApp.`;
 
-  const rateHeadingTemplate = `Estimated Call Girl Rates List in ${cityName}`;
+  const rateHeadingTemplate = `Call Girl Rates & Pricing Guide in ${cityName}`;
 
-  const rateIntroTemplate = `{Estimated rates for hiring a <strong class="font-bold">Call Girl in ${cityName}</strong> are determined independently by each provider based on the session duration and services requested. Below is an approximate rate guide representing the average market prices. We strongly advise a strict Cash on Delivery policy—never transfer advance booking fees or medical card charges online. Always verify the rates face-to-face before starting the session. Rates vary from local student models to high-class international VIP escorts, so discuss your expectations openly beforehand.}`;
+  const rateIntroTemplate = `Rates in ${cityName} vary based on session duration, provider category, and service type. All prices are determined independently by providers. Always follow our Cash on Delivery policy—never transfer advance booking or security fees online before meeting.`;
 
-  const privacyHeadingTemplate = `Privacy Protocols & Discretion`;
+  const privacyHeadingTemplate = `Privacy & Security Standards`;
 
-  const privacyTemplate = `{Discretion is the cornerstone of adult companionship. Our directory for <strong class="font-bold">Call Girl in ${cityName}</strong> operates on a strict zero-logs policy, meaning we do not track search histories, store cookies, or ask for user sign-ups. All communications are direct and private between you and the independent companion. By avoiding online payment gateways and implementing a cash-only transaction policy, we eliminate any credit card paper trails or bank statements, giving you complete peace of mind. Both clients and companions can enjoy secure meetings with total anonymity and peace of mind. Your secret is safe with us, making your booking private and safe.}`;
+  const privacyTemplate = `We operate on a zero-log infrastructure. We do not require user account creation, store search histories, or retain personal data. Cash transactions eliminate credit card statements, ensuring total discretion for both clients and independent providers in ${cityName}.`;
 
-  const faqHeadingTemplate = `Frequently Asked Questions – Call Girl in ${cityName}`;
+  const faqHeadingTemplate = `Frequently Asked Questions — ${cityName} Directory`;
 
-  const faq1_q = `{Are the profiles of <strong class="font-bold">Call Girl in ${cityName}</strong> verified?|How can I know if the photos of <strong class="font-bold">${cityName} Call Girl</strong> are genuine?}`;
-  const faq1_a = `{Yes. We manually review and screen listings to verify the authenticity of photos and contact numbers in ${cityName}. We strongly encourage customers to report any profile that doesn't match the photos.|Every profile card displays verified badges which are verified manually. However, always exercise caution and report suspicious profiles.}`;
+  const faq1_q = `Are companion profiles in ${cityName} verified?`;
+  const faq1_a = `Yes. Listings undergo manual screening to verify photo authenticity and active contact numbers in ${cityName}. Users can report suspicious ads anytime.`;
 
-  const faq2_q = `{Is there any requirement for advance payment or deposit?|Do I need to pay a booking fee before meeting?}`;
-  const faq2_a = `{No, absolutely not. We follow a strict Cash on Delivery policy. Never pay any booking fee, security deposit, medical card fee, or travel charges online in advance. Always pay directly in cash after meeting.|Under no circumstances should you transfer money beforehand. Pay the companion only in cash after you meet and verify her in person.}`;
+  const faq2_q = `Is advance payment required before meeting in ${cityName}?`;
+  const faq2_a = `No. We follow a strict Cash on Delivery policy. Never pay advance deposit, registration fees, or card charges online. Pay only in cash after meeting.`;
 
-  const faq3_q = `{What kinds of companions can I book in ${cityName}?|What categories of Call Girl are available?}`;
-  const faq3_a = `{You can choose from a wide range of categories, including young college students, mature housewives, high-profile independent models, and premium Russian escorts.|Our directory lists various options, including local housewife companions, independent models, college girls, and VIP international escorts.}`;
+  const faq3_q = `What companion categories are available in ${cityName}?`;
+  const faq3_a = `Listings feature college companions, mature housewives, independent models, and VIP international escorts across ${cityName}.`;
 
-  const faq4_q = `{What locations do the companions cover for outcall?|Can the call girls deliver service to my hotel room?}`;
-  const faq4_a = `{Yes, our companions offer hotel and home outcall services to all major areas and premium hotels across ${cityName}. Ensure you meet in a safe and secure environment.|Outcall services are available at all major hotels, guest houses, and private residences in ${cityName} and surrounding localities.}`;
+  const faq4_q = `Are outcall services available to hotels in ${cityName}?`;
+  const faq4_a = `Yes, independent companions offer outcall services to major hotels, guest houses, and private residences throughout ${cityName}.`;
 
-  const hinglishTemplate = `{<p class="mb-4"><strong>${cityName} Call Girl</strong> service dhoondhna ab behad aasan aur surakshit ho gaya hai. Hamari website par aapko milenge 100% genuine aur active profiles jisme direct <strong>Call Girl WhatsApp Number</strong> diya gaya hai. Agar aap ${cityName} me hain aur ek bold, beautiful aur friendly companion ke sath apna time spend karna chahte hain, toh aap bilkul sahi jagah par hain.</p>
+  const hinglishTemplate = `<p class="mb-4"><strong>${cityName} Call Girl Directory:</strong> Agar aap ${cityName} me verified independent companions dhoondh rahe hain, toh CallGirl4U aapko direct WhatsApp contact provide karta hai. Yahan sabhi profiles active hain aur zero advance payment model par kaam karti hain.</p>
 
-<p class="mb-4">Hamari directory par aapko alag-alag categories jaise <strong>College Girls</strong>, <strong>Housewife Call Girls</strong>, aur high-profile <strong>Russian Escorts</strong> milengi jo aapki har sensual fantasy ko satisfy karne ke liye hamesha ready rehti hain. Yahan par sabhi independent escorts apni profile khud manage karti hain, isliye aapko kisi bhi middleman ya agency ko extra commission dene ki bilkul zarurat nahi hai.</p> 
+<p class="mb-4">Hamare portal par College Girls, Housewife Companions, aur VIP Models ki categories available hain. Aap bina kisi middleman ke direct companion se chat karke timing aur location confirm kar sakte hain.</p>
 
-<p class="mb-4">Sabse important baat jo aapko dhyan me rakhni hai woh hai <strong>Cash on Delivery</strong> policy. Internet par bahut se scammers logon se booking fee, security card fee, ya transport charges ke naam par advance online payment mangte hain. Hum aapko sakht salah dete hain ki kisi ko bhi ek rupaya bhi advance me pay na karein. Hamesha companion se face-to-face milne ke baad aur unki verification karne ke baad hi cash payment karein. Hamari site par aapko bilkul genuine call girl number milenge jahan online fraud ka zero risk hai.</p>
+<p class="mb-4"><strong>Safety Precaution:</strong> Kisi bhi provider ko online advance fee, travel charges ya medical card ke naam par advance payment mat karein. Hamesha face-to-face milne ke baad hi cash payment karein.</p>
 
-<p class="mb-4">Aap hotel booking ya home delivery, dono ke liye contact kar sakte hain. ${cityName} ke premium aur standard hotels me outcall service 24 ghante available hai. Bas profile select kijiye, WhatsApp link par click kijiye aur apni meeting confirm kijiye. Aapki privacy aur discretion hamare liye sabse badh kar hai, isliye hum aapse koi personal data ya credit card details nahi mangte.</p> 
-
-<p class="mb-4">Aap bina kisi darr ke direct call karke ya message karke safe aur private dating ka maza le sakte hain. Kisi bhi fake profile ya fraud booking request ko flag karne ke liye aap har listing par diye gaye report button ka use kar sakte hain taaki hum use jaldi se remove kar sakein. Surakshit rahein aur ${cityName} me top-class call girl service ka safe experience enjoy karein!</p>
-
-<p class="mb-4">Hum regularly hamare database ko update karte hain taaki aapko har baar naye aur fresh profiles dekhne ko milein. Agar aap ${cityName} ke kisi local area jaise main market ya railway station ke paas stay kar rahe hain, tab bhi hum aapko fast doorstep service provide karte hain. Yahan sabhi escorts bohot hi well-mannered aur educated hain jo aapke comfort aur privacy ka pura dhyan rakhti hain. Hamara aim aapko ek safe aur premium experience dena hai bina kisi online payment jhanjhat ke.</p>|<p class="mb-4">Agar aap <strong>${cityName} Call Girl</strong> ki talash me hain, toh hamara portal aapki sabse jyada madad karega. Hamari website par aapko milenge direct <strong>Call Girl WhatsApp Numbers</strong> jo bina kisi registration ya login ke accessible hain. ${cityName} me time spend karne ke liye aapko yahan milengi beautiful local models, college girls, housewife companions aur VIP models.</p>
-
-<p class="mb-4">Sabhi profiles fully active hain aur manually verify kiye jaate hain. Aap directly independent companions se chat kar sakte hain. Hume pata hai ki aap safety ko sabse upar rakhte hain, isliye hamari website par koi bhi prepaid scheme nahi hai. Aapko booking ya transport fee ke naam par kisi ko bhi online money send nahi karna hai. Hum hamesha <strong>Cash on Delivery</strong> ko support karte hain, jisse aapka paisa aur privacy dono 100% secure rehte hain.</p>
-
-<p class="mb-4">Meetings ke liye aap apne comfort ke hisab se in-call ya out-call choose kar sakte hain. ${cityName} ke major locations aur top hotels me delivery options available hain. Profiles check karke directly call kijiye aur apna sweet and romantic date book kijiye. Kisi bhi query ya report ke liye dynamic report flag ka use karein. Hum fake profiles ko turant website se ban karte hain taaki aapko bad experience na mile.</p>
-
-<p class="mb-4">Aapka experience behad smooth aur private rahe, yahi hamara motive hai. Pure cash payment hone ki wajah se aapke bank statements me koi credit card trail nahi hoga jo aapki anonymity ko ensure karta hai. Hum ${cityName} me dating aur escort directory ke sabse trusted names me se ek hain. Bina kisi doubt ke verified profile choose kijiye aur sweet companions ke sath full fun aur relaxation enjoy kijiye. Hum data privacy regulations ko follow karte hain aur aapke browsing records ko store nahi karte hain, jo is service ko aur bhi trustworthy banata hai.</p>}`;
+<p class="mb-4">${cityName} ke sabhi main areas aur top hotels me outcall service available hai. Profile select kijiye aur direct WhatsApp button se companion se connect kijiye.</p>`;
 
   return {
     metaTitle: parseSpintax(metaTitleTemplate, hash),

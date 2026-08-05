@@ -54,7 +54,7 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
   // Get rich SEO content
   const seoData = getDefaultSeoData(stateName, "India");
 
-  // Dynamic Schema for SEO
+  // Dynamic Schema for SEO (Clean CollectionPage & Service schema)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -65,25 +65,21 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
       "@type": "ItemList",
       "numberOfItems": profileImages.length,
       "itemListElement": profileImages.map((imgPath, index) => {
-        const adId = `${state}-${index}`;
         const adName = defaultNames[index % defaultNames.length];
-        const price = (Math.floor(Math.random() * 10) + 5) * 1000;
         return {
           "@type": "ListItem",
           "position": index + 1,
           "item": {
-            "@type": "LocalBusiness",
-            "name": `${adName} - ${stateName} Elite`,
+            "@type": "Service",
+            "name": `${adName} - ${stateName} Elite Companion`,
             "image": `https://callgirl4u.com${imgPath}`,
-            "telephone": getContactNumber(adId, globalPhone),
-            "priceRange": `INR ${price}`,
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": cities[index % cities.length] || stateName,
-              "addressRegion": stateName,
-              "postalCode": (110001 + (getHash(cities[index % cities.length] || stateName) % 889999)).toString(),
-              "streetAddress": `${cities[index % cities.length] || stateName} City Center`,
-              "addressCountry": "IN"
+            "provider": {
+              "@type": "Organization",
+              "name": "CallGirl4U"
+            },
+            "areaServed": {
+              "@type": "AdministrativeArea",
+              "name": stateName
             }
           }
         };

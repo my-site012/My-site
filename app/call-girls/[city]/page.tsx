@@ -67,16 +67,20 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const isExt = isExtendedCity(city);
 
   const state = getStateFromCity(city) || "India";
-  const seoData = cityContentData[city] || getDefaultSeoData(cityName, state);
+  const seoDataKey = CITY_DISPLAY_OVERRIDES[city] ? city.replace(/-\d+$/, "") : city;
+  const seoData = cityContentData[seoDataKey] || cityContentData[city] || getDefaultSeoData(cityName, state);
 
-  // Extended cities — different meta wording to avoid duplicate content
+  // For DMCA alternate slugs (e.g. jaipur-2), canonical points to the primary city slug
+  const canonicalSlug = CITY_DISPLAY_OVERRIDES[city] ? city.replace(/-\d+$/, "") : city;
+
+  // Extended cities — natural meta wording
   if (isExt) {
-    const extKeywords = `Call Girls in ${cityName}, ${cityName} Call Girl Number, Escort Service ${cityName}, ${cityName} Escort, Call Girl ${cityName} WhatsApp, Female Escort ${cityName}`;
+    const extKeywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Cash on Delivery`;
     return {
-      title: `Call Girls in ${cityName} | Contact Directly | CallGirl4U`,
-      description: `Find verified call girls in ${cityName} with direct WhatsApp contact. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery. No advance payment.`,
+      title: `Call Girls in ${cityName} | Direct Contact | CallGirl4U`,
+      description: `Find verified call girls in ${cityName} with direct WhatsApp contact. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`,
       keywords: extKeywords,
-      alternates: { canonical: `https://callgirl4u.com/call-girls/${city}` },
+      alternates: { canonical: `https://callgirl4u.com/call-girls/${canonicalSlug}` },
     };
   }
 
@@ -92,12 +96,9 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const title       = customSeo.title.replace(rawName, cityName);
   const description = customSeo.description.replace(rawName, cityName);
 
-  // Extra Jaipur-specific keywords for sub-areas
+  // Extra Jaipur-specific keywords for sub-areas (natural format)
   const extraKeywords = isJaipurSub
-    ? `Call girl ${areaName} Jaipur, Jaipur Call girl ${areaName}, Jaipur ${areaName} Escort service, ` +
-      `Escort service ${areaName} Jaipur, ${areaName} Jaipur Call Girl Number, ` +
-      `Call Girls in ${areaName} Jaipur, Jaipur ${areaName} Call Girls, ` +
-      `${areaName} Jaipur Escorts, Jaipur ${areaName} Call Girl, `
+    ? `Call Girls in ${areaName} Jaipur, Escort Service ${areaName} Jaipur, `
     : "";
 
   return {
@@ -105,7 +106,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
     description,
     keywords: extraKeywords + seoData.metaKeywords,
     alternates: {
-      canonical: `https://callgirl4u.com/call-girls/${city}`,
+      canonical: `https://callgirl4u.com/call-girls/${canonicalSlug}`,
     }
   };
 }
@@ -226,37 +227,33 @@ export default async function CityPage({ params, searchParams }: { params: Promi
   // Helper: strip HTML tags for schema plain text
   const stripHtml = (html: string) => html.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").trim();
 
-  // Dynamic Schema for SEO
+  // Dynamic Schema for SEO (Clean CollectionPage & Service schema)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": seoData.h1,
     "description": seoData.metaDescription,
-    "url": `https://callgirl4u.com/call-girls/${city}`,
+    "url": `https://callgirl4u.com/call-girls/${seoDataKey}`,
     "mainEntity": {
       "@type": "ItemList",
       "numberOfItems": paginatedCards.length,
-      "itemListElement": paginatedCards.map((card, index) => {
-        return {
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "LocalBusiness",
-            "name": card.title,
-            "image": `https://callgirl4u.com${card.imagePath}`,
-            "telephone": card.phone || "N/A",
-            "priceRange": `INR ${card.price}`,
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": cityName,
-              "addressRegion": state,
-              "postalCode": (110001 + (getHash(cityName) % 889999)).toString(),
-              "streetAddress": `${cityName} City Center`,
-              "addressCountry": "IN"
-            }
+      "itemListElement": paginatedCards.map((card, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Service",
+          "name": card.title,
+          "image": `https://callgirl4u.com${card.imagePath}`,
+          "provider": {
+            "@type": "Organization",
+            "name": "CallGirl4U"
+          },
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": cityName
           }
-        };
-      })
+        }
+      }))
     }
   };
 
