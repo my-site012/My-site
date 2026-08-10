@@ -38,7 +38,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
           fill
           // First 2 cards are LCP candidates — mark as high priority for preload
           priority={index < 2}
-          unoptimized={true}
+          loading={index < 2 ? "eager" : "lazy"}
           className={`object-cover transition-transform duration-700 group-hover:scale-110 ${hasError ? 'opacity-50 grayscale' : ''}`}
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           onError={() => {

@@ -1,4 +1,4 @@
-import { getAllCities, getCitySlug, getStateFromCity, locations } from "@/lib/data/locations";
+import { getAllCities, getCitySlug, getStateFromCity, locations, EXTENDED_CITIES } from "@/lib/data/locations";
 import AdCard from "@/components/AdCard";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -7,7 +7,13 @@ import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data/blogPosts";
 
-const validSlugs = new Set(getAllCities().map(city => getCitySlug(city)));
+const allLocationSlugs = Object.values(locations).flat().map(city => getCitySlug(city));
+
+const validSlugs = new Set([
+  ...getAllCities().map(city => getCitySlug(city)),
+  ...EXTENDED_CITIES.map(city => getCitySlug(city)),
+  ...allLocationSlugs,
+]);
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
@@ -19,15 +25,31 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
   const { city } = await params;
+  const { page } = (await searchParams) || {};
+  const currentPage = parseInt(page || "1");
+  const isPage2 = currentPage > 1;
+
+  if (!validSlugs.has(city.toLowerCase())) {
+    notFound();
+  }
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
 
+  let title = `Call Boy in ${cityName} | Male Companions | CallGirl4U`;
+  let description = `Discover handsome, charming call boys in ${cityName}, ${state}. Browse verified male companion profiles — discreet, trustworthy, and available 24/7. No advance payment.`;
+
+  if (isPage2) {
+    title = `${title} - Page ${currentPage}`;
+    description = `${description} (Page ${currentPage})`;
+  }
+
   return {
-    title: `Call Boy in ${cityName} | Handsome Male Companions | CallGirl4U`,
-    description: `Discover handsome, charming call boys in ${cityName}, ${state}. Browse verified male companion profiles — discreet, trustworthy, and available 24/7. No advance payment.`,
+    title,
+    description,
     keywords: `call boy in ${cityName}, male companion ${cityName}, gigolo service ${cityName}, male escort ${cityName}, playboy ${cityName}`,
+    robots: isPage2 ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: `https://callgirl4u.com/call-boys/${city}`,
     }
@@ -36,6 +58,9 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 export default async function CallBoyCityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
+  if (!validSlugs.has(city.toLowerCase())) {
+    notFound();
+  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;

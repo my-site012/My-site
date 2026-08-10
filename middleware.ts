@@ -11,41 +11,66 @@ const CACHE_TTL = 30000; // 30 seconds
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
-  // 0.1 INDEX / PHP URL REDIRECTS
+  // 0.1 INDEX / PHP / HTML URL REDIRECTS
   const lowerPath = pathname.toLowerCase();
   if (lowerPath === '/index.php' || lowerPath === '/index.html' || lowerPath === '/index.htm' || lowerPath === '/home.php' || lowerPath === '/home.html') {
     const targetUrl = new URL('/', request.url);
     return NextResponse.redirect(targetUrl, 301);
   }
 
-  // 0.2 AD DETAIL REDIRECT TO SIMILAR CITY PAGE
-  const pathParts = pathname.split('/').filter(Boolean);
-  if (pathParts.length >= 2 && pathParts[0] === 'ad' && pathParts[1] !== 'post') {
-    const id = pathParts[1];
-    let category = 'call-girls';
-    let rawLocation = '';
-
-    if (id.startsWith('msg-')) {
-      category = 'massage';
-      const parts = id.split('-');
-      rawLocation = parts.slice(1, -1).join('-');
-    } else if (id.startsWith('boy-')) {
-      category = 'call-boys';
-      const parts = id.split('-');
-      rawLocation = parts.slice(1, -1).join('-');
-    } else if (id.startsWith('featured')) {
-      category = 'call-girls';
-      rawLocation = '';
-    } else {
-      category = 'call-girls';
-      const parts = id.split('-');
-      rawLocation = parts.slice(0, -1).join('-');
-    }
-
-    const cleanLocation = rawLocation.toLowerCase().trim();
-    const targetPath = cleanLocation ? `/${category}/${cleanLocation}` : `/${category}`;
-    const targetUrl = new URL(targetPath, request.url);
+  // Author pages redirect to /blog
+  if (lowerPath.startsWith('/author/')) {
+    const targetUrl = new URL('/blog', request.url);
     return NextResponse.redirect(targetUrl, 301);
+  }
+
+  // Generic & State legacy aliases
+  const GENERIC_ALIASES: Record<string, string> = {
+    '/tamil-call-girls': '/call-girls/state/tamil-nadu',
+    '/kerala-call-girls': '/call-girls/state/kerala',
+    '/kannada-call-girls': '/call-girls/state/karnataka',
+    '/bihar-call-girl': '/call-girls/state/bihar',
+    '/indian-call-girl': '/call-girls',
+    '/call-girls-in-assam': '/call-girls/state/assam',
+    '/call-girls-in-goa': '/call-girls/state/goa',
+  };
+  const normalizedPath = lowerPath.replace(/\/+$/, '');
+  if (GENERIC_ALIASES[normalizedPath]) {
+    const targetUrl = new URL(GENERIC_ALIASES[normalizedPath], request.url);
+    return NextResponse.redirect(targetUrl, 301);
+  }
+
+  // Universal Single-Segment Legacy URL Pattern Matcher
+  // Handles: /pune-call-girls/, /call-girl-noida.html, /call-girl-pune.html, /call-girls-in-mysore/, /andheri-escorts/, /escort-service-in-dehradun/, etc.
+  const TOP_LEVEL_EXEMPTIONS = new Set([
+    'call-girls', 'call-boys', 'massage', 'blog', 'admin', 'login', 'signup',
+    'privacy-policy', 'terms-and-conditions', 'disclaimer', 'contact',
+    'dmca', 'terms', 'privacy', 'forums', 'maintenance', 'ad', 'sitemap.xml'
+  ]);
+  const singleSegmentMatch = normalizedPath.match(/^\/([a-z0-9.-]+)$/);
+  if (singleSegmentMatch) {
+    const rawSlug = singleSegmentMatch[1];
+    if (!TOP_LEVEL_EXEMPTIONS.has(rawSlug) && !rawSlug.startsWith('sitemap')) {
+      let cleanSlug = rawSlug
+        .replace(/\.html?$/, '')
+        .replace(/^call-girls?-in-/, '')
+        .replace(/^call-girls?-/, '')
+        .replace(/^call-girl-in-/, '')
+        .replace(/^call-girl-/, '')
+        .replace(/^escort-service-in-/, '')
+        .replace(/-call-girls?-number$/, '')
+        .replace(/-call-girls?$/, '')
+        .replace(/-call-girl$/, '')
+        .replace(/-escorts?$/, '')
+        .replace(/-romantic-sexy-girls$/, '')
+        .replace(/-\d+$/, '');
+
+      if (cleanSlug) {
+        const citySlug = getCitySlug(cleanSlug) || cleanSlug;
+        const targetUrl = new URL(`/call-girls/${citySlug}`, request.url);
+        return NextResponse.redirect(targetUrl, 301);
+      }
+    }
   }
 
   // 0. LEGACY URL REDIRECTS
@@ -67,15 +92,25 @@ export async function middleware(request: NextRequest) {
       'hubli': 'hubballi',
       'trichy': 'tiruchirappalli',
       'baroda': 'vadodara',
-      'bombay': 'mumbai',
-      'calcutta': 'kolkata',
-      'madras': 'chennai',
       'benaras': 'varanasi',
       'benares': 'varanasi',
       'gurgaon': 'gurugram'
     };
     if (parts.length === 2 && CITY_ALIASES[parts[1]]) {
       const targetUrl = new URL(`/${parts[0]}/${CITY_ALIASES[parts[1]]}`, request.url);
+      searchParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+      return NextResponse.redirect(targetUrl, 301);
+    }
+
+    const STATE_ALIASES: Record<string, string> = {
+      'andaman-nicobar-islands': 'andaman-and-nicobar-islands',
+      'dadra-nagar-haveli': 'dadra-and-nagar-haveli',
+      'jammu-kashmir': 'jammu-and-kashmir',
+    };
+    if (parts.length === 2 && STATE_ALIASES[parts[1]]) {
+      const targetUrl = new URL(`/${parts[0]}/state/${STATE_ALIASES[parts[1]]}`, request.url);
       searchParams.forEach((value, key) => {
         targetUrl.searchParams.set(key, value);
       });
@@ -110,6 +145,16 @@ export async function middleware(request: NextRequest) {
       }
     }
 
+    // Redirect -2 overrides back to clean slug for non-call-girls categories (e.g. /call-boys/jodhpur-2 -> /call-boys/jodhpur)
+    if (parts.length === 2 && parts[0] !== 'call-girls' && /-\d+$/.test(parts[1])) {
+      const cleanCity = parts[1].replace(/-\d+$/, '');
+      const targetUrl = new URL(`/${parts[0]}/${cleanCity}`, request.url);
+      searchParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+      return NextResponse.redirect(targetUrl, 301);
+    }
+
     // 3-part URL: /[category]/[state]/[city] -> /[category]/[city]
     if (parts.length === 3 && parts[1] !== 'state') {
       const targetUrl = new URL(`/${parts[0]}/${parts[2]}`, request.url);
@@ -132,23 +177,16 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // 0.5. BOT EARLY-EXIT (Bypasses maintenance check & geo redirects for search engine crawlers)
-  const userAgent = request.headers.get('user-agent') || '';
-  const isBot = BOTS_REGEX.test(userAgent);
-  if (isBot) {
-    return NextResponse.next();
-  }
-
   // 1. MAINTENANCE MODE CHECK
   const isExempt = 
     pathname.startsWith('/admin') ||
     pathname.startsWith('/api/admin') ||
     pathname.startsWith('/maintenance') ||
     pathname.startsWith('/_next') ||
-    pathname.includes('.') || 
     pathname.startsWith('/images') ||
     pathname.startsWith('/api/report') ||
-    pathname.startsWith('/api/whatsapp-click');
+    pathname.startsWith('/api/whatsapp-click') ||
+    /\.(png|jpg|jpeg|gif|webp|svg|ico|css|js|woff2?|map)$/i.test(pathname);
 
   if (!isExempt) {
     const now = Date.now();
@@ -175,66 +213,6 @@ export async function middleware(request: NextRequest) {
     if (cachedMaintenance) {
       const maintenanceUrl = new URL('/maintenance', request.url);
       return NextResponse.redirect(maintenanceUrl, 307);
-    }
-  }
-
-  // 2. GEOLOCATION REDIRECT FOR HOME PAGE
-  if (pathname === '/') {
-    // Skip redirect for search engine crawlers
-    const userAgent = request.headers.get('user-agent') || '';
-    if (BOTS_REGEX.test(userAgent)) {
-      return NextResponse.next();
-    }
-
-    // Skip redirect if request is internal
-    const referer = request.headers.get('referer');
-    const isInternal = referer && (
-      referer.includes('callgirl4u.com') || 
-      referer.includes('localhost') || 
-      referer.includes('vercel.app')
-    );
-    
-    const hasBypassParam = searchParams.get('noredirect') === 'true';
-
-    if (isInternal || hasBypassParam) {
-      return NextResponse.next();
-    }
-
-    // Check for cookie-based user choice
-    const cookieCity = request.cookies.get('user-city')?.value;
-    const cookieCategory = request.cookies.get('user-category')?.value || 'call-girls';
-
-    if (cookieCity) {
-      const allCities = getAllCities();
-      const matchingCity = allCities.find(
-        (c) => getCitySlug(c) === cookieCity
-      );
-      if (matchingCity) {
-        const redirectUrl = new URL(`/${cookieCategory}/${cookieCity}`, request.url);
-        return NextResponse.redirect(redirectUrl, 307);
-      }
-    }
-
-    // Geolocation headers
-    const vercelCity = request.headers.get('x-vercel-ip-city');
-
-    if (vercelCity) {
-      try {
-        const decodedCity = decodeURIComponent(vercelCity);
-        const allCities = getAllCities();
-
-        const matchingCity = allCities.find(
-          (c) => c.toLowerCase() === decodedCity.toLowerCase()
-        );
-
-        if (matchingCity) {
-          const citySlug = getCitySlug(matchingCity);
-          const redirectUrl = new URL(`/call-girls/${citySlug}`, request.url);
-          return NextResponse.redirect(redirectUrl, 307);
-        }
-      } catch (e) {
-        console.error("Error in geo redirect parsing:", e);
-      }
     }
   }
 

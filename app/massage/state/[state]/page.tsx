@@ -168,7 +168,8 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
   const { state } = await params;
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!matchedState) notFound();
+  const stateName = matchedState;
   const seoData = getMassageStateSeoData(stateName);
 
   return {
@@ -187,7 +188,8 @@ export default async function MassageStatePage({ params }: { params: Promise<{ s
   // Find original state name from slug
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!matchedState) notFound();
+  const stateName = matchedState;
 
   const cities = locations[stateName] || [];
   

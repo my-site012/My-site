@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return {};
 
   return {
-    title: post.title,
+    title: post.title.endsWith("CallGirl4U") ? post.title : `${post.title} | CallGirl4U Blog`,
     description: post.metaDescription,
     alternates: {
       canonical: `https://callgirl4u.com/blog/${post.slug}`,

@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
   const { state } = await params;
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!matchedState) notFound();
+  const stateName = matchedState;
   
   const seoData = getDefaultSeoData(stateName, "India");
   const customSeo = getCitySeo(state);
@@ -42,7 +43,8 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
   // Find original state name from slug
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!matchedState) notFound();
+  const stateName = matchedState;
   
   const cities = locations[stateName] || [];
   const profileImages = getDeterministicImagesPool(state, 12);

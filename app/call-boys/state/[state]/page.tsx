@@ -20,10 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
   const { state } = await params;
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!matchedState) notFound();
+  const stateName = matchedState;
 
   return {
-    title: `Call Boys in ${stateName} | Verified Male Companions | CallGirl4U`,
+    title: `Call Boys in ${stateName} | CallGirl4U`,
     description: `Discover handsome, charming call boys across all major cities in ${stateName}. Browse verified male companion profiles — discreet, professional, and available 24/7. No advance payment required.`,
     keywords: `call boy in ${stateName}, male companion ${stateName}, gigolo service ${stateName}, male escort ${stateName}, playboy ${stateName}`,
     alternates: {
@@ -37,7 +38,8 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
 
   const allStates = getAllStates();
   const matchedState = allStates.find(s => getStateSlug(s) === state);
-  const stateName = matchedState || state.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  if (!matchedState) notFound();
+  const stateName = matchedState;
 
   const cities = locations[stateName] || [];
   const profileImages = getDeterministicBoyImagesPool(state + "-boy", 12);

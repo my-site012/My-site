@@ -42,10 +42,15 @@ const CITY_DISPLAY_OVERRIDES: Record<string, string> = {
   "varanasi-2":  "Varanasi",
 };
 
+const allLocationSlugs = Object.values(locations).flat().map(c => getCitySlug(c));
+
 const validSlugs = new Set([
   ...getAllCities().map(city => getCallGirlsSlug(city)),
+  ...getAllCities().map(city => getCitySlug(city)),
   ...Object.keys(CITY_DISPLAY_OVERRIDES),
+  ...Object.keys(JAIPUR_SUB_SLUGS),
   ...EXTENDED_CITIES.map(city => getCitySlug(city)),
+  ...allLocationSlugs,
 ]);
 
 /**
@@ -59,8 +64,15 @@ function getDisplayCityName(city: string): string {
   return city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
   const { city } = await params;
+  const { page } = (await searchParams) || {};
+  const currentPage = parseInt(page || "1");
+  const isPage2 = currentPage > 1;
+
+  if (!validSlugs.has(city.toLowerCase())) {
+    notFound();
+  }
   const cityName = getDisplayCityName(city);           // e.g. "Sitapura Jaipur"
   const areaName = JAIPUR_SUB_SLUGS[city] ?? cityName; // e.g. "Sitapura"
   const isJaipurSub = !!JAIPUR_SUB_SLUGS[city];
@@ -68,43 +80,48 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
   const state = getStateFromCity(city) || "India";
   const seoDataKey = CITY_DISPLAY_OVERRIDES[city] ? city.replace(/-\d+$/, "") : city;
-  const seoData = cityContentData[seoDataKey] || cityContentData[city] || getDefaultSeoData(cityName, state);
+  const seoData = getMergedSeoData(cityName, state, seoDataKey);
 
-  // For DMCA alternate slugs (e.g. jaipur-2), canonical points to the primary city slug
-  const canonicalSlug = CITY_DISPLAY_OVERRIDES[city] ? city.replace(/-\d+$/, "") : city;
+  // Self-referencing canonical URL (e.g. jaipur-2 -> https://callgirl4u.com/call-girls/jaipur-2)
+  const canonicalSlug = city;
+
+  let title = "";
+  let description = "";
+  let keywords = "";
 
   // Extended cities — natural meta wording
   if (isExt) {
-    const extKeywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Cash on Delivery`;
-    return {
-      title: `Call Girls in ${cityName} | Direct Contact | CallGirl4U`,
-      description: `Find verified call girls in ${cityName} with direct WhatsApp contact. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`,
-      keywords: extKeywords,
-      alternates: { canonical: `https://callgirl4u.com/call-girls/${canonicalSlug}` },
-    };
+    keywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Cash on Delivery`;
+    title = `Call Girls in ${cityName} | Direct Contact | CallGirl4U`;
+    description = `Find verified call girls in ${cityName} with direct WhatsApp contact. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`;
+  } else {
+    // For DMCA alternate slugs (e.g. jaipur-2), use original city slug as SEO seed
+    const seoSeed = CITY_DISPLAY_OVERRIDES[city]
+      ? city.replace(/-\d+$/, "")  // strip trailing -2, -3 etc → "jaipur"
+      : (isJaipurSub ? (city.startsWith("jaipur-") ? city : `jaipur-${city}`) : city);
+    const customSeo = getCitySeo(seoSeed);
+    // rawName must match what's inside the template so replace works correctly
+    const rawName = CITY_DISPLAY_OVERRIDES[city]
+      ? CITY_DISPLAY_OVERRIDES[city]  // e.g. "Jaipur"
+      : city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    title = customSeo.title.replace(rawName, cityName);
+    description = customSeo.description.replace(rawName, cityName);
+    const extraKeywords = isJaipurSub
+      ? `Call Girls in ${areaName} Jaipur, Escort Service ${areaName} Jaipur, `
+      : "";
+    keywords = extraKeywords + seoData.metaKeywords;
   }
 
-  // For DMCA alternate slugs (e.g. jaipur-2), use original city slug as SEO seed
-  const seoSeed = CITY_DISPLAY_OVERRIDES[city]
-    ? city.replace(/-\d+$/, "")  // strip trailing -2, -3 etc → "jaipur"
-    : (isJaipurSub ? (city.startsWith("jaipur-") ? city : `jaipur-${city}`) : city);
-  const customSeo = getCitySeo(seoSeed);
-  // rawName must match what's inside the template so replace works correctly
-  const rawName = CITY_DISPLAY_OVERRIDES[city]
-    ? CITY_DISPLAY_OVERRIDES[city]  // e.g. "Jaipur"
-    : city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-  const title       = customSeo.title.replace(rawName, cityName);
-  const description = customSeo.description.replace(rawName, cityName);
-
-  // Extra Jaipur-specific keywords for sub-areas (natural format)
-  const extraKeywords = isJaipurSub
-    ? `Call Girls in ${areaName} Jaipur, Escort Service ${areaName} Jaipur, `
-    : "";
+  if (isPage2) {
+    title = `${title} - Page ${currentPage}`;
+    description = `${description} (Page ${currentPage})`;
+  }
 
   return {
     title,
     description,
-    keywords: extraKeywords + seoData.metaKeywords,
+    keywords,
+    robots: isPage2 ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: `https://callgirl4u.com/call-girls/${canonicalSlug}`,
     }
@@ -113,8 +130,29 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 
 
+function getMergedSeoData(cityName: string, state: string, citySlug: string): CitySEOContent {
+  const defaultSeo = getDefaultSeoData(cityName, state);
+  const customData = cityContentData[citySlug];
+
+  if (!customData) return defaultSeo;
+
+  return {
+    ...defaultSeo,
+    metaTitle: customData.metaTitle || defaultSeo.metaTitle,
+    metaDescription: customData.metaDescription || defaultSeo.metaDescription,
+    metaKeywords: customData.metaKeywords || defaultSeo.metaKeywords,
+    h1: customData.h1 || defaultSeo.h1,
+    heroSubtext: customData.heroSubtext || defaultSeo.heroSubtext,
+    introHeading: customData.introHeading || defaultSeo.introHeading,
+    introText: customData.introText || defaultSeo.introText,
+  };
+}
+
 export default async function CityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
+  if (!validSlugs.has(city.toLowerCase())) {
+    notFound();
+  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;
@@ -134,7 +172,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
   const seoDataKey = CITY_DISPLAY_OVERRIDES[city]
     ? city.replace(/-\d+$/, "") // e.g. jaipur-2 -> jaipur
     : city;
-  const seoData = cityContentData[seoDataKey] || getDefaultSeoData(cityName, state);
+  const seoData = getMergedSeoData(cityName, state, seoDataKey);
   const isExt = isExtendedCity(city);
 
   // Sub-areas for this city (e.g. Jaipur Locations, Mumbai Locations, Delhi Locations)
@@ -390,7 +428,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
 
       <article className="max-w-4xl mx-auto px-4 py-12 prose prose-lg prose-red text-gray-800 border-t">
         <h2 className="text-2xl mb-4">{seoData.introHeading}</h2>
-        <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.introText }} />
+        <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.introText }} />
 
         {/* Safe Dating & Anti-Scam Advisory */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 my-8 not-prose">
@@ -412,13 +450,13 @@ export default async function CityPage({ params, searchParams }: { params: Promi
         <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.whyChooseText }} />
 
         <h2 className="text-2xl mb-4">{seoData.typesHeading}</h2>
-        <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.typesText }} />
+        <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.typesText }} />
 
         <h2 className="text-2xl mb-4">{seoData.bookingHeading}</h2>
         <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.bookingText }} />
 
         <h2 className="text-2xl mb-4">{seoData.areasHeading}</h2>
-        <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.areasText }} />
+        <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.areasText }} />
 
         <h2 className="text-2xl mb-4">{seoData.rateHeading}</h2>
         <p className="mb-4" dangerouslySetInnerHTML={{ __html: seoData.rateIntro }} />
@@ -456,7 +494,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
         </div>
 
         <h2 className="text-2xl mb-4">{seoData.privacyHeading}</h2>
-        <p className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.privacyText }} />
+        <div className="mb-8 leading-relaxed" dangerouslySetInnerHTML={{ __html: seoData.privacyText }} />
 
         <h2 className="text-2xl mb-6">{seoData.faqHeading}</h2>
         <div className="space-y-4 mb-10">

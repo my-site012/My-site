@@ -7,8 +7,37 @@ export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://callgirl4u.com";
   const today = new Date().toISOString().split('T')[0];
 
+  const CITY_ALIASES: Record<string, string> = {
+    'bangalore': 'bengaluru',
+    'belgaum': 'belagavi',
+    'mysore': 'mysuru',
+    'gulbarga': 'kalaburagi',
+    'pondicherry': 'puducherry',
+    'trivandrum': 'thiruvananthapuram',
+    'calicut': 'kozhikode',
+    'cochin': 'kochi',
+    'mangalore': 'mangaluru',
+    'shimoga': 'shivamogga',
+    'hubli': 'hubballi',
+    'trichy': 'tiruchirappalli',
+    'baroda': 'vadodara',
+    'bombay': 'mumbai',
+    'calcutta': 'kolkata',
+    'madras': 'chennai',
+    'benaras': 'varanasi',
+    'benares': 'varanasi',
+    'gurgaon': 'gurugram'
+  };
+
+  const getCanonicalSlug = (city: string) => {
+    const raw = getCitySlug(city);
+    const canonical = CITY_ALIASES[raw] || raw;
+    return getCallGirlsSlug(canonical);
+  };
+
   const cities = getAllCities();
   const states = getAllStates();
+  const stateSlugs = new Set(states.map(getStateSlug));
 
   const stateUrls = states.map(state => ({
     loc: `${baseUrl}/call-girls/state/${getStateSlug(state)}`,
@@ -16,24 +45,35 @@ export async function GET() {
     priority: '0.7'
   }));
 
-  const cityUrls = cities.map(city => ({
-    loc: `${baseUrl}/call-girls/${getCallGirlsSlug(city)}`,
-    changefreq: 'daily',
-    priority: '0.8'
-  }));
+  const cityUrls = cities
+    .filter(city => !stateSlugs.has(getCanonicalSlug(city)))
+    .map(city => ({
+      loc: `${baseUrl}/call-girls/${getCanonicalSlug(city)}`,
+      changefreq: 'daily',
+      priority: '0.8'
+    }));
 
-  const extendedCityUrls = EXTENDED_CITIES.map(city => ({
-    loc: `${baseUrl}/call-girls/${getCitySlug(city)}`,
-    changefreq: 'weekly',
-    priority: '0.6'
-  }));
+  const extendedCityUrls = EXTENDED_CITIES
+    .filter(city => !stateSlugs.has(getCanonicalSlug(city)))
+    .map(city => ({
+      loc: `${baseUrl}/call-girls/${getCanonicalSlug(city)}`,
+      changefreq: 'weekly',
+      priority: '0.6'
+    }));
 
-  const urls = [
+  const rawUrls = [
     { loc: `${baseUrl}/call-girls`, changefreq: 'daily', priority: '0.9' },
     ...stateUrls,
     ...cityUrls,
     ...extendedCityUrls
   ];
+
+  const seen = new Set<string>();
+  const urls = rawUrls.filter(u => {
+    if (seen.has(u.loc)) return false;
+    seen.add(u.loc);
+    return true;
+  });
 
   const urlElements = urls.map(u => `  <url>
     <loc>${u.loc}</loc>

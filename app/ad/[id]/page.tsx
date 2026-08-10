@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     robots: {
       index: false,
-      follow: true, 
+      follow: false, 
     },
     alternates: {
       canonical: `https://callgirl4u.com/ad/${id}`,
@@ -224,7 +224,7 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
             <div>
               <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-md bg-gray-200">
                 {mainImage ? (
-                  <Image src={mainImage} alt={`Profile of ${name} in ${location}`} fill className="object-cover" priority unoptimized={true} />
+                  <Image src={mainImage} alt={`Profile of ${name} in ${location}`} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 50vw" />
                 ) : (
                    <div className="w-full h-full flex items-center justify-center text-gray-400 font-bold uppercase">No Photo</div>
                 )}

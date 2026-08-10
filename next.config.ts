@@ -4,12 +4,25 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 86400,
+    minimumCacheTTL: 31536000,
   },
   async headers() {
     return [
       {
-        // Prevent image hotlinking from external sites
+        // Cache static images and icons aggressively for 1 year
+        source: "/(images|icon.png|apple-icon.png|favicon.ico)/:path*",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
         source: "/images/:path*",
         headers: [
           {
@@ -18,7 +31,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Cache-Control",
-            value: "public, max-age=86400, stale-while-revalidate=604800",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

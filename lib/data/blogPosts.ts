@@ -15,7 +15,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-delhi",
     title: "Call Girls in Delhi NCR – Verified Escorts & Independent Companions",
-    metaDescription: "Looking for genuine call girls in Delhi NCR? Browse verified independent escorts across Aerocity, Connaught Place, Dwarka. Real photos, no advance payment.",
+    metaDescription: "Looking for genuine call girls in Delhi NCR? Browse verified independent escorts across Aerocity, Connaught Place, Dwarka. Real photos, no advance payment in Delhi. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "delhi",
     cityName: "Delhi",
@@ -66,7 +66,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-mumbai",
     title: "Call Girls in Mumbai – Independent Escorts & Premium Companions",
-    metaDescription: "Find verified call girls in Mumbai — Andheri, Bandra, Juhu, Colaba. Real photos, genuine profiles, cash only. India's most trusted adult directory.",
+    metaDescription: "Find verified call girls in Mumbai — Andheri, Bandra, Juhu, Colaba. Real photos, genuine profiles, cash only. India's most trusted adult directory in Mumbai. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "mumbai",
     cityName: "Mumbai",
@@ -112,7 +112,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-jaipur",
     title: "Call Girls in Jaipur – Independent Escorts in the Pink City",
-    metaDescription: "Verified call girls in Jaipur — Malviya Nagar, Vaishali Nagar, C-Scheme. Real photos, 24/7, cash only. Rajasthan's most trusted escort directory.",
+    metaDescription: "Verified call girls in Jaipur — Malviya Nagar, Vaishali Nagar, C-Scheme. Real photos, 24/7, cash only. Rajasthan's most trusted escort directory in Jaipur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "jaipur",
     cityName: "Jaipur",
@@ -153,7 +153,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-goa",
     title: "Call Girls in Goa – Beach Escorts & Independent Companions",
-    metaDescription: "Verified call girls in Goa — Calangute, Baga, Anjuna, Panaji. Premium beach escorts for tourists and couples. Real photos, no advance payment.",
+    metaDescription: "Verified call girls in Goa — Calangute, Baga, Anjuna, Panaji. Premium beach escorts for tourists and couples. Real photos, no advance payment in Goa. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "goa",
     cityName: "Goa",
@@ -198,7 +198,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-bangalore",
     title: "Call Girls in Bangalore – Independent Escorts in India's Tech City",
-    metaDescription: "Verified call girls in Bangalore — Koramangala, Whitefield, Indiranagar, MG Road. Premium escorts, real photos. Browse now.",
+    metaDescription: "Verified call girls in Bangalore — Koramangala, Whitefield, Indiranagar, MG Road. Premium escorts, real photos. Browse now in Bangalore. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "bengaluru",
     cityName: "Bangalore",
@@ -239,7 +239,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-kolkata",
     title: "Call Girls in Kolkata – Independent Escorts in City of Joy",
-    metaDescription: "Verified call girls in Kolkata — Park Street, Salt Lake, Howrah. Genuine profiles, real photos, no advance. West Bengal's trusted escort directory.",
+    metaDescription: "Verified call girls in Kolkata — Park Street, Salt Lake, Howrah. Genuine profiles, real photos, no advance. West Bengal's trusted escort directory in Kolkata. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "kolkata",
     cityName: "Kolkata",
@@ -275,7 +275,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-hyderabad",
     title: "Call Girls in Hyderabad – Escorts in City of Pearls",
-    metaDescription: "Verified call girls in Hyderabad — Banjara Hills, Jubilee Hills, Kondapur, Madhapur. Real photos, 24/7 available, cash only.",
+    metaDescription: "Verified call girls in Hyderabad — Banjara Hills, Jubilee Hills, Kondapur, Madhapur. Real photos, 24/7 available, cash only in Hyderabad. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "hyderabad",
     cityName: "Hyderabad",
@@ -309,7 +309,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-pune",
     title: "Call Girls in Pune – Escorts in Oxford of the East",
-    metaDescription: "Verified call girls in Pune — Koregaon Park, Hinjewadi, Viman Nagar. Premium independent escorts. No advance payment required.",
+    metaDescription: "Verified call girls in Pune — Koregaon Park, Hinjewadi, Viman Nagar. Premium independent escorts. No advance payment required in Pune. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "pune",
     cityName: "Pune",
@@ -343,7 +343,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-chandigarh",
     title: "Call Girls in Chandigarh – Escorts in the City Beautiful",
-    metaDescription: "Verified call girls in Chandigarh — Sector 17, Sector 22, Panchkula. Independent escorts, real photos, no advance payment.",
+    metaDescription: "Verified call girls in Chandigarh — Sector 17, Sector 22, Panchkula. Independent escorts, real photos, no advance payment in Chandigarh. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "chandigarh",
     cityName: "Chandigarh",
@@ -376,7 +376,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-lucknow",
     title: "Call Girls in Lucknow – Nawabs & Verified Escorts",
-    metaDescription: "Verified call girls in Lucknow — Gomti Nagar, Hazratganj, Indira Nagar. Genuine profiles, real photos, no advance payment.",
+    metaDescription: "Verified call girls in Lucknow — Gomti Nagar, Hazratganj, Indira Nagar. Genuine profiles, real photos, no advance payment in Lucknow. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "lucknow",
     cityName: "Lucknow",
@@ -409,7 +409,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-gurgaon",
     title: "Call Girls in Gurgaon – Premium Escorts in Cyber City",
-    metaDescription: "Verified call girls in Gurgaon — MG Road, Cyber Hub, DLF Phase. Premium escorts in Haryana's corporate hub. Real photos, no advance payment.",
+    metaDescription: "Verified call girls in Gurgaon — MG Road, Cyber Hub, DLF Phase. Premium escorts in Haryana's corporate hub. Real photos, no advance payment in Gurgaon. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "gurgaon",
     cityName: "Gurgaon",
@@ -441,7 +441,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-noida",
     title: "Call Girls in Noida – Escorts in Delhi NCR's IT Hub",
-    metaDescription: "Verified call girls in Noida — Sector 18, Greater Noida, Sector 62. Independent escorts in UP. Real photos, no advance payment.",
+    metaDescription: "Verified call girls in Noida — Sector 18, Greater Noida, Sector 62. Independent escorts in UP. Real photos, no advance payment in Noida. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "noida",
     cityName: "Noida",
@@ -474,7 +474,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-boys-in-delhi",
     title: "Call Boys in Delhi NCR – Verified Male Companions for Women",
-    metaDescription: "Find handsome verified call boys in Delhi NCR — available for women and couples. Discreet male companions in Aerocity, Connaught Place. No advance payment.",
+    metaDescription: "Find handsome verified call boys in Delhi NCR — available for women and couples. Discreet male companions in Aerocity, Connaught Place. No advance payment in Delhi. Guaranteed privacy & cash payment.",
     category: "call-boys",
     citySlug: "delhi",
     cityName: "Delhi",
@@ -517,7 +517,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-boys-in-mumbai",
     title: "Call Boys in Mumbai – Handsome Male Companions for Women",
-    metaDescription: "Verified call boys in Mumbai — Andheri, Bandra, Juhu. Charming male companions for women and couples. No advance payment.",
+    metaDescription: "Verified call boys in Mumbai — Andheri, Bandra, Juhu. Charming male companions for women and couples. No advance payment in Mumbai. Guaranteed privacy & cash payment.",
     category: "call-boys",
     citySlug: "mumbai",
     cityName: "Mumbai",
@@ -553,7 +553,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-boys-in-bangalore",
     title: "Call Boys in Bangalore – Verified Male Companions in Tech City",
-    metaDescription: "Verified call boys in Bangalore — Koramangala, Indiranagar, Whitefield. Available for women and couples. No advance payment.",
+    metaDescription: "Verified call boys in Bangalore — Koramangala, Indiranagar, Whitefield. Available for women and couples. No advance payment in Bangalore. Guaranteed privacy & cash payment.",
     category: "call-boys",
     citySlug: "bengaluru",
     cityName: "Bangalore",
@@ -581,7 +581,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-boys-in-goa",
     title: "Call Boys in Goa – Beach Male Companions for Women",
-    metaDescription: "Verified call boys in Goa — Calangute, Baga, Anjuna. Handsome beach companions for women and couples. No advance payment.",
+    metaDescription: "Verified call boys in Goa — Calangute, Baga, Anjuna. Handsome beach companions for women and couples. No advance payment in Goa. Guaranteed privacy & cash payment.",
     category: "call-boys",
     citySlug: "goa",
     cityName: "Goa",
@@ -613,7 +613,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "massage-service-in-delhi",
     title: "Massage Service in Delhi – Body Massage & Spa Near You",
-    metaDescription: "Verified body massage services in Delhi NCR — Aerocity, Karol Bagh, Connaught Place. Professional therapists, in-call and out-call.",
+    metaDescription: "Verified body massage services in Delhi NCR — Aerocity, Karol Bagh, Connaught Place. Professional therapists, in-call and out-call in Delhi. Guaranteed privacy & cash payment.",
     category: "massage",
     citySlug: "delhi",
     cityName: "Delhi",
@@ -651,7 +651,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "massage-service-in-mumbai",
     title: "Massage Service in Mumbai – Body Massage at Your Hotel",
-    metaDescription: "Verified body massage services in Mumbai — Andheri, Bandra, Juhu. Professional in-call and out-call massage therapists.",
+    metaDescription: "Verified body massage services in Mumbai — Andheri, Bandra, Juhu. Professional in-call and out-call massage therapists in Mumbai. Guaranteed privacy & cash payment.",
     category: "massage",
     citySlug: "mumbai",
     cityName: "Mumbai",
@@ -687,7 +687,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "massage-service-in-bangalore",
     title: "Massage Service in Bangalore – Professional Body Massage",
-    metaDescription: "Verified body massage in Bangalore — Koramangala, Whitefield, Indiranagar. Professional therapists for home and hotel visits.",
+    metaDescription: "Verified body massage in Bangalore — Koramangala, Whitefield, Indiranagar. Professional therapists for home and hotel visits in Bangalore. Guaranteed privacy & cash payment.",
     category: "massage",
     citySlug: "bengaluru",
     cityName: "Bangalore",
@@ -714,7 +714,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "massage-service-in-goa",
     title: "Massage Service in Goa – Spa & Body Massage at Beach Resorts",
-    metaDescription: "Verified massage services in Goa — Calangute, Baga, Anjuna. Beach resort therapists, out-call available. No advance payment.",
+    metaDescription: "Verified massage services in Goa — Calangute, Baga, Anjuna. Beach resort therapists, out-call available. No advance payment in Goa. Guaranteed privacy & cash payment.",
     category: "massage",
     citySlug: "goa",
     cityName: "Goa",
@@ -746,7 +746,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "massage-service-in-chandigarh",
     title: "Massage Service in Chandigarh – Body Massage & Spa",
-    metaDescription: "Verified massage services in Chandigarh — Sector 17, Sector 35, Panchkula. Professional therapists, in-call and out-call.",
+    metaDescription: "Verified massage services in Chandigarh — Sector 17, Sector 35, Panchkula. Professional therapists, in-call and out-call in Chandigarh. Guaranteed privacy & cash payment.",
     category: "massage",
     citySlug: "chandigarh",
     cityName: "Chandigarh",
@@ -773,7 +773,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-udaipur",
     title: "Call Girls in Udaipur – Escorts in the City of Lakes",
-    metaDescription: "Verified call girls in Udaipur — near Lake Pichola, Fatehpura. Independent escorts in Rajasthan's most romantic city. No advance.",
+    metaDescription: "Verified call girls in Udaipur — near Lake Pichola, Fatehpura. Independent escorts in Rajasthan's most romantic city. No advance in Udaipur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "udaipur",
     cityName: "Udaipur",
@@ -799,7 +799,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-agra",
     title: "Call Girls in Agra – Escorts Near the Taj Mahal",
-    metaDescription: "Verified call girls in Agra near Taj Mahal, Fatehabad Road. Genuine escorts for tourists. Real photos, no advance payment.",
+    metaDescription: "Verified call girls in Agra near Taj Mahal, Fatehabad Road. Genuine escorts for tourists. Real photos, no advance payment in Agra. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "agra",
     cityName: "Agra",
@@ -823,7 +823,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-chennai",
     title: "Call Girls in Chennai – Escorts in Tamil Nadu's Capital",
-    metaDescription: "Verified call girls in Chennai — Anna Nagar, T. Nagar, Adyar, OMR. Real photos, genuine profiles, no advance payment.",
+    metaDescription: "Verified call girls in Chennai — Anna Nagar, T. Nagar, Adyar, OMR. Real photos, genuine profiles, no advance payment in Chennai. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "chennai",
     cityName: "Chennai",
@@ -855,7 +855,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-ahmedabad",
     title: "Call Girls in Ahmedabad – Independent Escorts in Gujarat",
-    metaDescription: "Verified call girls in Ahmedabad — SG Highway, Prahlad Nagar, Navrangpura. Real photos, cash only. Gujarat's top escort directory.",
+    metaDescription: "Verified call girls in Ahmedabad — SG Highway, Prahlad Nagar, Navrangpura. Real photos, cash only. Gujarat's top escort directory in Ahmedabad. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "ahmedabad",
     cityName: "Ahmedabad",
@@ -886,7 +886,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-surat",
     title: "Call Girls in Surat – Independent Escorts in Diamond City",
-    metaDescription: "Verified call girls in Surat — Adajan, Vesu, Citylight. Independent escorts in Gujarat. No advance payment.",
+    metaDescription: "Verified call girls in Surat — Adajan, Vesu, Citylight. Independent escorts in Gujarat. No advance payment in Surat. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "surat",
     cityName: "Surat",
@@ -910,7 +910,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-kochi",
     title: "Call Girls in Kochi – Escorts in Kerala's Commercial Capital",
-    metaDescription: "Verified call girls in Kochi — Ernakulam, MG Road, Marine Drive. Independent escorts in Kerala. No advance payment.",
+    metaDescription: "Verified call girls in Kochi — Ernakulam, MG Road, Marine Drive. Independent escorts in Kerala. No advance payment in Kochi. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "kochi",
     cityName: "Kochi",
@@ -941,7 +941,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-boys-in-hyderabad",
     title: "Call Boys in Hyderabad – Verified Male Companions for Women",
-    metaDescription: "Verified call boys in Hyderabad — Banjara Hills, Jubilee Hills, Kondapur. Available for women and couples. No advance.",
+    metaDescription: "Verified call boys in Hyderabad — Banjara Hills, Jubilee Hills, Kondapur. Available for women and couples. No advance in Hyderabad. Guaranteed privacy & cash payment.",
     category: "call-boys",
     citySlug: "hyderabad",
     cityName: "Hyderabad",
@@ -965,7 +965,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-boys-in-chandigarh",
     title: "Call Boys in Chandigarh – Handsome Male Companions",
-    metaDescription: "Verified call boys in Chandigarh — Sector 17, Panchkula, Mohali. Handsome male companions for women. No advance.",
+    metaDescription: "Verified call boys in Chandigarh — Sector 17, Panchkula, Mohali. Handsome male companions for women. No advance in Chandigarh. Guaranteed privacy & cash payment.",
     category: "call-boys",
     citySlug: "chandigarh",
     cityName: "Chandigarh",
@@ -989,7 +989,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-varanasi",
     title: "Call Girls in Varanasi – Discreet Escorts in the Holy City",
-    metaDescription: "Verified call girls in Varanasi near Lanka, Sigra, Cantt. Discreet companions for tourists. Real photos, no advance.",
+    metaDescription: "Verified call girls in Varanasi near Lanka, Sigra, Cantt. Discreet companions for tourists. Real photos, no advance in Varanasi. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "varanasi",
     cityName: "Varanasi",
@@ -1012,7 +1012,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-patna",
     title: "Call Girls in Patna – Independent Escorts in Bihar",
-    metaDescription: "Verified call girls in Patna — Bailey Road, Boring Road. Genuine profiles, no advance. Bihar's escort directory.",
+    metaDescription: "Verified call girls in Patna — Bailey Road, Boring Road. Genuine profiles, no advance. Bihar's escort directory in Patna. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "patna",
     cityName: "Patna",
@@ -1035,7 +1035,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-bhopal",
     title: "Call Girls in Bhopal – Escorts in MP's Capital",
-    metaDescription: "Verified call girls in Bhopal — MP Nagar, New Market. Independent escorts in Madhya Pradesh. No advance.",
+    metaDescription: "Verified call girls in Bhopal — MP Nagar, New Market. Independent escorts in Madhya Pradesh. No advance in Bhopal. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "bhopal",
     cityName: "Bhopal",
@@ -1058,7 +1058,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-indore",
     title: "Call Girls in Indore – Escorts in MP's Commercial Capital",
-    metaDescription: "Verified call girls in Indore — Vijay Nagar, Palasia, MG Road. Independent escorts in Madhya Pradesh. No advance.",
+    metaDescription: "Verified call girls in Indore — Vijay Nagar, Palasia, MG Road. Independent escorts in Madhya Pradesh. No advance in Indore. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "indore",
     cityName: "Indore",
@@ -1081,7 +1081,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-nagpur",
     title: "Call Girls in Nagpur – Escorts in Orange City",
-    metaDescription: "Verified call girls in Nagpur — Sitabuldi, Dharampeth. Independent escorts in Maharashtra. No advance.",
+    metaDescription: "Verified call girls in Nagpur — Sitabuldi, Dharampeth. Independent escorts in Maharashtra. No advance in Nagpur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "nagpur",
     cityName: "Nagpur",
@@ -1104,7 +1104,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-guwahati",
     title: "Call Girls in Guwahati – Escorts in Northeast India's Hub",
-    metaDescription: "Verified call girls in Guwahati — Dispur, Ganeshguri. Independent escorts in Assam. No advance.",
+    metaDescription: "Verified call girls in Guwahati — Dispur, Ganeshguri. Independent escorts in Assam. No advance in Guwahati. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "guwahati",
     cityName: "Guwahati",
@@ -1127,7 +1127,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-shimla",
     title: "Call Girls in Shimla – Escorts in Queen of Hill Stations",
-    metaDescription: "Verified call girls in Shimla — Mall Road, Lower Bazaar. Independent escorts in HP. No advance.",
+    metaDescription: "Verified call girls in Shimla — Mall Road, Lower Bazaar. Independent escorts in HP. No advance in Shimla. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "shimla",
     cityName: "Shimla",
@@ -1150,7 +1150,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-ludhiana",
     title: "Call Girls in Ludhiana – Escorts in Punjab's Largest City",
-    metaDescription: "Verified call girls in Ludhiana — Ferozepur Road, Dugri. Independent escorts in Punjab. No advance.",
+    metaDescription: "Verified call girls in Ludhiana — Ferozepur Road, Dugri. Independent escorts in Punjab. No advance in Ludhiana. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "ludhiana",
     cityName: "Ludhiana",
@@ -1173,7 +1173,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-dehradun",
     title: "Call Girls in Dehradun – Escorts in Uttarakhand's Capital",
-    metaDescription: "Verified call girls in Dehradun — Rajpur Road, Clement Town. Independent escorts in Uttarakhand. No advance.",
+    metaDescription: "Verified call girls in Dehradun — Rajpur Road, Clement Town. Independent escorts in Uttarakhand. No advance in Dehradun. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "dehradun",
     cityName: "Dehradun",
@@ -1196,7 +1196,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "call-girls-in-amritsar",
     title: "Call Girls in Amritsar – Escorts in the Golden Temple City",
-    metaDescription: "Verified call girls in Amritsar — near Golden Temple, Lawrence Road. Independent escorts in Punjab. No advance.",
+    metaDescription: "Verified call girls in Amritsar — near Golden Temple, Lawrence Road. Independent escorts in Punjab. No advance in Amritsar. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "amritsar",
     cityName: "Amritsar",
@@ -1219,7 +1219,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispers-of-desire-in-the-hills",
     title: "Whispers of Desire in the Misty Hills",
-    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance.",
+    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance in Pune. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "pune",
     cityName: "Pune",
@@ -1231,7 +1231,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-secrets-of-the-city-lights",
     title: "Midnight Secrets Under the Golden City Lights",
-    metaDescription: "Indulge in a sensual evening of romance. Connect with premium local companions for a warm, private experience tonight.",
+    metaDescription: "Indulge in a sensual evening of romance. Connect with premium local companions for a warm, private experience tonight in Kolkata. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "kolkata",
     cityName: "Kolkata",
@@ -1243,7 +1243,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "chasing-silken-dreams-at-midnight",
     title: "Chasing Silken Dreams in the Tech Capital",
-    metaDescription: "Escape the high-tech hustle and indulge in a romantic, private rendezvous. Verified companions ready to warm your night.",
+    metaDescription: "Escape the high-tech hustle and indulge in a romantic, private rendezvous. Verified companions ready to warm your night in Bengaluru. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "bengaluru",
     cityName: "Bengaluru",
@@ -1255,7 +1255,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "a-dance-of-shadows-and-desire",
     title: "A Dance of Shadows and Sweet Desire",
-    metaDescription: "Find verified local companions for a sweet, passionate night of romance. Discreet services with no advance payments required.",
+    metaDescription: "Find verified local companions for a sweet, passionate night of romance. Discreet services with no advance payments required in Ahmedabad. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "ahmedabad",
     cityName: "Ahmedabad",
@@ -1267,7 +1267,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-rendezvous-in-the-royal-suite",
     title: "A Midnight Rendezvous in the Royal Suite",
-    metaDescription: "Experience an elite romantic escape with verified companions. Discreet and sensual call girl services, cash only.",
+    metaDescription: "Experience an elite romantic escape with verified companions. Discreet and sensual call girl services, cash only in Hyderabad. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "hyderabad",
     cityName: "Hyderabad",
@@ -1279,7 +1279,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-shadows-of-the-ancient-streets",
     title: "Whispering Shadows in the City of Nawabs",
-    metaDescription: "Indulge in a warm, romantic evening with verified companions. Enjoy complete discretion and a passionate connection tonight.",
+    metaDescription: "Indulge in a warm, romantic evening with verified companions. Enjoy complete discretion and a passionate connection tonight in Lucknow. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "lucknow",
     cityName: "Lucknow",
@@ -1291,7 +1291,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "a-sensual-escape-in-the-clean-city",
     title: "A Sensual Escape in the Modern Grid",
-    metaDescription: "Discover verified local companions for a passionate, romantic evening. Premium services with complete privacy.",
+    metaDescription: "Discover verified local companions for a passionate, romantic evening. Premium services with complete privacy in Chandigarh. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "chandigarh",
     cityName: "Chandigarh",
@@ -1303,7 +1303,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-melodies-of-passion",
     title: "Midnight Melodies of Pure Passion",
-    metaDescription: "Experience a romantic, private getaway with verified local companions. Safe, discreet services with no advance payments.",
+    metaDescription: "Experience a romantic, private getaway with verified local companions. Safe, discreet services with no advance payments in Ludhiana. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "ludhiana",
     cityName: "Ludhiana",
@@ -1315,7 +1315,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "a-passionate-rendezvous-near-the-taj",
     title: "A Passionate Rendezvous Near the Monument of Love",
-    metaDescription: "Experience an intimate, romantic escape with verified companions. Safe, private call girl services, cash only.",
+    metaDescription: "Experience an intimate, romantic escape with verified companions. Safe, private call girl services, cash only in Agra. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "agra",
     cityName: "Agra",
@@ -1327,7 +1327,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-waters-and-candlelit-desires",
     title: "Whispering Waters and Candlelit Desires",
-    metaDescription: "Experience a romantic getaway by the lakes. Connect with verified local companions for an intimate night of passion.",
+    metaDescription: "Experience a romantic getaway by the lakes. Connect with verified local companions for an intimate night of passion in Udaipur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "udaipur",
     cityName: "Udaipur",
@@ -1339,7 +1339,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-blue-city",
     title: "Midnight Desires in the Blue City",
-    metaDescription: "Find verified local companions for a passionate, romantic evening in Jodhpur. Discreet services, cash only.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening in Jodhpur. Discreet services, cash only in Jodhpur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "jodhpur",
     cityName: "Jodhpur",
@@ -1351,7 +1351,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "private-whispers-behind-closed-doors",
     title: "Private Whispers Behind Closed Doors",
-    metaDescription: "Experience a sweet, passionate night of romance with verified local companions. Safe, discreet services with complete privacy.",
+    metaDescription: "Experience a sweet, passionate night of romance with verified local companions. Safe, discreet services with complete privacy in Noida. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "noida",
     cityName: "Noida",
@@ -1363,7 +1363,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-escapades-in-the-luxury-suite",
     title: "Midnight Escapades in the Luxury Suite",
-    metaDescription: "Indulge in a premium romantic escape with verified companions. Safe, private call girl services, cash only.",
+    metaDescription: "Indulge in a premium romantic escape with verified companions. Safe, private call girl services, cash only in Gurgaon. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "gurgaon",
     cityName: "Gurgaon",
@@ -1375,7 +1375,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-secrets-in-the-suburb-nights",
     title: "Whispering Secrets in the Suburb Nights",
-    metaDescription: "Find verified local companions for a warm, romantic evening. Enjoy complete discretion and a passionate connection tonight.",
+    metaDescription: "Find verified local companions for a warm, romantic evening. Enjoy complete discretion and a passionate connection tonight in Ghaziabad. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "ghaziabad",
     cityName: "Ghaziabad",
@@ -1387,7 +1387,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "intimate-rendezvous-in-the-misty-hills",
     title: "An Intimate Rendezvous in the Misty Hills",
-    metaDescription: "Experience an elite romantic escape with verified companions in Dehradun. Discreet and sensual call girl services, cash only.",
+    metaDescription: "Experience an elite romantic escape with verified companions in Dehradun. Discreet and sensual call girl services, cash only in Dehradun. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "dehradun",
     cityName: "Dehradun",
@@ -1399,7 +1399,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-dreams-under-the-golden-dome",
     title: "Whispering Dreams in the Spiritual Haven",
-    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance.",
+    metaDescription: "Experience an intimate, passionate escape in Amritsar. Discover verified local companions for a memorable evening of warmth and romance in Amritsar. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "amritsar",
     cityName: "Amritsar",
@@ -1411,7 +1411,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "a-dance-of-light-and-shadow-by-the-river",
     title: "A Dance of Light and Shadow by the River",
-    metaDescription: "Indulge in a sensual evening of romance. Connect with premium local companions for a warm, private experience tonight.",
+    metaDescription: "Indulge in a sensual evening of romance. Connect with premium local companions for a warm, private experience tonight in Surat. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "surat",
     cityName: "Surat",
@@ -1423,7 +1423,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-gardens-of-sensual-desire",
     title: "Whispering Gardens of Sensual Desire",
-    metaDescription: "Find verified local companions for a sweet, passionate night of romance. Discreet services, cash only.",
+    metaDescription: "Find verified local companions for a sweet, passionate night of romance. Discreet services, cash only in Vadodara. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "vadodara",
     cityName: "Vadodara",
@@ -1435,7 +1435,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-princely-town",
     title: "Midnight Desires in the Princely Town",
-    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy in Rajkot. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "rajkot",
     cityName: "Rajkot",
@@ -1445,9 +1445,9 @@ const rawBlogPosts: BlogPost[] = [
     content: "<h2>Finding Warmth and Passion in the Princely Town</h2>\n<p>After a busy day, all you need is a warm, private place to relax. If you want to share a romantic evening with a beautiful, friendly companion, booking a verified companion is the best choice. Discover gorgeous <a href=\"/call-girls/rajkot\">call girls</a> who are dedicated to offering comfort, passion, and elite companionship.</p>\n\n<p>These companions are elegant, fit, and very professional. They welcome you with a warm smile and ensure a safe, confidential environment. Whether you want to share a glass of wine, have deep conversations, or dive directly into physical intimacy, they ensure every moment is satisfying.</p>\n\n<h3>Tips for a Relaxing Rendezvous</h3>\n<p>Set a beautiful stage for your private date:</p>\n<ul>\n  <li><strong>Soft Lighting:</strong> Avoid bright lights; let warm lamps or candles set a cozy mood.</li>\n  <li><strong>Relaxing Music:</strong> Play soft jazz or chill tracks to soothe your mind.</li>\n  <li><strong>Gentle Touch:</strong> Start with a relaxing shoulder rub to build a comfortable connection.</li>\n</ul>\n\n<h3>Companionship Rates Guide</h3>\n<p>Rates vary based on the duration and profile style:</p>\n<ul>\n  <li><strong>Lively Student:</strong> ₹2,000 – ₹4,000 per hour. Playful, cheerful, and highly interactive.</li>\n  <li><strong>Premium Independent:</strong> ₹4,500 – ₹8,000 per session. Sensory massage and passionate romance.</li>\n  <li><strong>Elite VIP Model:</strong> ₹10,000 – ₹25,000 overnight. Luxury companions for a night of pure bliss.</li>\n</ul>\n\n<h3>Safe Booking Guidelines</h3>\n<p>Protect your booking by communicating directly with the profile's listed number. Avoid paying any advance registration fees or card charges online. Direct cash payment at the meeting room guarantees a safe, authentic, and confidential date.</p>"
   },
   {
-    slug: "whispering-lakes-and-midnight-sighs",
-    title: "Whispering Lakes and Midnight Sighs",
-    metaDescription: "Experience an elite romantic escape with verified companions. Discreet and sensual call girl services, cash only.",
+    slug: "whispering-shadows-in-the-lakes",
+    title: "Whispering Shadows by the Quiet Lakes",
+    metaDescription: "Experience an elite romantic escape with verified companions in Bhopal. Discreet and sensual call girl services, cash only in Bhopal. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "bhopal",
     cityName: "Bhopal",
@@ -1459,7 +1459,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-commercial-heart",
     title: "Midnight Desires in the Commercial Heart",
-    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy.",
+    metaDescription: "Find verified local companions in Indore for a passionate, romantic evening. Premium services with complete privacy in Indore. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "indore",
     cityName: "Indore",
@@ -1471,19 +1471,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispers-of-desire-in-the-sacred-city",
     title: "Whispers of Desire in the Sacred City",
-    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance.",
-    category: "call-girls",
-    citySlug: "ujjain",
-    cityName: "Ujjain",
-    date: "2026-07-08",
-    readTime: "5 min read",
-    excerpt: "When the cool evening breeze cools the air, cozy up with a gorgeous companion for a night of warmth and sweet whispers.",
-    content: "<h2>Cozy Evenings and Sensual Connections</h2>\n<p>When the evening breeze cools the air, it is the perfect time to seek the company of someone who values beauty and romance. Connect with verified <a href=\"/call-girls/ujjain\">call girls</a> who offer complete discretion, warm affection, and a deeply satisfying companionship experience.</p>\n\n<p>Temporary placeholder for Ujjain content. This post will be expanded automatically by next-level romance content.</p>"
-  },
-  {
-    slug: "whispers-of-desire-in-the-sacred-city",
-    title: "Whispers of Desire in the Sacred City",
-    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance.",
+    metaDescription: "Experience an intimate, passionate escape in Ujjain. Discover verified local companions for a memorable evening of warmth and romance in Ujjain. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "ujjain",
     cityName: "Ujjain",
@@ -1495,7 +1483,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-orange-city",
     title: "Midnight Desires in the Orange City",
-    metaDescription: "Find verified local companions for a passionate, romantic evening in Nagpur. Premium services, cash only.",
+    metaDescription: "Find verified local companions in Nagpur for a passionate, romantic evening. Premium services, cash only in Nagpur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "nagpur",
     cityName: "Nagpur",
@@ -1507,7 +1495,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-shadows-in-the-wine-capital",
     title: "Whispering Shadows in the Wine Capital",
-    metaDescription: "Experience an elite romantic escape with verified companions. Discreet and sensual call girl services, cash only.",
+    metaDescription: "Experience an elite romantic escape with verified companions in Nashik. Discreet and sensual call girl services, cash only in Nashik. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "nashik",
     cityName: "Nashik",
@@ -1519,7 +1507,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-lake-suburb",
     title: "Midnight Desires in the Lake Suburb",
-    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy.",
+    metaDescription: "Find verified local companions in Thane for a passionate, romantic evening. Premium services with complete privacy in Thane. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "thane",
     cityName: "Thane",
@@ -1531,7 +1519,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-waves-of-the-golden-beach",
     title: "Whispering Waves on the Golden Coast",
-    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance.",
+    metaDescription: "Experience an intimate, passionate escape in Visakhapatnam. Discover verified local companions for a memorable evening of warmth and romance on the Golden Coast in Visakhapatnam. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "visakhapatnam",
     cityName: "Visakhapatnam",
@@ -1543,7 +1531,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-business-hub",
     title: "Midnight Desires in the Business Hub",
-    metaDescription: "Find verified local companions for a passionate, romantic evening in Vijayawada. Premium services, cash only.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening in Vijayawada. Premium services, cash only in Vijayawada. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "vijayawada",
     cityName: "Vijayawada",
@@ -1555,7 +1543,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-palms-and-intimate-tides",
     title: "Whispering Palms and Intimate Tides",
-    metaDescription: "Experience an elite romantic escape with verified companions in Kochi. Discreet and sensual call girl services, cash only.",
+    metaDescription: "Experience an elite romantic escape with verified companions in Kochi. Discreet and sensual call girl services, cash only in Kochi. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "kochi",
     cityName: "Kochi",
@@ -1567,7 +1555,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-textile-capital",
     title: "Midnight Desires in the Textile Capital",
-    metaDescription: "Find verified local companions for a passionate, romantic evening in Coimbatore. Premium services, cash only.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening in Coimbatore. Premium services, cash only in Coimbatore. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "coimbatore",
     cityName: "Coimbatore",
@@ -1579,7 +1567,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-shadows-by-the-ancient-river",
     title: "Whispering Shadows by the Ancient Ganges",
-    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance in Patna.",
+    metaDescription: "Experience an intimate, passionate escape. Discover verified local companions for a memorable evening of warmth and romance in Patna in Patna. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "patna",
     cityName: "Patna",
@@ -1591,7 +1579,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-breezes-in-the-hills",
     title: "Whispering Breezes in the Green Suburbs",
-    metaDescription: "Indulge in a relaxing romantic evening. Connect with verified local companions for complete privacy and sensual touch.",
+    metaDescription: "Indulge in a relaxing romantic evening. Connect with verified local companions for complete privacy and sensual touch in Thane. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "thane",
     cityName: "Thane",
@@ -1603,7 +1591,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-ancient-fort-town",
     title: "Midnight Desires in the Historical City",
-    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy in Gwalior. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "gwalior",
     cityName: "Gwalior",
@@ -1615,7 +1603,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-shadows-in-the-industrial-hub",
     title: "Whispering Shadows in the Industrial Hub",
-    metaDescription: "Experience an elite romantic escape with verified companions. Discreet and sensual call girl services, cash only.",
+    metaDescription: "Experience an elite romantic escape with verified companions. Discreet and sensual call girl services, cash only in Faridabad. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "faridabad",
     cityName: "Faridabad",
@@ -1627,7 +1615,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-escapes-in-the-cultural-capital",
     title: "Midnight Escapades in the Cultural Capital",
-    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services with complete privacy in Pune. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "pune",
     cityName: "Pune",
@@ -1639,7 +1627,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "whispering-palms-and-sensual-tides",
     title: "Whispering Palms and Sensual Tides",
-    metaDescription: "Experience an elite romantic escape. Discover verified local companions for a memorable evening of warmth and romance.",
+    metaDescription: "Experience an elite romantic escape. Discover verified local companions for a memorable evening of warmth and romance in Goa. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "goa",
     cityName: "Goa",
@@ -1651,7 +1639,7 @@ const rawBlogPosts: BlogPost[] = [
   {
     slug: "midnight-desires-in-the-steel-city",
     title: "Midnight Desires in the Steel City",
-    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services, cash only.",
+    metaDescription: "Find verified local companions for a passionate, romantic evening. Premium services, cash only in Jamshedpur. Guaranteed privacy & cash payment.",
     category: "call-girls",
     citySlug: "jamshedpur",
     cityName: "Jamshedpur",

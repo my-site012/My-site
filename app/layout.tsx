@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -33,6 +34,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Google Analytics 4 (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GYH19TGGCN"
+          strategy="lazyOnload"
+        />
+        <Script
+          id="google-analytics"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-GYH19TGGCN');
+            `,
+          }}
+        />
         <meta name="google-site-verification" content="4q9gLbRNwfJE0crAutXcsgeVLQloYZ6L7aSihfNXfo8" />
         {/* DNS prefetch + preconnect for faster resource loading */}
         <link rel="dns-prefetch" href="https://api.whatsapp.com" />

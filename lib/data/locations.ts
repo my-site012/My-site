@@ -90,7 +90,7 @@ export const locations: Record<string, string[]> = {
   "Madhya Pradesh": [
     "Betul", "Bhind", "Bhopal", "Burhanpur", "Chhatarpur",
     "Chhindwara", "Damoh", "Datia", "Dewas", "Dhar",
-    "Guna", "Gwalior", "Indore", "Itarsi", "Jabalpur",
+    "Guna", "Gwalior", "Hoshangabad", "Indore", "Itarsi", "Jabalpur",
     "Katni", "Khajuraaho", "Khandwa", "Khargone", "Mandsaur",
     "Morena", "Nagda", "Neemuch", "Panchmadi", "Pithampur",
     "Ratlam", "Rewa", "Sagar", "Satna", "Sehore",
@@ -369,38 +369,26 @@ export const locations: Record<string, string[]> = {
     "Palwal", "Samana", "Sohna"
   ],
   "Himachal Pradesh Locations": [
-    "Dalhousie", "Hampi", "Himachal Pradesh", "Kinnaur", "Lahaul And Spiti",
+    "Dalhousie", "Hampi", "Kinnaur", "Lahaul And Spiti",
     "Mcleod Ganj", "Mhow", "Sirmaur", "Sundernagar"
   ],
   "Punjab Locations": [
     "Batala", "Ferozpur", "Firozepur", "Kotkapura", "Mansa", "Muktasar",
-    "Panjab", "Samana", "Sas Nagar", "SBS Nagar", "Tarn Taran"
-  ],
-  "Madhya Pradesh Locations": [
-    "Hoshangabad", "Madhya Pradesh"
-  ],
-  "Jammu And Kashmir Locations": [
-    "Jammu And Kashmir"
-  ],
-  "Jharkhand Locations": [
-    "Jharkhand"
-  ],
-  "Uttarakhand Locations": [
-    "Uttarakhand"
+    "Samana", "Sas Nagar", "SBS Nagar", "Tarn Taran"
   ],
   "Kerala Locations": [
-    "Kerala", "Munnar"
+    "Munnar"
   ],
   "Lakshadweep": [
-    "Kavaratti", "Lakshadweep"
+    "Kavaratti"
   ],
   "Daman And Diu": [
     "Daman"
   ],
   "Other Locations": [
-    "Gujrat", "Haora", "Jaipur Malviya Nagar", "Jaipur Vaishali Nagar",
-    "Krishna", "Krishna Nagar", "Maharastra", "Mandu", "Nerul",
-    "Nongstoin", "Rajasthan", "Uttar Pradesh", "West Bengal"
+    "Haora", "Jaipur Malviya Nagar", "Jaipur Vaishali Nagar",
+    "Krishna", "Krishna Nagar", "Mandu", "Nerul",
+    "Nongstoin"
   ]
 };
 
@@ -424,10 +412,19 @@ export function getCallGirlsSlug(city: string): string {
 
 // Helper: get all cities flat list (alphabetical) for dropdown
 export function getAllCities(): string[] {
-  const allStatesSet = new Set(getAllStates());
+  const allStateSlugs = new Set(getAllStates().map(getStateSlug));
+  const EXCLUDED_SLUGS = new Set([
+    "jammu-and-kashmir", "jharkhand", "uttarakhand", "kerala",
+    "madhya-pradesh", "himachal-pradesh", "rajasthan", "uttar-pradesh",
+    "west-bengal", "panjab", "gujrat", "maharastra", "lakshadweep"
+  ]);
+
   const all = Object.values(locations).flat();
   return [...new Set(all)]
-    .filter(city => !allStatesSet.has(city))
+    .filter(city => {
+      const slug = getCitySlug(city);
+      return !allStateSlugs.has(slug) && !EXCLUDED_SLUGS.has(slug);
+    })
     .sort();
 }
 

@@ -7,9 +7,12 @@ import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data/blogPosts";
 
+const allLocationSlugs = Object.values(locations).flat().map(city => getCitySlug(city));
+
 const validSlugs = new Set([
   ...getAllCities().map(city => getCitySlug(city)),
   ...EXTENDED_CITIES.map(city => getCitySlug(city)),
+  ...allLocationSlugs,
 ]);
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
@@ -170,26 +173,44 @@ function getMassageSeoData(cityName: string, state: string) {
   };
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }): Promise<Metadata> {
   const { city } = await params;
+  const { page } = (await searchParams) || {};
+  const currentPage = parseInt(page || "1");
+  const isPage2 = currentPage > 1;
+
+  if (!validSlugs.has(city.toLowerCase())) {
+    notFound();
+  }
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
 
+  let title = "";
+  let description = "";
+  let keywords = "";
+
   // Extended cities — different meta wording
   if (isExtendedCity(city)) {
-    return {
-      title: `Massage Service in ${cityName} | Body Spa | CallGirl4U`,
-      description: `Find verified massage therapists in ${cityName} with direct WhatsApp contact. Full body massage, B2B spa, and home delivery available in ${cityName}, ${state}. Cash on delivery only.`,
-      keywords: `Massage in ${cityName}, ${cityName} Massage Service, Body Massage ${cityName}, Female Massage ${cityName}, Spa ${cityName}`,
-      alternates: { canonical: `https://callgirl4u.com/massage/${city}` },
-    };
+    title = `Massage Service in ${cityName} | Body Spa | CallGirl4U`;
+    description = `Find verified massage therapists in ${cityName} with direct WhatsApp contact. Full body massage, B2B spa, and home delivery available in ${cityName}, ${state}. Cash on delivery only.`;
+    keywords = `Massage in ${cityName}, ${cityName} Massage Service, Body Massage ${cityName}, Female Massage ${cityName}, Spa ${cityName}`;
+  } else {
+    const seoData = getMassageSeoData(cityName, state);
+    title = seoData.metaTitle;
+    description = seoData.metaDescription;
+    keywords = seoData.metaKeywords;
   }
 
-  const seoData = getMassageSeoData(cityName, state);
+  if (isPage2) {
+    title = `${title} - Page ${currentPage}`;
+    description = `${description} (Page ${currentPage})`;
+  }
+
   return {
-    title: seoData.metaTitle,
-    description: seoData.metaDescription,
-    keywords: seoData.metaKeywords,
+    title,
+    description,
+    keywords,
+    robots: isPage2 ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: `https://callgirl4u.com/massage/${city}`,
     }
@@ -198,6 +219,9 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 
 export default async function MassageCityPage({ params, searchParams }: { params: Promise<{ city: string }>, searchParams: Promise<{ page?: string }> }) {
   const { city } = await params;
+  if (!validSlugs.has(city.toLowerCase())) {
+    notFound();
+  }
   const { page } = await searchParams;
   const currentPage = parseInt(page || "1");
   const adsPerPage = 12;

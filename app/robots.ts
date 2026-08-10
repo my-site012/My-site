@@ -8,7 +8,16 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
+      allow: [
+        '/',
+        '/_next/image*',
+        '/_next/static/*',
+        '/images/*',
+        '/favicon.ico',
+        '/apple-icon.png',
+        '/icon.png',
+        '/icon.svg'
+      ],
       disallow: [
         '/admin',
         '/dashboard',
@@ -23,9 +32,6 @@ export default function robots(): MetadataRoute.Robots {
         '/*?*q=*',
         '/*?*search=*',
         '/*?*s=*',
-        '/ad',
-        '/ad/',
-        '/ad/*',
         '/profile'
       ],
     },
