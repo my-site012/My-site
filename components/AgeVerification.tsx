@@ -5,9 +5,21 @@ export default function AgeVerification() {
   const [verified, setVerified] = useState(true);
 
   useEffect(() => {
-    const v = localStorage.getItem("age-verified");
-    if (!v) {
-      setVerified(false);
+    // Skip age verification for search engine bots and crawlers
+    // Bots have no localStorage — without this check they'd see only the popup
+    const isBot = /bot|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|crawler|spider|robot|crawling|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\slink\spreview|showyoubot|outbrain|pinterest|developers\.google\.com\/\+\/web\/snippet/i.test(
+      typeof navigator !== "undefined" ? navigator.userAgent : ""
+    );
+    if (isBot) return; // Googlebot & all crawlers bypass popup — they see full content
+
+    try {
+      const v = localStorage.getItem("age-verified");
+      if (!v) {
+        setVerified(false);
+      }
+    } catch (e) {
+      // If localStorage is unavailable, don't block the user
+      setVerified(true);
     }
   }, []);
 

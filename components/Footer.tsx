@@ -51,34 +51,6 @@ export default function Footer() {
           <a href="/dmca" className="text-blue-700 hover:underline">DMCA Policy &amp; Counter-Notice</a>
         </div>
 
-        {/* Partner Links */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-            Partner Directories
-          </h4>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-blue-700">
-            <a href="https://kokasite.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">KokaSite</a>
-            <a href="https://kokasite.com/massage/andhra-pradesh/vuyyuru" target="_blank" rel="noopener noreferrer" className="hover:underline">Vuyyuru Massage</a>
-            <a href="https://kokasite.com/call-girls/assam/rangia" target="_blank" rel="noopener noreferrer" className="hover:underline">Rangia Call Girls</a>
-            <a href="https://kokasite.com/massage/gujarat/narmada" target="_blank" rel="noopener noreferrer" className="hover:underline">Narmada Massage</a>
-            <a href="https://kokasite.com/call-girls/uttar-pradesh/deoria" target="_blank" rel="noopener noreferrer" className="hover:underline">Deoria Call Girls</a>
-            <a href="https://kokasite.com/call-girls/rajasthan/sojat" target="_blank" rel="noopener noreferrer" className="hover:underline">Sojat Call Girls</a>
-            <a href="https://kokasite.com/call-girls/delhi-ncr/vikas-puri" target="_blank" rel="noopener noreferrer" className="hover:underline">Vikas Puri Call Girls</a>
-            <a href="https://kokasite.com/massage/jharkhand/giridih" target="_blank" rel="noopener noreferrer" className="hover:underline">Giridih Massage</a>
-            <a href="https://kokasite.com/massage/kerala/taliparamba" target="_blank" rel="noopener noreferrer" className="hover:underline">Taliparamba Massage</a>
-            <a href="https://kokasite.com/massage/telangana/kompally" target="_blank" rel="noopener noreferrer" className="hover:underline">Kompally Massage</a>
-            <a href="https://kokasite.com/call-girls/punjab/muktsar" target="_blank" rel="noopener noreferrer" className="hover:underline">Muktsar Call Girls</a>
-            <a href="https://kokasite.com/call-girls/delhi-ncr/preet-vihar" target="_blank" rel="noopener noreferrer" className="hover:underline">Preet Vihar Call Girls</a>
-            <a href="https://kokasite.com/call-girls/bihar/darbhanga" target="_blank" rel="noopener noreferrer" className="hover:underline">Darbhanga Call Girls</a>
-            <a href="https://kokasite.com/call-girls/uttar-pradesh" target="_blank" rel="noopener noreferrer" className="hover:underline">Uttar Pradesh Call Girls</a>
-            <a href="https://kokasite.com/massage/delhi-ncr/moti-bagh" target="_blank" rel="noopener noreferrer" className="hover:underline">Moti Bagh Massage</a>
-            <a href="https://kokasite.com/call-girls/uttar-pradesh/ujhani" target="_blank" rel="noopener noreferrer" className="hover:underline">Ujhani Call Girls</a>
-            <a href="https://kokasite.com/call-girls/andhra-pradesh/patparganj" target="_blank" rel="noopener noreferrer" className="hover:underline">Patparganj Call Girls</a>
-            <a href="https://kokasite.com/call-girls/delhi-ncr/uttam-nagar" target="_blank" rel="noopener noreferrer" className="hover:underline">Uttam Nagar Call Girls</a>
-            <a href="https://kokasite.com/call-girls/uttar-pradesh/saharanpur" target="_blank" rel="noopener noreferrer" className="hover:underline">Saharanpur Call Girls</a>
-            <a href="https://kokasite.com/call-girls/madhya-pradesh/katni" target="_blank" rel="noopener noreferrer" className="hover:underline">Katni Call Girls</a>
-          </div>
-        </div>
       </div>
     </footer>
   );

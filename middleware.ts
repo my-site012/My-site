@@ -177,6 +177,16 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // BOT EARLY-EXIT — Restored (was accidentally removed in Aug 10 commit)
+  // Googlebot & crawlers must bypass ALL middleware checks:
+  // maintenance mode, geo-redirect, age-verification logic etc.
+  // Without this, bots hit the KV fetch + get treated as unverified users
+  const userAgent = request.headers.get('user-agent') || '';
+  const isBot = BOTS_REGEX.test(userAgent);
+  if (isBot) {
+    return NextResponse.next();
+  }
+
   // 1. MAINTENANCE MODE CHECK
   const isExempt = 
     pathname.startsWith('/admin') ||

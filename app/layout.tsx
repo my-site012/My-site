@@ -63,6 +63,10 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
+                  // Don't block bots/crawlers — they have no localStorage
+                  var ua = navigator.userAgent || '';
+                  var isBot = /bot|googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|crawler|spider|robot|crawling/i.test(ua);
+                  if (isBot) return; // Googlebot sees full content, no age-unverified class
                   var verified = localStorage.getItem('age-verified');
                   if (!verified) {
                     document.documentElement.classList.add('age-unverified');
