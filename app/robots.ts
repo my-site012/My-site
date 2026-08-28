@@ -8,7 +8,14 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: '*',
+        userAgent: [
+          'Googlebot',
+          'Googlebot-Image',
+          'Googlebot-News',
+          'Googlebot-Video',
+          'Mediapartners-Google',
+          'AdsBot-Google'
+        ],
         allow: [
           '/',
           '/_next/static/*',
@@ -36,20 +43,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
       {
-        userAgent: [
-          'AhrefsBot',
-          'SemrushBot',
-          'DotBot',
-          'MJ12bot',
-          'PetalBot',
-          'Bytespider',
-          'Amazonbot',
-          'ClaudeBot',
-          'GPTBot',
-          'CCBot',
-          'MegaIndex.ru',
-          'BLEXBot'
-        ],
+        userAgent: '*',
         disallow: ['/'],
       }
     ],
