@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getAllCities, getCitySlug, getAllStates, getStateSlug } from '@/lib/data/locations';
+import { getAllCities, getCitySlug, getAllStates, getStateSlug, EXTENDED_CITIES } from '@/lib/data/locations';
 
 export const dynamic = 'force-static';
 
@@ -52,10 +52,19 @@ export async function GET() {
       priority: '0.8'
     }));
 
+  const extendedCityUrls = EXTENDED_CITIES
+    .filter(city => !stateSlugs.has(getCanonicalSlug(city)))
+    .map(city => ({
+      loc: `${baseUrl}/call-boys/${getCanonicalSlug(city)}`,
+      changefreq: 'weekly',
+      priority: '0.6'
+    }));
+
   const rawUrls = [
     { loc: `${baseUrl}/call-boys`, changefreq: 'daily', priority: '0.9' },
     ...stateUrls,
-    ...cityUrls
+    ...cityUrls,
+    ...extendedCityUrls
   ];
 
   const seen = new Set<string>();

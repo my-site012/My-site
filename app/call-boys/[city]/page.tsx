@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import { getDeterministicBoyImagesPool, getBoyNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
 import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
-import { blogPosts } from "@/lib/data/blogPosts";
 
 const allLocationSlugs = Object.values(locations).flat().map(city => getCitySlug(city));
 
@@ -49,7 +48,19 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
     title,
     description,
     keywords: `call boy in ${cityName}, male companion ${cityName}, gigolo service ${cityName}, male escort ${cityName}, playboy ${cityName}`,
-    robots: isPage2 ? { index: false, follow: true } : undefined,
+    robots: isPage2 
+      ? { index: false, follow: true } 
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
     alternates: {
       canonical: `https://callgirl4u.com/call-boys/${city}`,
     }
@@ -68,14 +79,6 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
 
-  // Find related blog posts for this city or category
-  const relatedBlogs = blogPosts
-    .filter(post => post.category === "call-boys" && (post.citySlug === city || getCitySlug(post.cityName) === city))
-    .slice(0, 3);
-  
-  const fallbackBlogs = relatedBlogs.length > 0 
-    ? relatedBlogs 
-    : blogPosts.filter(post => post.category === "call-boys").slice(0, 3);
 
   const totalAdsToShow = 48;
 
@@ -216,7 +219,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
         "name": `Do call boys in ${cityName} offer outcall services?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes, most male companions in ${cityName} offer outcall services to hotels and private residences. Confirm location and meeting details directly with the companion via WhatsApp before the meeting.`
+          "text": `Yes, most male companions in ${cityName} offer outcall services to hotels and private residences. Confirm location and meeting details directly with the companion before the meeting.`
         }
       }
     ]
@@ -382,7 +385,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
         <h2 className="text-2xl mb-6">Frequently Asked Questions — Call Boys in {cityName}</h2>
         <div className="space-y-4 mb-10">
           {[
-            { q: `How do I book a call boy in ${cityName}?`, a: `Browse profiles on our directory, select the companion you like, and contact them directly via the Call or WhatsApp button. No registration or advance payment is needed.` },
+            { q: `How do I book a call boy in ${cityName}?`, a: `Browse profiles on our directory, select the companion you like, and contact them directly via the phone number. No registration or advance payment is needed.` },
             { q: `Are the call boy profiles in ${cityName} verified?`, a: `Yes. Every profile on our platform is manually reviewed. Photos are confirmed to be genuine and profiles are regularly audited for authenticity.` },
             { q: `Is the service available 24/7 in ${cityName}?`, a: `Most companions listed in ${cityName} are available around the clock, including weekends and holidays. Availability may vary by individual profile.` },
             { q: `What is the call boy service charge in ${cityName}?`, a: `Rates vary by companion type. College boys start from ₹2,000/hour, while VIP companions may charge ₹7,000 or more per hour. Always confirm the rate directly with the companion before meeting.` },
@@ -427,61 +430,6 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
           })}
         </div>
 
-        {/* Yellow SEO Tag Cloud */}
-        <div className="bg-[#f7d046] text-gray-950 p-6 rounded-xl border border-yellow-400/30 shadow-sm">
-          <div className="text-xs md:text-sm font-medium leading-relaxed text-justify tracking-wide">
-            {([
-              `Call Boy In ${cityName}`,
-              `Call Boy Near Me`,
-              `Call Boy Number In ${cityName}`,
-              `Male Escort Service In ${cityName}`,
-              `Call Boys In ${cityName}`,
-              `Escort Service ${cityName}`,
-              `${cityName} Call Boys`,
-              `${cityName} Male Escort Service`,
-              `Call Boy Contact Number ${cityName}`,
-              `Call Boy Price ${cityName}`,
-              `Call Boys Near Me`,
-              `${cityName} Male Escort`,
-              `Male Escort Service In ${cityName}`,
-              `Low Price Call Boy in ${cityName}`,
-              `Call Boys ${cityName}`,
-              `Call Boys Number ${cityName}`,
-              `Male Escort In ${cityName}`,
-              `Call Boy Pics ${cityName}`,
-              `Call Boy Contact Number ${cityName}`,
-              `Call Boys Rate ${cityName}`,
-              `Call Boy Service ${cityName}`,
-              `Best Call Boy Service ${cityName}`,
-              `Low Price Call Boys ${cityName}`,
-              `${cityName} Call Boy Service`,
-              `Cheap Call Boy Near Me`,
-              `Call Boys Price ${cityName}`,
-              `${cityName} Call Boy Number`,
-              `Call Boy Photo ${cityName}`,
-              `Night Call Boy ${cityName}`,
-              `Nearest Call Boy ${cityName}`,
-              `Call Boy Ka Number ${cityName}`,
-              `Low Cost Call Boys ${cityName}`,
-              `Call Boy Services ${cityName}`,
-              `Cheapest Call Boy ${cityName}`,
-            ] as string[]).map((tag, idx, arr) => (
-              <span key={idx}>
-                <Link prefetch={false} href={`/call-boys/${city}`}
-                  title={tag}
-                  className="hover:underline hover:text-black/80 transition-colors">
-                  {tag}
-                </Link>
-                {idx < arr.length - 1 && (
-                  <span className="mx-2 text-gray-950 font-normal select-none" aria-hidden>
-                    ☛
-                  </span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* Nearby Cities / Localities in State */}
         {state && locations[state] && locations[state].length > 1 && (
           <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
@@ -503,30 +451,6 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
           </div>
         )}
 
-        {/* Recent Blogs & Guides */}
-        {fallbackBlogs.length > 0 && (
-          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
-              Latest Call Boy Guides & Articles
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {fallbackBlogs.map(post => (
-                <div key={post.slug} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-                  <div className="p-5 flex flex-col h-full">
-                    <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
-                    <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
-                      <Link prefetch={false} href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h4>
-                    <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
-                    <Link prefetch={false} href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
-                      Read Article →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Cross-Service Interlinking Section */}
         <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">

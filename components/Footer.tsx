@@ -33,11 +33,15 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Social */}
-        <div className="flex gap-4 text-sm text-gray-600">
-          <span>Follow us:</span>
-          <a href="#">Youtube</a>
-          <Link prefetch={false} href="/blog">Blog</Link>
+        {/* Social & Copyright */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-gray-600 mb-5 pb-4 border-b border-gray-200">
+          <div className="flex gap-4 items-center">
+            <span>Follow us:</span>
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-red-600 font-medium transition-colors">Youtube</a>
+          </div>
+          <div className="text-xs text-gray-500">
+            <p>© {new Date().getFullYear()} <strong className="text-gray-700 font-semibold">CallGirl4U.com</strong>. All Rights Reserved.</p>
+          </div>
         </div>
 
         {/* DMCA Safe Harbor Notice */}

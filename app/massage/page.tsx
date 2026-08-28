@@ -6,8 +6,19 @@ import { getAllCities } from "@/lib/data/locations";
 
 export const metadata: Metadata = {
   title: "Massage Service in India | Body Massage, Spa & Female to Male Massage Near You",
-  description: "Find verified full body massage service near you across India. Book female to male massage, B2B spa, happy ending massage, and home delivery massage with direct WhatsApp contact. Cash on delivery.",
+  description: "Find verified full body massage service near you across India. Book female to male massage, B2B spa, happy ending massage, and home delivery massage with direct contact. Cash on delivery.",
   keywords: "massage service india, body massage india, female to male massage, B2B massage, full body massage, spa near me, massage parlour india, home massage delivery, happy ending massage",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "https://callgirl4u.com/massage",
   }

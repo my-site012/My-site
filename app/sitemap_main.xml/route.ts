@@ -11,7 +11,12 @@ export async function GET() {
     { loc: `${baseUrl}/call-girls`, changefreq: 'daily', priority: '0.9' },
     { loc: `${baseUrl}/call-boys`, changefreq: 'daily', priority: '0.9' },
     { loc: `${baseUrl}/massage`, changefreq: 'daily', priority: '0.9' },
-    { loc: `${baseUrl}/blog`, changefreq: 'daily', priority: '0.8' },
+    { loc: `${baseUrl}/forums`, changefreq: 'daily', priority: '0.7' },
+    { loc: `${baseUrl}/ad/post`, changefreq: 'weekly', priority: '0.7' },
+    { loc: `${baseUrl}/contact`, changefreq: 'monthly', priority: '0.5' },
+    { loc: `${baseUrl}/privacy`, changefreq: 'monthly', priority: '0.3' },
+    { loc: `${baseUrl}/terms`, changefreq: 'monthly', priority: '0.3' },
+    { loc: `${baseUrl}/dmca`, changefreq: 'monthly', priority: '0.3' },
   ];
 
   const urlElements = urls.map(u => `  <url>

@@ -11,6 +11,22 @@ export const metadata: Metadata = {
   title: "CallGirl4U India – #1 Adult Classified Ads & Escort Directory",
   description: "CallGirl4U is the #1 adult classifieds website in India. Browse local listings for independent call girls, massages, male escorts, and shemale dating in your city. Post your adult ad absolutely FREE!",
   keywords: "adult classifieds india, adult classified website, escorts in india, call girls india, male escorts, massages, shemale escorts, post free adult ads",
+  authors: [{ name: "CallGirl4U", url: "https://callgirl4u.com" }],
+  creator: "CallGirl4U",
+  publisher: "CallGirl4U",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -34,6 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="author" content="CallGirl4U" />
+        <meta name="publisher" content="CallGirl4U" />
         {/* Google Analytics 4 (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-GYH19TGGCN"

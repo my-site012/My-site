@@ -52,6 +52,6 @@ next-env.d.ts
 vercel_login_out.log
 task.md
 /scratch/
-
-.vercel
-.env*.local
+service-account*.json
+.indexing-*.json
+my-site/

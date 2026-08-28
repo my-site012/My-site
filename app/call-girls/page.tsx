@@ -8,6 +8,17 @@ export const metadata: Metadata = {
   title: "Explore Local Adult Classified Listings & Call Girls across India",
   description: "Search verified adult classified ads by city or state on CallGirl4U. Connect with independent call girls, premium escorts, and adult massage services near you.",
   keywords: "adult classifieds india, adult classified website, escorts in india, call girls india, male escorts, massages, shemale escorts, post free adult ads, local adult ads",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "https://callgirl4u.com/call-girls",
   }

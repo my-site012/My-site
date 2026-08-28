@@ -188,10 +188,10 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
     "telephone": displayPhone,
     "url": `https://callgirl4u.com/ad/${id}`,
     "description": isMassage 
-      ? `Verified Massage Therapist ${name} in ${location}. Contact via WhatsApp/Call for premium body massage services.`
+      ? `Verified Massage Therapist ${name} in ${location}. Contact via Call/Message for premium body massage services.`
       : isBoy
-      ? `Verified Call Boy ${name} in ${location}. Contact via WhatsApp/Call for premium male companion services.`
-      : `Verified Call Girl ${name} in ${location}. Contact via WhatsApp/Call for premium companion services.`,
+      ? `Verified Call Boy ${name} in ${location}. Contact via Call/Message for premium male companion services.`
+      : `Verified Call Girl ${name} in ${location}. Contact via Call/Message for premium companion services.`,
     "address": {
       "@type": "PostalAddress",
       "addressLocality": location,
@@ -283,15 +283,15 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
                    {customDescription || (
                      isMassage ? (
                        <>
-                         Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Massage Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Massage Therapist in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Massage Therapist WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
+                         Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Massage Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Massage Therapist in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Massage Therapist Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
                        </>
                      ) : isBoy ? (
                        <>
-                         Hello, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Call Boy / Male Escort Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Call Boy in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Boy WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
+                         Hello, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Call Boy / Male Escort Service in {location}</strong>. If you are looking for a <strong className="font-bold">Verified Call Boy in {location}</strong> who values your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Boy Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
                        </>
                      ) : (
                        <>
-                         Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Escort Service in {location}</strong>. If you are looking for <strong className="font-bold">Verified Call Girls in {location}</strong> who value your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Girl WhatsApp Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
+                         Hello gentlemen, I am <strong className="font-bold">{name}</strong>, a premium companion offering top-class <strong className="font-bold">Escort Service in {location}</strong>. If you are looking for <strong className="font-bold">Verified Call Girls in {location}</strong> who value your privacy, I am the perfect choice. You can contact me directly on my <strong className="font-bold">Call Girl Number</strong> for booking. I offer both incall and outcall services with <strong className="font-bold">Cash on Delivery</strong>—absolutely no advance payments required. Let&apos;s spend a memorable time together!
                        </>
                      )
                    )}

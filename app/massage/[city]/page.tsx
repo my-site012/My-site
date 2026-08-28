@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
 import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
-import { blogPosts } from "@/lib/data/blogPosts";
 
 const allLocationSlugs = Object.values(locations).flat().map(city => getCitySlug(city));
 
@@ -56,21 +55,62 @@ function parseSpintax(text: string, seed: number): string {
 function getMassageSeoData(cityName: string, state: string) {
   const hash = getCityHash(cityName);
 
-  const metaTitleTemplate = hash % 2 === 0
-    ? `Massage Service in ${cityName} ❤️ Full Body Spa & Female to Male Massage`
-    : `${cityName} Massage Girls | Best Body Massage Parlour Near You`;
+  const massageMetaTitles = [
+    `Massage Service in ${cityName} | Full Body Spa & Female to Male Massage`,
+    `${cityName} Massage Girls | Best Body Massage Parlour Near You`,
+    `Verified Massage in ${cityName} | B2B Body Spa (Cash on Delivery)`,
+    `Top Female to Male Massage in ${cityName} | Direct Contact 24/7`,
+    `Best Body Massage in ${cityName} | Professional Therapists (COD)`,
+    `Full Body Massage in ${cityName} | Home & Hotel Doorstep Delivery`,
+    `${cityName} Massage Parlour | Independent Female Masseuses (No Advance)`,
+    `Sensual B2B Massage in ${cityName} | Relaxing Body to Body Spa`,
+    `Hire Massage Therapist in ${cityName} | Direct Contact Number COD`,
+    `24/7 Massage Service in ${cityName} | Genuine Therapists & Real Photos`,
+    `Aromatherapy & Body Spa in ${cityName} | Cash on Delivery Massage`,
+    `VIP Massage Service in ${cityName} | Discreet Female Massager COD`,
+    `Happy Ending Massage in ${cityName} | Private & Safe Companion Spa`,
+    `${cityName} Female Massage Service | Doorstep Outcall & Parlour`,
+    `Relaxing Body Massage in ${cityName} | Verified Female Therapist COD`,
+    `Deep Tissue & Swedish Massage in ${cityName} | Cash On Delivery`,
+    `${cityName} Body to Body Massage | Instant Booking 24/7`,
+    `Independent Massage Girls in ${cityName} | Zero Advance Payment COD`,
+    `Executive Spa & Massage Service in ${cityName} | Verified Profiles`,
+    `Book Full Body Massage in ${cityName} | 100% Privacy & Cash Payment`
+  ];
 
-  const metaDescriptionTemplate = hash % 3 === 0
-    ? `Book verified full body massage service in ${cityName}. Professional female to male massage at home or hotel. Sensual & relaxing body spa with cash on delivery.`
-    : `Find top-rated massage parlour in ${cityName} with direct WhatsApp contact. Full body, B2B, & relaxation massage available 24/7 in ${cityName}.`;
+  const massageMetaDescriptions = [
+    `Book verified full body massage service in ${cityName}. Professional female to male massage at home or hotel. Sensual & relaxing body spa with cash on delivery.`,
+    `Find top-rated massage parlour in ${cityName} with direct contact. Full body, B2B, & relaxation massage available 24/7 in ${cityName}.`,
+    `Looking for female to male massage in ${cityName}? Connect directly with verified massage therapists for deep tissue and B2B massage with zero advance.`,
+    `Top body massage in ${cityName} with independent female therapists. Direct booking, discreet hotel room delivery, and cash on delivery.`,
+    `Discover relaxing full body massage and aromatherapy spa in ${cityName}. 100% verified therapists, real photos, and strict cash payment on arrival.`,
+    `Hire professional massage therapist in ${cityName} today. Home and hotel doorstep massage delivery across ${cityName} with zero upfront charges.`,
+    `Sensual B2B and full body massage service in ${cityName}. Connect via direct phone number for immediate appointment. Pay cash after service.`,
+    `Explore best massage parlours and independent masseuses in ${cityName}. 100% privacy, authentic profiles, and convenient cash on delivery.`,
+    `24/7 home delivery massage service in ${cityName}. Trained female therapists offering relaxing body spa and happy ending sessions with complete discretion.`,
+    `Book certified massage service in ${cityName} with direct phone access. No agency markup, no prepayment, safe cash settlement after massage.`,
+    `Premier directory for body massage in ${cityName}. Female to male spa, Swedish therapy, and private hotel outcall service across ${state}.`,
+    `Verified ${cityName} massage service directory. Browse real photos of professional masseuses and enjoy relaxing full body therapy with zero deposit.`,
+    `Discreet and confidential massage service in ${cityName}. Connect with independent female therapists for hotel room and home sessions 24/7.`,
+    `Get direct contact for top massage therapists in ${cityName}. Relaxing B2B spa, full body therapy, and authentic companions with cash payment.`,
+    `Experience therapeutic and sensual massage in ${cityName}. Safe in-person service with verified female providers. No online advance payment required.`,
+    `Top-rated female to male body massage in ${cityName}. Professional therapists offering deep relaxation head-to-toe with 100% privacy and COD.`,
+    `Direct ${cityName} massage parlour contact. Verified independent masseuses available for incall and outcall bookings with zero booking fees.`,
+    `Relax and rejuvenate with verified massage service in ${cityName}. Direct phone communication with independent providers across ${cityName}.`,
+    `Find trusted massage therapists in ${cityName} on CallGirl4U. Real photos, verified phone numbers, and guaranteed Cash on Delivery.`,
+    `Book executive body spa and female to male massage in ${cityName}. Prompt 30-minute outcall to major hotels and residences with zero advance fee.`
+  ];
 
-  const metaKeywords = `Massage in ${cityName}, ${cityName} Massage Service, Body Massage ${cityName}, Female to Male Massage ${cityName}, Massage Parlour ${cityName}, Full Body Massage ${cityName}, Spa in ${cityName}`;
+  const metaTitleTemplate = massageMetaTitles[hash % massageMetaTitles.length];
+  const metaDescriptionTemplate = massageMetaDescriptions[(hash + 3) % massageMetaDescriptions.length];
+
+  const metaKeywords = `Massage in ${cityName}, ${cityName} Massage Service, Body Massage ${cityName}, Female to Male Massage ${cityName}, Massage Parlour ${cityName}, Full Body Massage ${cityName}, Spa in ${cityName}, B2B Massage ${cityName}`;
 
   const h1Template = hash % 2 === 0
-    ? `Full Body Massage in ${cityName} ❤️ Best Spa & Massage Service`
+    ? `Full Body Massage in ${cityName} | Best Spa & Massage Service`
     : `Massage Service in ${cityName} | Female to Male Body Spa`;
 
-  const heroSubtextTemplate = `{Discover|Find|Book|Explore} {verified|genuine|professional|trained} <strong class="font-bold">Massage Service in ${cityName}</strong>. {Connect directly|Get in touch} with {experienced|skilled|trained} massage therapists via {direct WhatsApp|phone number}. {Our directory features|Browse through} {relaxing full body massages, sensual B2B massage, aromatherapy spa, and home massage delivery|body-to-body spa, deep tissue massage, and outcall home massage services} available {24/7|round-the-clock} in ${cityName}. All {sessions|bookings} are {based on|conducted via} <strong class="font-bold">Cash on Delivery</strong> — {no advance payment required|zero deposit needed}.`;
+  const heroSubtextTemplate = `{Discover|Find|Book|Explore} {verified|genuine|professional|trained} <strong class="font-bold">Massage Service in ${cityName}</strong>. {Connect directly|Get in touch} with {experienced|skilled|trained} massage therapists via direct phone number. {Our directory features|Browse through} {relaxing full body massages, sensual B2B massage, aromatherapy spa, and home massage delivery|body-to-body spa, deep tissue massage, and outcall home massage services} available {24/7|round-the-clock} in ${cityName}. All {sessions|bookings} are {based on|conducted via} <strong class="font-bold">Cash on Delivery</strong> — {no advance payment required|zero deposit needed}.`;
 
   const introHeading = hash % 2 === 0
     ? `Best Massage Parlour in ${cityName} — Verified & Trusted`
@@ -92,14 +132,14 @@ function getMassageSeoData(cityName: string, state: string) {
   const bookingText = `<p class="mb-4">{Booking a {professional|verified} massage in ${cityName} is {easy and secure|simple and safe} through our directory:}</p>
 <ol class="list-decimal pl-5 space-y-2">
   <li><strong>{Browse Profiles|Select a Therapist}:</strong> {View verified massage therapist profiles with photos, rates, and service descriptions.|Choose from our active listing of trained massage professionals in ${cityName}.}</li>
-  <li><strong>{Direct Contact|WhatsApp Connect}:</strong> {Use the direct WhatsApp number to chat with the therapist and discuss your preferred massage type, duration, and location.|Instantly contact the massage provider via phone or WhatsApp without any middlemen.}</li>
+  <li><strong>{Direct Contact|Phone Connect}:</strong> {Use the direct phone number to speak with the therapist and discuss your preferred massage type, duration, and location.|Instantly contact the massage provider via phone without any middlemen.}</li>
   <li><strong>{Confirm Booking|Schedule Session}:</strong> {Agree on the session time, location (home/hotel/parlour), and service package. Never send any advance payment online.|Finalize the massage appointment details without any online transfer of funds.}</li>
   <li><strong>{Enjoy & Pay Cash|Cash on Delivery}:</strong> {Enjoy your full relaxation massage session and pay directly in cash to the therapist after completing the service.|Pay the agreed amount face-to-face in cash only after your massage session is completed.}</li>
 </ol>
 <p class="mt-4">{This secure, cash-only process ensures you enjoy genuine massage services without any risk of online scam or fraud.}</p>`;
 
   const areasHeading = `Massage Service Coverage in ${cityName}`;
-  const areasText = `{Our verified directory covers all major areas, hotels, and residential localities across <strong class="font-bold">${cityName}</strong> for home and hotel massage delivery. Whether you are staying at a {5-star luxury hotel|guest house|private residence}, our massage therapists can provide {doorstep service|room service} directly. Popular areas for massage home delivery include {business districts, tourist hotspots, and major transit areas|premium hotel zones, corporate hubs, and residential neighborhoods}. Most independent massage providers in ${cityName} can reach your location within {30-45 minutes|an hour}. Always {share your complete address|confirm location details} directly with the therapist via WhatsApp for a smooth, on-time service. Our ${state} region directory ensures you find a {nearby professional|local massage expert} wherever you are in the city.}`;
+  const areasText = `{Our verified directory covers all major areas, hotels, and residential localities across <strong class="font-bold">${cityName}</strong> for home and hotel massage delivery. Whether you are staying at a {5-star luxury hotel|guest house|private residence}, our massage therapists can provide {doorstep service|room service} directly. Popular areas for massage home delivery include {business districts, tourist hotspots, and major transit areas|premium hotel zones, corporate hubs, and residential neighborhoods}. Most independent massage providers in ${cityName} can reach your location within {30-45 minutes|an hour}. Always {share your complete address|confirm location details} directly with the therapist for a smooth, on-time service. Our ${state} region directory ensures you find a {nearby professional|local massage expert} wherever you are in the city.}`;
 
   const rateHeading = `Massage Service Price List in ${cityName}`;
   const rateIntro = `{The rates for massage services in <strong class="font-bold">${cityName}</strong> vary based on service type, duration, and therapist experience. The following is an estimated price guide. Always confirm actual rates directly with the provider before booking. Strictly follow Cash on Delivery — never pay any advance booking fee, medical card charge, or transport cost online.}`;
@@ -124,25 +164,25 @@ function getMassageSeoData(cityName: string, state: string) {
     },
     {
       q: `{Can I get massage service delivered to my hotel in ${cityName}?|Is home/hotel outcall massage available?}`,
-      a: `{Yes. Most massage providers in ${cityName} offer hotel and home outcall services throughout the city and nearby areas. Confirm your location directly via WhatsApp.|Outcall home and hotel delivery massage is available across ${cityName} and ${state}. Contact the therapist directly to arrange.}`
+      a: `{Yes. Most massage providers in ${cityName} offer hotel and home outcall services throughout the city and nearby areas. Confirm your location directly with the provider.|Outcall home and hotel delivery massage is available across ${cityName} and ${state}. Contact the therapist directly to arrange.}`
     }
   ];
 
-  const hinglishText = `{<p class="mb-4"><strong>${cityName} Massage Service</strong> ki talash ab aasaan ho gayi hai. Hamari website par aapko milenge <strong>verified aur professional massage therapists</strong> ke direct <strong>WhatsApp numbers</strong>. Agar aap ${cityName} mein hain aur ek relaxing full body massage ya B2B massage ka experience lena chahte hain, toh aap bilkul sahi jagah par hain.</p>
+  const hinglishText = `{<p class="mb-4"><strong>${cityName} Massage Service</strong> ki talash ab aasaan ho gayi hai. Hamari website par aapko milenge <strong>verified aur professional massage therapists</strong> ke direct phone numbers. Agar aap ${cityName} mein hain aur ek relaxing full body massage ya B2B massage ka experience lena chahte hain, toh aap bilkul sahi jagah par hain.</p>
 
 <p class="mb-4">Hamari directory par aapko milegi poori variety jaise <strong>Full Body Massage</strong>, <strong>Body to Body Massage</strong>, <strong>Aromatherapy Spa</strong>, aur <strong>Happy Ending Massage</strong>. Yahan sabhi massage providers apni profile khud manage karti hain, isliye kisi middleman ya agency ko extra commission dene ki bilkul zarurat nahi hai.</p>
 
 <p class="mb-4">Sabse zaroori baat — hamesha <strong>Cash on Delivery</strong> ka use karein. Internet par bahut se fraud log booking fee, medical card charges ya transport charges ke naam par advance payment mangte hain. Hum aapko sakht salah dete hain ki kisi ko bhi online advance payment na karein. Massage session complete hone ke baad hi cash payment karein.</p>
 
-<p class="mb-4">Aap apne hotel ya ghar par home delivery massage book kar sakte hain. ${cityName} ke sabhi major areas mein 24 ghante service available hai. Bas profile select karein, WhatsApp karein aur apna appointment confirm karein. Aapki privacy aur discretion hamari top priority hai.</p>
+<p class="mb-4">Aap apne hotel ya ghar par home delivery massage book kar sakte hain. ${cityName} ke sabhi major areas mein 24 ghante service available hai. Bas profile select karein aur apna appointment confirm karein. Aapki privacy aur discretion hamari top priority hai.</p>
 
-<p class="mb-4">Hum regularly apna database update karte hain taaki aapko ${cityName} mein fresh aur active massage profiles milein. Sahi companion choose karein, safe rahen, aur <strong>${cityName} massage service</strong> ka premium experience enjoy karein bina kisi online fraud ke darr ke!</p>|<p class="mb-4">Agar aap <strong>${cityName} mein best massage service</strong> dhundh rahe hain, toh hamara portal aapka sabse bada helper hai. Yahan par aapko milenge experienced <strong>female massage therapists</strong> ke direct <strong>WhatsApp numbers</strong> jo bina kisi registration ke accessible hain.</p>
+<p class="mb-4">Hum regularly apna database update karte hain taaki aapko ${cityName} mein fresh aur active massage profiles milein. Sahi companion choose karein, safe rahen, aur <strong>${cityName} massage service</strong> ka premium experience enjoy karein bina kisi online fraud ke darr ke!</p>|<p class="mb-4">Agar aap <strong>${cityName} mein best massage service</strong> dhundh rahe hain, toh hamara portal aapka sabse bada helper hai. Yahan par aapko milenge experienced <strong>female massage therapists</strong> ke direct contact numbers jo bina kisi registration ke accessible hain.</p>
 
 <p class="mb-4">Hamare ${cityName} massage directory mein aapko milega — <strong>Full Body Massage</strong>, sensual <strong>B2B Massage</strong>, traditional <strong>Indian Spa</strong>, aur <strong>Happy Ending Massage</strong> — sabhi services ek hi jagah par. Sabhi profiles manually verified hain aur regularly update kiye jaate hain.</p>
 
 <p class="mb-4">Kisi bhi advance payment se bachein. Hamari directory par listed koi bhi genuine therapist advance booking fee nahi maangti. Hum hamesha <strong>Cash on Delivery</strong> ko promote karte hain jisse aapka paisa aur privacy dono 100% safe rehte hain.</p>
 
-<p class="mb-4">${cityName} ke premium hotels ya aapke ghar par doorstep massage delivery available hai. Apni pasandida profile choose karein, seedha WhatsApp karein aur apna relaxation session enjoy karein. Fraud profile report karne ke liye listing par diye gaye report button ka use karein.</p>
+<p class="mb-4">${cityName} ke premium hotels ya aapke ghar par doorstep massage delivery available hai. Apni pasandida profile choose karein, seedha call/message karein aur apna relaxation session enjoy karein. Fraud profile report karne ke liye listing par diye gaye report button ka use karein.</p>
 
 <p class="mb-4">Hamara aim hai aapko ${cityName} mein ek safe, premium, aur trusted massage experience dena — bina kisi jhanjhat ke. Verified profiles browse karein aur ek relaxing companion ke sath full satisfaction enjoy karein!</p>}`;
 
@@ -192,7 +232,7 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   // Extended cities — different meta wording
   if (isExtendedCity(city)) {
     title = `Massage Service in ${cityName} | Body Spa | CallGirl4U`;
-    description = `Find verified massage therapists in ${cityName} with direct WhatsApp contact. Full body massage, B2B spa, and home delivery available in ${cityName}, ${state}. Cash on delivery only.`;
+    description = `Find verified massage therapists in ${cityName} with direct contact. Full body massage, B2B spa, and home delivery available in ${cityName}, ${state}. Cash on delivery only.`;
     keywords = `Massage in ${cityName}, ${cityName} Massage Service, Body Massage ${cityName}, Female Massage ${cityName}, Spa ${cityName}`;
   } else {
     const seoData = getMassageSeoData(cityName, state);
@@ -210,7 +250,19 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
     title,
     description,
     keywords,
-    robots: isPage2 ? { index: false, follow: true } : undefined,
+    robots: isPage2 
+      ? { index: false, follow: true } 
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
     alternates: {
       canonical: `https://callgirl4u.com/massage/${city}`,
     }
@@ -229,14 +281,6 @@ export default async function MassageCityPage({ params, searchParams }: { params
   const cityName = city.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
   const state = getStateFromCity(city) || "India";
 
-  // Find related blog posts for this city or category
-  const relatedBlogs = blogPosts
-    .filter(post => post.category === "massage" && (post.citySlug === city || getCitySlug(post.cityName) === city))
-    .slice(0, 3);
-  
-  const fallbackBlogs = relatedBlogs.length > 0 
-    ? relatedBlogs 
-    : blogPosts.filter(post => post.category === "massage").slice(0, 3);
 
   const seoData = getMassageSeoData(cityName, state);
   const isExt = isExtendedCity(city);
@@ -356,7 +400,7 @@ export default async function MassageCityPage({ params, searchParams }: { params
         "name": `Is massage service in ${cityName} available at home or hotel?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `Yes. Most massage therapists listed in ${cityName} offer both home delivery and hotel room service. You can confirm the location directly with the therapist via WhatsApp. Services are available 24/7.`
+          "text": `Yes. Most massage therapists listed in ${cityName} offer both home delivery and hotel room service. You can confirm the location directly with the provider. Services are available 24/7.`
         }
       },
       {
@@ -406,7 +450,7 @@ export default async function MassageCityPage({ params, searchParams }: { params
             <>
               <h1 className="text-3xl text-gray-900 mb-4">Massage Service Available in {cityName}</h1>
               <p className="text-gray-600 text-lg">
-                Find <strong>verified massage therapists in {cityName}</strong>, {state} with direct WhatsApp contact.
+                Find <strong>verified massage therapists in {cityName}</strong>, {state} with direct contact.
                 Full body massage, B2B spa &amp; home delivery available 24/7. <strong>Cash on delivery</strong> — no advance payment.
               </p>
             </>
@@ -596,82 +640,6 @@ export default async function MassageCityPage({ params, searchParams }: { params
           })}
         </div>
 
-        {/* Yellow SEO Tag Cloud */}
-        <div className="bg-[#f7d046] text-gray-950 p-6 rounded-xl border border-yellow-400/30 shadow-sm">
-          <div className="text-xs md:text-sm font-medium leading-relaxed text-justify tracking-wide">
-            {([
-              `Massage in ${cityName}`,
-              `${cityName} Massage Service`,
-              `Body Massage ${cityName}`,
-              `Spa in ${cityName}`,
-              `Female to Male Massage ${cityName}`,
-              `B2B Massage ${cityName}`,
-              `Happy Ending Massage ${cityName}`,
-              `Home Massage ${cityName}`,
-              `Hotel Massage ${cityName}`,
-              `Full Body Massage ${cityName}`,
-              `Massage Parlour in ${cityName}`,
-              `Male to Female Massage ${cityName}`,
-              `Sensual Massage ${cityName}`,
-              `Massage Service near me`,
-              `Therapists in ${cityName}`,
-              `Swedish Massage ${cityName}`,
-              `Deep Tissue Massage ${cityName}`,
-              `Aromatherapy Massage ${cityName}`,
-              `Thai Massage ${cityName}`,
-              `Massage near me`,
-              `Massage Center in ${cityName}`,
-              `Best Massage in ${cityName}`,
-              `Cheap Massage in ${cityName}`,
-              `Massage rates in ${cityName}`,
-              `VIP Massage ${cityName}`,
-              `Verified Massage Parlours ${cityName}`,
-              `Independent Massage Therapist ${cityName}`,
-              `Private Massage ${cityName}`,
-              `Outcall Massage ${cityName}`,
-              `Incall Massage ${cityName}`,
-              `Massage Contact Number ${cityName}`,
-              `Massage WhatsApp Number`,
-              `Adult Massage ${cityName}`,
-              `Erotic Massage ${cityName}`,
-              `Lomi Lomi Massage ${cityName}`,
-              `Hot Stone Massage ${cityName}`,
-              `Sports Massage ${cityName}`,
-              `Foot Massage ${cityName}`,
-              `Head Massage ${cityName}`,
-              `Back Massage ${cityName}`,
-              `Massage for Men in ${cityName}`,
-              `Massage for Women in ${cityName}`,
-              `Couple Massage ${cityName}`,
-              `Massage booking ${cityName}`,
-              `Relaxing Massage ${cityName}`,
-              `Sandwich Massage ${cityName}`,
-              `Nuru Massage ${cityName}`,
-              `Nurru Massage in ${cityName}`,
-              `Body to Body Massage ${cityName}`,
-              `Full Body Massage Center ${cityName}`,
-              `Top Massage Spa ${cityName}`,
-              `Massage therapy ${cityName}`,
-              `Traditional Massage ${cityName}`,
-              `Best Spa Service ${cityName}`,
-              `Spa Massage Center ${cityName}`,
-            ] as string[]).map((tag, idx, arr) => (
-              <span key={idx}>
-                <Link prefetch={false} href={`/massage/${city}`}
-                  title={tag}
-                  className="hover:underline hover:text-black/80 transition-colors">
-                  {tag}
-                </Link>
-                {idx < arr.length - 1 && (
-                  <span className="mx-2 text-gray-950 font-normal select-none" aria-hidden>
-                    ☛
-                  </span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* Nearby Cities / Localities in State */}
         {state && locations[state] && locations[state].length > 1 && (
           <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
@@ -693,30 +661,6 @@ export default async function MassageCityPage({ params, searchParams }: { params
           </div>
         )}
 
-        {/* Recent Blogs & Guides */}
-        {fallbackBlogs.length > 0 && (
-          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
-              Latest Massage Guides & Articles
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {fallbackBlogs.map(post => (
-                <div key={post.slug} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-                  <div className="p-5 flex flex-col h-full">
-                    <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
-                    <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
-                      <Link prefetch={false} href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h4>
-                    <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
-                    <Link prefetch={false} href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
-                      Read Article →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Cross-Service Interlinking Section */}
         <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">

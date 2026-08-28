@@ -603,3 +603,44 @@ export function isExtendedCity(citySlug: string): boolean {
   return EXTENDED_CITIES.some(c => getCitySlug(c) === citySlug);
 }
 
+// Most popular cities in India
+export const POPULAR_CITIES: string[] = [
+  "Delhi",
+  "Mumbai",
+  "Bengaluru",
+  "Hyderabad",
+  "Kolkata",
+  "Chennai",
+  "Pune",
+  "Ahmedabad",
+  "Jaipur",
+  "Goa",
+  "Chandigarh",
+  "Lucknow",
+  "Gurgaon",
+  "Noida",
+  "Indore",
+  "Bhopal",
+  "Patna",
+  "Kochi",
+  "Surat",
+  "Bhubaneswar",
+  "Guwahati",
+  "Dehradun",
+  "Ludhiana",
+  "Amritsar",
+  "Agra",
+  "Varanasi",
+  "Visakhapatnam",
+  "Coimbatore",
+  "Vadodara",
+  "Nagpur",
+  "Ranchi",
+  "Mysore",
+  "Raipur",
+  "Jodhpur",
+  "Udaipur",
+  "Shimla",
+  "Pondicherry"
+];
+

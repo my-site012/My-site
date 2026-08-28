@@ -6,7 +6,6 @@ import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
 import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
 import { notFound } from "next/navigation";
-import { blogPosts } from "@/lib/data/blogPosts";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
 export const revalidate = 3600;
@@ -92,8 +91,8 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   // Extended cities — natural meta wording
   if (isExt) {
     keywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Cash on Delivery`;
-    title = `Call Girls in ${cityName} | Direct Contact | CallGirl4U`;
-    description = `Find verified call girls in ${cityName} with direct WhatsApp contact. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`;
+    title = `Call Girls in ${cityName} | Direct Number | CallGirl4U`;
+    description = `Find verified call girls in ${cityName} with direct number. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`;
   } else {
     // For DMCA alternate slugs (e.g. jaipur-2), use original city slug as SEO seed
     const seoSeed = CITY_DISPLAY_OVERRIDES[city]
@@ -121,7 +120,19 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
     title,
     description,
     keywords,
-    robots: isPage2 ? { index: false, follow: true } : undefined,
+    robots: isPage2 
+      ? { index: false, follow: true } 
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
     alternates: {
       canonical: `https://callgirl4u.com/call-girls/${canonicalSlug}`,
     }
@@ -160,14 +171,6 @@ export default async function CityPage({ params, searchParams }: { params: Promi
   const cityName = getDisplayCityName(city);
   const state = getStateFromCity(city) || "India";
 
-  // Find related blog posts for this city or category
-  const relatedBlogs = blogPosts
-    .filter(post => post.category === "call-girls" && (post.citySlug === city || getCitySlug(post.cityName) === city))
-    .slice(0, 3);
-  
-  const fallbackBlogs = relatedBlogs.length > 0 
-    ? relatedBlogs 
-    : blogPosts.filter(post => post.category === "call-girls").slice(0, 3);
   
   const seoDataKey = CITY_DISPLAY_OVERRIDES[city]
     ? city.replace(/-\d+$/, "") // e.g. jaipur-2 -> jaipur
@@ -328,7 +331,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
             <>
               <h1 className="text-3xl text-gray-900 mb-4">Call Girls Available in {cityName}</h1>
               <p className="text-gray-600 text-lg">
-                Find <strong>verified call girls in {cityName}</strong>, {state} with direct WhatsApp contact.
+                Find <strong>verified call girls in {cityName}</strong>, {state} with direct number.
                 Genuine female companions available 24/7. <strong>Cash on delivery</strong> — no advance payment required.
               </p>
             </>
@@ -354,7 +357,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
                     <Link prefetch={false} key={area}
                       href={`/call-girls/${getCitySlug(area)}`}
                       className="text-gray-600 hover:text-red-600 hover:bg-red-50 px-3 py-2 rounded-lg transition text-sm font-medium">
-                      {area} Call Girls
+                      {area} Escorts
                     </Link>
                   ))}
                 </div>
@@ -505,120 +508,9 @@ export default async function CityPage({ params, searchParams }: { params: Promi
             </div>
           ))}
         </div>
-
-        <div className="bg-red-50 p-6 rounded-xl border border-red-200 my-8 shadow-sm">
-          <div className="text-gray-800 font-medium leading-relaxed italic space-y-4" dangerouslySetInnerHTML={{ __html: seoData.hindiText }} />
-        </div>
       </article>
 
-      {/* Tags Section */}
       <section className="max-w-4xl mx-auto px-4 pb-12">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Tags</h2>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {([
-            `Escorts in ${cityName}`,
-            `${cityName} Escorts`,
-            `Independent Escorts ${cityName}`,
-            `Escort Directory ${cityName}`,
-            `Companions in ${cityName}`,
-            `VIP Escorts ${cityName}`,
-            `Verified Profiles ${cityName}`,
-            `Independent Companions ${cityName}`,
-            `Adult Classifieds ${cityName}`,
-            `Verified Directory ${cityName}`,
-          ] as string[]).map((tag, i) => {
-            const colors = [
-              'bg-red-600','bg-orange-500','bg-blue-700','bg-green-700',
-              'bg-gray-800','bg-red-700','bg-orange-600','bg-blue-600',
-              'bg-green-600','bg-rose-600','bg-indigo-700','bg-amber-600',
-            ];
-            return (
-              <Link prefetch={false} key={i}
-                href={`/call-girls/${city}`}
-                title={tag}
-                className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
-                {tag} <span aria-hidden>&#10148;</span>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Yellow SEO Tag Cloud */}
-        <div className="bg-[#f7d046] text-gray-950 p-6 rounded-xl border border-yellow-400/30 shadow-sm">
-          <div className="text-xs md:text-sm font-medium leading-relaxed text-justify tracking-wide">
-            {([
-              `Call Girl In ${cityName}`,
-              `Call Girl Near Me`,
-              `Call Girl Number In ${cityName}`,
-              `Escort Service In ${cityName}`,
-              `Call Girls In ${cityName}`,
-              `Escort Service ${cityName}`,
-              `${cityName} Escorts`,
-              `${cityName} Escort Service`,
-              `Call Girl Contact Number ${cityName}`,
-              `Call Girl Price ${cityName}`,
-              `Call Girls Near Me`,
-              `${cityName} Escort`,
-              `Escorts Service In ${cityName}`,
-              `Low Price Call Girl in ${cityName}`,
-              `Call Girls ${cityName}`,
-              `Call Girls Number ${cityName}`,
-              `Escort In ${cityName}`,
-              `Escorts In ${cityName}`,
-              `Call Girl Pics ${cityName}`,
-              `Escort Girl In ${cityName}`,
-              `Call Girls Contact Number ${cityName}`,
-              `Call Girls Rate ${cityName}`,
-              `Call Girl Service ${cityName}`,
-              `Call Girls Pics ${cityName}`,
-              `Best Escort Service ${cityName}`,
-              `Low Price Call Girls ${cityName}`,
-              `${cityName} Call Girl Service`,
-              `Cheap Call Girl Near Me`,
-              `Call Girls Price ${cityName}`,
-              `Call Girl In ${cityName}`,
-              `Escort Near Me`,
-              `${cityName} Call Girl Number`,
-              `Escort ${cityName}`,
-              `Photo Call Girls ${cityName}`,
-              `Call Girls Low Price ${cityName}`,
-              `Call Girls Service In ${cityName}`,
-              `Near me Call Girl`,
-              `Call Girls Photo ${cityName}`,
-              `Call Girl Phone Number ${cityName}`,
-              `Escort Services In ${cityName}`,
-              `Low Rate Call Girls ${cityName}`,
-              `Call Girl Low Rate ${cityName}`,
-              `Call Girl Escort Service ${cityName}`,
-              `Cheap Rate Call Girls ${cityName}`,
-              `Night Call Girl ${cityName}`,
-              `Nearest Call Girl ${cityName}`,
-              `Escorts Near Me`,
-              `Call Girl Ka Number ${cityName}`,
-              `Low Cost Call Girls ${cityName}`,
-              `Escort Call Girl ${cityName}`,
-              `Near By Call Girl ${cityName}`,
-              `Call Girl Services ${cityName}`,
-              `Call Girls Numbers ${cityName}`,
-              `Call Girl Agent Number ${cityName}`,
-              `Cheapest Call Girl ${cityName}`,
-            ] as string[]).map((tag, idx, arr) => (
-              <span key={idx}>
-                <Link prefetch={false} href={`/call-girls/${city}`}
-                  title={tag}
-                  className="hover:underline hover:text-black/80 transition-colors">
-                  {tag}
-                </Link>
-                {idx < arr.length - 1 && (
-                  <span className="mx-2 text-gray-950 font-normal select-none" aria-hidden>
-                    ☛
-                  </span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* Nearby Cities / Localities in State */}
         {state && locations[state] && locations[state].length > 1 && (
           <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
@@ -640,30 +532,6 @@ export default async function CityPage({ params, searchParams }: { params: Promi
           </div>
         )}
 
-        {/* Recent Blogs & Guides */}
-        {fallbackBlogs.length > 0 && (
-          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
-              Latest Call Girl Guides & Articles
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {fallbackBlogs.map(post => (
-                <div key={post.slug} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-                  <div className="p-5 flex flex-col h-full">
-                    <span className="text-[10px] uppercase font-bold text-red-600 tracking-wider mb-2 block">{post.readTime || "5 min read"}</span>
-                    <h4 className="font-bold text-gray-900 text-sm mb-2 hover:text-red-600 line-clamp-2">
-                      <Link prefetch={false} href={`/blog/${post.slug}`}>{post.title}</Link>
-                    </h4>
-                    <p className="text-gray-500 text-xs line-clamp-3 mb-4 leading-relaxed">{post.excerpt}</p>
-                    <Link prefetch={false} href={`/blog/${post.slug}`} className="text-red-600 text-xs font-bold uppercase mt-auto hover:text-red-700">
-                      Read Article →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Cross-Service Interlinking Section */}
         <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">

@@ -27,6 +27,17 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
     title: `Call Boys in ${stateName} | CallGirl4U`,
     description: `Discover handsome, charming call boys across all major cities in ${stateName}. Browse verified male companion profiles — discreet, professional, and available 24/7. No advance payment required.`,
     keywords: `call boy in ${stateName}, male companion ${stateName}, gigolo service ${stateName}, male escort ${stateName}, playboy ${stateName}`,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     alternates: {
       canonical: `https://callgirl4u.com/call-boys/state/${state}`,
     }
@@ -237,7 +248,7 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
             <h2 className="text-2xl mb-6">Frequently Asked Questions — Call Boys in {stateName}</h2>
             <div className="space-y-4 mb-10">
               {[
-                { q: `How do I book a call boy in ${stateName}?`, a: `Browse profiles on our directory, choose a city in ${stateName}, select the companion you like, and contact them directly via Call or WhatsApp. No registration or advance payment needed.` },
+                { q: `How do I book a call boy in ${stateName}?`, a: `Browse profiles on our directory, choose a city in ${stateName}, select the companion you like, and contact them directly via phone. No registration or advance payment needed.` },
                 { q: `Are call boy profiles in ${stateName} genuine?`, a: `Yes. Every profile is manually reviewed and verified. Photos are confirmed to be real. We regularly audit all listings across ${stateName} for authenticity.` },
                 { q: `Is the service available 24/7 across ${stateName}?`, a: `Most companions listed across ${stateName} are available around the clock, including weekends and public holidays. Availability varies by individual.` },
                 { q: `What are the call boy rates in ${stateName}?`, a: `Rates differ by city and profile type. College boys start from ₹2,000/hour. VIP companions may charge ₹7,000 or more. Always confirm the rate directly with the companion before meeting.` },
@@ -280,58 +291,6 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
                   </Link>
                 );
               })}
-            </div>
-
-            {/* Yellow SEO Tag Cloud */}
-            <div className="bg-[#f7d046] text-gray-950 p-6 rounded-xl border border-yellow-400/30 shadow-sm">
-              <div className="text-xs md:text-sm font-medium leading-relaxed text-justify tracking-wide">
-                {([
-                  `Call Boy In ${stateName}`,
-                  `Call Boy Near Me`,
-                  `Call Boy Number In ${stateName}`,
-                  `Male Escort Service In ${stateName}`,
-                  `Call Boys In ${stateName}`,
-                  `${stateName} Call Boys`,
-                  `${stateName} Male Escort Service`,
-                  `Call Boy Contact Number ${stateName}`,
-                  `Call Boy Price ${stateName}`,
-                  `Call Boys Near Me`,
-                  `${stateName} Male Escort`,
-                  `Low Price Call Boy in ${stateName}`,
-                  `Call Boys ${stateName}`,
-                  `Call Boys Number ${stateName}`,
-                  `Male Escort In ${stateName}`,
-                  `Call Boy Pics ${stateName}`,
-                  `Call Boys Rate ${stateName}`,
-                  `Call Boy Service ${stateName}`,
-                  `Best Call Boy Service ${stateName}`,
-                  `Low Price Call Boys ${stateName}`,
-                  `${stateName} Call Boy Service`,
-                  `Cheap Call Boy Near Me`,
-                  `Call Boys Price ${stateName}`,
-                  `${stateName} Call Boy Number`,
-                  `Call Boy Photo ${stateName}`,
-                  `Night Call Boy ${stateName}`,
-                  `Nearest Call Boy ${stateName}`,
-                  `Call Boy Ka Number ${stateName}`,
-                  `Low Cost Call Boys ${stateName}`,
-                  `Call Boy Services ${stateName}`,
-                  `Cheapest Call Boy ${stateName}`,
-                ] as string[]).map((tag, idx, arr) => (
-                  <span key={idx}>
-                    <Link prefetch={false} href={`/call-boys/state/${state}`}
-                      title={tag}
-                      className="hover:underline hover:text-black/80 transition-colors">
-                      {tag}
-                    </Link>
-                    {idx < arr.length - 1 && (
-                      <span className="mx-2 text-gray-950 font-normal select-none" aria-hidden>
-                        ☛
-                      </span>
-                    )}
-                  </span>
-                ))}
-              </div>
             </div>
           </section>
         </main>

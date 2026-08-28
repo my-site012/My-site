@@ -29,8 +29,19 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
 
   return {
     title: customSeo.title || `Call Girls in ${stateName} State | Verified Companion Services`,
-    description: customSeo.description || `Find verified independent call girls across ${stateName}. Browse local female escort profiles with direct WhatsApp booking and cash on delivery.`,
+    description: customSeo.description || `Find verified independent call girls across ${stateName}. Browse local female escort profiles with direct booking and cash on delivery.`,
     keywords: seoData.metaKeywords,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     alternates: {
       canonical: `https://callgirl4u.com/call-girls/state/${state}`,
     }
@@ -259,120 +270,7 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
                 </div>
               ))}
             </div>
-
-            <div className="bg-red-50 p-6 rounded-xl border border-red-200 my-8 shadow-sm">
-              <div className="text-gray-800 font-medium leading-relaxed italic space-y-4" dangerouslySetInnerHTML={{ __html: seoData.hindiText }} />
-            </div>
           </article>
-
-          {/* Tags Section */}
-          <section className="mt-12">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Tags</h2>
-            <div className="flex flex-wrap gap-2 mb-6">
-              {([
-                `Escorts in ${stateName}`,
-                `${stateName} Escorts`,
-                `Independent Escorts ${stateName}`,
-                `Escort Directory ${stateName}`,
-                `Companions in ${stateName}`,
-                `VIP Escorts ${stateName}`,
-                `Verified Profiles ${stateName}`,
-                `Independent Companions ${stateName}`,
-                `Adult Classifieds ${stateName}`,
-                `Verified Directory ${stateName}`,
-              ] as string[]).map((tag, i) => {
-                const colors = [
-                  'bg-red-600','bg-orange-500','bg-blue-700','bg-green-700',
-                  'bg-gray-800','bg-red-700','bg-orange-600','bg-blue-600',
-                  'bg-green-600','bg-rose-600','bg-indigo-700','bg-amber-600',
-                ];
-                return (
-                  <Link prefetch={false} key={i}
-                    href={`/call-girls/state/${state}`}
-                    title={tag}
-                    className={`${colors[i % colors.length]} text-white text-xs font-medium px-3 py-1 rounded flex items-center gap-1 hover:opacity-80 transition-opacity`}>
-                    {tag} <span aria-hidden>&#10148;</span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            {/* Yellow SEO Tag Cloud */}
-            <div className="bg-[#f7d046] text-gray-950 p-6 rounded-xl border border-yellow-400/30 shadow-sm">
-              <div className="text-xs md:text-sm font-medium leading-relaxed text-justify tracking-wide">
-                {([
-                  `Call Girl In ${stateName}`,
-                  `Call Girl Near Me`,
-                  `Call Girl Number In ${stateName}`,
-                  `Escort Service In ${stateName}`,
-                  `Call Girls In ${stateName}`,
-                  `Escort Service ${stateName}`,
-                  `${stateName} Escorts`,
-                  `${stateName} Escort Service`,
-                  `Call Girl Contact Number ${stateName}`,
-                  `Call Girl Price ${stateName}`,
-                  `Call Girls Near Me`,
-                  `${stateName} Escort`,
-                  `Escorts Service In ${stateName}`,
-                  `Low Price Call Girl in ${stateName}`,
-                  `Call Girls ${stateName}`,
-                  `Call Girls Number ${stateName}`,
-                  `Escort In ${stateName}`,
-                  `Escorts In ${stateName}`,
-                  `Call Girl Pics ${stateName}`,
-                  `Escort Girl In ${stateName}`,
-                  `Call Girls Contact Number ${stateName}`,
-                  `Call Girls Rate ${stateName}`,
-                  `Call Girl Service ${stateName}`,
-                  `Call Girls Pics ${stateName}`,
-                  `Best Escort Service ${stateName}`,
-                  `Low Price Call Girls ${stateName}`,
-                  `${stateName} Call Girl Service`,
-                  `Cheap Call Girl Near Me`,
-                  `Call Girls Price ${stateName}`,
-                  `Call Girl In ${stateName}`,
-                  `Escort Near Me`,
-                  `${stateName} Call Girl Number`,
-                  `Escort ${stateName}`,
-                  `Photo Call Girls ${stateName}`,
-                  `Call Girls Low Price ${stateName}`,
-                  `Call Girls Service In ${stateName}`,
-                  `Near me Call Girl`,
-                  `Call Girls Photo ${stateName}`,
-                  `Call Girl Phone Number ${stateName}`,
-                  `Escort Services In ${stateName}`,
-                  `Low Rate Call Girls ${stateName}`,
-                  `Call Girl Low Rate ${stateName}`,
-                  `Call Girl Escort Service ${stateName}`,
-                  `Cheap Rate Call Girls ${stateName}`,
-                  `Night Call Girl ${stateName}`,
-                  `Nearest Call Girl ${stateName}`,
-                  `Escorts Near Me`,
-                  `Call Girl Ka Number ${stateName}`,
-                  `Low Cost Call Girls ${stateName}`,
-                  `Escort Call Girl ${stateName}`,
-                  `Near By Call Girl ${stateName}`,
-                  `Call Girl Services ${stateName}`,
-                  `Call Girls Numbers ${stateName}`,
-                  `Call Girl Agent Number ${stateName}`,
-                  `Cheapest Call Girl ${stateName}`,
-                ] as string[]).map((tag, idx, arr) => (
-                  <span key={idx}>
-                    <Link prefetch={false} href={`/call-girls/state/${state}`}
-                      title={tag}
-                      className="hover:underline hover:text-black/80 transition-colors">
-                      {tag}
-                    </Link>
-                    {idx < arr.length - 1 && (
-                      <span className="mx-2 text-gray-950 font-normal select-none" aria-hidden>
-                        ☛
-                      </span>
-                    )}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </section>
         </main>
       </div>
     </div>

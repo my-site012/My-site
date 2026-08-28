@@ -8,6 +8,17 @@ export const metadata: Metadata = {
   title: "Explore Call Boy Listings Across India",
   description: "Search verified call boy ads by city or state. Connect with independent call boys, premium services, and more.",
   keywords: "call boy india, indian call boys, adult classifieds india, premium call boys",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "https://callgirl4u.com/call-boys",
   },

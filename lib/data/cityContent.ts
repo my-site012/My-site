@@ -32,10 +32,10 @@ export interface CitySEOContent {
 export const cityContentData: Record<string, CitySEOContent> = {
   jaipur: {
     metaTitle: "Call Girls in Jaipur | Verified Independent Escort Directory",
-    metaDescription: "Find verified independent call girls in Jaipur. Direct WhatsApp contact, real photos, cash on delivery with zero advance payment in Pink City.",
+    metaDescription: "Find verified independent call girls in Jaipur. Direct direct contact, real photos, cash on delivery with zero advance payment in Pink City.",
     metaKeywords: "Jaipur Call Girls, Call Girl in Jaipur, Independent Companions Jaipur, Jaipur Escort Service, Malviya Nagar Escorts, Vaishali Nagar Call Girls",
     h1: "Call Girls in Jaipur — Verified Independent Companions",
-    heroSubtext: "Discover verified independent call girls across Jaipur including Malviya Nagar, Vaishali Nagar, Jagatpura, and Tonk Road. Browse real companion profiles with direct WhatsApp contact and strict Cash on Delivery booking.",
+    heroSubtext: "Discover verified independent call girls across Jaipur including Malviya Nagar, Vaishali Nagar, Jagatpura, and Tonk Road. Browse real companion profiles with direct direct contact and strict Cash on Delivery booking.",
     introHeading: "Verified Female Companions in Pink City Jaipur",
     introText: "Welcome to the official Jaipur directory for independent companions. Whether staying at luxury heritage hotels in C-Scheme or business stays near Sitapura and Sanganer, our platform connects you directly with genuine local models, college companions, and VIP escorts without agency intermediaries.",
     whyChooseHeading: "Why Book Companions in Jaipur via CallGirl4U",
@@ -44,7 +44,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
   <li><strong>100% Cash on Delivery:</strong> Pay in person only after meeting your companion in your hotel room or residence.</li>
   <li><strong>No Online Deposits:</strong> Protect your money by avoiding prepaid card scams, medical fee traps, or upfront booking charges.</li>
   <li><strong>Local Coverage:</strong> Fast 30-minute outcall delivery across Raja Park, Mansarovar, MI Road, and Airport zones.</li>
-  <li><strong>Direct WhatsApp Access:</strong> Chat directly with self-managed independent providers.</li>
+  <li><strong>Direct direct access:</strong> Chat directly with self-managed independent providers.</li>
 </ul>`,
     typesHeading: "Popular Companion Categories in Jaipur",
     typesText: `Explore diverse profiles in Jaipur:
@@ -56,7 +56,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     bookingHeading: "Steps to Book a Call Girl in Jaipur",
     bookingText: `<ol class="list-decimal pl-5 space-y-2">
   <li>Browse active Jaipur listings and select your favorite companion card.</li>
-  <li>Click the direct WhatsApp button to start chatting with the provider.</li>
+  <li>Click the direct Contact button to start chatting with the provider.</li>
   <li>Discuss meeting time, hotel/residential venue, and agreed session rate.</li>
   <li>Meet in person and complete payment in cash upon verification.</li>
 </ol>`,
@@ -72,28 +72,28 @@ export const cityContentData: Record<string, CitySEOContent> = {
       { q: "Do I need to pay any advance fee in Jaipur?", a: "No. Never pay any booking fee or deposit online. Pay cash face-to-face after meeting." },
       { q: "Which hotel areas are supported for outcall in Jaipur?", a: "Companions deliver outcall services to all major hotels in C-Scheme, MI Road, Tonk Road, Malviya Nagar, and Vaishali Nagar." }
     ],
-    hindiText: `<p class="mb-4"><strong>Jaipur Call Girl Directory:</strong> Jaipur (Pink City) me verified independent call girls aur companions ke saath connect karein. Direct WhatsApp contact aur zero advance payment policy ke saath 100% Cash on Delivery safe experience enjoy karein.</p>`,
+    hindiText: `<p class="mb-4"><strong>Jaipur Call Girl Directory:</strong> Jaipur (Pink City) me verified independent call girls aur companions ke saath connect karein. Direct direct contact aur zero advance payment policy ke saath 100% Cash on Delivery safe experience enjoy karein.</p>`,
     profiles: []
   },
 
   delhi: {
     metaTitle: "Call Girls in Delhi | Verified NCR Escort Directory",
-    metaDescription: "Find verified independent call girls in Delhi NCR. Direct WhatsApp contact, real photos, cash on delivery with zero advance payment across South Delhi, Connaught Place & Dwarka.",
+    metaDescription: "Find verified independent call girls in Delhi NCR. Direct direct contact, real photos, cash on delivery with zero advance payment across South Delhi, Connaught Place & Dwarka.",
     metaKeywords: "Delhi Call Girls, Call Girl in Delhi, Independent Companions Delhi, Delhi Escort Service, South Delhi Escorts, Aerocity Call Girls",
     h1: "Call Girls in Delhi NCR — Verified Independent Companions",
-    heroSubtext: "Browse verified independent call girls across Delhi NCR including South Delhi, Connaught Place, Aerocity, Dwarka, and Rohini. Direct WhatsApp booking with strict Cash on Delivery.",
+    heroSubtext: "Browse verified independent call girls across Delhi NCR including South Delhi, Connaught Place, Aerocity, Dwarka, and Rohini. Direct direct booking with strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Delhi NCR",
     introText: "Welcome to CallGirl4U's Delhi directory. Find verified independent companions available 24/7 across South Delhi, Central Delhi, West Delhi, and Aerocity hotel hubs. Enjoy direct provider contact with zero deposit demands.",
     whyChooseHeading: "Why Choose CallGirl4U in Delhi",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>100% Cash on Delivery:</strong> No advance booking charges or upfront deposit.</li>
-  <li><strong>Verified Independent Profiles:</strong> Direct WhatsApp access to genuine local models.</li>
+  <li><strong>Verified Independent Profiles:</strong> Direct direct access to genuine local models.</li>
   <li><strong>Discreet Hotel Outcalls:</strong> Fast doorstep delivery to hotels in Aerocity, Saket, and CP.</li>
 </ul>`,
     typesHeading: "Categories Available in Delhi",
     typesText: `Choose from college companions, mature housewives, high-profile independent models, and VIP Russian escorts for 5-star hotel bookings.`,
     bookingHeading: "Booking Guide for Delhi",
-    bookingText: `Select a profile, connect via WhatsApp, confirm your hotel room or residence location, and pay directly in cash after meeting.`,
+    bookingText: `Select a profile, connect via Contact, confirm your hotel room or residence location, and pay directly in cash after meeting.`,
     areasHeading: "Delhi Service Coverage",
     areasText: "Service covers South Delhi (Saket, GK, Hauz Khas), Central Delhi (CP, Karol Bagh), Aerocity hotel zone, Dwarka, Janakpuri, and Rohini.",
     rateHeading: "Delhi Rates & Pricing Guide",
@@ -105,28 +105,28 @@ export const cityContentData: Record<string, CitySEOContent> = {
       { q: "Is advance payment required in Delhi NCR?", a: "No, never pay any money online beforehand. Pay cash in person after meeting." },
       { q: "Are Aerocity hotel deliveries supported?", a: "Yes, independent companions provide prompt outcall service to Aerocity hotel hubs." }
     ],
-    hindiText: `<p class="mb-4"><strong>Delhi Call Girl Directory:</strong> Delhi NCR me verified companions ke saath safe date book karein. Direct WhatsApp contact aur Cash on Delivery policy ke saath zero fraud risk.</p>`,
+    hindiText: `<p class="mb-4"><strong>Delhi Call Girl Directory:</strong> Delhi NCR me verified companions ke saath safe date book karein. Direct direct contact aur Cash on Delivery policy ke saath zero fraud risk.</p>`,
     profiles: []
   },
 
   mumbai: {
     metaTitle: "Call Girls in Mumbai | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Mumbai. Direct WhatsApp contact, real photos, cash on delivery across Bandra, Andheri, Juhu & South Mumbai.",
+    metaDescription: "Find verified independent call girls in Mumbai. Direct direct contact, real photos, cash on delivery across Bandra, Andheri, Juhu & South Mumbai.",
     metaKeywords: "Mumbai Call Girls, Call Girl in Mumbai, Bandra Escorts, Andheri Call Girls, Independent Companions Mumbai",
     h1: "Call Girls in Mumbai — Verified Independent Companions",
-    heroSubtext: "Discover verified independent companions across Mumbai including Bandra, Andheri, Juhu, Powai, and South Mumbai. Direct WhatsApp booking with strict Cash on Delivery.",
+    heroSubtext: "Discover verified independent companions across Mumbai including Bandra, Andheri, Juhu, Powai, and South Mumbai. Direct direct booking with strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Mumbai",
     introText: "Connect directly with verified independent companions in Mumbai without middleman commissions. Listings cover corporate event dates, hotel outcalls, and private arrangements.",
     whyChooseHeading: "Why Book in Mumbai via CallGirl4U",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Cash Payment on Meeting:</strong> Pay face-to-face after meeting your companion.</li>
-  <li><strong>Verified Models:</strong> Authenticated photos and direct WhatsApp numbers.</li>
+  <li><strong>Verified Models:</strong> Authenticated photos and direct numbers.</li>
   <li><strong>Prompt Doorstep Delivery:</strong> Outcall service across Suburbs and Town.</li>
 </ul>`,
     typesHeading: "Companion Categories in Mumbai",
     typesText: "Featuring high-profile fashion models, college companions, mature ladies, and elite VIP escorts.",
     bookingHeading: "How to Book in Mumbai",
-    bookingText: "Browse Mumbai listings, click WhatsApp, confirm meeting venue, and pay in cash after meeting.",
+    bookingText: "Browse Mumbai listings, click Contact, confirm meeting venue, and pay in cash after meeting.",
     areasHeading: "Mumbai Neighborhood Coverage",
     areasText: "Service covers Bandra West, Andheri East/West, Juhu, BKC, Powai, Lower Parel, and Colaba.",
     rateHeading: "Mumbai Pricing Overview",
@@ -143,12 +143,12 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   surat: {
     metaTitle: "Call Girls in Surat | Verified Escort & Companion Directory",
-    metaDescription: "Find verified independent call girls in Surat, Gujarat. Direct WhatsApp contact, genuine photos, cash on delivery in Vesu, Piplod & Ring Road.",
+    metaDescription: "Find verified independent call girls in Surat, Gujarat. Direct direct contact, genuine photos, cash on delivery in Vesu, Piplod & Ring Road.",
     metaKeywords: "Surat Call Girls, Call Girl in Surat, Vesu Escorts, Piplod Call Girls, Independent Companions Surat",
     h1: "Call Girls in Surat — Verified Independent Companions",
     heroSubtext: "Browse genuine independent call girls across Surat including Vesu, Piplod, Adajan, Varachha, and Ring Road. Cash on Delivery booking with zero advance payment.",
     introHeading: "Verified Female Companions in Surat",
-    introText: "Connect with independent models and female companions in Surat, Gujarat. Enjoy direct WhatsApp messaging, transparent pricing, and 100% face-to-face cash payment.",
+    introText: "Connect with independent models and female companions in Surat, Gujarat. Enjoy direct Contact messaging, transparent pricing, and 100% face-to-face cash payment.",
     whyChooseHeading: "Why Book Companions in Surat",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Zero Advance Deposit:</strong> Never transfer money online before meeting.</li>
@@ -158,7 +158,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     typesHeading: "Surat Companion Categories",
     typesText: "College models, housewives, and VIP companions available for private hotel dates.",
     bookingHeading: "Surat Booking Steps",
-    bookingText: "Select a Surat companion profile, send a WhatsApp message, agree on location, and pay cash after meeting.",
+    bookingText: "Select a Surat companion profile, send a message, agree on location, and pay cash after meeting.",
     areasHeading: "Surat Location Coverage",
     areasText: "Delivery available across Vesu, Piplod, Adajan, City Light, Ghod Dod Road, Varachha, and Dumas Road.",
     rateHeading: "Surat Pricing Guide",
@@ -175,7 +175,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   ahmedabad: {
     metaTitle: "Call Girls in Ahmedabad | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Ahmedabad. Direct WhatsApp booking, authentic photos, cash on delivery across SG Highway, Satellite & Bodakdev.",
+    metaDescription: "Find verified independent call girls in Ahmedabad. Direct direct booking, authentic photos, cash on delivery across SG Highway, Satellite & Bodakdev.",
     metaKeywords: "Ahmedabad Call Girls, Call Girl in Ahmedabad, SG Highway Escorts, Satellite Call Girls, Independent Companions Ahmedabad",
     h1: "Call Girls in Ahmedabad — Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls across Ahmedabad including SG Highway, Satellite, Bodakdev, Prahlad Nagar, and Vastrapur. Strict Cash on Delivery.",
@@ -190,7 +190,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     typesHeading: "Available Categories in Ahmedabad",
     typesText: "College student companions, mature housewives, and high-profile VIP escorts.",
     bookingHeading: "Ahmedabad Booking Steps",
-    bookingText: "Choose a profile, click WhatsApp, confirm meeting details, and pay in cash after meeting.",
+    bookingText: "Choose a profile, click Contact, confirm meeting details, and pay in cash after meeting.",
     areasHeading: "Ahmedabad Neighborhood Coverage",
     areasText: "Service covers SG Highway, Satellite, Bodakdev, Prahlad Nagar, Navrangpura, Ashram Road, and Airport zone.",
     rateHeading: "Ahmedabad Rate Guide",
@@ -201,28 +201,28 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are SG Highway hotels covered in Ahmedabad?", a: "Yes, companions deliver prompt outcall services to all major hotels along SG Highway." }
     ],
-    hindiText: `<p class="mb-4"><strong>Ahmedabad Call Girl Directory:</strong> Ahmedabad me verified independent companions ke saath safe booking karein. Direct WhatsApp contact aur zero advance payment.</p>`,
+    hindiText: `<p class="mb-4"><strong>Ahmedabad Call Girl Directory:</strong> Ahmedabad me verified independent companions ke saath safe booking karein. Direct direct contact aur zero advance payment.</p>`,
     profiles: []
   },
 
   pune: {
     metaTitle: "Call Girls in Pune | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Pune. Direct WhatsApp contact, real photos, cash on delivery across Viman Nagar, Koregaon Park, Baner & Hinjawadi.",
+    metaDescription: "Find verified independent call girls in Pune. Direct direct contact, real photos, cash on delivery across Viman Nagar, Koregaon Park, Baner & Hinjawadi.",
     metaKeywords: "Pune Call Girls, Call Girl in Pune, Viman Nagar Escorts, Koregaon Park Call Girls, Hinjewadi Escorts",
     h1: "Call Girls in Pune — Verified Independent Companions",
-    heroSubtext: "Browse verified independent call girls across Pune including Viman Nagar, Koregaon Park, Baner, Hinjawadi, and Wakad. Direct WhatsApp contact and Cash on Delivery.",
+    heroSubtext: "Browse verified independent call girls across Pune including Viman Nagar, Koregaon Park, Baner, Hinjawadi, and Wakad. Direct direct contact and Cash on Delivery.",
     introHeading: "Verified Female Companions in Pune",
     introText: "Connect with genuine independent companions in Pune. Ideal for corporate travelers and residents seeking discreet dates in IT hubs and luxury hotel zones.",
     whyChooseHeading: "Why Choose CallGirl4U in Pune",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Cash Payment on Meeting:</strong> Never pay any deposit or booking fee online.</li>
-  <li><strong>Direct WhatsApp Access:</strong> Connect directly with independent models.</li>
+  <li><strong>Direct direct access:</strong> Connect directly with independent models.</li>
   <li><strong>Fast IT Hub Outcalls:</strong> Quick delivery to Hinjawadi, Baner, and Viman Nagar hotels.</li>
 </ul>`,
     typesHeading: "Pune Companion Categories",
     typesText: "College students, mature ladies, and elite VIP companions for corporate dinner dates.",
     bookingHeading: "Pune Booking Steps",
-    bookingText: "Select a profile, send a WhatsApp text, agree on venue details, and complete payment in cash after meeting.",
+    bookingText: "Select a profile, send a text message, agree on venue details, and complete payment in cash after meeting.",
     areasHeading: "Pune Service Coverage",
     areasText: "Covers Viman Nagar, Koregaon Park, Kalyani Nagar, Baner, Wakad, Hinjawadi, Kharadi, and Shivaji Nagar.",
     rateHeading: "Pune Pricing Guide",
@@ -239,7 +239,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   bangalore: {
     metaTitle: "Call Girls in Bangalore | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Bangalore (Bengaluru). Direct WhatsApp contact, genuine photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
+    metaDescription: "Find verified independent call girls in Bangalore (Bengaluru). Direct direct contact, genuine photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
     metaKeywords: "Bangalore Call Girls, Call Girl in Bangalore, Indiranagar Escorts, Koramangala Call Girls, Whitefield Escorts",
     h1: "Call Girls in Bangalore — Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls across Bangalore (Bengaluru) including Indiranagar, Koramangala, Whitefield, HSR Layout, and MG Road. Cash on Delivery.",
@@ -248,13 +248,13 @@ export const cityContentData: Record<string, CitySEOContent> = {
     whyChooseHeading: "Why Book in Bangalore via CallGirl4U",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>100% Cash on Delivery:</strong> No advance payments or prepaid card fees.</li>
-  <li><strong>Direct WhatsApp Booking:</strong> Zero middleman commissions.</li>
+  <li><strong>Direct direct booking:</strong> Zero middleman commissions.</li>
   <li><strong>Silicon Valley Coverage:</strong> Doorstep delivery to luxury hotels in Indiranagar, MG Road, and Electronic City.</li>
 </ul>`,
     typesHeading: "Bangalore Companion Categories",
     typesText: "College student companions, sophisticated independent models, and VIP international escorts.",
     bookingHeading: "Bangalore Booking Guide",
-    bookingText: "Pick a companion profile, chat on WhatsApp, confirm meeting location, and pay cash face-to-face.",
+    bookingText: "Pick a companion profile, contact directly, confirm meeting location, and pay cash face-to-face.",
     areasHeading: "Bangalore Neighborhood Coverage",
     areasText: "Service covers Indiranagar, Koramangala, Whitefield, HSR Layout, Jayanagar, Electronic City, and MG Road.",
     rateHeading: "Bangalore Rates & Pricing",
@@ -265,18 +265,18 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are Koramangala and Indiranagar hotels covered?", a: "Yes, independent companions offer prompt outcall delivery to hotels in Koramangala and Indiranagar." }
     ],
-    hindiText: `<p class="mb-4"><strong>Bangalore Call Girl Directory:</strong> Bangalore me verified independent companions ke saath safe date book karein. Direct WhatsApp contact aur Cash on Delivery.</p>`,
+    hindiText: `<p class="mb-4"><strong>Bangalore Call Girl Directory:</strong> Bangalore me verified independent companions ke saath safe date book karein. Direct direct contact aur Cash on Delivery.</p>`,
     profiles: []
   },
 
   bengaluru: {
     metaTitle: "Call Girls in Bengaluru | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Bengaluru. Direct WhatsApp contact, real photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
+    metaDescription: "Find verified independent call girls in Bengaluru. Direct direct contact, real photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
     metaKeywords: "Bengaluru Call Girls, Call Girl in Bengaluru, Indiranagar Escorts, Koramangala Call Girls, Whitefield Escorts",
     h1: "Call Girls in Bengaluru — Verified Independent Companions",
     heroSubtext: "Browse verified independent companions across Bengaluru including Indiranagar, Koramangala, Whitefield, HSR Layout, and MG Road. Cash on Delivery.",
     introHeading: "Verified Female Companions in Bengaluru",
-    introText: "Connect with genuine independent companions in Bengaluru. Enjoy transparent pricing and direct WhatsApp contact with zero advance deposit.",
+    introText: "Connect with genuine independent companions in Bengaluru. Enjoy transparent pricing and direct direct contact with zero advance deposit.",
     whyChooseHeading: "Why Choose CallGirl4U in Bengaluru",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Cash on Delivery:</strong> Pay face-to-face only after meeting your companion.</li>
@@ -286,7 +286,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     typesHeading: "Available Categories in Bengaluru",
     typesText: "College models, housewives, and VIP escorts for hotel dates.",
     bookingHeading: "Bengaluru Booking Steps",
-    bookingText: "Select a profile, send a WhatsApp text, agree on venue details, and pay cash after meeting.",
+    bookingText: "Select a profile, send a text message, agree on venue details, and pay cash after meeting.",
     areasHeading: "Bengaluru Location Coverage",
     areasText: "Covers Indiranagar, Koramangala, Whitefield, HSR Layout, MG Road, and Electronic City.",
     rateHeading: "Bengaluru Pricing Guide",
@@ -303,7 +303,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   kolkata: {
     metaTitle: "Call Girls in Kolkata | Verified Escort Directory",
-    metaDescription: "Find verified independent call girls in Kolkata. Direct WhatsApp booking, authentic photos, cash on delivery across Salt Lake, Park Street & Rajarhat New Town.",
+    metaDescription: "Find verified independent call girls in Kolkata. Direct direct booking, authentic photos, cash on delivery across Salt Lake, Park Street & Rajarhat New Town.",
     metaKeywords: "Kolkata Call Girls, Call Girl in Kolkata, Salt Lake Escorts, Park Street Call Girls, New Town Escorts",
     h1: "Call Girls in Kolkata — Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls across Kolkata including Salt Lake, Park Street, Rajarhat New Town, Ballygunge, and EM Bypass. Cash on Delivery.",
@@ -312,13 +312,13 @@ export const cityContentData: Record<string, CitySEOContent> = {
     whyChooseHeading: "Why Choose CallGirl4U in Kolkata",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>100% Cash on Delivery:</strong> No upfront deposit or online booking fee.</li>
-  <li><strong>Verified Independent Profiles:</strong> Direct WhatsApp access to local models.</li>
+  <li><strong>Verified Independent Profiles:</strong> Direct direct access to local models.</li>
   <li><strong>Discreet Hotel Delivery:</strong> Fast outcall service to Park Street, Salt Lake, and Airport hotel zones.</li>
 </ul>`,
     typesHeading: "Categories Available in Kolkata",
     typesText: "College companions, mature housewife companions, and VIP models.",
     bookingHeading: "Kolkata Booking Guide",
-    bookingText: "Pick a companion profile, chat via WhatsApp, confirm your hotel room location, and pay cash face-to-face.",
+    bookingText: "Pick a companion profile, chat via Contact, confirm your hotel room location, and pay cash face-to-face.",
     areasHeading: "Kolkata Neighborhood Coverage",
     areasText: "Service covers Park Street, Salt Lake Sector V, Rajarhat New Town, Ballygunge, Gariahat, and EM Bypass.",
     rateHeading: "Kolkata Rate Expectations",
@@ -329,28 +329,28 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are Salt Lake and Park Street hotels supported in Kolkata?", a: "Yes, independent companions offer prompt outcall delivery to hotels in Salt Lake and Park Street." }
     ],
-    hindiText: `<p class="mb-4"><strong>Kolkata Call Girl Directory:</strong> Kolkata me verified independent companions ke saath safe booking karein. Direct WhatsApp contact aur zero advance payment.</p>`,
+    hindiText: `<p class="mb-4"><strong>Kolkata Call Girl Directory:</strong> Kolkata me verified independent companions ke saath safe booking karein. Direct direct contact aur zero advance payment.</p>`,
     profiles: []
   },
 
   hyderabad: {
     metaTitle: "Call Girls in Hyderabad | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Hyderabad. Direct WhatsApp contact, real photos, cash on delivery across HITECH City, Gachibowli, Jubilee Hills & Banjara Hills.",
+    metaDescription: "Find verified independent call girls in Hyderabad. Direct direct contact, real photos, cash on delivery across HITECH City, Gachibowli, Jubilee Hills & Banjara Hills.",
     metaKeywords: "Hyderabad Call Girls, Call Girl in Hyderabad, HITECH City Escorts, Gachibowli Call Girls, Jubilee Hills Escorts",
     h1: "Call Girls in Hyderabad — Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls across Hyderabad including HITECH City, Gachibowli, Jubilee Hills, Banjara Hills, and Madhapur. Strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Hyderabad",
-    introText: "Connect directly with verified independent companions in Cyberabad and Hyderabad. Browse active listings with direct WhatsApp contact and zero advance fees.",
+    introText: "Connect directly with verified independent companions in Cyberabad and Hyderabad. Browse active listings with direct direct contact and zero advance fees.",
     whyChooseHeading: "Why Choose CallGirl4U in Hyderabad",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Cash Payment on Meeting:</strong> Pay face-to-face after meeting your companion.</li>
-  <li><strong>Direct WhatsApp Booking:</strong> Connect directly with self-managed providers.</li>
+  <li><strong>Direct direct booking:</strong> Connect directly with self-managed providers.</li>
   <li><strong>IT Hub Hotel Delivery:</strong> Fast outcall service to Gachibowli, HITECH City, and Financial District.</li>
 </ul>`,
     typesHeading: "Hyderabad Companion Categories",
     typesText: "College student models, housewife companions, and elite VIP escorts.",
     bookingHeading: "Hyderabad Booking Steps",
-    bookingText: "Choose a profile, click WhatsApp, confirm meeting details, and pay in cash after meeting.",
+    bookingText: "Choose a profile, click Contact, confirm meeting details, and pay in cash after meeting.",
     areasHeading: "Hyderabad Service Coverage",
     areasText: "Covers HITECH City, Gachibowli, Jubilee Hills, Banjara Hills, Madhapur, Kondapur, and Begumpet.",
     rateHeading: "Hyderabad Pricing Guide",
@@ -367,7 +367,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   goa: {
     metaTitle: "Call Girls in Goa | Verified Companion & Beach Escort Directory",
-    metaDescription: "Find verified independent call girls in Goa. Direct WhatsApp contact, real photos, cash on delivery across Calangute, Baga, Candolim & Panaji.",
+    metaDescription: "Find verified independent call girls in Goa. Direct direct contact, real photos, cash on delivery across Calangute, Baga, Candolim & Panaji.",
     metaKeywords: "Goa Call Girls, Call Girl in Goa, Calangute Escorts, Baga Call Girls, Panaji Escorts, Russian Escorts Goa",
     h1: "Call Girls in Goa — Verified Independent Beach Companions",
     heroSubtext: "Discover verified independent call girls across Goa including Calangute, Baga, Candolim, Anjuna, Colva, and Panaji. Cash on Delivery with zero deposit.",
@@ -377,12 +377,12 @@ export const cityContentData: Record<string, CitySEOContent> = {
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>100% Cash on Delivery:</strong> Never pay any online deposit or booking fee while on holiday.</li>
   <li><strong>Vacation Doorstep Service:</strong> Fast delivery to beach resorts and private villas.</li>
-  <li><strong>Direct WhatsApp Contact:</strong> Connect directly with independent models.</li>
+  <li><strong>Direct direct contact:</strong> Connect directly with independent models.</li>
 </ul>`,
     typesHeading: "Goa Companion Categories",
     typesText: "Beach companions, college models, and VIP Russian escorts for resort dates.",
     bookingHeading: "Goa Booking Steps",
-    bookingText: "Pick a companion profile, message on WhatsApp, confirm resort/hotel room details, and pay in cash after meeting.",
+    bookingText: "Pick a companion profile, message on Contact, confirm resort/hotel room details, and pay in cash after meeting.",
     areasHeading: "Goa Service Coverage",
     areasText: "Service covers North Goa (Calangute, Baga, Candolim, Anjuna, Vagator) and South Goa (Colva, Margao, Panaji).",
     rateHeading: "Goa Pricing Overview",
@@ -393,28 +393,28 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are resort outcalls supported in Calangute and Baga?", a: "Yes, independent companions provide prompt outcall service to resorts in North and South Goa." }
     ],
-    hindiText: `<p class="mb-4"><strong>Goa Call Girl Directory:</strong> Goa vacation me verified independent companions ke saath safe booking karein. Direct WhatsApp contact aur Cash on Delivery.</p>`,
+    hindiText: `<p class="mb-4"><strong>Goa Call Girl Directory:</strong> Goa vacation me verified independent companions ke saath safe booking karein. Direct direct contact aur Cash on Delivery.</p>`,
     profiles: []
   },
 
   panaji: {
     metaTitle: "Call Girls in Panaji Goa | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Panaji, Goa. Direct WhatsApp contact, real photos, cash on delivery across Miramar, Dona Paula & Panaji.",
+    metaDescription: "Find verified independent call girls in Panaji, Goa. Direct direct contact, real photos, cash on delivery across Miramar, Dona Paula & Panaji.",
     metaKeywords: "Panaji Call Girls, Call Girl in Panaji, Miramar Escorts, Dona Paula Call Girls, Independent Companions Panaji",
     h1: "Call Girls in Panaji — Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls in Panaji, Miramar, Dona Paula, and Miramar Beach. Strict Cash on Delivery with zero advance payment.",
     introHeading: "Verified Female Companions in Panaji",
-    introText: "Connect directly with independent companions in Panaji city. Enjoy transparent pricing and direct WhatsApp booking.",
+    introText: "Connect directly with independent companions in Panaji city. Enjoy transparent pricing and direct direct booking.",
     whyChooseHeading: "Why Choose CallGirl4U in Panaji",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Zero Advance Deposit:</strong> Pay cash face-to-face only.</li>
-  <li><strong>Direct Provider Chat:</strong> Instant WhatsApp messaging.</li>
+  <li><strong>Direct Provider Chat:</strong> Instant Contact messaging.</li>
   <li><strong>Capital City Outcalls:</strong> Service across Panaji hotels and guest houses.</li>
 </ul>`,
     typesHeading: "Panaji Companion Categories",
     typesText: "College models, mature ladies, and VIP companions.",
     bookingHeading: "Panaji Booking Steps",
-    bookingText: "Select a profile, message on WhatsApp, confirm venue, and pay cash after meeting.",
+    bookingText: "Select a profile, message on Contact, confirm venue, and pay cash after meeting.",
     areasHeading: "Panaji Area Coverage",
     areasText: "Covers Panaji City Center, Miramar, Dona Paula, Fontainhas, and Bambolim.",
     rateHeading: "Panaji Rate Guide",
@@ -431,7 +431,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   chandigarh: {
     metaTitle: "Call Girls in Chandigarh | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Chandigarh, Mohali & Zirakpur. Direct WhatsApp contact, real photos, cash on delivery across Sector 17, 35 & 22.",
+    metaDescription: "Find verified independent call girls in Chandigarh, Mohali & Zirakpur. Direct direct contact, real photos, cash on delivery across Sector 17, 35 & 22.",
     metaKeywords: "Chandigarh Call Girls, Call Girl in Chandigarh, Mohali Escorts, Zirakpur Call Girls, Sector 17 Escorts",
     h1: "Call Girls in Chandigarh — Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls across Chandigarh Tri-City including Mohali, Zirakpur, Panchkula, and Sector 17/35. Strict Cash on Delivery.",
@@ -440,13 +440,13 @@ export const cityContentData: Record<string, CitySEOContent> = {
     whyChooseHeading: "Why Choose CallGirl4U in Chandigarh",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>100% Cash on Delivery:</strong> No advance booking charges or upfront deposit.</li>
-  <li><strong>Verified Tri-City Profiles:</strong> Direct WhatsApp access to genuine local models.</li>
+  <li><strong>Verified Tri-City Profiles:</strong> Direct direct access to genuine local models.</li>
   <li><strong>Prompt Hotel Outcalls:</strong> Fast doorstep delivery to hotels in Sector 17, 35, Mohali, and Zirakpur.</li>
 </ul>`,
     typesHeading: "Chandigarh Companion Categories",
     typesText: "College student companions, mature housewives, and VIP models.",
     bookingHeading: "Chandigarh Booking Guide",
-    bookingText: "Select a profile, send a WhatsApp text, agree on hotel details, and pay cash face-to-face.",
+    bookingText: "Select a profile, send a text message, agree on hotel details, and pay cash face-to-face.",
     areasHeading: "Chandigarh Service Coverage",
     areasText: "Covers Sector 17, 22, 35, 43, Mohali Phase 3B2/7/10, Zirakpur VIP Road, and Panchkula.",
     rateHeading: "Chandigarh Rate Expectations",
@@ -463,12 +463,12 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   jodhpur: {
     metaTitle: "Call Girls in Jodhpur | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Jodhpur, Rajasthan. Direct WhatsApp contact, real photos, cash on delivery across Ratanada, Sardarpura & Paota.",
+    metaDescription: "Find verified independent call girls in Jodhpur, Rajasthan. Direct direct contact, real photos, cash on delivery across Ratanada, Sardarpura & Paota.",
     metaKeywords: "Jodhpur Call Girls, Call Girl in Jodhpur, Ratanada Escorts, Sardarpura Call Girls, Independent Companions Jodhpur",
     h1: "Call Girls in Jodhpur — Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls in Jodhpur including Ratanada, Sardarpura, Paota, Shastri Nagar, and Airport Road. Cash on Delivery.",
     introHeading: "Verified Female Companions in Sun City Jodhpur",
-    introText: "Connect directly with independent companions in Jodhpur without agency markups. Browse active profiles with authentic photos and direct WhatsApp numbers.",
+    introText: "Connect directly with independent companions in Jodhpur without agency markups. Browse active profiles with authentic photos and direct numbers.",
     whyChooseHeading: "Why Book Companions in Jodhpur",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Cash Payment on Meeting:</strong> Pay face-to-face only after meeting.</li>
@@ -478,7 +478,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     typesHeading: "Jodhpur Companion Categories",
     typesText: "College models, mature housewife companions, and VIP escorts.",
     bookingHeading: "Jodhpur Booking Guide",
-    bookingText: "Choose a profile, chat on WhatsApp, confirm meeting details, and pay cash after meeting.",
+    bookingText: "Choose a profile, contact directly, confirm meeting details, and pay cash after meeting.",
     areasHeading: "Jodhpur Area Coverage",
     areasText: "Service covers Ratanada, Sardarpura, Paota, Shastri Nagar, Chopasni Road, and Airport zone.",
     rateHeading: "Jodhpur Rate Expectations",
@@ -495,7 +495,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   udaipur: {
     metaTitle: "Call Girls in Udaipur | Verified Escort Directory",
-    metaDescription: "Find verified independent call girls in Udaipur, Rajasthan. Direct WhatsApp contact, authentic photos, cash on delivery across Hiran Magri, Sukher & City Palace area.",
+    metaDescription: "Find verified independent call girls in Udaipur, Rajasthan. Direct direct contact, authentic photos, cash on delivery across Hiran Magri, Sukher & City Palace area.",
     metaKeywords: "Udaipur Call Girls, Call Girl in Udaipur, Hiran Magri Escorts, Sukher Call Girls, Lake City Escorts",
     h1: "Call Girls in Udaipur — Verified Independent Lake City Companions",
     heroSubtext: "Browse verified independent call girls across Udaipur including Hiran Magri, Sukher, Panchwati, Fateh Sagar, and Fatehpura. Cash on Delivery.",
@@ -504,13 +504,13 @@ export const cityContentData: Record<string, CitySEOContent> = {
     whyChooseHeading: "Why Choose CallGirl4U in Udaipur",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>100% Cash on Delivery:</strong> No advance booking charges or deposit demands.</li>
-  <li><strong>Direct WhatsApp Booking:</strong> Connect directly with self-managed providers.</li>
+  <li><strong>Direct direct booking:</strong> Connect directly with self-managed providers.</li>
   <li><strong>Resort Doorstep Service:</strong> Fast delivery to hotels and resorts around Lake Pichola and Fateh Sagar.</li>
 </ul>`,
     typesHeading: "Udaipur Companion Categories",
     typesText: "College companions, mature housewives, and VIP models for resort dates.",
     bookingHeading: "Udaipur Booking Steps",
-    bookingText: "Select a profile, send a WhatsApp message, agree on hotel details, and pay cash face-to-face.",
+    bookingText: "Select a profile, send a message, agree on hotel details, and pay cash face-to-face.",
     areasHeading: "Udaipur Location Coverage",
     areasText: "Covers Hiran Magri, Sukher, Fatehpura, Panchwati, Old City Lake area, and Airport Road.",
     rateHeading: "Udaipur Pricing Overview",

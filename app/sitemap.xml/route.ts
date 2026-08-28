@@ -24,10 +24,6 @@ export async function GET() {
     <loc>${baseUrl}/sitemap_massage.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
-  <sitemap>
-    <loc>${baseUrl}/sitemap_blogs.xml</loc>
-    <lastmod>${today}</lastmod>
-  </sitemap>
 </sitemapindex>`;
 
   return new Response(xml, {
