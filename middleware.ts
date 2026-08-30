@@ -8,7 +8,7 @@ let cachedMaintenance = false;
 let lastChecked = 0;
 const CACHE_TTL = 30000; // 30 seconds
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
   // 0.1 INDEX / PHP / HTML URL REDIRECTS
@@ -235,6 +235,3 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico|images|apple-icon.png|icon.png|icon.svg|api/|sitemap|robots.txt).*)',
   ],
 };
-
-// Next.js 16: proxy.ts replaces middleware.ts (same API, renamed file + function)
-// Migration: https://nextjs.org/docs/messages/middleware-to-proxy
