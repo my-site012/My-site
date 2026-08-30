@@ -9,6 +9,9 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "placement": {
+    "mode": "smart"
+  },
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
