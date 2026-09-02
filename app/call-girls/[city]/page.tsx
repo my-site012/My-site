@@ -467,27 +467,27 @@ export default async function CityPage({ params, searchParams }: { params: Promi
           <table className="w-full text-left bg-white font-sans text-sm">
             <thead>
               <tr className="bg-gray-100 border-b border-gray-200">
-                <th className="p-4 font-semibold text-gray-700">Category</th>
-                <th className="p-4 font-semibold text-gray-700">1 Shot</th>
-                <th className="p-4 font-semibold text-gray-700">2 Shots</th>
-                <th className="p-4 font-semibold text-gray-700">Full Night</th>
+                <th className="p-4 font-semibold text-gray-700">Companion Category</th>
+                <th className="p-4 font-semibold text-gray-700">1 Hour Session</th>
+                <th className="p-4 font-semibold text-gray-700">2–3 Hours Session</th>
+                <th className="p-4 font-semibold text-gray-700">Full Evening / Dinner</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b border-gray-100">
-                <td className="p-4">College Girls & Housewife Call Girls</td>
+                <td className="p-4 font-medium text-gray-800">College Companions &amp; Local Profiles</td>
                 <td className="p-4">₹2,100</td>
                 <td className="p-4">₹3,500</td>
                 <td className="p-4">₹6,000</td>
               </tr>
               <tr className="border-b border-gray-100">
-                <td className="p-4">Independent Call Girls in {cityName}</td>
+                <td className="p-4 font-medium text-gray-800">Independent Companions in {cityName}</td>
                 <td className="p-4">₹3,000</td>
                 <td className="p-4">₹5,000</td>
                 <td className="p-4">₹10,000</td>
               </tr>
               <tr className="border-b border-gray-100">
-                <td className="p-4">Russian Escorts / VIP Companions</td>
+                <td className="p-4 font-medium text-gray-800">VIP / High-Class Dating Escorts</td>
                 <td className="p-4">₹8,000</td>
                 <td className="p-4">₹12,000</td>
                 <td className="p-4">₹20,000</td>

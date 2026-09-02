@@ -23,14 +23,14 @@ export default function Footer() {
           <Link prefetch={false} href="/forums">Adult Forums</Link>
         </div>
 
-        {/* For Rent Button */}
+        {/* Contact / Inquiries Button */}
         <div className="mb-5">
-          <a
-            href="mailto:worksunil26@gmail.com"
+          <Link
+            href="/contact"
             className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold px-5 py-2 rounded-lg shadow transition-all hover:shadow-md active:scale-95"
           >
-            📧 Site For Rent
-          </a>
+            📧 Support &amp; Inquiries
+          </Link>
         </div>
 
         {/* Social & Copyright */}

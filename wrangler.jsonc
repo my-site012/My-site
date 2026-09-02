@@ -9,6 +9,20 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "routes": [
+    {
+      "pattern": "callgirl4u.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.callgirl4u.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "jaipur.callgirl4u.com",
+      "custom_domain": true
+    }
+  ],
   "placement": {
     "mode": "smart"
   },

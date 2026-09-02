@@ -1,32 +1,57 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | CallGirl4U India",
-  description: "Read the Terms and Conditions for using CallGirl4U adult classifieds directory in India. Rules regarding platform use, content guidelines, and legal compliance.",
-  robots: { index: false, follow: true },
+  title: "Terms and Conditions of Use | CallGirl4U Directory",
+  description: "Terms and Conditions for CallGirl4U adult classifieds directory. User guidelines, advertiser rules, content moderation, and legal disclaimers.",
+  robots: { index: true, follow: true },
   alternates: { canonical: "https://callgirl4u.com/terms" }
 };
 
 export default function TermsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12 prose prose-gray">
-      <h1 className="text-3xl font-black mb-8 text-gray-900">Terms and Conditions</h1>
-      <p>By accessing CallGirl4U, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
+      <h1 className="text-3xl font-black mb-4 text-gray-900">Terms and Conditions of Use</h1>
+      <p className="text-sm text-gray-500 mb-8">Last Updated: September 2026</p>
 
-      <h2 className="text-xl font-bold mt-8">1. Acceptance of Terms</h2>
-      <p>Your use of our website constitutes your agreement to all such terms, conditions, and notices. You must be at least 18 years of age to use this site.</p>
+      <p className="text-gray-700 leading-relaxed">
+        Please review these Terms and Conditions carefully prior to accessing or publishing advertisements on CallGirl4U (&quot;Platform&quot;). By browsing or using this platform, you affirm that you understand and agree to comply with all provisions stated herein.
+      </p>
 
-      <h2 className="text-xl font-bold mt-8">2. Content Responsibility</h2>
-      <p>Users are solely responsible for the content they post. CallGirl4U does not endorse and is not responsible for any user-generated content.</p>
+      <h2 className="text-xl font-bold mt-8 text-gray-900">1. Age Requirement &amp; Mandatory 18+ Verification</h2>
+      <p className="text-gray-700 leading-relaxed">
+        You must be at least 18 years of age (or the legal age of majority in your jurisdiction) to browse, access, or post advertisements on this website. Access by minors is strictly forbidden.
+      </p>
 
-      <h2 className="text-xl font-bold mt-8">3. Prohibited Conduct</h2>
-      <p>You may not use our site for any illegal purposes or to post fraudulent, deceptive, or offensive material. We reserve the right to remove any content at our discretion.</p>
+      <h2 className="text-xl font-bold mt-8 text-gray-900">2. Platform Role &amp; Intermediary Disclaimer</h2>
+      <p className="text-gray-700 leading-relaxed">
+        CallGirl4U operates solely as an online classifieds directory and hosting intermediary. We do not operate an escort agency, organize bookings, participate in companion agreements, or process financial payments on behalf of advertisers. Any contact, arrangements, or transactions are exclusively between independent advertisers and consenting adults.
+      </p>
 
-      <h2 className="text-xl font-bold mt-8">4. Liability Limitation</h2>
-      <p>CallGirl4U is provided "as is" without any warranties. We shall not be liable for any damages arising out of your use of our website.</p>
+      <h2 className="text-xl font-bold mt-8 text-gray-900">3. Strict Zero-Tolerance Policy &amp; Prohibited Content</h2>
+      <p className="text-gray-700 leading-relaxed">
+        The following content and activities are strictly prohibited on this platform. Any violation will lead to permanent deletion of listings and immediate banning:
+      </p>
+      <ul className="list-disc pl-5 space-y-2 text-gray-700">
+        <li>Any underage content, child exploitation, or involvement of minors (zero tolerance).</li>
+        <li>Human trafficking, forced labor, coercion, or non-consensual exploitation.</li>
+        <li>Financial fraud, online prepayment scams, extortion, or deceptive impersonation.</li>
+        <li>Publication of third-party private personal data, contact details, or copyrighted media without explicit legal authorization.</li>
+      </ul>
 
-      <h2 className="text-xl font-bold mt-8">5. Governing Law</h2>
-      <p>These terms shall be governed by and construed in accordance with the laws of India.</p>
+      <h2 className="text-xl font-bold mt-8 text-gray-900">4. Advertiser Obligations &amp; Representations</h2>
+      <p className="text-gray-700 leading-relaxed">
+        Advertisers posting on this directory explicitly certify that they are at least 18 years of age, own the rights to the photos/media submitted, and are legally authorized to publish their contact advertisements in compliance with all relevant local and national regulations.
+      </p>
+
+      <h2 className="text-xl font-bold mt-8 text-gray-900">5. Limitation of Liability</h2>
+      <p className="text-gray-700 leading-relaxed">
+        CallGirl4U provides the directory on an &quot;as is&quot; and &quot;as available&quot; basis without warranties of any kind. We disclaim liability for any direct or indirect dispute, loss, injury, or damages arising out of interactions between users and independent advertisers.
+      </p>
+
+      <h2 className="text-xl font-bold mt-8 text-gray-900">6. Reporting and Inquiries</h2>
+      <p className="text-gray-700 leading-relaxed">
+        For questions regarding these terms or to report prohibited behavior, contact our compliance team at <a href="mailto:worksunil26@gmail.com" className="text-blue-600 underline">worksunil26@gmail.com</a>.
+      </p>
     </div>
   );
 }

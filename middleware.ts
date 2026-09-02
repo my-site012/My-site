@@ -11,6 +11,20 @@ const CACHE_TTL = 30000; // 30 seconds
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
+  // 0. SUBDOMAIN REDIRECTS (e.g. jaipur.callgirl4u.com -> https://callgirl4u.com/call-girls/jaipur)
+  const host = (request.headers.get('host') || '').toLowerCase().replace(/:\d+$/, '');
+  if (host && host !== 'callgirl4u.com' && host !== 'www.callgirl4u.com' && host.endsWith('.callgirl4u.com')) {
+    const subdomain = host.replace('.callgirl4u.com', '');
+    if (subdomain === 'jaipur') {
+      return NextResponse.redirect(new URL('https://callgirl4u.com/call-girls/jaipur'), 301);
+    }
+    const citySlug = getCitySlug(subdomain);
+    if (citySlug) {
+      return NextResponse.redirect(new URL(`https://callgirl4u.com/call-girls/${citySlug}`), 301);
+    }
+    return NextResponse.redirect(new URL('https://callgirl4u.com/'), 301);
+  }
+
   // 0.1 INDEX / PHP / HTML URL REDIRECTS
   const lowerPath = pathname.toLowerCase();
   if (lowerPath === '/index.php' || lowerPath === '/index.html' || lowerPath === '/index.htm' || lowerPath === '/home.php' || lowerPath === '/home.html') {
