@@ -55,3 +55,6 @@ task.md
 service-account*.json
 .indexing-*.json
 my-site/
+
+.vercel
+.env*.local

@@ -2,13 +2,21 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getAllCities, getCitySlug, getAllStates, getStateSlug } from './lib/data/locations';
 
-const BOTS_REGEX = /bot|googlebot|bingbot|crawler|spider|robot|crawling|ahrefs|siteaudit|semrush|screaming|gtmetrix/i;
+const GOOD_BOTS_REGEX = /googlebot|bingbot|duckduckbot|slurp|baiduspider|yandex/i;
+const BAD_BOTS_REGEX = /ahrefs|semrush|dotbot|mj12bot|petalbot|bytespider|scrapy|python-requests|aiohttp|curl\/|wget|httpclient|postman|censys|masscan|zgrab|nmap|nikto|zoominfobot|dataforseo|barkrowler/i;
 
 let cachedMaintenance = false;
 let lastChecked = 0;
 const CACHE_TTL = 30000; // 30 seconds
 
 export async function middleware(request: NextRequest) {
+  const userAgent = request.headers.get('user-agent') || '';
+
+  // 1. INSTANTLY BLOCK KNOWN BAD BOTS / SCRAPERS (Saves Vercel Functions & Bandwidth)
+  if (BAD_BOTS_REGEX.test(userAgent)) {
+    return new NextResponse('Access Denied', { status: 403 });
+  }
+
   const { pathname, searchParams } = request.nextUrl;
 
   // 0. SUBDOMAIN REDIRECTS (e.g. jaipur.callgirl4u.com -> https://callgirl4u.com/call-girls/jaipur)
@@ -191,13 +199,9 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // BOT EARLY-EXIT — Restored (was accidentally removed in Aug 10 commit)
-  // Googlebot & crawlers must bypass ALL middleware checks:
-  // maintenance mode, geo-redirect, age-verification logic etc.
-  // Without this, bots hit the KV fetch + get treated as unverified users
-  const userAgent = request.headers.get('user-agent') || '';
-  const isBot = BOTS_REGEX.test(userAgent);
-  if (isBot) {
+  // BOT EARLY-EXIT — Search engine bots (Googlebot, Bingbot, etc.) bypass maintenance check
+  const isGoodBot = GOOD_BOTS_REGEX.test(userAgent);
+  if (isGoodBot) {
     return NextResponse.next();
   }
 

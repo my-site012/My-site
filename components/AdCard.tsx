@@ -36,6 +36,7 @@ export default function AdCard({ id, title, location, price, imagePath, index = 
           src={imgSrc}
           alt={title}
           fill
+          unoptimized
           // First 2 cards are LCP candidates — mark as high priority for preload
           priority={index < 2}
           loading={index < 2 ? "eager" : "lazy"}
