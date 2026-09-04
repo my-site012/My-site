@@ -10,8 +10,31 @@ import { cachedGetValue } from "@/lib/kv";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
+  title: "CallGirl4U – Local Adult Classifieds & Personal Advertisements in India",
+  description: "Browse local personal and adult classified advertisements across India on CallGirl4U. Explore advertiser profiles by city, connect with independent companions, or publish a free listing.",
   alternates: {
     canonical: "https://callgirl4u.com",
+  },
+  openGraph: {
+    title: "CallGirl4U – Local Adult Classifieds & Personal Advertisements in India",
+    description: "Browse local personal and adult classified advertisements across India on CallGirl4U. Explore advertiser profiles by city, connect with independent companions, or publish a free listing.",
+    url: "https://callgirl4u.com",
+    siteName: "CallGirl4U",
+    type: "website",
+    images: [
+      {
+        url: "https://callgirl4u.com/icon.png",
+        width: 512,
+        height: 512,
+        alt: "CallGirl4U Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CallGirl4U – Local Adult Classifieds & Personal Advertisements in India",
+    description: "Browse local personal and adult classified advertisements across India on CallGirl4U. Explore advertiser profiles by city, connect with independent companions, or publish a free listing.",
+    images: ["https://callgirl4u.com/icon.png"],
   },
   robots: {
     index: true,
@@ -53,7 +76,7 @@ export default async function Home() {
     "name": "CallGirl4U",
     "url": "https://callgirl4u.com",
     "logo": "https://callgirl4u.com/icon.png",
-    "description": "CallGirl4U is the #1 adult classifieds website in India. Browse local listings for independent call girls, massages, male escorts, and shemale dating."
+    "description": "CallGirl4U is an online classifieds platform in India for local personal advertisements, companion listings, and wellness massage services."
   };
 
   return (
@@ -67,12 +90,16 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
       />
+      
       {/* Hero Search Section */}
       <section className="bg-gray-50 py-12 border-b">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl text-gray-900 mb-6 uppercase tracking-tighter">
-            Find Verified Adult Classifieds on <span className="text-red-600">CallGirl4U</span>
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+            Local Adult Classifieds and Companion Directory across India
           </h1>
+          <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto mb-8">
+            Search verified advertiser listings by city and category to discover independent companions and massage therapies in your area.
+          </p>
           
           <CitySearch cities={getAllCities()} layout="hero" />
         </div>
@@ -81,7 +108,7 @@ export default async function Home() {
       {/* Featured Ads Section */}
       {featuredImages.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 py-12 border-b">
-          <h2 className="text-2xl text-gray-900 mb-6">Featured Profiles</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Profiles</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {Array.from({ length: 8 }).map((_, index) => {
               const adId = `featured-${index}`;
@@ -93,7 +120,7 @@ export default async function Home() {
                  <AdCard 
                   key={index}
                   id={adId}
-                  title={`${adName} - VIP Independent`}
+                  title={`${adName} – Independent Profile`}
                   location="Delhi NCR"
                   price={price}
                   imagePath={imgPath}
@@ -114,10 +141,10 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
-              India's Premier Adult Classifieds & Escort Directory
+              About CallGirl4U Classifieds Directory
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Welcome to CallGirl4U, the most trusted and secure platform for local adult classified advertisements across India. We connect independent companion advertisers with consenting adults, ensuring complete transparency and privacy.
+              CallGirl4U is an open advertising portal connecting independent companion advertisers with consenting adults across India. Our directory offers an organized platform for users to browse personal listings by location and category while maintaining privacy and transparency.
             </p>
           </div>
 
@@ -125,32 +152,32 @@ export default async function Home() {
             {/* Left Column - Popular Categories */}
             <div className="space-y-6">
               <h3 className="text-2xl font-bold text-gray-800 border-b border-gray-100 pb-2">
-                Popular Adult Categories in India
+                Available Directory Categories
               </h3>
               
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold text-red-600 text-lg">Independent Call Girls</h4>
+                  <h4 className="font-semibold text-red-600 text-lg">Independent Female Companions</h4>
                   <p className="text-gray-600 text-sm leading-relaxed mt-1">
-                    Discover handpicked and verified female call girls and premium escorts in Delhi, Mumbai, Jaipur, Bengaluru, and other major cities. Find real, high-quality photos and contact details to connect directly.
+                    Browse profiles of independent female advertisers in major metropolitan areas such as Delhi NCR, Mumbai, Bengaluru, Hyderabad, and Jaipur. View verified contact details to connect directly with advertisers.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-red-600 text-lg">Sensual Body Massages</h4>
+                  <h4 className="font-semibold text-red-600 text-lg">Wellness & Body Massages</h4>
                   <p className="text-gray-600 text-sm leading-relaxed mt-1">
-                    Unwind and destress with therapeutic body-to-body massages, executive spa packages, and independent massage therapies. Search local listings to find professional massagers near you.
+                    Find relaxation and wellness services, including therapeutic body massages and independent spa packages posted by local therapists in your city.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-red-600 text-lg">Male Escorts & Gigolos</h4>
+                  <h4 className="font-semibold text-red-600 text-lg">Male Companions</h4>
                   <p className="text-gray-600 text-sm leading-relaxed mt-1">
-                    Browse premium listings of athletic and professional male escorts catering to women, men, and couples looking for companionship and elite dating experiences.
+                    Explore listings from professional male companions offering social dating and companion services across major Indian cities.
                   </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-red-600 text-lg">Transsexual & Shemale Escorts</h4>
+                  <h4 className="font-semibold text-red-600 text-lg">Transgender & Transsexual Companions</h4>
                   <p className="text-gray-600 text-sm leading-relaxed mt-1">
-                    Explore diverse profiles of beautiful TS and shemale escorts across major Indian cities. Connect with genuine individuals in a safe, supportive, and judgment-free environment.
+                    Discover inclusive personal advertisements from transgender and TS companions offering direct contact channels in a safe environment.
                   </p>
                 </div>
               </div>
@@ -160,22 +187,22 @@ export default async function Home() {
             <div className="space-y-6">
               <div className="bg-red-50 border border-red-100 rounded-2xl p-6">
                 <h3 className="text-xl font-bold text-red-800 mb-2">
-                  Post Your Adult Ad Absolutely Free!
+                  Publish Your Free Classified Ad
                 </h3>
                 <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                  Are you an independent call girl, male companion, transsexual escort, or massage therapist looking to reach clients in India? CallGirl4U is the perfect advertising hub. Create a profile, upload photos, specify your location, and publish your ad completely free of charge. Reach thousands of daily visitors in just a few steps.
+                  Are you an independent companion or massage therapist looking to reach clients in your city? CallGirl4U provides a straightforward advertising platform. Create your profile, upload your photos, and publish your classified ad at no cost.
                 </p>
                 <a href="/ad/post" className="inline-block bg-red-600 text-white font-bold text-sm px-6 py-2.5 rounded-lg shadow hover:bg-red-700 transition">
-                  Post Free Ad Now
+                  Post Free Ad
                 </a>
               </div>
 
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6">
                 <h3 className="text-lg font-bold text-amber-800 mb-2 flex items-center gap-2">
-                  ⚠️ Safety Guide: Avoid Prepayment Scams
+                  ⚠️ User Safety & Anti-Fraud Advisory
                 </h3>
                 <p className="text-gray-700 text-xs leading-relaxed">
-                  CallGirl4U is purely an advertising directory and does not offer booking coordination or financial transaction processing. We strongly advise both clients and advertisers to prioritize safety. <strong>Never pay any money online in advance</strong>—whether for hotel bookings, transport costs, medical cards, or reservation fees. Always meet in person, verify your companion, and pay in cash directly.
+                  CallGirl4U is strictly an advertising directory and does not handle payments, bookings, or client-advertiser transactions. For your safety, <strong>never send advance payments or deposits online</strong> (such as hotel deposits, registration charges, or travel fees). Always verify companion identity in person and handle transactions directly.
                 </p>
               </div>
             </div>
@@ -184,7 +211,7 @@ export default async function Home() {
           {/* Legal Disclaimer */}
           <div className="border-t border-gray-100 pt-8 text-center text-xs text-gray-500 max-w-4xl mx-auto">
             <p className="leading-relaxed">
-              <strong>Disclaimer:</strong> This website is an open-platform hosting service strictly intended for adults aged 18 and above. The advertisements published here are created by independent advertisers. CallGirl4U does not arrange meetings, verify legal age of physical interactions, or run an escort agency. Users are responsible for complying with all local, state, and national laws in India when utilizing services advertised on this portal.
+              <strong>Disclaimer:</strong> This website is an open advertising directory strictly intended for individuals aged 18 years and above. All listings are posted by independent third-party advertisers. CallGirl4U does not operate an agency, employ any individuals listed, or mediate interactions between users and advertisers. All users are expected to comply with applicable local, state, and national laws.
             </p>
           </div>
         </div>

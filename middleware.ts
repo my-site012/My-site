@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
   if (host && host !== 'callgirl4u.com' && host !== 'www.callgirl4u.com' && host.endsWith('.callgirl4u.com')) {
     const subdomain = host.replace('.callgirl4u.com', '');
     if (subdomain === 'jaipur') {
-      return NextResponse.redirect(new URL('https://callgirl4u.com/call-girls/jaipur'), 301);
+      return NextResponse.redirect(new URL('https://callgirl4u.com/call-girls/jaipur-2'), 301);
     }
     const citySlug = getCitySlug(subdomain);
     if (citySlug) {
