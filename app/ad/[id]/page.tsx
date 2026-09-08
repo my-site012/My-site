@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
 import AdCard from "@/components/AdCard";
@@ -224,7 +223,8 @@ export default async function AdDetailPage({ params }: { params: Promise<{ id: s
             <div>
               <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden shadow-md bg-gray-200">
                 {mainImage ? (
-                  <Image src={mainImage} alt={`Profile of ${name} in ${location}`} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 50vw" />
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={mainImage} alt={`Profile of ${name} in ${location}`} className="object-cover w-full h-full" loading="eager" />
                 ) : (
                    <div className="w-full h-full flex items-center justify-center text-gray-400 font-bold uppercase">No Photo</div>
                 )}

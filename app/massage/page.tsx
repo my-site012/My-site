@@ -101,7 +101,7 @@ export default function MassageDirectory() {
         <div className="bg-purple-50 p-8 rounded-2xl border border-purple-200">
           <h3 className="text-xl font-bold text-purple-800 mb-4 uppercase tracking-wide">Why Book on CallGirl4U?</h3>
           <ul className="space-y-3 text-gray-800 font-medium">
-            <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> 100% Verified Massage Therapist Profiles</li>
+            <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> Verified Massage Therapist Profiles</li>
             <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> <strong>No advance payment</strong> — Pay Cash After Service</li>
             <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> Home & Hotel Delivery Massage Available</li>
             <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> <strong>Massage Service</strong> Available 24/7 Across India</li>

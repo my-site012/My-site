@@ -44,7 +44,19 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: '*',
-        disallow: ['/'],
+        allow: ['/'],
+        disallow: [
+          '/admin',
+          '/dashboard',
+          '/login',
+          '/register',
+          '/create-profile',
+          '/api',
+          '/search',
+          '/search/',
+          '/search/*',
+          '/profile',
+        ],
       }
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

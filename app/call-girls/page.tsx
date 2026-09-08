@@ -120,7 +120,7 @@ export default function CallGirlsDirectory() {
         <div className="bg-red-50 p-8 rounded-2xl border border-red-200">
           <h3 className="text-xl font-bold text-red-800 mb-4 uppercase tracking-wide">Why Browse on CallGirl4U?</h3>
           <ul className="space-y-3 text-gray-800 font-medium">
-            <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> 100% Verified Profiles with Real Photos</li>
+            <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> Verified Profiles with Real Photos</li>
             <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> <strong>No advance payment</strong> - Pay Cash on Delivery</li>
             <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> Discreet and Private Meeting Locations</li>
             <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> <strong>Call Girls</strong> Available 24/7 in All Major Indian Cities</li>
