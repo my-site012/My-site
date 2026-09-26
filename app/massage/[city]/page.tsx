@@ -1,5 +1,7 @@
 import { getAllCities, getCitySlug, getStateFromCity, locations, EXTENDED_CITIES, isExtendedCity } from "@/lib/data/locations";
 import AdCard from "@/components/AdCard";
+import NearbyCitiesNav from "@/components/NearbyCitiesNav";
+import { generateEnhancedLocalBusinessSchema, generateBreadcrumbsSchema } from "@/lib/seo-enhancements";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
@@ -430,6 +432,25 @@ export default async function MassageCityPage({ params, searchParams }: { params
     ]
   };
 
+  // 1, 2, 3: Enhanced LocalBusiness Schema with Star Ratings, GeoCoordinates, and Wikipedia Entity Grounding
+  const localBusinessSchema = generateEnhancedLocalBusinessSchema({
+    title: `Massage Service in ${cityName}`,
+    description: `Find verified massage therapists and wellness spas in ${cityName}, ${state}.`,
+    cityName,
+    citySlug: city,
+    stateName: state,
+    categorySlug: "massage",
+    phone: effectivePhone || "+91 9232504628",
+  });
+
+  // 4: BreadcrumbList Schema for Google Search Hierarchy
+  const breadcrumbsSchema = generateBreadcrumbsSchema(
+    "Massage Service",
+    "massage",
+    cityName,
+    city
+  );
+
   return (
     <div className="bg-gray-50 pb-12">
       {/* Dynamic SEO JSON-LD — CollectionPage */}
@@ -441,6 +462,16 @@ export default async function MassageCityPage({ params, searchParams }: { params
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {/* 1, 2, 3: LocalBusiness + Star Ratings + GeoCoordinates + Wikipedia sameAs */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      {/* 4: BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
       />
 
 
@@ -640,26 +671,14 @@ export default async function MassageCityPage({ params, searchParams }: { params
           })}
         </div>
 
-        {/* Nearby Cities / Localities in State */}
-        {state && locations[state] && locations[state].length > 1 && (
-          <div className="max-w-4xl mx-auto px-4 mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-6 uppercase tracking-wider text-center">
-              Other Cities & Locations in {state}
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-center">
-              {locations[state]
-                .filter(c => getCitySlug(c) !== city)
-                .slice(0, 16)
-                .map(c => (
-                  <Link prefetch={false} key={c}
-                    href={`/massage/${getCitySlug(c)}`}
-                    className="text-xs font-semibold text-blue-600 hover:text-red-600 hover:underline py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors capitalize">
-                    {c.toLowerCase()} Massage
-                  </Link>
-                ))}
-            </div>
-          </div>
-        )}
+        {/* Point 6: Enhanced Nearby Cities Navigation Hub + Rating Badge */}
+        <NearbyCitiesNav
+          cityName={cityName}
+          citySlug={city}
+          stateName={state}
+          categorySlug="massage"
+          categoryLabel="Massage"
+        />
 
 
         {/* Cross-Service Interlinking Section */}
