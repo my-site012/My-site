@@ -1,6 +1,7 @@
 import { getAllCities, getCitySlug, getStateFromCity, locations, getCallGirlsSlug, EXTENDED_CITIES, isExtendedCity } from "@/lib/data/locations";
 import { cityContentData, CitySEOContent } from "@/lib/data/cityContent";
 import AdCard from "@/components/AdCard";
+import TelegramBanner from "@/components/TelegramBanner";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
@@ -383,6 +384,9 @@ export default async function CityPage({ params, searchParams }: { params: Promi
       )}
 
       <section className="max-w-7xl mx-auto px-4 py-8">
+        <div className="mb-6">
+          <TelegramBanner />
+        </div>
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl text-gray-900">Featured Profiles in {cityName}</h2>
           <span className="text-gray-500 text-sm">{totalAdsToShow} Ads Available (Page {currentPage}/{totalPages})</span>

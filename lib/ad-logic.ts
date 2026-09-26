@@ -1,3 +1,5 @@
+import { getAllCities, getCitySlug } from "./data/locations";
+
 export const names = [
   "Priya", "Neha", "Kajal", "Simran", "Riya", "Pooja", "Deepika", "Nisha", "Aarti", "Meera", 
   "Sonia", "Reshma", "Anjali", "Tanya", "Zoya", "Preeti", "Ishani", "Sanya", "Varsha", "Divya", 
@@ -785,6 +787,106 @@ export const imagePool = [
     "model5_imgi98389_343a6f63.webp"
 ];
 
+// Lazy-cached list of unique city slugs
+let _cachedCitySlugs: string[] | null = null;
+export function getCitySlugList(): string[] {
+  if (!_cachedCitySlugs) {
+    try {
+      const all = getAllCities().map(c => getCitySlug(c));
+      _cachedCitySlugs = Array.from(new Set(all));
+    } catch {
+      _cachedCitySlugs = [];
+    }
+  }
+  return _cachedCitySlugs;
+}
+
+/**
+ * Shifts/swaps any city slug to another city across India.
+ * A cyclic permutation (derangement) ensures every city receives another city's profiles.
+ */
+export function getRotatedCitySlug(citySlug: string): string {
+  if (!citySlug) return "mumbai";
+  const clean = citySlug.toLowerCase().trim();
+  const list = getCitySlugList();
+  if (list.length === 0) return clean;
+
+  const idx = list.indexOf(clean);
+  if (idx !== -1) {
+    // 79 is a prime number that cleanly permutes the city list across diverse states & regions
+    const newIdx = (idx + 79) % list.length;
+    return list[newIdx];
+  }
+
+  // Fallback for sub-areas / non-standard slugs (Jaipur sub-areas, etc.):
+  const hash = getHash(clean + "-rot-salt-v1");
+  return list[hash % list.length];
+}
+
+/**
+ * Decomposes any profile seed (e.g. "delhi", "delhi-0", "msg-pune-2", "boy-jaipur-1"),
+ * extracts the city portion, rotates it to another city, and rebuilds the seed.
+ */
+export function getRotatedSeed(seed: string): string {
+  if (!seed) return seed;
+  if (seed.startsWith("user-") || seed.startsWith("approved-")) {
+    return seed;
+  }
+
+  // Massage ads: msg-[city]-[index] or msg-[city]
+  if (seed.startsWith("msg-")) {
+    const rest = seed.substring(4);
+    const parts = rest.split("-");
+    const lastPart = parts[parts.length - 1];
+    if (parts.length > 1 && !isNaN(Number(lastPart))) {
+      const city = parts.slice(0, -1).join("-");
+      const rotatedCity = getRotatedCitySlug(city);
+      return `msg-${rotatedCity}-${lastPart}`;
+    } else {
+      const rotatedCity = getRotatedCitySlug(rest);
+      return `msg-${rotatedCity}`;
+    }
+  }
+
+  // Call Boy ads: boy-[city]-[index] or [city]-boy
+  if (seed.startsWith("boy-")) {
+    const rest = seed.substring(4);
+    const parts = rest.split("-");
+    const lastPart = parts[parts.length - 1];
+    if (parts.length > 1 && !isNaN(Number(lastPart))) {
+      const city = parts.slice(0, -1).join("-");
+      const rotatedCity = getRotatedCitySlug(city);
+      return `boy-${rotatedCity}-${lastPart}`;
+    } else {
+      const rotatedCity = getRotatedCitySlug(rest);
+      return `boy-${rotatedCity}`;
+    }
+  }
+
+  if (seed.endsWith("-boy")) {
+    const city = seed.slice(0, -4);
+    const rotatedCity = getRotatedCitySlug(city);
+    return `${rotatedCity}-boy`;
+  }
+
+  // Featured homepage
+  if (seed.startsWith("featured")) {
+    return `${seed}-rotated-cross-city`;
+  }
+
+  // Standard Call Girl ad: [city]-[index]
+  const parts = seed.split("-");
+  const lastPart = parts[parts.length - 1];
+  if (parts.length > 1 && !isNaN(Number(lastPart))) {
+    const city = parts.slice(0, -1).join("-");
+    const rotatedCity = getRotatedCitySlug(city);
+    return `${rotatedCity}-${lastPart}`;
+  }
+
+  // Bare city slug (e.g. "delhi", "mumbai")
+  return getRotatedCitySlug(seed);
+}
+
 export function getHash(seed: string): number {
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
@@ -795,20 +897,23 @@ export function getHash(seed: string): number {
 }
 
 export function getNameFromId(seed: string): string {
-  const hash = getHash(seed);
+  const effectiveSeed = getRotatedSeed(seed);
+  const hash = getHash(effectiveSeed);
   return names[hash % names.length];
 }
 
 export function getPriceFromId(seed: string): number {
-  const hash = getHash(seed);
+  const effectiveSeed = getRotatedSeed(seed);
+  const hash = getHash(effectiveSeed);
   return (5 + (hash % 10)) * 1000;
 }
 
 export function getDeterministicImagesPool(seed: string, count: number): string[] {
   if (imagePool.length === 0) return [];
 
-  // Append salt to seed to completely shuffle the image pool assignments while keeping names/prices consistent
-  const hash = getHash(seed + "-shuffled-salt-v4");
+  // Use rotated seed so profiles are redistributed across cities
+  const effectiveSeed = getRotatedSeed(seed);
+  const hash = getHash(effectiveSeed + "-shuffled-salt-v4");
   const result: string[] = [];
   const usedIndices = new Set<number>();
   
@@ -892,13 +997,15 @@ export const boyNames = [
 ];
 
 export function getBoyNameFromId(seed: string): string {
-  const hash = getHash(seed);
+  const effectiveSeed = getRotatedSeed(seed);
+  const hash = getHash(effectiveSeed);
   return boyNames[hash % boyNames.length];
 }
 
 export function getDeterministicBoyImagesPool(seed: string, count: number): string[] {
   if (boyImagePool.length === 0) return [];
-  const hash = getHash(seed + "-boy-salt-v1");
+  const effectiveSeed = getRotatedSeed(seed);
+  const hash = getHash(effectiveSeed + "-boy-salt-v1");
   const result: string[] = [];
   for (let i = 0; i < count; i++) {
     const index = (hash + (i * 7)) % boyImagePool.length;

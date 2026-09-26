@@ -4,6 +4,7 @@ import AdCard from "@/components/AdCard";
 import { getAllCities } from "@/lib/data/locations";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId } from "@/lib/ad-logic";
 import CitySearch from "@/components/CitySearch";
+import TelegramBanner from "@/components/TelegramBanner";
 import { cachedGetValue } from "@/lib/kv";
 
 // ISR: revalidate every hour — homepage content is deterministic
@@ -102,6 +103,11 @@ export default async function Home() {
           </p>
           
           <CitySearch cities={getAllCities()} layout="hero" />
+
+          {/* FunGirls / VIP Telegram Channel Banner */}
+          <div className="mt-8 text-left max-w-3xl mx-auto">
+            <TelegramBanner />
+          </div>
         </div>
       </section>
 
@@ -111,6 +117,8 @@ export default async function Home() {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Featured Profiles</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {Array.from({ length: 8 }).map((_, index) => {
+              const popularCities = ["Mumbai", "Bengaluru", "Delhi NCR", "Jaipur", "Goa", "Kolkata", "Hyderabad", "Pune"];
+              const currentCity = popularCities[index % popularCities.length];
               const adId = `featured-${index}`;
               const adName = getNameFromId(adId);
               const price = getPriceFromId(adId);
@@ -121,7 +129,7 @@ export default async function Home() {
                   key={index}
                   id={adId}
                   title={`${adName} – Independent Profile`}
-                  location="Delhi NCR"
+                  location={currentCity}
                   price={price}
                   imagePath={imgPath}
                   index={index}
