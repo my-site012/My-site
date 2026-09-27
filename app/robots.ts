@@ -59,6 +59,12 @@ export default function robots(): MetadataRoute.Robots {
         ],
       }
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [
+      `${baseUrl}/sitemap.xml`,
+      `${baseUrl}/sitemap_main.xml`,
+      `${baseUrl}/sitemap_call_girls.xml`,
+      `${baseUrl}/sitemap_call_boys.xml`,
+      `${baseUrl}/sitemap_massage.xml`,
+    ],
   };
 }

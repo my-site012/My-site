@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AgeVerification from "@/components/AgeVerification";
 import SecurityProvider from "@/components/SecurityProvider";
-import TelegramFloatingButton from "@/components/TelegramFloatingButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://callgirl4u.com"),
@@ -106,7 +105,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <TelegramFloatingButton />
       </body>
     </html>
   );

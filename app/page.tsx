@@ -4,7 +4,6 @@ import AdCard from "@/components/AdCard";
 import { getAllCities } from "@/lib/data/locations";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId } from "@/lib/ad-logic";
 import CitySearch from "@/components/CitySearch";
-import TelegramBanner from "@/components/TelegramBanner";
 import { cachedGetValue } from "@/lib/kv";
 
 // ISR: revalidate every hour — homepage content is deterministic
@@ -103,11 +102,6 @@ export default async function Home() {
           </p>
           
           <CitySearch cities={getAllCities()} layout="hero" />
-
-          {/* FunGirls / VIP Telegram Channel Banner */}
-          <div className="mt-8 text-left max-w-3xl mx-auto">
-            <TelegramBanner />
-          </div>
         </div>
       </section>
 
