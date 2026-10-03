@@ -36,6 +36,9 @@ export async function POST(req: NextRequest) {
     if (!city || typeof city !== "string" || !city.trim()) {
       return NextResponse.json({ error: "Please select your location / city" }, { status: 400 });
     }
+    if (!utr || typeof utr !== "string" || utr.trim().length < 8) {
+      return NextResponse.json({ error: "Please enter your 12-digit UPI UTR / Transaction Reference ID" }, { status: 400 });
+    }
 
     // Generate Unique Token (e.g. BK-783921)
     const randomNum = Math.floor(100000 + Math.random() * 900000);

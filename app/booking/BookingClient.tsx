@@ -140,6 +140,17 @@ export default function BookingClient({
   // Step 2 Submission & Token Generation
   const handleSubmitBooking = async () => {
     setErrorMessage("");
+
+    if (!utr || !utr.trim()) {
+      setErrorMessage("Please enter your 12-digit UPI Ref / UTR Number to receive your token.");
+      return;
+    }
+
+    if (utr.trim().length < 8) {
+      setErrorMessage("Please enter a valid UPI Reference / UTR Number (must be at least 8 to 12 digits).");
+      return;
+    }
+
     setSubmitting(true);
 
     try {
@@ -958,21 +969,39 @@ Please confirm and dispatch!`;
 
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          12-Digit UPI Ref / UTR / Transaction ID <span className="text-red-500">*</span>
-                        </label>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-xs font-bold text-gray-700">
+                            12-Digit UPI Ref / UTR / Transaction ID <span className="text-red-500">*</span>
+                          </label>
+                          <span className="text-[10px] text-red-600 font-bold uppercase tracking-wider bg-red-50 px-2 py-0.5 rounded border border-red-200">
+                            Mandatory
+                          </span>
+                        </div>
                         <input
                           type="text"
                           required
                           value={utr}
                           maxLength={16}
-                          onChange={(e) => setUtr(e.target.value.replace(/[^a-zA-Z0-9]/g, ""))}
+                          onChange={(e) => {
+                            setUtr(e.target.value.replace(/[^a-zA-Z0-9]/g, ""));
+                            if (errorMessage) setErrorMessage("");
+                          }}
                           placeholder="e.g. 423891028371"
-                          className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:bg-white focus:border-red-600 focus:ring-2 focus:ring-red-100 outline-none text-base font-mono font-bold uppercase transition"
+                          className={`w-full px-4 py-3 bg-gray-50 border-2 rounded-xl focus:bg-white focus:ring-2 outline-none text-base font-mono font-bold uppercase transition ${
+                            !utr.trim() && errorMessage
+                              ? "border-red-500 ring-2 ring-red-200 bg-red-50/20"
+                              : "border-gray-200 focus:border-red-600 focus:ring-red-100"
+                          }`}
                         />
-                        <p className="text-[11px] text-gray-400 mt-1">
-                          Tip: Found in your Google Pay, PhonePe, or Paytm payment receipt under &quot;UPI Ref No.&quot; or &quot;UTR&quot;.
-                        </p>
+                        {!utr.trim() && errorMessage ? (
+                          <p className="text-xs text-red-600 font-bold mt-1.5 flex items-center gap-1 animate-pulse">
+                            <span>⚠️</span> UTR Number is required! Please enter your 12-digit UPI UTR to proceed.
+                          </p>
+                        ) : (
+                          <p className="text-[11px] text-gray-400 mt-1">
+                            Tip: Found in your Google Pay, PhonePe, or Paytm payment receipt under &quot;UPI Ref No.&quot; or &quot;UTR&quot;.
+                          </p>
+                        )}
                       </div>
 
                       <div>
