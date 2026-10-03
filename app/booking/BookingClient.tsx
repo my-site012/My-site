@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -55,6 +55,44 @@ export default function BookingClient({
   const [trackingLoading, setTrackingLoading] = useState(false);
   const [trackedBooking, setTrackedBooking] = useState<any>(null);
   const [trackError, setTrackError] = useState("");
+
+  // 5-minute auto lockout state after payment
+  const [isLockedOut, setIsLockedOut] = useState(false);
+  const [secondsRemaining, setSecondsRemaining] = useState<number | null>(null);
+  const [savedToken, setSavedToken] = useState("");
+
+  useEffect(() => {
+    try {
+      const paidAt = localStorage.getItem("cg_booking_paid_at");
+      const token = localStorage.getItem("cg_booking_token");
+      if (token) setSavedToken(token);
+
+      if (paidAt) {
+        const elapsed = Math.floor((Date.now() - Number(paidAt)) / 1000);
+        const limit = 5 * 60; // 5 minutes = 300 seconds
+        if (elapsed >= limit) {
+          setIsLockedOut(true);
+          setSecondsRemaining(0);
+        } else {
+          setSecondsRemaining(limit - elapsed);
+        }
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    if (secondsRemaining === null || secondsRemaining <= 0) return;
+    const timer = setInterval(() => {
+      setSecondsRemaining((prev) => {
+        if (prev === null || prev <= 1) {
+          setIsLockedOut(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [secondsRemaining]);
 
   // Cities for selected state or all filtered
   const availableCities = useMemo(() => {
@@ -184,8 +222,18 @@ export default function BookingClient({
 
       setGeneratedToken(data.token);
       setConfirmedBooking(data.booking);
+      setSavedToken(data.token);
       setStep(3);
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Save 5-minute lockout timer
+      try {
+        const now = Date.now();
+        localStorage.setItem("cg_booking_paid_at", now.toString());
+        localStorage.setItem("cg_booking_token", data.token);
+        document.cookie = `cg_booking_paid_at=${now}; path=/; max-age=2592000; SameSite=Lax`;
+        setSecondsRemaining(300);
+      } catch {}
     } catch (err: any) {
       setErrorMessage(err.message || "Failed to submit booking. Please try again.");
     } finally {
@@ -241,43 +289,91 @@ Please confirm and dispatch!`;
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 py-8 px-3 sm:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Top Header & Navigation Breadcrumb */}
-        <div className="flex items-center justify-between gap-2 mb-6">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-gray-600 hover:text-red-600 flex items-center gap-1 transition"
-          >
-            ← Back to Home
-          </Link>
-          <div className="flex bg-gray-200 p-1 rounded-xl text-xs font-bold">
-            <button
-              onClick={() => {
-                setActiveTab("book");
-              }}
-              className={`px-3 py-1.5 rounded-lg transition ${
-                activeTab === "book"
-                  ? "bg-red-600 text-white shadow"
-                  : "text-gray-700 hover:text-black"
-              }`}
+        {!isLockedOut && (
+          <div className="flex items-center justify-between gap-2 mb-6">
+            <Link
+              href="/"
+              className="text-sm font-semibold text-gray-600 hover:text-red-600 flex items-center gap-1 transition"
             >
-              📅 New Booking
-            </button>
-            <button
-              onClick={() => {
-                setActiveTab("track");
-              }}
-              className={`px-3 py-1.5 rounded-lg transition ${
-                activeTab === "track"
-                  ? "bg-red-600 text-white shadow"
-                  : "text-gray-700 hover:text-black"
-              }`}
-            >
-              🔍 Track Token
-            </button>
+              ← Back to Home
+            </Link>
+            <div className="flex bg-gray-200 p-1 rounded-xl text-xs font-bold">
+              <button
+                onClick={() => {
+                  setActiveTab("book");
+                }}
+                className={`px-3 py-1.5 rounded-lg transition ${
+                  activeTab === "book"
+                    ? "bg-red-600 text-white shadow"
+                    : "text-gray-700 hover:text-black"
+                }`}
+              >
+                📅 New Booking
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab("track");
+                }}
+                className={`px-3 py-1.5 rounded-lg transition ${
+                  activeTab === "track"
+                    ? "bg-red-600 text-white shadow"
+                    : "text-gray-700 hover:text-black"
+                }`}
+              >
+                🔍 Track Token
+              </button>
+            </div>
           </div>
-        </div>
+        )}
+
+        {/* LOCKED OUT SCREEN (AFTER 5 MINUTES OF PAYMENT) */}
+        {isLockedOut && (
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-12 text-center max-w-lg mx-auto mb-12 animate-fadeIn">
+            <div className="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-sm ring-8 ring-red-50">
+              🔒
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-2">
+              Booking Session Closed
+            </h2>
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">
+              Your payment has been received and your booking request has already been registered. For privacy and security reasons, this booking page is automatically closed after 5 minutes of payment.
+            </p>
+
+            {savedToken && (
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-6 text-center">
+                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-widest block mb-1">
+                  Your Registered Token Number
+                </span>
+                <span className="text-2xl font-mono font-black text-red-600">
+                  {savedToken}
+                </span>
+              </div>
+            )}
+
+            <div className="space-y-3">
+              <a
+                href={`https://wa.me/919232504628?text=${encodeURIComponent(
+                  `Hello Support, my booking token is ${savedToken || "registered"}. Please assist me!`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl shadow transition text-sm active:scale-95"
+              >
+                <span>💬</span> Contact Support on WhatsApp
+              </a>
+
+              <Link
+                href="/"
+                className="w-full inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition text-sm"
+              >
+                ← Return to Website
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* TRACK TOKEN TAB */}
-        {activeTab === "track" && (
+        {!isLockedOut && activeTab === "track" && (
           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-10 mb-12">
             <div className="text-center max-w-lg mx-auto mb-8">
               <span className="text-4xl mb-3 inline-block">🎟️</span>
@@ -385,7 +481,7 @@ Please confirm and dispatch!`;
         )}
 
         {/* BOOKING FLOW TAB */}
-        {activeTab === "book" && (
+        {!isLockedOut && activeTab === "book" && (
           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-12">
             {/* Top Banner & Title */}
             <div className="bg-gradient-to-r from-red-600 via-red-700 to-rose-700 text-white p-6 sm:p-8 text-center relative overflow-hidden">
@@ -1061,7 +1157,7 @@ Please confirm and dispatch!`;
             {step === 3 && confirmedBooking && (
               <div className="p-6 sm:p-10 animate-fadeIn">
                 {/* Celebratory Banner */}
-                <div className="text-center max-w-lg mx-auto mb-8">
+                <div className="text-center max-w-lg mx-auto mb-6">
                   <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-sm ring-8 ring-emerald-50">
                     ✓
                   </div>
@@ -1072,6 +1168,20 @@ Please confirm and dispatch!`;
                     Your appointment request has been recorded. Here is your official booking pass:
                   </p>
                 </div>
+
+                {/* 5-minute security countdown notice */}
+                {secondsRemaining !== null && secondsRemaining > 0 && (
+                  <div className="max-w-xl mx-auto mb-6 bg-amber-50 border border-amber-300 rounded-2xl p-3.5 flex items-center justify-between text-xs text-amber-900 font-semibold shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <span className="text-base animate-pulse">⏱️</span>
+                      <span>This booking session will close in:</span>
+                    </div>
+                    <span className="font-mono font-black text-sm bg-white px-2.5 py-1 rounded-lg border border-amber-200 text-red-600">
+                      {Math.floor(secondsRemaining / 60)}:
+                      {(secondsRemaining % 60).toString().padStart(2, "0")}
+                    </span>
+                  </div>
+                )}
 
                 {/* Printable Token Pass */}
                 <div
@@ -1174,7 +1284,7 @@ Please confirm and dispatch!`;
                 </div>
 
                 {/* Instant Actions */}
-                <div className="max-w-xl mx-auto space-y-3">
+                <div className="max-w-xl mx-auto">
                   {/* WhatsApp Support Share Button */}
                   <a
                     href={`https://wa.me/919232504628?text=${encodeURIComponent(
@@ -1187,34 +1297,6 @@ Please confirm and dispatch!`;
                     <span className="text-xl">💬</span>
                     <span>Send Token to Support on WhatsApp for Instant Dispatch</span>
                   </a>
-
-                  {/* Print / Save Receipt Button */}
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => window.print()}
-                      className="flex-1 bg-gray-900 hover:bg-black text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow"
-                    >
-                      <span>🖨️</span> Print / Save Receipt
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setStep(1);
-                        setName("");
-                        setPhone("");
-                        setAddress("");
-                        setUtr("");
-                        setUpiSender("");
-                        setNotes("");
-                        setConfirmedBooking(null);
-                        setGeneratedToken("");
-                      }}
-                      className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 border border-gray-200"
-                    >
-                      <span>🔄</span> Book Another Appointment
-                    </button>
-                  </div>
                 </div>
               </div>
             )}
