@@ -16,6 +16,7 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex flex-wrap gap-4 text-sm text-blue-700 mb-4">
+          <Link prefetch={false} href="/booking" className="font-bold text-red-600">📅 Online Booking</Link>
           <Link prefetch={false} href="/privacy">Privacy Policy</Link>
           <Link prefetch={false} href="/dmca">DMCA Policy</Link>
           <Link prefetch={false} href="/terms">Terms and Conditions</Link>

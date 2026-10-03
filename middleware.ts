@@ -59,7 +59,8 @@ export async function middleware(request: NextRequest) {
   const TOP_LEVEL_EXEMPTIONS = new Set([
     'call-girls', 'call-boys', 'massage', 'blog', 'admin', 'login', 'signup',
     'privacy-policy', 'terms-and-conditions', 'disclaimer', 'contact',
-    'dmca', 'terms', 'privacy', 'forums', 'maintenance', 'ad', 'sitemap.xml'
+    'dmca', 'terms', 'privacy', 'forums', 'maintenance', 'ad', 'sitemap.xml',
+    'booking'
   ]);
   const singleSegmentMatch = normalizedPath.match(/^\/([a-z0-9.-]+)$/);
   if (singleSegmentMatch) {

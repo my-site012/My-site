@@ -13,6 +13,19 @@ export default function AdminPage() {
   const [boyPhones, setBoyPhones] = useState<string[]>(["", "", "", "", "", ""]);
   const [jaipurPhone, setJaipurPhone] = useState("");
   const [pendingAds, setPendingAds] = useState<any[]>([]);
+  const [bookings, setBookings] = useState<any[]>([]);
+
+  const fetchBookings = useCallback(async () => {
+    try {
+      const res = await fetch("/api/booking");
+      if (res.ok) {
+        const data = await res.json();
+        setBookings(data.bookings || []);
+      }
+    } catch (err) {
+      console.error("Failed to fetch bookings", err);
+    }
+  }, []);
 
   const fetchPendingAds = useCallback(async () => {
     try {
@@ -73,6 +86,7 @@ export default function AdminPage() {
         setStats(data);
         setFetchError("");
         fetchPendingAds();
+        fetchBookings();
       } else if (res.status === 401) {
         // Session expired, go back to login
         setIsLoggedIn(false);
@@ -82,7 +96,7 @@ export default function AdminPage() {
     } catch (err) {
       setFetchError("Network error. Check connection.");
     }
-  }, [fetchPendingAds]);
+  }, [fetchPendingAds, fetchBookings]);
 
   // On mount: check if session cookie exists by trying to fetch stats
   useEffect(() => {
@@ -93,12 +107,13 @@ export default function AdminPage() {
         setStats(data);
         setIsLoggedIn(true);
         fetchPendingAds();
+        fetchBookings();
       } else {
         setIsLoggedIn(false);
       }
     };
     checkSession();
-  }, [fetchPendingAds]);
+  }, [fetchPendingAds, fetchBookings]);
 
   // Auto-refresh every 30 seconds when logged in
   useEffect(() => {
@@ -542,6 +557,101 @@ export default function AdminPage() {
                 {message && <span className="text-green-600 font-bold text-sm animate-pulse">{message}</span>}
               </div>
             </form>
+          </div>
+        </div>
+
+        {/* Customer Bookings & Generated Tokens */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden mt-8">
+          <div className="p-6 border-b border-gray-50 flex justify-between items-center bg-gradient-to-r from-red-50/50 to-white">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">🎟️</span>
+              <h3 className="text-lg font-bold text-gray-900 uppercase tracking-tight">Customer Bookings &amp; Tokens</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs bg-red-100 text-red-700 px-3 py-1 rounded-full font-bold">{bookings.length} Bookings</span>
+              <button
+                type="button"
+                onClick={fetchBookings}
+                className="text-xs text-gray-500 hover:text-black font-bold p-1 rounded"
+                title="Refresh Bookings"
+              >
+                🔄 Refresh
+              </button>
+            </div>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider text-gray-500 font-bold">
+                  <th className="p-4">Token</th>
+                  <th className="p-4">Client / Phone</th>
+                  <th className="p-4">Mode / Service</th>
+                  <th className="p-4">Location</th>
+                  <th className="p-4">Duration</th>
+                  <th className="p-4">Payment UTR</th>
+                  <th className="p-4">Date / Time</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {bookings.map((b, i) => (
+                  <tr key={i} className="hover:bg-gray-50 transition-colors">
+                    <td className="p-4 font-mono font-black text-sm text-red-600 whitespace-nowrap">
+                      <span className="bg-red-50 border border-red-200 px-2.5 py-1 rounded-lg">
+                        {b.token}
+                      </span>
+                    </td>
+                    <td className="p-4">
+                      <div className="font-bold text-gray-900 text-sm">{b.name}</div>
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500 mt-0.5">
+                        <span>📞 {b.phone}</span>
+                        <a
+                          href={`https://wa.me/91${b.phone.replace(/\D/g, "")}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-emerald-600 font-bold hover:underline"
+                        >
+                          WhatsApp
+                        </a>
+                      </div>
+                    </td>
+                    <td className="p-4 text-xs font-semibold">
+                      <span className={`inline-block px-2 py-0.5 rounded ${b.serviceType === "Incall" ? "bg-blue-100 text-blue-800" : "bg-purple-100 text-purple-800"}`}>
+                        {b.serviceType}
+                      </span>
+                      <div className="text-gray-500 text-[11px] mt-0.5">{b.category}</div>
+                    </td>
+                    <td className="p-4 text-sm font-medium text-gray-800 whitespace-nowrap">
+                      {b.city} {b.state ? `(${b.state})` : ""}
+                      {b.address && <div className="text-[11px] text-gray-400 truncate max-w-[150px]">{b.address}</div>}
+                    </td>
+                    <td className="p-4 text-xs font-bold text-gray-700 whitespace-nowrap">
+                      {b.duration}
+                    </td>
+                    <td className="p-4 text-xs">
+                      <div className="font-bold text-emerald-700">₹{b.advanceAmount || 1000}</div>
+                      {b.utr ? (
+                        <span className="font-mono text-[11px] bg-gray-100 px-1.5 py-0.5 rounded text-gray-700">
+                          UTR: {b.utr}
+                        </span>
+                      ) : (
+                        <span className="text-[10px] text-amber-600 font-semibold">Pending UTR</span>
+                      )}
+                    </td>
+                    <td className="p-4 text-xs text-gray-500 whitespace-nowrap">
+                      <div>{b.date}</div>
+                      <div className="text-[10px] text-gray-400">{b.timeSlot}</div>
+                    </td>
+                  </tr>
+                ))}
+                {bookings.length === 0 && (
+                  <tr>
+                    <td colSpan={7} className="p-8 text-center text-gray-400 font-medium">
+                      No customer bookings received yet.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 

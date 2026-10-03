@@ -90,6 +90,12 @@ export default function Header() {
             </div>
           )}
 
+          {/* Online Booking Button */}
+          <Link prefetch={false} href="/booking" className="bg-emerald-600 text-white px-2 py-1 rounded-md text-[10px] md:text-sm font-bold hover:bg-emerald-700 transition shadow-md flex items-center gap-1 whitespace-nowrap">
+            <span>📅</span>
+            <span className="hidden xs:inline">Booking</span>
+          </Link>
+
           {/* Post Ad - Compact on mobile */}
           <Link prefetch={false} href="/ad/post" className="bg-red-600 text-white px-2 py-1 rounded-md text-[10px] md:text-sm font-bold hover:bg-black transition shadow-md flex items-center gap-0.5">
             <span className="hidden xs:inline">+</span> 
