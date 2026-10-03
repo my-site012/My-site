@@ -115,15 +115,15 @@ export default function BookingClient({
   const validateStep1 = () => {
     setErrorMessage("");
     if (!name.trim()) {
-      setErrorMessage("Please enter your full name (अपना नाम दर्ज करें).");
+      setErrorMessage("Please enter your full name.");
       return false;
     }
     if (!phone.trim() || phone.replace(/\D/g, "").length < 10) {
-      setErrorMessage("Please enter a valid 10-digit mobile number (मान्य 10 अंकों का मोबाइल नंबर दर्ज करें).");
+      setErrorMessage("Please enter a valid 10-digit mobile number.");
       return false;
     }
     if (!selectedCity) {
-      setErrorMessage("Please select your location / city (कृपया अपना शहर चुनें).");
+      setErrorMessage("Please select your city / location.");
       return false;
     }
     return true;
@@ -461,7 +461,7 @@ Please confirm and dispatch!`;
                 <div>
                   <h2 className="text-base font-black text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs">1</span>
-                    Client Information (क्लाइंट की जानकारी)
+                    Client Information
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
@@ -507,7 +507,7 @@ Please confirm and dispatch!`;
                 <div className="border-t border-gray-100 pt-6">
                   <h2 className="text-base font-black text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs">2</span>
-                    Service Type &amp; Mode (सर्विस का प्रकार)
+                    Service Type &amp; Mode
                   </h2>
 
                   {/* Category Selection */}
@@ -607,7 +607,7 @@ Please confirm and dispatch!`;
                 <div className="border-t border-gray-100 pt-6">
                   <h2 className="text-base font-black text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-2">
                     <span className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs">3</span>
-                    Duration Required (कितने समय के लिए चाहिए) <span className="text-red-500">*</span>
+                    Duration Required <span className="text-red-500">*</span>
                   </h2>
                   <p className="text-xs text-gray-500 mb-3">Choose the duration you need the appointment for:</p>
 
@@ -658,40 +658,17 @@ Please confirm and dispatch!`;
                 <div className="border-t border-gray-100 pt-6">
                   <h2 className="text-base font-black text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-2">
                     <span className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs">4</span>
-                    Choose Location (लोकेशन चुनें) <span className="text-red-500">*</span>
+                    Choose Location <span className="text-red-500">*</span>
                   </h2>
                   <p className="text-xs text-gray-500 mb-3">
-                    Select any city available across India:
+                    Select your state and city across India:
                   </p>
-
-                  {/* Popular quick-select city pills */}
-                  <div className="mb-4">
-                    <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-2">
-                      Popular Cities:
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {popularCities.slice(0, 14).map((city) => (
-                        <button
-                          key={city}
-                          type="button"
-                          onClick={() => handleQuickCitySelect(city)}
-                          className={`text-xs px-3 py-1.5 rounded-full font-bold transition border cursor-pointer ${
-                            selectedCity.toLowerCase() === city.toLowerCase()
-                              ? "bg-red-600 text-white border-red-600 shadow-sm"
-                              : "bg-gray-100 text-gray-700 border-gray-200 hover:bg-gray-200"
-                          }`}
-                        >
-                          {city}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
 
                   {/* State and City Selectors */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-gray-700 mb-1">
-                        Select State (राज्य)
+                        Select State
                       </label>
                       <select
                         value={selectedState}
@@ -709,7 +686,7 @@ Please confirm and dispatch!`;
 
                     <div>
                       <label className="block text-xs font-bold text-gray-700 mb-1">
-                        Select City (शहर) <span className="text-red-500">*</span>
+                        Select City <span className="text-red-500">*</span>
                       </label>
                       <div className="space-y-2 relative">
                         <div className="relative">
@@ -822,7 +799,7 @@ Please confirm and dispatch!`;
                 <div className="border-t border-gray-100 pt-6">
                   <h2 className="text-base font-black text-gray-900 uppercase tracking-wider flex items-center gap-2 mb-4">
                     <span className="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xs">5</span>
-                    Appointment Schedule (तारीख और समय)
+                    Appointment Schedule
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
