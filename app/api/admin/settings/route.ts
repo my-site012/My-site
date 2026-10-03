@@ -15,6 +15,9 @@ export async function GET(req: NextRequest) {
   const logs = await getLogs("whatsapp_activity_logs", 50);
   const maintenance = (await getValue("maintenance_mode")) === "true";
   const dailyHits = await getDailyHits(30);
+  const bookingAdvancePrice = await getValue("booking_advance_price");
+  const bookingQrImage = await getValue("booking_qr_image");
+  const bookingUpiId = await getValue("booking_upi_id");
   
   return NextResponse.json({ 
     clicks: Number(clicks) || 0, 
@@ -24,6 +27,9 @@ export async function GET(req: NextRequest) {
     logs: logs || [],
     maintenance: maintenance,
     dailyHits: dailyHits,
+    bookingAdvancePrice: bookingAdvancePrice || "1000",
+    bookingQrImage: bookingQrImage || "/images/payment-qr.png",
+    bookingUpiId: bookingUpiId || "sharmajii01@fam",
   });
 }
 
@@ -31,7 +37,7 @@ export async function POST(req: NextRequest) {
   const session = req.cookies.get("admin_session");
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { phone, callBoyPhone, jaipurPhone, maintenance } = await req.json();
+  const { phone, callBoyPhone, jaipurPhone, maintenance, bookingAdvancePrice, bookingQrImage, bookingUpiId } = await req.json();
   
   if (phone !== undefined) {
     await setValue("contact_phone", phone);
@@ -44,6 +50,15 @@ export async function POST(req: NextRequest) {
   }
   if (maintenance !== undefined) {
     await setValue("maintenance_mode", maintenance ? "true" : "false");
+  }
+  if (bookingAdvancePrice !== undefined) {
+    await setValue("booking_advance_price", String(bookingAdvancePrice));
+  }
+  if (bookingQrImage !== undefined) {
+    await setValue("booking_qr_image", bookingQrImage);
+  }
+  if (bookingUpiId !== undefined) {
+    await setValue("booking_upi_id", bookingUpiId);
   }
   
   // Bust ISR cache so phone number changes reflect immediately on all pages
@@ -61,6 +76,7 @@ export async function POST(req: NextRequest) {
     revalidatePath("/call-girls/jaipur-vaishali-nagar", "page");
     revalidatePath("/call-boys", "layout");
     revalidatePath("/massage", "layout");
+    revalidatePath("/booking", "page");
   } catch {}
   
   return NextResponse.json({ success: true });

@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 interface BookingClientProps {
   locations: Record<string, string[]>;
   states: string[];
   popularCities: string[];
   allWebsiteCities?: string[];
+  defaultAdvancePrice?: number;
+  defaultQrImage?: string;
+  defaultUpiId?: string;
 }
 
 export default function BookingClient({
@@ -16,20 +19,45 @@ export default function BookingClient({
   states,
   popularCities,
   allWebsiteCities = [],
+  defaultAdvancePrice = 1000,
+  defaultQrImage = "/images/payment-qr.png",
+  defaultUpiId = "sharmajii01@fam",
 }: BookingClientProps) {
+  const searchParams = useSearchParams();
+
+  // Read URL params if link was generated specifically for a client
+  const paramAmount = searchParams?.get("amount") ? Number(searchParams.get("amount")) : null;
+  const paramName = searchParams?.get("name") || "";
+  const paramPhone = searchParams?.get("phone") || "";
+  const paramCity = searchParams?.get("city") || "";
+  const paramService = searchParams?.get("service") || "";
+  const paramStep = searchParams?.get("step") || "";
+
+  const advanceAmount = useMemo(() => {
+    if (paramAmount && !isNaN(paramAmount) && paramAmount > 0) {
+      return paramAmount;
+    }
+    return defaultAdvancePrice || 1000;
+  }, [paramAmount, defaultAdvancePrice]);
+
+  const qrImage = defaultQrImage || "/images/payment-qr.png";
+  const upiId = defaultUpiId || "sharmajii01@fam";
+
   // Navigation / Tab state
   const [activeTab, setActiveTab] = useState<"book" | "track">("book");
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step, setStep] = useState<1 | 2 | 3>(paramStep === "2" ? 2 : 1);
 
   // Form Fields
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [serviceType, setServiceType] = useState<"Incall" | "Outcall">("Incall");
+  const [name, setName] = useState(paramName);
+  const [phone, setPhone] = useState(paramPhone);
+  const [serviceType, setServiceType] = useState<"Incall" | "Outcall">(
+    paramService.toLowerCase() === "outcall" ? "Outcall" : "Incall"
+  );
   const [duration, setDuration] = useState("2 Hours");
   const [category, setCategory] = useState("Call Girls");
   const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-  const [citySearch, setCitySearch] = useState("");
+  const [selectedCity, setSelectedCity] = useState(paramCity);
+  const [citySearch, setCitySearch] = useState(paramCity);
   const [address, setAddress] = useState("");
   const [date, setDate] = useState(() => {
     const today = new Date();
@@ -43,6 +71,22 @@ export default function BookingClient({
   const [upiSender, setUpiSender] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Sync params if URL changes or client loads with query params
+  useEffect(() => {
+    if (paramName && !name) setName(paramName);
+    if (paramPhone && !phone) setPhone(paramPhone);
+    if (paramCity && !selectedCity) {
+      setSelectedCity(paramCity);
+      setCitySearch(paramCity);
+    }
+    if (paramService && (paramService.toLowerCase() === "outcall" || paramService.toLowerCase() === "incall")) {
+      setServiceType(paramService.toLowerCase() === "outcall" ? "Outcall" : "Incall");
+    }
+    if (paramStep === "2") {
+      setStep(2);
+    }
+  }, [paramName, paramPhone, paramCity, paramService, paramStep]);
   const [copiedUpi, setCopiedUpi] = useState(false);
 
   // Step 3 / Result
@@ -203,7 +247,7 @@ export default function BookingClient({
         address,
         date,
         timeSlot,
-        advanceAmount: 1000,
+        advanceAmount: advanceAmount,
         utr,
         upiSender,
         notes,
@@ -271,6 +315,7 @@ export default function BookingClient({
   const getWhatsAppMessage = (tokenVal: string, bookingObj?: any) => {
     const b = bookingObj || confirmedBooking;
     const utrStr = b?.utr ? `\nPayment UTR: ${b.utr}` : "";
+    const paidAmt = b?.advanceAmount || advanceAmount;
     return `Hello CallGirl4U Team,
 I have booked an appointment online.
 *Token Number:* ${tokenVal}
@@ -280,7 +325,7 @@ I have booked an appointment online.
 *Service:* ${b?.serviceType || serviceType}
 *Duration:* ${b?.duration || duration}
 *Date & Slot:* ${b?.date || date} (${b?.timeSlot || timeSlot})
-*Advance Paid:* ₹1,000${utrStr}
+*Advance Paid:* ₹${Number(paidAmt).toLocaleString("en-IN")}${utrStr}
 
 Please confirm and dispatch!`;
   };
@@ -1004,23 +1049,25 @@ Please confirm and dispatch!`;
                     <span className="text-xs font-black tracking-widest uppercase text-gray-500 mb-1">
                       ACCEPTED HERE
                     </span>
-                    <h3 className="text-lg font-black text-gray-900 mb-3">Scan &amp; Pay ₹1,000</h3>
+                    <h3 className="text-lg font-black text-gray-900 mb-3">
+                      Scan &amp; Pay ₹{Number(advanceAmount).toLocaleString("en-IN")}
+                    </h3>
 
                     {/* QR Code Container */}
                     <div className="relative w-64 h-64 sm:w-72 sm:h-72 bg-white p-3 rounded-2xl shadow-md border-2 border-gray-100 flex items-center justify-center overflow-hidden">
-                      <Image
-                        src="/images/payment-qr.png"
-                        alt="Payment QR Code - Pay ₹1,000"
-                        width={280}
-                        height={280}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={qrImage}
+                        alt={`Payment QR Code - Pay ₹${advanceAmount}`}
                         className="w-full h-full object-contain"
-                        priority
                       />
                     </div>
 
                     {/* Amount & UPI Details */}
                     <div className="mt-4 w-full max-w-xs">
-                      <div className="text-2xl font-black text-gray-900 mb-1">Pay ₹1,000</div>
+                      <div className="text-2xl font-black text-gray-900 mb-1">
+                        Pay ₹{Number(advanceAmount).toLocaleString("en-IN")}
+                      </div>
                       <div className="text-xs text-gray-500 font-medium mb-3">
                         Advance Booking Token Amount
                       </div>
@@ -1028,11 +1075,11 @@ Please confirm and dispatch!`;
                       {/* UPI ID Box with Copy Button */}
                       <div className="flex items-center justify-between bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-sm">
                         <span className="text-xs font-mono font-bold text-gray-800 truncate mr-2">
-                          sharmajii01@fam
+                          {upiId}
                         </span>
                         <button
                           type="button"
-                          onClick={() => copyToClipboard("sharmajii01@fam", "upi")}
+                          onClick={() => copyToClipboard(upiId, "upi")}
                           className="bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold px-2.5 py-1 rounded-lg transition whitespace-nowrap active:scale-95"
                         >
                           {copiedUpi ? "✓ Copied!" : "📋 Copy"}
@@ -1041,10 +1088,10 @@ Please confirm and dispatch!`;
 
                       {/* Mobile Deep Link: Open UPI Apps */}
                       <a
-                        href="upi://pay?pa=sharmajii01@fam&pn=CallGirl4U&am=1000&cu=INR&tn=BookingAdvance"
+                        href={`upi://pay?pa=${encodeURIComponent(upiId)}&pn=CallGirl4U&am=${advanceAmount}&cu=INR&tn=BookingAdvance`}
                         className="mt-3 inline-flex items-center justify-center gap-1.5 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow transition active:scale-95 sm:hidden"
                       >
-                        <span>📱</span> Pay with UPI App (GPay / PhonePe / Paytm)
+                        <span>📱</span> Pay ₹{Number(advanceAmount).toLocaleString("en-IN")} with UPI App (GPay / PhonePe / Paytm)
                       </a>
                     </div>
                   </div>
@@ -1059,7 +1106,7 @@ Please confirm and dispatch!`;
                         Enter Payment Details to Get Your Token
                       </h3>
                       <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                        After scanning the QR code and completing your ₹1,000 payment, please enter your 12-digit UPI Reference / UTR Number below to instantly receive your official booking token.
+                        After scanning the QR code and completing your ₹{Number(advanceAmount).toLocaleString("en-IN")} payment, please enter your 12-digit UPI Reference / UTR Number below to instantly receive your official booking token.
                       </p>
                     </div>
 
