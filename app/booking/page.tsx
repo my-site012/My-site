@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import BookingClient from "./BookingClient";
-import { locations, getAllStates, POPULAR_CITIES } from "@/lib/data/locations";
+import { locations, getAllStates, POPULAR_CITIES, getAllWebsiteCities } from "@/lib/data/locations";
 
 export const metadata: Metadata = {
   title: "Online Booking & Appointment Token | CallGirl4U India",
@@ -11,11 +11,13 @@ export const metadata: Metadata = {
 
 export default function BookingPage() {
   const states = getAllStates();
+  const allCities = getAllWebsiteCities();
   return (
     <BookingClient
       locations={locations}
       states={states}
       popularCities={POPULAR_CITIES}
+      allWebsiteCities={allCities}
     />
   );
 }

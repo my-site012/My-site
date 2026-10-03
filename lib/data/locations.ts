@@ -85,7 +85,9 @@ export const locations: Record<string, string[]> = {
     "Kottakkal", "Mananthavady", "Punalur", "Nilambur",
     "Taliparamba", "Varkala", "Chavakkad", "Kothamangalam",
     "Attingal", "Paravur", "Angamaly", "Haripad",
-    "Muvattupuzha", "Kottarakara", "Adoor", "Pattambi", "Aluva"
+    "Muvattupuzha", "Kottarakara", "Adoor", "Pattambi", "Aluva",
+    "Tiruvalla", "Changanacherry", "Cherthala", "Kalpetta", "Kayamkulam",
+    "Koyilandy", "Neyyattinkara", "Tirur", "Vatakara"
   ],
   "Madhya Pradesh": [
     "Betul", "Bhind", "Bhopal", "Burhanpur", "Chhatarpur",
@@ -426,6 +428,12 @@ export function getAllCities(): string[] {
       return !allStateSlugs.has(slug) && !EXCLUDED_SLUGS.has(slug);
     })
     .sort();
+}
+
+// Helper: get all website cities including extended cities and sub-areas
+export function getAllWebsiteCities(): string[] {
+  const all = [...Object.values(locations).flat(), ...EXTENDED_CITIES];
+  return [...new Set(all)].sort((a, b) => a.localeCompare(b));
 }
 
 // Helper: get state from city

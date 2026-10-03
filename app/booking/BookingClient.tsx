@@ -8,12 +8,14 @@ interface BookingClientProps {
   locations: Record<string, string[]>;
   states: string[];
   popularCities: string[];
+  allWebsiteCities?: string[];
 }
 
 export default function BookingClient({
   locations,
   states,
   popularCities,
+  allWebsiteCities = [],
 }: BookingClientProps) {
   // Navigation / Tab state
   const [activeTab, setActiveTab] = useState<"book" | "track">("book");
@@ -57,22 +59,23 @@ export default function BookingClient({
   // Cities for selected state or all filtered
   const availableCities = useMemo(() => {
     if (selectedState && locations[selectedState]) {
-      return locations[selectedState];
+      return [...locations[selectedState]].sort((a, b) => a.localeCompare(b));
+    }
+    if (allWebsiteCities && allWebsiteCities.length > 0) {
+      return allWebsiteCities;
     }
     // Return all cities if no state selected
     const all: string[] = [];
     Object.values(locations).forEach((cityList) => {
       all.push(...cityList);
     });
-    return Array.from(new Set(all));
-  }, [selectedState, locations]);
+    return Array.from(new Set(all)).sort((a, b) => a.localeCompare(b));
+  }, [selectedState, locations, allWebsiteCities]);
 
   const filteredCities = useMemo(() => {
-    if (!citySearch.trim()) return availableCities.slice(0, 40);
+    if (!citySearch.trim()) return availableCities;
     const query = citySearch.toLowerCase();
-    return availableCities
-      .filter((c) => c.toLowerCase().includes(query))
-      .slice(0, 50);
+    return availableCities.filter((c) => c.toLowerCase().includes(query));
   }, [availableCities, citySearch]);
 
   const handleStateChange = (stateName: string) => {
@@ -83,13 +86,12 @@ export default function BookingClient({
 
   const handleCitySelect = (cityName: string) => {
     setSelectedCity(cityName);
-    // Auto-detect state if not selected
-    if (!selectedState) {
-      for (const [st, cities] of Object.entries(locations)) {
-        if (cities.includes(cityName)) {
-          setSelectedState(st);
-          break;
-        }
+    setCitySearch(cityName);
+    // Auto-detect state if not selected or mismatched
+    for (const [st, cities] of Object.entries(locations)) {
+      if (cities.some((c) => c.toLowerCase() === cityName.toLowerCase())) {
+        setSelectedState(st);
+        break;
       }
     }
   };
@@ -709,21 +711,82 @@ Please confirm and dispatch!`;
                       <label className="block text-xs font-bold text-gray-700 mb-1">
                         Select City (शहर) <span className="text-red-500">*</span>
                       </label>
-                      <div className="space-y-2">
-                        <input
-                          type="text"
-                          value={citySearch}
-                          onChange={(e) => setCitySearch(e.target.value)}
-                          placeholder="Type to filter city..."
-                          className="w-full px-3 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-lg outline-none focus:border-red-600"
-                        />
+                      <div className="space-y-2 relative">
+                        <div className="relative">
+                          <input
+                            type="text"
+                            value={citySearch}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setCitySearch(val);
+                              // If user typed exact match
+                              const exact = availableCities.find(
+                                (c) => c.toLowerCase() === val.trim().toLowerCase()
+                              );
+                              if (exact) {
+                                handleCitySelect(exact);
+                              }
+                            }}
+                            placeholder="Search or type city (e.g. Tiruvalla, Kochi, Delhi)..."
+                            className="w-full px-3.5 py-2.5 text-sm bg-gray-50 border border-gray-300 rounded-xl outline-none focus:bg-white focus:border-red-600 focus:ring-2 focus:ring-red-100 font-medium"
+                          />
+                          {citySearch && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setCitySearch("");
+                                setSelectedCity("");
+                              }}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 text-xs font-bold"
+                            >
+                              ✕
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Live suggestions when typing */}
+                        {citySearch.trim().length > 0 && selectedCity.toLowerCase() !== citySearch.trim().toLowerCase() && (
+                          <div className="bg-white border border-gray-200 rounded-xl shadow-lg p-2 max-h-48 overflow-y-auto z-20 space-y-1 animate-fadeIn">
+                            {filteredCities.slice(0, 10).map((ct) => (
+                              <button
+                                key={ct}
+                                type="button"
+                                onClick={() => handleCitySelect(ct)}
+                                className="w-full text-left px-3 py-1.5 rounded-lg text-xs font-bold text-gray-800 hover:bg-red-50 hover:text-red-700 transition flex items-center justify-between cursor-pointer"
+                              >
+                                <span>📍 {ct}</span>
+                                <span className="text-[10px] text-gray-400">Click to select</span>
+                              </button>
+                            ))}
+                            {filteredCities.length === 0 && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelectedCity(citySearch.trim());
+                                }}
+                                className="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 transition flex items-center gap-1.5 cursor-pointer"
+                              >
+                                <span>✨</span>
+                                <span>Use &quot;{citySearch.trim()}&quot; as my City</span>
+                              </button>
+                            )}
+                          </div>
+                        )}
+
+                        {/* Native dropdown showing all available cities */}
                         <select
                           required
                           value={selectedCity}
-                          onChange={(e) => setSelectedCity(e.target.value)}
+                          onChange={(e) => handleCitySelect(e.target.value)}
                           className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:border-red-600 outline-none text-sm font-semibold"
                         >
-                          <option value="">-- Choose City --</option>
+                          <option value="">
+                            {selectedState ? `-- Select City in ${selectedState} (${filteredCities.length}) --` : `-- Choose from All Cities (${filteredCities.length}) --`}
+                          </option>
+                          {/* If a custom or typed city is selected and not in filtered list, include it */}
+                          {selectedCity && !filteredCities.includes(selectedCity) && (
+                            <option value={selectedCity}>{selectedCity} (Selected)</option>
+                          )}
                           {filteredCities.map((ct) => (
                             <option key={ct} value={ct}>
                               {ct}
