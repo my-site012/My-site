@@ -813,13 +813,13 @@ export function getRotatedCitySlug(citySlug: string): string {
 
   const idx = list.indexOf(clean);
   if (idx !== -1) {
-    // 79 is a prime number that cleanly permutes the city list across diverse states & regions
-    const newIdx = (idx + 79) % list.length;
+    // 389 is a prime number that cleanly permutes the city list across diverse states & regions (rotated from previous 79)
+    const newIdx = (idx + 389) % list.length;
     return list[newIdx];
   }
 
   // Fallback for sub-areas / non-standard slugs (Jaipur sub-areas, etc.):
-  const hash = getHash(clean + "-rot-salt-v1");
+  const hash = getHash(clean + "-rot-salt-v2");
   return list[hash % list.length];
 }
 
@@ -871,7 +871,7 @@ export function getRotatedSeed(seed: string): string {
 
   // Featured homepage
   if (seed.startsWith("featured")) {
-    return `${seed}-rotated-cross-city`;
+    return `${seed}-rotated-cross-city-v2`;
   }
 
   // Standard Call Girl ad: [city]-[index]
@@ -898,13 +898,13 @@ export function getHash(seed: string): number {
 
 export function getNameFromId(seed: string): string {
   const effectiveSeed = getRotatedSeed(seed);
-  const hash = getHash(effectiveSeed);
+  const hash = getHash(effectiveSeed + "-name-salt-v2");
   return names[hash % names.length];
 }
 
 export function getPriceFromId(seed: string): number {
   const effectiveSeed = getRotatedSeed(seed);
-  const hash = getHash(effectiveSeed);
+  const hash = getHash(effectiveSeed + "-price-salt-v2");
   return (5 + (hash % 10)) * 1000;
 }
 
@@ -913,7 +913,7 @@ export function getDeterministicImagesPool(seed: string, count: number): string[
 
   // Use rotated seed so profiles are redistributed across cities
   const effectiveSeed = getRotatedSeed(seed);
-  const hash = getHash(effectiveSeed + "-shuffled-salt-v4");
+  const hash = getHash(effectiveSeed + "-shuffled-salt-v5");
   const result: string[] = [];
   const usedIndices = new Set<number>();
   
@@ -925,7 +925,7 @@ export function getDeterministicImagesPool(seed: string, count: number): string[
     
     while (!indexFound && attempt < imagePool.length) {
       // Use a formula that shifts based on attempt if first pick is taken
-      const index = (hash + (i * 131) + (attempt * 17)) % imagePool.length;
+      const index = (hash + (i * 137) + (attempt * 19)) % imagePool.length;
       
       if (!usedIndices.has(index)) {
         usedIndices.add(index);
@@ -998,17 +998,17 @@ export const boyNames = [
 
 export function getBoyNameFromId(seed: string): string {
   const effectiveSeed = getRotatedSeed(seed);
-  const hash = getHash(effectiveSeed);
+  const hash = getHash(effectiveSeed + "-boyname-salt-v2");
   return boyNames[hash % boyNames.length];
 }
 
 export function getDeterministicBoyImagesPool(seed: string, count: number): string[] {
   if (boyImagePool.length === 0) return [];
   const effectiveSeed = getRotatedSeed(seed);
-  const hash = getHash(effectiveSeed + "-boy-salt-v1");
+  const hash = getHash(effectiveSeed + "-boy-salt-v2");
   const result: string[] = [];
   for (let i = 0; i < count; i++) {
-    const index = (hash + (i * 7)) % boyImagePool.length;
+    const index = (hash + (i * 11)) % boyImagePool.length;
     const parts = boyImagePool[index].split('/');
     const encodedPath = parts.map(p => encodeURIComponent(p)).join('/');
     result.push(`/images/${encodedPath}`);
