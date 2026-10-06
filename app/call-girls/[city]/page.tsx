@@ -6,7 +6,7 @@ import { generateEnhancedLocalBusinessSchema, generateBreadcrumbsSchema } from "
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
-import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
+import { cachedGetValue, getCachedApprovedAds } from "@/lib/kv";
 import { notFound } from "next/navigation";
 
 // ISR: revalidate every hour — content is deterministic, no need to re-render on every request
@@ -200,30 +200,8 @@ export default async function CityPage({ params, searchParams }: { params: Promi
   // Use jaipurPhone if set and this city is Jaipur or a Jaipur sub-area
   const effectivePhone = (JAIPUR_CITIES.has(city) && jaipurPhone) ? jaipurPhone : (globalPhone || undefined);
 
-  // Fetch approved ads from KV
-  let approvedAds: any[] = [];
-  try {
-    const approvedAdIds = await lRange(`ads:approved:call-girls:${city}`, 0, -1);
-    const expiredIds: string[] = [];
-    
-    for (const adId of approvedAdIds) {
-      const ad = await getJson(`ad:${adId}`);
-      if (ad && ad.status === "approved") {
-        approvedAds.push(ad);
-      } else {
-        expiredIds.push(adId);
-      }
-    }
-    
-    // Asynchronously clean up expired in background
-    if (expiredIds.length > 0) {
-      for (const adId of expiredIds) {
-        await kvCommand(["LREM", `ads:approved:call-girls:${city}`, 0, adId]);
-      }
-    }
-  } catch (err) {
-    console.error("Failed to load approved ads:", err);
-  }
+  // Fetch approved ads from KV cache (single mGet roundtrip, cached 5m)
+  const approvedAds = await getCachedApprovedAds("call-girls", city);
 
   // Use city as seed for the image pool
   const cityImages = getDeterministicImagesPool(city, totalAdsToShow);

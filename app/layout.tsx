@@ -76,6 +76,8 @@ export default function RootLayout({
         {/* DNS prefetch + preconnect for faster resource loading */}
         <link rel="dns-prefetch" href="https://api.whatsapp.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         {/* Preconnect to self-origin for image optimization */}
         <link rel="preconnect" href="https://callgirl4u.com" />
         <script

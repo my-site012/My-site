@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getAllCities } from "@/lib/data/locations";
-import CitySearch from "./CitySearch";
+import dynamic from "next/dynamic";
+
+const CitySearch = dynamic(() => import("./CitySearch"), { ssr: false });
 
 export default function Header() {
   const [user, setUser] = useState<any>(null);
@@ -12,6 +13,11 @@ export default function Header() {
   const router = useRouter();
 
   const checkAuth = async () => {
+    // Only fetch auth status if user_session cookie exists to prevent blocking network request on every page
+    if (typeof document !== "undefined" && !document.cookie.includes("user_session=")) {
+      setLoading(false);
+      return;
+    }
     try {
       const res = await fetch("/api/auth/me");
       if (res.ok) {
@@ -63,7 +69,7 @@ export default function Header() {
 
         {/* Search */}
         <div className="flex-1 max-w-[120px] xs:max-w-[200px] md:max-w-md ml-auto">
-          <CitySearch cities={getAllCities()} layout="header" />
+          <CitySearch layout="header" />
         </div>
 
         {/* Auth & Post */}

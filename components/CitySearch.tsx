@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { getCitySlug, getCallGirlsSlug } from "@/lib/data/locations";
+import { getCitySlug, getCallGirlsSlug, getAllCities } from "@/lib/data/locations";
 import SearchableSelect from "./SearchableSelect";
 
 interface CitySearchProps {
-  cities: string[];
+  cities?: string[];
   layout?: "header" | "hero";
 }
 
-export default function CitySearch({ cities, layout = "header" }: CitySearchProps) {
+export default function CitySearch({ cities: citiesProp, layout = "header" }: CitySearchProps) {
+  const cities = citiesProp || getAllCities();
   const router = useRouter();
   const pathname = usePathname();
 

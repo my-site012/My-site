@@ -134,7 +134,7 @@ export default function SearchableSelect({
           {/* Options list */}
           <div className="overflow-y-auto max-h-56 divide-y divide-gray-50">
             {filteredOptions.length > 0 ? (
-              filteredOptions.map((option) => (
+              filteredOptions.slice(0, 60).map((option) => (
                 <button
                   key={option}
                   type="button"

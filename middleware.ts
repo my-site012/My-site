@@ -6,7 +6,8 @@ const BOTS_REGEX = /bot|googlebot|bingbot|crawler|spider|robot|crawling|ahrefs|s
 
 let cachedMaintenance = false;
 let lastChecked = 0;
-const CACHE_TTL = 30000; // 30 seconds
+const CACHE_TTL = 300000; // 5 minutes cache to prevent latency on every request
+const STATE_SLUGS_SET = new Set(getAllStates().map(getStateSlug));
 
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
@@ -180,15 +181,12 @@ export async function middleware(request: NextRequest) {
     }
 
     // 2-part URL: /[category]/[state] -> /[category]/state/[state]
-    if (parts.length === 2) {
-      const stateSlugs = getAllStates().map(getStateSlug);
-      if (stateSlugs.includes(parts[1])) {
-        const targetUrl = new URL(`/${parts[0]}/state/${parts[1]}`, request.url);
-        searchParams.forEach((value, key) => {
-          targetUrl.searchParams.set(key, value);
-        });
-        return NextResponse.redirect(targetUrl, 301);
-      }
+    if (parts.length === 2 && STATE_SLUGS_SET.has(parts[1])) {
+      const targetUrl = new URL(`/${parts[0]}/state/${parts[1]}`, request.url);
+      searchParams.forEach((value, key) => {
+        targetUrl.searchParams.set(key, value);
+      });
+      return NextResponse.redirect(targetUrl, 301);
     }
   }
 
@@ -223,7 +221,7 @@ export async function middleware(request: NextRequest) {
         const res = await fetch(`${KV_URL}/get/maintenance_mode`, {
           headers: { Authorization: `Bearer ${KV_TOKEN}` },
           cache: 'no-store',
-          signal: AbortSignal.timeout(500),
+          signal: AbortSignal.timeout(200),
         });
         if (res.ok) {
           const data = await res.json();

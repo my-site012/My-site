@@ -4,8 +4,8 @@ import NearbyCitiesNav from "@/components/NearbyCitiesNav";
 import { generateEnhancedLocalBusinessSchema, generateBreadcrumbsSchema } from "@/lib/seo-enhancements";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getDeterministicBoyImagesPool, getBoyNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
-import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
+import { getDeterministicBoyImagesPool, getBoyNameFromId, getPriceFromId, getHash } from "@/lib/ad-logic";
+import { cachedGetValue, getCachedApprovedAds } from "@/lib/kv";
 import { notFound } from "next/navigation";
 
 const allLocationSlugs = Object.values(locations).flat().map(city => getCitySlug(city));
@@ -89,30 +89,8 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
   const globalPhone = boyPhone || fallbackPhone;
   const effectivePhone = globalPhone || undefined;
 
-  // Fetch approved ads from KV
-  let approvedAds: any[] = [];
-  try {
-    const approvedAdIds = await lRange(`ads:approved:call-boys:${city}`, 0, -1);
-    const expiredIds: string[] = [];
-    
-    for (const adId of approvedAdIds) {
-      const ad = await getJson(`ad:${adId}`);
-      if (ad && ad.status === "approved") {
-        approvedAds.push(ad);
-      } else {
-        expiredIds.push(adId);
-      }
-    }
-    
-    // Asynchronously clean up expired in background
-    if (expiredIds.length > 0) {
-      for (const adId of expiredIds) {
-        await kvCommand(["LREM", `ads:approved:call-boys:${city}`, 0, adId]);
-      }
-    }
-  } catch (err) {
-    console.error("Failed to load approved ads:", err);
-  }
+  // Fetch approved ads from KV cache (single mGet roundtrip, cached 5m)
+  const approvedAds = await getCachedApprovedAds("call-boys", city);
 
   const cityImages = getDeterministicBoyImagesPool(city + "-boy", totalAdsToShow);
 

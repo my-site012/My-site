@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  compress: true,
   images: {
     unoptimized: true,
     formats: ["image/avif", "image/webp"],
@@ -10,8 +11,8 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        // Cache static images and icons aggressively for 1 year
-        source: "/(images|icon.png|apple-icon.png|favicon.ico)/:path*",
+        // Cache static images in /images aggressively for 1 year
+        source: "/images/:path*",
         headers: [
           {
             key: "X-Content-Type-Options",
@@ -24,7 +25,8 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/images/:path*",
+        // Cache static icons and public assets aggressively for 1 year
+        source: "/:file(favicon.ico|icon.png|icon.svg|apple-icon.png)",
         headers: [
           {
             key: "X-Content-Type-Options",

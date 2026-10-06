@@ -229,3 +229,39 @@ export const cachedGetValue = unstable_cache(
   ["kv-value"],
   { revalidate: 3600 }
 );
+
+/**
+ * Cached version of approved ads by category and city.
+ * Uses mGet to fetch all ads in a SINGLE roundtrip instead of sequential loops.
+ * Revalidates every 5 minutes (300 seconds).
+ */
+export const getCachedApprovedAds = unstable_cache(
+  async (category: string, city: string): Promise<any[]> => {
+    try {
+      const approvedAdIds = await lRange(`ads:approved:${category}:${city}`, 0, -1);
+      if (!approvedAdIds || approvedAdIds.length === 0) return [];
+
+      const keys = approvedAdIds.map((id) => `ad:${id}`);
+      const rawAds = await mGet(keys);
+      const approvedAds: any[] = [];
+
+      for (let i = 0; i < rawAds.length; i++) {
+        const raw = rawAds[i];
+        if (!raw) continue;
+        try {
+          const ad = typeof raw === "string" ? JSON.parse(raw) : raw;
+          if (ad && ad.status === "approved") {
+            approvedAds.push(ad);
+          }
+        } catch {}
+      }
+
+      return approvedAds;
+    } catch (err) {
+      console.error(`Failed to load cached approved ads for ${category}:${city}:`, err);
+      return [];
+    }
+  },
+  ["approved-ads-by-city"],
+  { revalidate: 300 }
+);

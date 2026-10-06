@@ -4,8 +4,8 @@ import NearbyCitiesNav from "@/components/NearbyCitiesNav";
 import { generateEnhancedLocalBusinessSchema, generateBreadcrumbsSchema } from "@/lib/seo-enhancements";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getContactNumber, getHash } from "@/lib/ad-logic";
-import { cachedGetValue, getJson, lRange, kvCommand } from "@/lib/kv";
+import { getDeterministicImagesPool, getNameFromId, getPriceFromId, getHash } from "@/lib/ad-logic";
+import { cachedGetValue, getCachedApprovedAds } from "@/lib/kv";
 import { notFound } from "next/navigation";
 
 const allLocationSlugs = Object.values(locations).flat().map(city => getCitySlug(city));
@@ -292,30 +292,8 @@ export default async function MassageCityPage({ params, searchParams }: { params
   const globalPhone = await cachedGetValue("contact_phone");
   const effectivePhone = globalPhone || undefined;
 
-  // Fetch approved ads from KV
-  let approvedAds: any[] = [];
-  try {
-    const approvedAdIds = await lRange(`ads:approved:massage:${city}`, 0, -1);
-    const expiredIds: string[] = [];
-    
-    for (const adId of approvedAdIds) {
-      const ad = await getJson(`ad:${adId}`);
-      if (ad && ad.status === "approved") {
-        approvedAds.push(ad);
-      } else {
-        expiredIds.push(adId);
-      }
-    }
-    
-    // Asynchronously clean up expired in background
-    if (expiredIds.length > 0) {
-      for (const adId of expiredIds) {
-        await kvCommand(["LREM", `ads:approved:massage:${city}`, 0, adId]);
-      }
-    }
-  } catch (err) {
-    console.error("Failed to load approved ads:", err);
-  }
+  // Fetch approved ads from KV cache (single mGet roundtrip, cached 5m)
+  const approvedAds = await getCachedApprovedAds("massage", city);
 
   // Use different seed prefix for massage to show different images than call-girls
   const seedKey = `msg-${city}`;
