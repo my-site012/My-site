@@ -25,7 +25,7 @@ export default function ContactPage() {
               href="mailto:worksunil26@gmail.com"
               className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2.5 rounded-lg shadow transition-all text-sm"
             >
-              📧 Contact Support Team
+              Contact Support Team
             </a>
           </div>
 

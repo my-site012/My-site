@@ -57,7 +57,7 @@ const INITIAL_POSTS: ForumPost[] = [
     nickname: "AdminSafety",
     category: "Safety Tips",
     city: "All Cities",
-    content: "Important safety warning: Never pay anyone in advance. Genuine independent service providers will NEVER ask for advance payments, booking fees, or transport charges online. Always follow Cash on Delivery.",
+    content: "Important safety warning: Never pay anyone in advance. Genuine independent service providers will NEVER ask for advance payments, booking fees, or transport charges online. Always pay in person after meeting.",
     likes: 28,
     createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
     replies: [

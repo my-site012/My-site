@@ -183,7 +183,7 @@ export function generateEnhancedLocalBusinessSchema({
     telephone: phone,
     priceRange: "INR 3000 - 10000",
     currenciesAccepted: "INR",
-    paymentAccepted: "Cash, Cash on Delivery",
+    paymentAccepted: "Cash",
     address: {
       "@type": "PostalAddress",
       streetAddress: `${cityName} Center`,

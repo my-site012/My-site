@@ -98,9 +98,9 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
       ? `Call Girls in ${areaName} Jaipur, Escort Service ${areaName} Jaipur, ` + seoData.metaKeywords
       : seoData.metaKeywords;
   } else if (isExt) {
-    keywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Cash on Delivery`;
+    keywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}`;
     title = `Call Girls in ${cityName} | Direct Number | CallGirl4U`;
-    description = `Find verified call girls in ${cityName} with direct number. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`;
+    description = `Find verified call girls in ${cityName} with direct number. Genuine female companions available 24/7 in ${cityName}, ${state}. Pay after meeting.`;
   } else {
     // For DMCA alternate slugs (e.g. jaipur-2), use original city slug as SEO seed
     const seoSeed = CITY_DISPLAY_OVERRIDES[city]
@@ -340,7 +340,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
               <h1 className="text-3xl text-gray-900 mb-4">Call Girls Available in {cityName}</h1>
               <p className="text-gray-600 text-lg">
                 Find <strong>verified call girls in {cityName}</strong>, {state} with direct number.
-                Genuine female companions available 24/7. <strong>Cash on delivery</strong> | No advance payment required.
+                Genuine female companions available 24/7. <strong>Pay after meeting</strong> | No advance payment required.
               </p>
             </>
           ) : (
@@ -443,8 +443,8 @@ export default async function CityPage({ params, searchParams }: { params: Promi
 
         {/* Safe Dating & Anti-Scam Advisory */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 my-8 not-prose">
-          <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0 flex items-center gap-2">
-            ⚠️ Safe Dating & Anti-Scam Advisory for {cityName}
+          <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0">
+            Safe Dating & Anti-Scam Advisory for {cityName}
           </h3>
           <p className="text-gray-700 text-sm mb-3">
             To ensure a safe and positive experience when using our independent directory in <strong>{cityName}</strong>, please observe these safety practices:
@@ -538,15 +538,15 @@ export default async function CityPage({ params, searchParams }: { params: Promi
           <div className="flex flex-wrap justify-center gap-3">
             <Link prefetch={false} href={`/call-boys/${city}`}
               className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm">
-              👨 Call Boys in {cityName}
+              Call Boys in {cityName}
             </Link>
             <Link prefetch={false} href={`/massage/${city}`}
               className="px-4 py-2 bg-purple-50 text-purple-600 text-sm font-bold rounded-xl border border-purple-100 hover:bg-purple-600 hover:text-white transition-all shadow-sm">
-              💆 Massage Service in {cityName}
+              Massage Service in {cityName}
             </Link>
             <Link prefetch={false} href={`/call-girls`}
               className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm">
-              📍 All India Call Girls Directory
+              All India Call Girls Directory
             </Link>
           </div>
         </div>

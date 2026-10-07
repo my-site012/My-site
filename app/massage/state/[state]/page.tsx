@@ -50,35 +50,35 @@ function getMassageStateSeoData(stateName: string) {
   const massageMetaTitles = [
     `Massage Service in ${stateName} | Full Body Spa & Female to Male Massage`,
     `${stateName} Massage Girls | Best Body Massage Parlour Near You`,
-    `Verified Massage in ${stateName} | B2B Body Spa (Cash on Delivery)`,
+    `Verified Massage in ${stateName} | B2B Body Spa (Pay After Meeting)`,
     `Top Female to Male Massage in ${stateName} | Direct Contact 24/7`,
-    `Best Body Massage in ${stateName} | Professional Therapists (COD)`,
+    `Best Body Massage in ${stateName} | Professional Therapists (Direct Booking)`,
     `Full Body Massage in ${stateName} | Home & Hotel Doorstep Delivery`,
     `${stateName} Massage Parlour | Independent Female Masseuses (No Advance)`,
     `Sensual B2B Massage in ${stateName} | Relaxing Body to Body Spa`,
-    `Hire Massage Therapist in ${stateName} | Direct Contact Number COD`,
+    `Hire Massage Therapist in ${stateName} | Direct Contact Number`,
     `24/7 Massage Service in ${stateName} | Genuine Therapists & Real Photos`,
-    `Aromatherapy & Body Spa in ${stateName} | Cash on Delivery Massage`,
-    `VIP Massage Service in ${stateName} | Discreet Female Massager COD`,
+    `Aromatherapy & Body Spa in ${stateName} | Direct Booking Massage`,
+    `VIP Massage Service in ${stateName} | Discreet Female Massager`,
     `Happy Ending Massage in ${stateName} | Private & Safe Companion Spa`,
     `${stateName} Female Massage Service | Doorstep Outcall & Parlour`,
-    `Relaxing Body Massage in ${stateName} | Verified Female Therapist COD`,
-    `Deep Tissue & Swedish Massage in ${stateName} | Cash On Delivery`,
+    `Relaxing Body Massage in ${stateName} | Verified Female Therapist`,
+    `Deep Tissue & Swedish Massage in ${stateName} | Pay After Service`,
     `${stateName} Body to Body Massage | Instant Booking 24/7`,
-    `Independent Massage Girls in ${stateName} | Zero Advance Payment COD`,
+    `Independent Massage Girls in ${stateName} | Zero Advance Payment`,
     `Executive Spa & Massage Service in ${stateName} | Verified Profiles`,
     `Book Full Body Massage in ${stateName} | Discreet & Cash Payment`
   ];
 
   const massageMetaDescriptions = [
-    `Book verified full body massage service in ${stateName}. Professional female to male massage at home or hotel. Sensual & relaxing body spa with cash on delivery.`,
+    `Book verified full body massage service in ${stateName}. Professional female to male massage at home or hotel. Sensual & relaxing body spa with zero advance payment.`,
     `Find top-rated massage parlour in ${stateName} with direct contact. Full body, B2B, & relaxation massage available 24/7 in ${stateName}.`,
     `Looking for female to male massage in ${stateName}? Connect directly with verified massage therapists for deep tissue and B2B massage with zero advance.`,
-    `Top body massage in ${stateName} with independent female therapists. Direct booking, discreet hotel room delivery, and cash on delivery.`,
+    `Top body massage in ${stateName} with independent female therapists. Direct booking, discreet hotel room delivery, and zero advance payment.`,
     `Discover relaxing full body massage and aromatherapy spa in ${stateName}. Verified therapists, real photos, and strict cash payment on arrival.`,
     `Hire professional massage therapist in ${stateName} today. Home and hotel doorstep massage delivery across ${stateName} with zero upfront charges.`,
     `Sensual B2B and full body massage service in ${stateName}. Connect via direct phone number for immediate appointment. Pay cash after service.`,
-    `Explore best massage parlours and independent masseuses in ${stateName}. Complete privacy, authentic profiles, and convenient cash on delivery.`,
+    `Explore best massage parlours and independent masseuses in ${stateName}. Complete privacy, authentic profiles, and pay after service.`,
     `24/7 home delivery massage service in ${stateName}. Trained female therapists offering relaxing body spa and happy ending sessions with complete discretion.`,
     `Book certified massage service in ${stateName} with direct phone access. No agency markup, no prepayment, safe cash settlement after massage.`,
     `Premier directory for body massage in ${stateName}. Female to male spa, Swedish therapy, and private hotel outcall service across ${stateName}.`,
@@ -86,10 +86,10 @@ function getMassageStateSeoData(stateName: string) {
     `Discreet and confidential massage service in ${stateName}. Connect with independent female therapists for hotel room and home sessions 24/7.`,
     `Get direct contact for top massage girls in ${stateName}. Relaxing B2B spa, full body therapy, and authentic companions with cash payment.`,
     `Experience therapeutic and sensual massage in ${stateName}. Safe in-person service with verified female providers. No online advance payment required.`,
-    `Top-rated female to male body massage in ${stateName}. Professional therapists offering deep relaxation head-to-toe with discreet privacy and COD.`,
+    `Top-rated female to male body massage in ${stateName}. Professional therapists offering deep relaxation head-to-toe with discreet privacy.`,
     `Direct ${stateName} massage parlour contact. Verified independent masseuses available for incall and outcall bookings with zero booking fees.`,
     `Relax and rejuvenate with verified massage service in ${stateName}. Direct phone communication with independent providers across ${stateName}.`,
-    `Find trusted massage therapists in ${stateName} on CallGirl4U. Real photos, verified phone numbers, and direct Cash on Delivery.`,
+    `Find trusted massage therapists in ${stateName} on CallGirl4U. Real photos, verified phone numbers, and zero advance payment.`,
     `Book executive body spa and female to male massage in ${stateName}. Prompt 30-minute outcall to major hotels and residences with zero advance fee.`
   ];
 
@@ -102,13 +102,13 @@ function getMassageStateSeoData(stateName: string) {
     ? `Full Body Massage in ${stateName} | Best Spa & Massage Service`
     : `Massage Service in ${stateName} | Female to Male Body Spa`;
 
-  const heroSubtextTemplate = `{Discover|Find|Book|Explore} {verified|genuine|professional|trained} <strong class="font-bold">Massage Service in ${stateName}</strong>. {Connect directly|Get in touch} with {experienced|skilled|trained} massage therapists via direct phone number. {Our directory features|Browse through} {relaxing full body massages, sensual B2B massage, aromatherapy spa, and home massage delivery|body-to-body spa, deep tissue massage, and outcall home massage services} available {24/7|round-the-clock} in ${stateName}. All {sessions|bookings} are {based on|conducted via} <strong class="font-bold">Cash on Delivery</strong> | {no advance payment required|zero deposit needed}.`;
+  const heroSubtextTemplate = `{Discover|Find|Book|Explore} {verified|genuine|professional|trained} <strong class="font-bold">Massage Service in ${stateName}</strong>. {Connect directly|Get in touch} with {experienced|skilled|trained} massage therapists via direct phone number. {Our directory features|Browse through} {relaxing full body massages, sensual B2B massage, aromatherapy spa, and home massage delivery|body-to-body spa, deep tissue massage, and outcall home massage services} available {24/7|round-the-clock} in ${stateName}. All {sessions|bookings} are {based on|conducted via} <strong class="font-bold">Pay After Meeting</strong> | {no advance payment required|zero deposit needed}.`;
 
   const introHeading = hash % 2 === 0
     ? `Best Massage Parlour in ${stateName} | Verified & Trusted`
     : `Top Massage Service in ${stateName} | Home & Hotel Delivery`;
 
-  const introText = `{Welcome to the premier|Discover the leading} directory for booking {premium|professional|relaxing} <strong class="font-bold">Massage Service in ${stateName}</strong>. Whether you are {looking for a relaxing full body massage after a long day|seeking a rejuvenating spa experience}, our platform connects you directly with {certified therapists and independent massage providers|experienced massage specialists} across the state. We feature {verified|genuine} profiles of {female massage therapists|trained spa professionals} who offer services ranging from {traditional Indian massage|body-to-body massage|aromatherapy} to {deep tissue therapy|Swedish relaxation massage|sensual companion massage}. All services are {offered with cash-on-delivery|available with zero advance payment} so you {never have to worry about online fraud|pay only after complete satisfaction}. Our directory covers ${stateName} with {doorstep home delivery|hotel room service} in all major localities and cities.`;
+  const introText = `{Welcome to the premier|Discover the leading} directory for booking {premium|professional|relaxing} <strong class="font-bold">Massage Service in ${stateName}</strong>. Whether you are {looking for a relaxing full body massage after a long day|seeking a rejuvenating spa experience}, our platform connects you directly with {certified therapists and independent massage providers|experienced massage specialists} across the state. We feature {verified|genuine} profiles of {female massage therapists|trained spa professionals} who offer services ranging from {traditional Indian massage|body-to-body massage|aromatherapy} to {deep tissue therapy|Swedish relaxation massage|sensual companion massage}. All services are {offered with direct payment|available with zero advance payment} so you {never have to worry about online fraud|pay only after complete satisfaction}. Our directory covers ${stateName} with {doorstep home delivery|hotel room service} in all major localities and cities.`;
 
   const typesHeading = `Types of Massage Available in ${stateName}`;
   const typesText = `{Our ${stateName} massage directory features diverse service options:}
@@ -126,7 +126,7 @@ function getMassageStateSeoData(stateName: string) {
   <li><strong>{Browse Profiles|Select a Therapist}:</strong> {View verified massage therapist profiles with photos, rates, and service descriptions.|Choose from our active listing of trained massage professionals in ${stateName}.}</li>
   <li><strong>{Direct Contact|Phone Connect}:</strong> {Use the direct phone number to chat with the therapist and discuss your preferred massage type, duration, and location.|Instantly contact the massage provider via phone without any middlemen.}</li>
   <li><strong>{Confirm Booking|Schedule Session}:</strong> {Agree on the session time, location (home/hotel/parlour), and service package. Never send any advance payment online.|Finalize the massage appointment details without any online transfer of funds.}</li>
-  <li><strong>{Enjoy & Pay Cash|Cash on Delivery}:</strong> {Enjoy your full relaxation massage session and pay directly in cash to the therapist after completing the service.|Pay the agreed amount face-to-face in cash only after your massage session is completed.}</li>
+  <li><strong>{Enjoy & Pay Cash|Pay After Service}:</strong> {Enjoy your full relaxation massage session and pay directly in cash to the therapist after completing the service.|Pay the agreed amount face-to-face in cash only after your massage session is completed.}</li>
 </ol>
 <p class="mt-4">{This secure, cash-only process ensures you enjoy genuine massage services without any risk of online scam or fraud.}</p>`;
 
@@ -134,10 +134,10 @@ function getMassageStateSeoData(stateName: string) {
   const areasText = `{Our verified directory covers all major areas, hotels, and residential localities across <strong class="font-bold">${stateName}</strong> for home and hotel massage delivery. Whether you are staying at a {5-star luxury hotel|guest house|private residence}, our massage therapists can provide {doorstep service|room service} directly. Popular areas for massage home delivery include {business districts, tourist hotspots, and major transit areas|premium hotel zones, corporate hubs, and residential neighborhoods}. Most independent massage providers in ${stateName} can reach your location within {30-45 minutes|an hour}. Always {share your complete address|confirm location details} directly with the therapist for a smooth, on-time service. Our ${stateName} region directory ensures you find a {nearby professional|local massage expert} wherever you are in the state.}`;
 
   const rateHeading = `Massage Service Price List in ${stateName}`;
-  const rateIntro = `{The rates for massage services in <strong class="font-bold">${stateName}</strong> vary based on service type, duration, and therapist experience. The following is an estimated price guide. Always confirm actual rates directly with the provider before booking. Strictly follow Cash on Delivery | never pay any advance booking fee, medical card charge, or transport cost online.}`;
+  const rateIntro = `{The rates for massage services in <strong class="font-bold">${stateName}</strong> vary based on service type, duration, and therapist experience. The following is an estimated price guide. Always confirm actual rates directly with the provider before booking. Strictly follow pay after meeting | never pay any advance booking fee, medical card charge, or transport cost online.}`;
 
   const privacyHeading = `Privacy & Discretion for Massage Bookings`;
-  const privacyText = `{Your privacy is our top priority. Our ${stateName} massage directory operates on a {strict no-logs policy|complete anonymity basis}, meaning we {don't store your browsing data|never track your searches or location}. All communication is {direct between you and the massage provider|completely private and end-to-end}. By using {cash-only payment|Cash on Delivery}, there are no {bank statements or credit card trails|online payment records} linking you to the service. Your {identity|personal information} is fully protected at all times. Enjoy {complete discretion|private browsing} while booking your ${stateName} massage service.}`;
+  const privacyText = `{Your privacy is our top priority. Our ${stateName} massage directory operates on a {strict no-logs policy|complete anonymity basis}, meaning we {don't store your browsing data|never track your searches or location}. All communication is {direct between you and the massage provider|completely private and end-to-end}. By using {cash-only payment|direct in-person payment}, there are no {bank statements or credit card trails|online payment records} linking you to the service. Your {identity|personal information} is fully protected at all times. Enjoy {complete discretion|private browsing} while booking your ${stateName} massage service.}`;
 
   const faqHeading = `FAQs | Massage Service in ${stateName}`;
 
@@ -148,7 +148,7 @@ function getMassageStateSeoData(stateName: string) {
     },
     {
       q: `{Do I need to pay advance for massage service in ${stateName}?|Is there any upfront booking fee required?}`,
-      a: `{Absolutely not. We strictly enforce Cash on Delivery. Never pay any advance fee, transport charges, or medical card fee online before your session.|No advance payment is needed. Always pay the massage therapist directly in cash after your session is complete.}`
+      a: `{Absolutely not. We strictly enforce zero advance payment. Never pay any advance fee, transport charges, or medical card fee online before your session.|No advance payment is needed. Always pay the massage therapist directly in cash after your session is complete.}`
     },
     {
       q: `{What massage types are available in ${stateName}?|Which massage services can I book?}`,
@@ -164,7 +164,7 @@ function getMassageStateSeoData(stateName: string) {
 
 <p class="mb-4">Hamari directory par aapko milegi poori variety jaise <strong>Full Body Massage</strong>, <strong>Body to Body Massage</strong>, <strong>Aromatherapy Spa</strong>, aur <strong>Happy Ending Massage</strong>. Yahan sabhi massage providers apni profile khud manage karti hain, isliye kisi middleman ya agency ko extra commission dene ki bilkul zarurat nahi hai.</p>
 
-<p class="mb-4">Sabse zaroori baat, hamesha <strong>Cash on Delivery</strong> ka use karein. Internet par bahut se fraud log booking fee, medical card charges ya transport charges ke naam par advance payment mangte hain. Hum aapko sakht salah dete hain ki kisi ko bhi online advance payment na karein. Massage session complete hone ke baad hi cash payment karein.</p>
+<p class="mb-4">Sabse zaroori baat, hamesha meeting ke baad direct payment karein. Internet par bahut se fraud log booking fee, medical card charges ya transport charges ke naam par advance payment mangte hain. Hum aapko sakht salah dete hain ki kisi ko bhi online advance payment na karein. Massage session complete hone ke baad hi cash payment karein.</p>
 
 <p class="mb-4">Aap apne hotel ya ghar par home delivery massage book kar sakte hain. ${stateName} ke sabhi major areas mein 24 ghante service available hai. Bas profile select karein aur apna appointment confirm karein. Aapki privacy aur discretion hamari top priority hai.</p>
 
@@ -172,7 +172,7 @@ function getMassageStateSeoData(stateName: string) {
 
 <p class="mb-4">Hamare ${stateName} massage directory mein aapko milega: <strong>Full Body Massage</strong>, sensual <strong>B2B Massage</strong>, traditional <strong>Indian Spa</strong>, aur <strong>Happy Ending Massage</strong>, sabhi services ek hi jagah par. Sabhi profiles manually verified hain aur regularly update kiye jaate hain.</p>
 
-<p class="mb-4">Kisi bhi advance payment se bachein. Hamari directory par listed koi bhi genuine therapist advance booking fee nahi maangti. Hum hamesha <strong>Cash on Delivery</strong> ko promote karte hain jisse aapka paisa aur privacy dono safe rehte hain.</p>
+<p class="mb-4">Kisi bhi advance payment se bachein. Hamari directory par listed koi bhi genuine therapist advance booking fee nahi maangti. Hum hamesha zero advance payment ko promote karte hain jisse aapka paisa aur privacy dono safe rehte hain.</p>
 
 <p class="mb-4">${stateName} ke premium hotels ya aapke ghar par doorstep massage delivery available hai. Apni pasandida profile choose karein, seedha call/message karein aur apna relaxation session enjoy karein. Fraud profile report karne ke liye listing par diye gaye report button ka use karein.</p>
 
@@ -399,8 +399,8 @@ export default async function MassageStatePage({ params }: { params: Promise<{ s
 
             {/* Safe Dating & Anti-Scam Advisory */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 my-8 not-prose">
-              <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0 flex items-center gap-2">
-                ⚠️ Safe Booking Advisory for {stateName} Massage
+              <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0">
+                Safe Booking Advisory for {stateName} Massage
               </h3>
               <p className="text-gray-700 text-sm mb-3">
                 To ensure a genuine, safe massage experience in <strong>{stateName}</strong>:

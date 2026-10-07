@@ -6,7 +6,7 @@ import { getAllCities } from "@/lib/data/locations";
 
 export const metadata: Metadata = {
   title: "Massage Service in India | Body Massage, Spa & Female to Male Massage Near You",
-  description: "Find verified full body massage service near you across India. Book female to male massage, B2B spa, happy ending massage, and home delivery massage with direct contact. Cash on delivery.",
+  description: "Find verified full body massage service near you across India. Book female to male massage, B2B spa, happy ending massage, and home delivery massage with direct contact. Zero advance payment.",
   keywords: "massage service india, body massage india, female to male massage, B2B massage, full body massage, spa near me, massage parlour india, home massage delivery, happy ending massage",
   robots: {
     index: true,
@@ -79,13 +79,12 @@ export default function MassageDirectory() {
         <h2 className="text-3xl mb-6 uppercase tracking-tight">Types of <strong>Massage Service</strong> Available in India</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { icon: "💆", title: "Full Body Massage", desc: "Deep relaxation head-to-toe" },
-            { icon: "🛁", title: "B2B Massage", desc: "Body to body sensual spa" },
-            { icon: "🌸", title: "Aromatherapy", desc: "Essential oils & herbal spa" },
-            { icon: "✨", title: "Happy Ending", desc: "Complete satisfaction session" },
+            { title: "Full Body Massage", desc: "Deep relaxation head-to-toe" },
+            { title: "B2B Massage", desc: "Body to body sensual spa" },
+            { title: "Aromatherapy", desc: "Essential oils & herbal spa" },
+            { title: "Happy Ending", desc: "Complete satisfaction session" },
           ].map((type) => (
-            <div key={type.title} className="bg-white rounded-xl p-4 text-center border border-gray-100 shadow-sm hover:shadow-md transition">
-              <div className="text-3xl mb-2">{type.icon}</div>
+            <div key={type.title} className="bg-white rounded-xl p-5 text-center border border-gray-100 shadow-sm hover:shadow-md transition">
               <div className="font-bold text-gray-900 text-sm">{type.title}</div>
               <div className="text-gray-500 text-xs mt-1">{type.desc}</div>
             </div>

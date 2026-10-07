@@ -2,55 +2,55 @@ import { CitySEOContent } from "./data/cityContent";
 
 export const metaTitles = [
   "Call Girl in (City) | Active (City) Companions & Numbers",
-  "Call girl (City) | Independent (City) Companions (COD)",
-  "Verified Call Girl in (City) | Local Companions (City) COD",
+  "Call girl (City) | Independent (City) Companions",
+  "Verified Call Girl in (City) | Local Companions (City) 24/7",
   "Call girl (City) | Direct (City) Companion Directory 24/7",
   "Top (City) Companions | Independent Call girl (City) 24/7",
-  "Genuine (City) Call Girl Number | Cash on Delivery",
+  "Genuine (City) Call Girl Number | Direct Contact",
   "(City) Call Girls | Verified Independent Escorts & Direct Contact",
-  "Independent Call Girl in (City) | VIP Companions 24/7 COD",
+  "Independent Call Girl in (City) | VIP Companions 24/7",
   "Top Call Girl Service in (City) | Active Photos & Direct Contact",
-  "Hire Call Girl (City) | Direct (City) Call Girl Number COD",
+  "Hire Call Girl (City) | Direct (City) Call Girl Number",
   "(City) Escort Service | Verified Independent Call Girls (City)",
   "College Call Girls in (City) | Direct Contact 24/7",
   "VIP Independent Call Girl (City) | Safe Hotel & Outcall Delivery",
-  "Verified (City) Call Girls Number | Cash On Delivery Escorts",
+  "Verified (City) Call Girls Number | Independent Escorts",
   "Top Rated Call Girl in (City) | Direct Model Contact (No Advance)",
-  "(City) Call Girl Contact Number | 24/7 Independent Escorts COD",
+  "(City) Call Girl Contact Number | 24/7 Independent Escorts",
   "Exclusive Call Girls in (City) | Verified Female Escort Service",
-  "Russian & Model Call Girl in (City) | VIP Escort Service COD",
+  "Russian & Model Call Girl in (City) | VIP Escort Service",
   "Browse Call Girl (City) | Active (City) Numbers & Photos",
-  "24/7 Call Girl in (City) | Genuine Independent Companion (COD)",
+  "24/7 Call Girl in (City) | Genuine Independent Companion",
   "Housewife & College Call Girls (City) | Direct Phone Contact",
-  "Discreet Call Girl Service in (City) | Cash On Delivery Escorts",
+  "Discreet Call Girl Service in (City) | Verified Escorts",
   "(City) Female Escorts | Top Rated Call Girl in (City) 24/7",
-  "Authentic Call Girl in (City) | Active Photo Profiles COD",
+  "Authentic Call Girl in (City) | Active Photo Profiles",
   "Premium Escort Service (City) | Independent Call Girls (City)"
 ];
 
 export const metaDescriptions = [
-  "Looking for a Call Girl in (City)? Connect with verified (City) call girl profiles. Independent companions with privacy and cash on delivery.",
+  "Looking for a Call Girl in (City)? Connect with verified (City) call girl profiles. Independent companions with privacy and direct contact.",
   "Browse independent Call Girl in (City) listings. Real photos of companions with direct contact and zero advance payment.",
-  "Explore verified (City) Escort service. Connect with local independent Call girl (City) companions. Genuine profiles, cash payment on meeting.",
+  "Explore verified (City) Escort service. Connect with local independent Call girl (City) companions. Genuine profiles, pay after meeting.",
   "Top-rated Escort service (City) with verified Call Girl in (City). Direct (City) call girl number, no upfront fees, safe hotel & doorstep meetings 24/7.",
-  "Book verified Call girl (City) models. Reach out via (City) call girl number for a memorable companion experience. Safe (City) Escort service cash on delivery.",
+  "Book verified Call girl (City) models. Reach out via (City) call girl number for a memorable companion experience. Safe (City) Escort service with zero advance.",
   "Find active Call Girls in (City) with verified (City) Call Girl Number. Independent college models and VIP escorts with zero upfront charge.",
-  "Looking for top Call Girl service in (City)? Direct phone contact with verified independent escorts. Strictly cash on delivery with complete privacy.",
+  "Looking for top Call Girl service in (City)? Direct phone contact with verified independent escorts. Strictly zero advance booking with complete privacy.",
   "Browse active Call Girl in (City) profiles with genuine photos. Connect via direct phone or call for safe hotel and doorstep outcalls across (City).",
-  "Get direct (City) call girl number without agency middlemen. Verified female companions, college models, and Russian escorts. Cash on delivery 24/7.",
+  "Get direct (City) call girl number without agency middlemen. Verified female companions, college models, and Russian escorts 24/7.",
   "Connect with independent Call Girls in (City). Active photos, direct phone contact, transparent rates, zero advance fees. Safe in-person companion booking across (City).",
-  "Verified (City) Escort service offering independent companions. Direct phone contact, private hotel room outcalls, and Cash on Delivery in (City).",
+  "Verified (City) Escort service offering independent companions. Direct phone contact, private hotel room outcalls in (City).",
   "Discover elite Call Girl in (City) with verified contact details. Discreet companionship for corporate travelers and gentlemen. Pay cash after meeting.",
   "Browse high-class Call Girls in (City) with direct contact. Genuine college girls, mature housewives, and VIP models with zero advance payment.",
   "Top independent Escort service (City). Get authentic (City) Call Girl Number for prompt 30-minute outcall service across all major hotel zones.",
-  "Hire verified Call Girl in (City). Authentic photos, active contact details, flexible incall and outcall meetings, and strict cash on delivery.",
+  "Hire verified Call Girl in (City). Authentic photos, active contact details, flexible incall and outcall meetings.",
   "Find reliable Call Girl service in (City) available 24/7. Connect directly via call or message for dinner dates, night stays, and private sessions.",
   "Explore genuine Call Girls in (City) on CallGirl4U. Direct mobile contact for self-managed female companions. Complete privacy and zero-deposit policy.",
-  "Instant access to verified (City) call girl numbers. High-profile models and independent escorts ready for private dates. Safe Cash on Delivery.",
+  "Instant access to verified (City) call girl numbers. High-profile models and independent escorts ready for private dates.",
   "Looking for trusted female escorts in (City)? Browse verified profiles with real pictures and direct contact. Pay cash upon companion arrival.",
   "Premier directory for Call Girls in (City). Choose independent college companions and VIP models with direct phone access and transparent cash payment.",
   "Verified independent Call Girl in (City) directory. Zero middleman commission, direct calling, and safe hotel doorstep delivery across (City).",
-  "Book verified female companions in (City) today. High-quality profiles with real photos, direct mobile number, and Cash on Delivery with no advance fee.",
+  "Book verified female companions in (City) today. High-quality profiles with real photos, direct mobile number, with no advance fee.",
   "Find top-tier Escort service in (City) with genuine independent call girls. Connect directly for discreet incall and outcall meetings.",
   "Direct (City) Call Girl Contact Number directory. Genuine verified companions ready for 24/7 hotel outcall service across (City) with zero advance.",
   "Elite independent Call Girls in (City). Browse real companion photos, get direct numbers without agency markup, and settle payment in cash on arrival."
@@ -110,18 +110,18 @@ export function getDefaultSeoData(cityName: string, state: string): CitySEOConte
   const metaTitleTemplate = metaTitles[titleIndex].replace(/\(City\)/g, cityName);
   const metaDescriptionTemplate = metaDescriptions[descIndex].replace(/\(City\)/g, cityName);
 
-  const metaKeywordsTemplate = `${cityName} Call Girls, Call Girl in ${cityName}, ${cityName} Call Girls Number, Independent Call Girls ${cityName}, Escort Service ${cityName}, Verified Female Escorts, Cash on Delivery, ${cityName} Female Escorts`;
+  const metaKeywordsTemplate = `${cityName} Call Girls, Call Girl in ${cityName}, ${cityName} Call Girls Number, Independent Call Girls ${cityName}, Escort Service ${cityName}, Verified Female Escorts, ${cityName} Female Escorts`;
 
   const h1Options = [
-    `Call Girls in ${cityName} — Verified Independent Companions`,
-    `Verified Independent Call Girls in ${cityName} | Cash on Delivery`,
+    `Call Girls in ${cityName} | Verified Independent Companions`,
+    `Verified Independent Call Girls in ${cityName} | Direct Contact`,
     `${cityName} Call Girls | Direct Contact & Real Photos`,
-    `Top Independent Call Girl Service in ${cityName} (COD Available)`,
+    `Top Independent Call Girl Service in ${cityName} | Verified Profiles`,
     `Verified Escort Service in ${cityName} | Direct Companion Booking`
   ];
   const h1Template = h1Options[hash % h1Options.length];
 
-  const heroSubtextTemplate = `{Discover|Explore|Find|Browse|Search for} {verified|genuine|premium|top-rated|trusted} independent <strong class="font-bold">Call Girls in ${cityName}</strong> {with direct|offering instant|providing verified} phone numbers. {Our directory features|We present|Find authentic|Browse our extensive catalog of} local college call girls, mature housewife escorts, and VIP models available for incall and outcall meetings across ${state}. {All bookings operate on a strict|We strictly enforce a|Every meeting follows a|Enjoy complete financial peace of mind with our} <strong class="font-bold">Cash on Delivery</strong> policy with zero advance payment.`;
+  const heroSubtextTemplate = `{Discover|Explore|Find|Browse|Search for} {verified|genuine|premium|top-rated|trusted} independent <strong class="font-bold">Call Girls in ${cityName}</strong> {with direct|offering instant|providing verified} phone numbers. {Our directory features|We present|Find authentic|Browse our extensive catalog of} local college call girls, mature housewife escorts, and VIP models available for incall and outcall meetings across ${state}. {All bookings operate on a strict|We strictly enforce a|Every meeting follows a|Enjoy complete financial peace of mind with our} <strong class="font-bold">zero advance payment</strong> policy.`;
 
   const introHeadingOptions = [
     `Verified Call Girl Services in ${cityName}`,
@@ -132,14 +132,14 @@ export function getDefaultSeoData(cityName: string, state: string): CitySEOConte
   const introHeadingTemplate = introHeadingOptions[hash % introHeadingOptions.length];
 
   const introTemplate = `<p class="mb-4">{Welcome to the premier directory for|Explore the most trusted platform for|Discover authentic listings of|Browse top-rated profiles for|Connect directly with verified} <strong class="font-bold">Call Girls in ${cityName}</strong>, {where sophistication meets genuine companionship|delivering discreet and high-class companion experiences|offering verified escort services with utmost privacy|ensuring authentic dating and companion arrangements}. {Whether you are traveling to ${cityName} for business meetings|If you are visiting ${cityName} for corporate trips|When traveling across ${cityName} for leisure or work|As a local resident seeking a peaceful date|If you seek an elite companion for dinner or evening events}, {our portal connects you directly with|we provide direct access to|our directory links you with|you can instantly connect with} verified <strong class="font-bold">${cityName} Call Girls</strong>. {All listings provide direct contact details|Every profile is self-managed by independent providers|Our platform ensures zero-middleman communication} featuring genuine photos and transparent details.</p>
-<p class="mb-4">{We maintain a strict zero-advance payment policy.|Our platform operates on complete payment transparency.|We support a clear Cash on Delivery framework.|Payment security is maintained through direct cash settlement.} {Clients are advised never to transfer|Please refrain from transferring|Never pay any online} booking charges, registration fees, or advance deposits online. All service charges are settled strictly face-to-face in <strong class="font-bold">Cash on Delivery</strong> {after meeting your companion at your chosen venue|upon arrival at your hotel room or residence|in person after physical identity verification} in ${cityName}. {From upscale hotel suites along central avenues to private residential outcalls|Whether at 5-star hotel lounges or private apartments|Across all prime districts and residential areas in ${cityName}}, {our providers offer discretion, warmth, and tailored experiences|companions deliver utmost privacy and memorable experiences|independent escorts maintain complete confidentiality and personal warmth} suited to your schedule.</p>`;
+<p class="mb-4">{We maintain a strict zero-advance payment policy.|Our platform operates on complete payment transparency.|We support direct face-to-face payments.|Payment security is maintained through direct settlement.} {Clients are advised never to transfer|Please refrain from transferring|Never pay any online} booking charges, registration fees, or advance deposits online. All service charges are settled strictly face-to-face in person {after meeting your companion at your chosen venue|upon arrival at your hotel room or residence|in person after physical identity verification} in ${cityName}. {From upscale hotel suites along central avenues to private residential outcalls|Whether at 5-star hotel lounges or private apartments|Across all prime districts and residential areas in ${cityName}}, {our providers offer discretion, warmth, and tailored experiences|companions deliver utmost privacy and memorable experiences|independent escorts maintain complete confidentiality and personal warmth} suited to your schedule.</p>`;
 
   const whyChooseHeadingTemplate = `Why Choose CallGirl4U for Call Girls in ${cityName}`;
 
   const whyChooseTemplate = `<p class="mb-4">{Finding trustworthy companion services requires privacy, safety, and authenticity.|Selecting a reliable escort directory demands complete transparency, safety, and direct communication.|When seeking companionship in ${cityName}, your safety, discretion, and peace of mind come first.} {Here is why gentlemen choose our|Explore why clients rely on our|Gentlemen and travelers trust our} directory for <strong class="font-bold">Call Girls in ${cityName}</strong>:</p>
 <ul class="list-disc pl-5 space-y-3 mb-6">
   <li><strong>Verified Profiles:</strong> {Manual review of listings to ensure|Every ad undergoes verification for|Thorough screening to confirm} authentic photographs, accurate bio details, and active <strong class="font-bold">${cityName} Call Girls Number</strong>.</li>
-  <li><strong>Strict Cash on Delivery (COD):</strong> {Complete financial safety with zero prepayment risks.|Total protection against online deposit frauds.|Zero upfront charges.} You pay only in cash after meeting your companion in person.</li>
+  <li><strong>Pay After Meeting:</strong> {Complete financial safety with zero prepayment risks.|Total protection against online deposit frauds.|Zero upfront charges.} You pay only after meeting your companion in person.</li>
   <li><strong>Direct Provider Access:</strong> Connect directly via phone or call {without agency middlemen|bypassing agency markups|with zero middleman commissions}.</li>
   <li><strong>Complete Anonymity & Zero-Log Privacy:</strong> {We do not require user sign-ups|No registration needed|No account creation}, nor do we store browsing logs or retain personal data. Your privacy in ${cityName} is fully protected.</li>
   <li><strong>Flexible In-Call & Out-Call Options:</strong> {Whether you prefer outcall service to 3-star, 4-star, or 5-star hotels|Prompt hotel doorstep outcalls across major hotel zones} in ${cityName} or private incall venues, providers accommodate your needs.</li>
@@ -178,14 +178,14 @@ export function getDefaultSeoData(cityName: string, state: string): CitySEOConte
   </div>
 </div>`;
 
-  const bookingHeadingTemplate = `How to Book Call Girls in ${cityName} — Step-by-Step Guide`;
+  const bookingHeadingTemplate = `How to Book Call Girls in ${cityName} | Step-by-Step Guide`;
 
   const bookingStepsTemplate = `<p class="mb-4">{Booking a verified companion in ${cityName} is simple, safe, and transparent:|Follow these 5 easy steps for a secure companion date in ${cityName}:}</p>
 <ol class="list-decimal pl-5 space-y-3 mb-6">
   <li><strong>Browse Verified Listings:</strong> Explore active companion profiles in ${cityName}, reviewing real photos, category details, and service offerings.</li>
   <li><strong>Direct Contact:</strong> Click on the verified <strong class="font-bold">${cityName} Call Girls Number</strong> on the listing card to connect without middleman intervention.</li>
   <li><strong>Confirm Date Details:</strong> Discuss meeting duration, preferred venue (hotel outcall or home delivery in ${cityName}), and agreed service charges.</li>
-  <li><strong>Zero Advance Payment:</strong> Never send online money, registration fees, or card charges beforehand. Our directory operates strictly on <strong class="font-bold">Cash on Delivery</strong>.</li>
+  <li><strong>Zero Advance Payment:</strong> Never send online money, registration fees, or card charges beforehand. Our directory operates strictly on direct in-person payment.</li>
   <li><strong>Meet & Pay in Cash:</strong> Meet your companion in a secure environment, verify her identity, and settle payment in cash upon arrival.</li>
 </ol>`;
 
@@ -200,16 +200,16 @@ export function getDefaultSeoData(cityName: string, state: string): CitySEOConte
 
   const privacyHeadingTemplate = `Privacy, Security & Zero-Log Standards in ${cityName}`;
 
-  const privacyTemplate = `<p class="mb-4">We prioritize your anonymity above all else. Our portal runs on a zero-log infrastructure—we do not require user account registration, track IP browsing histories, or store personal communication records.</p>
-<p class="mb-4">By enforcing cash payments upon meeting in <strong class="font-bold">${cityName}</strong>, bank statement trails and credit card records are completely eliminated, granting total discretion and peace of mind for both clients and independent companions.</p>`;
+  const privacyTemplate = `<p class="mb-4">We prioritize your anonymity above all else. Our portal runs on a zero-log infrastructure: we do not require user account registration, track IP browsing histories, or store personal communication records.</p>
+<p class="mb-4">By settling payments directly upon meeting in <strong class="font-bold">${cityName}</strong>, bank statement trails and credit card records are completely eliminated, granting total discretion and peace of mind for both clients and independent companions.</p>`;
 
-  const faqHeadingTemplate = `Frequently Asked Questions — ${cityName} Call Girl Directory`;
+  const faqHeadingTemplate = `Frequently Asked Questions | ${cityName} Call Girl Directory`;
 
   const faq1_q = `Are call girl profiles in ${cityName} genuine and verified?`;
   const faq1_a = `Yes. Profiles published on our directory undergo manual screening to verify photo authenticity and active phone/<strong class="font-bold">${cityName} Call Girls Number</strong> details. Suspicious listings can be reported immediately using the 'Report Profile' option.`;
 
   const faq2_q = `Is advance payment or registration fee required in ${cityName}?`;
-  const faq2_a = `No, absolutely not. We enforce a strict Cash on Delivery policy. Never transfer money, travel charges, or security card fees online in advance. Pay only in cash after meeting your companion in person.`;
+  const faq2_a = `No, absolutely not. We enforce a strict zero advance policy. Never transfer money, travel charges, or security card fees online in advance. Pay only in cash after meeting your companion in person.`;
 
   const faq3_q = `What companion categories can I find in ${cityName}?`;
   const faq3_a = `Our directory features independent college girls (18+), mature housewives, high-profile models, Russian escorts, and VIP companions across ${cityName}.`;
@@ -221,7 +221,7 @@ export function getDefaultSeoData(cityName: string, state: string): CitySEOConte
 
 <p class="mb-4">Hamare portal par <strong class="font-bold">College Call Girls in ${cityName}</strong>, <strong class="font-bold">Housewife Call Girls in ${cityName}</strong>, <strong class="font-bold">Model Call Girls in ${cityName}</strong>, aur <strong class="font-bold">Russian Escorts in ${cityName}</strong> ki rich categories available hain. Aap direct profile par number par call karke companion se chat aur timing confirm kar sakte hain.</p>
 
-<p class="mb-4"><strong>Important Anti-Scam Notice:</strong> Internet par kisi bhi person ko booking fee, medical card fee, ya transport charges ke naam par advance online payment na karein. Hamesha face-to-face milne ke baad hi <strong class="font-bold">Cash on Delivery</strong> payment karein.</p>
+<p class="mb-4"><strong>Important Anti-Scam Notice:</strong> Internet par kisi bhi person ko booking fee, medical card fee, ya transport charges ke naam par advance online payment na karein. Hamesha face-to-face milne ke baad hi payment karein.</p>
 
 <p class="mb-4">${cityName} ke sabhi main areas aur top hotels me outcall doorstep service available hai. Profile select kijiye aur direct <strong class="font-bold">${cityName} Call Girls Number</strong> par call karke companion se connect kijiye.</p>`;
 

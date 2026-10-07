@@ -183,7 +183,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
         "name": "Do I need to pay advance booking fee to hire a call boy?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No advance payment is required. We follow a strict Cash on Delivery policy. Pay only in cash directly after meeting the companion in person. Never transfer money online."
+          "text": "No advance payment is required. Pay directly only after meeting the companion in person. Never transfer money online."
         }
       },
       {
@@ -332,14 +332,14 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
 
         {/* Safe Advisory */}
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 my-8 not-prose">
-          <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0 flex items-center gap-2">
-            ⚠️ Safety Guidelines for Clients in {cityName}
+          <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0">
+            Safety Guidelines for Clients in {cityName}
           </h3>
           <p className="text-gray-700 text-sm mb-3">
             Your safety is our priority. Please follow these guidelines when booking a male companion in {cityName}:
           </p>
           <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1.5">
-            <li><strong>Never Pay in Advance:</strong> Legitimate companions never ask for UPI, bank transfers, or any prepayment. Pay cash only after meeting in person.</li>
+            <li><strong>Never Pay in Advance:</strong> Legitimate companions never ask for UPI, bank transfers, or any prepayment. Pay only after meeting in person.</li>
             <li><strong>Verify the Profile Photo:</strong> Always confirm the companion matches their directory photo before proceeding.</li>
             <li><strong>Meet at Safe Locations:</strong> Prefer reputable hotels, cafes, or your own residence for first meetings.</li>
             <li><strong>Trust Your Instincts:</strong> If something feels off, do not continue. Report any suspicious profile using the Report button.</li>
@@ -457,15 +457,15 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
           <div className="flex flex-wrap justify-center gap-3">
             <Link prefetch={false} href={`/call-girls/${city}`}
               className="px-4 py-2 bg-red-50 text-red-600 text-sm font-bold rounded-xl border border-red-100 hover:bg-red-600 hover:text-white transition-all shadow-sm">
-              💃 Call Girls in {cityName}
+              Call Girls in {cityName}
             </Link>
             <Link prefetch={false} href={`/massage/${city}`}
               className="px-4 py-2 bg-purple-50 text-purple-600 text-sm font-bold rounded-xl border border-purple-100 hover:bg-purple-600 hover:text-white transition-all shadow-sm">
-              💆 Massage Service in {cityName}
+              Massage Service in {cityName}
             </Link>
             <Link prefetch={false} href={`/call-boys`}
               className="px-4 py-2 bg-gray-100 text-gray-800 text-sm font-bold rounded-xl border border-gray-200 hover:bg-gray-800 hover:text-white transition-all shadow-sm">
-              📍 All India Call Boys Directory
+              All India Call Boys Directory
             </Link>
           </div>
         </div>

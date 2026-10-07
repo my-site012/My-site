@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
 
   return {
     title: customSeo.title || `Call Girls in ${stateName} State | Verified Companion Services`,
-    description: customSeo.description || `Find verified independent call girls across ${stateName}. Browse local female escort profiles with direct booking and cash on delivery.`,
+    description: customSeo.description || `Find verified independent call girls across ${stateName}. Browse local female escort profiles with direct booking and zero advance payment.`,
     keywords: seoData.metaKeywords,
     robots: {
       index: true,
@@ -197,8 +197,8 @@ export default async function StatePage({ params }: { params: Promise<{ state: s
 
             {/* Safe Dating & Anti-Scam Advisory */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 my-8 not-prose">
-              <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0 flex items-center gap-2">
-                ⚠️ Safe Dating & Anti-Scam Advisory for {stateName}
+              <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0">
+                Safe Dating & Anti-Scam Advisory for {stateName}
               </h3>
               <p className="text-gray-700 text-sm mb-3">
                 To ensure a safe and positive experience when using our independent directory in <strong>{stateName}</strong>, please observe these safety practices:

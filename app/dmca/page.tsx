@@ -38,20 +38,20 @@ export default function DMCAPage() {
 
       {/* Designated Agent */}
       <section className="mb-10 bg-gray-50 rounded-xl p-6 border border-gray-200">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">📬 Designated Copyright Agent</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Designated Copyright Agent</h2>
         <div className="text-sm text-gray-700 space-y-1">
           <p><strong>Service:</strong> CallGirl4U India</p>
           <p><strong>Website:</strong> https://callgirl4u.com</p>
           <p><strong>Email:</strong> <a href="mailto:worksunil26@gmail.com" className="text-blue-600 hover:underline">worksunil26@gmail.com</a></p>
           <p className="mt-3 text-xs text-gray-500">
-            Please use the subject line: <em>DMCA Takedown Request – [URL of infringing content]</em>
+            Please use the subject line: <em>DMCA Takedown Request: [URL of infringing content]</em>
           </p>
         </div>
       </section>
 
       {/* Filing a Notice */}
       <section className="mb-10">
-        <h2 className="text-xl font-bold text-gray-900 mb-3 border-b pb-2">📝 How to File a DMCA Takedown Notice</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-3 border-b pb-2">How to File a DMCA Takedown Notice</h2>
         <p className="text-gray-700 text-sm mb-4">
           To submit a valid DMCA notice under 17 U.S.C. § 512(c)(3), your written notice must include:
         </p>
@@ -64,13 +64,13 @@ export default function DMCAPage() {
           <li>A statement that the information in the notification is accurate, and <strong>under penalty of perjury</strong>, that you are authorized to act on behalf of the copyright owner.</li>
         </ol>
         <div className="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
-          ⚠️ <strong>Warning:</strong> Filing a false DMCA claim may expose you to liability under 17 U.S.C. § 512(f) for damages, attorney fees, and other costs.
+          <strong>Warning:</strong> Filing a false DMCA claim may expose you to liability under 17 U.S.C. § 512(f) for damages, attorney fees, and other costs.
         </div>
       </section>
 
       {/* Counter Notice */}
       <section className="mb-10">
-        <h2 className="text-xl font-bold text-gray-900 mb-3 border-b pb-2">↩️ Counter-Notice Procedure</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-3 border-b pb-2">Counter-Notice Procedure</h2>
         <p className="text-gray-700 text-sm mb-4">
           If you believe your content was removed due to a mistake or misidentification, you may file a
           Counter-Notice under 17 U.S.C. § 512(g)(3). Your counter-notice must include:
@@ -86,14 +86,14 @@ export default function DMCAPage() {
           Send counter-notices to: <a href="mailto:worksunil26@gmail.com" className="text-blue-600 hover:underline">worksunil26@gmail.com</a>
         </p>
         <p className="text-xs text-gray-500 mt-2">
-          Upon receiving a valid counter-notice, we will restore the removed content within 10–14 business
+          Upon receiving a valid counter-notice, we will restore the removed content within 10 to 14 business
           days unless the original complainant files a court action.
         </p>
       </section>
 
       {/* Repeat Infringer Policy */}
       <section className="mb-10">
-        <h2 className="text-xl font-bold text-gray-900 mb-3 border-b pb-2">🔁 Repeat Infringer Policy</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-3 border-b pb-2">Repeat Infringer Policy</h2>
         <p className="text-gray-700 text-sm leading-relaxed">
           In appropriate circumstances, CallGirl4U will terminate the accounts of users who are repeat
           copyright infringers. We track takedown requests and reserve the right to disable accounts

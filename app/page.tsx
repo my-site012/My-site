@@ -252,8 +252,8 @@ export default async function Home() {
               </div>
 
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6">
-                <h3 className="text-lg font-bold text-amber-800 mb-2 flex items-center gap-2">
-                  ⚠️ User Safety & Anti-Fraud Advisory
+                <h3 className="text-lg font-bold text-amber-800 mb-2">
+                  User Safety & Anti-Fraud Advisory
                 </h3>
                 <p className="text-gray-700 text-xs leading-relaxed">
                   CallGirl4U is strictly an advertising directory and does not handle payments, bookings, or client-advertiser transactions. For your safety, <strong>never send advance payments or deposits online</strong> (such as hotel deposits, registration charges, or travel fees). Always verify companion identity in person and handle transactions directly.

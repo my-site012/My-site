@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ state: st
 
   return {
     title: `Call Boys in ${stateName} | CallGirl4U`,
-    description: `Discover handsome, charming call boys across all major cities in ${stateName}. Browse verified male companion profiles — discreet, professional, and available 24/7. No advance payment required.`,
+    description: `Discover handsome, charming call boys across all major cities in ${stateName}. Browse verified male companion profiles | discreet, professional, and available 24/7. No advance payment required.`,
     keywords: `call boy in ${stateName}, male companion ${stateName}, gigolo service ${stateName}, male escort ${stateName}, playboy ${stateName}`,
     robots: {
       index: true,
@@ -106,7 +106,7 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
             Call Boys in <span className="text-red-600">{stateName}</span>
           </h1>
           <p className="text-gray-600 text-lg">
-            Discover charming, handsome, and discreet male companions across every major city in {stateName}. All profiles are individually verified — real photos, real people. <strong>No advance payment</strong> required.
+            Discover charming, handsome, and discreet male companions across every major city in {stateName}. All profiles are individually verified, real photos, real people. <strong>No advance payment</strong> required.
           </p>
         </div>
       </section>
@@ -138,7 +138,7 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
               {profileImages.map((imgPath, index) => {
                 const adId = `boy-${state}-${index}`;
                 const adName = getBoyNameFromId(adId);
-                const adTitle = `${adName} - ${stateName} Elite`;
+                const adTitle = `${adName} | ${stateName} Elite`;
                 const price = getPriceFromId(adId);
 
                 return (
@@ -168,32 +168,32 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
               Welcome to India's most trusted male companion directory. Whether you are a <strong>woman looking for a charming partner</strong>, or an individual seeking a fun and memorable experience, our verified <strong>call boy profiles across {stateName}</strong> are here for you. Every profile is real, handsome, and thoroughly screened before being listed.
             </p>
             <p className="mb-8 leading-relaxed">
-              Our <strong>call boys in {stateName}</strong> are well-groomed, educated, and trained to provide a comfortable, respectful, and enjoyable companionship experience — across Dinner dates, travel, social events, and more.
+              Our <strong>call boys in {stateName}</strong> are well-groomed, educated, and trained to provide a comfortable, respectful, and enjoyable companionship experience across Dinner dates, travel, social events, and more.
             </p>
 
             {/* Services Box */}
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 my-8 not-prose">
               <h3 className="text-lg font-bold text-gray-900 mb-4">What Our Call Boys in {stateName} Offer</h3>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700 text-sm">
-                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✔</span> Dinner & social event companionship</li>
-                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✔</span> Travel & tour partner across {stateName}</li>
-                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✔</span> Romantic dates & private outings</li>
-                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✔</span> Overnight companionship</li>
-                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✔</span> Confidential & discreet meetings</li>
-                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✔</span> Available 24/7 across {stateName}</li>
+                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✓</span> Dinner & social event companionship</li>
+                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✓</span> Travel & tour partner across {stateName}</li>
+                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✓</span> Romantic dates & private outings</li>
+                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✓</span> Overnight companionship</li>
+                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✓</span> Confidential & discreet meetings</li>
+                <li className="flex items-center gap-2"><span className="text-red-500 text-lg">✓</span> Available 24/7 across {stateName}</li>
               </ul>
             </div>
 
             {/* Safe Advisory */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 my-8 not-prose">
-              <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0 flex items-center gap-2">
-                ⚠️ Safety Guidelines for Clients in {stateName}
+              <h3 className="text-lg font-bold text-amber-800 mb-2 mt-0">
+                Safety Guidelines for Clients in {stateName}
               </h3>
               <p className="text-gray-700 text-sm mb-3">
                 Your safety is our priority. Please follow these guidelines when booking a male companion in {stateName}:
               </p>
               <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1.5">
-                <li><strong>Never Pay in Advance:</strong> Legitimate companions never ask for UPI, bank transfers, or any prepayment. Pay cash only after meeting in person.</li>
+                <li><strong>Never Pay in Advance:</strong> Legitimate companions never ask for UPI, bank transfers, or any prepayment. Pay only after meeting in person.</li>
                 <li><strong>Verify the Profile Photo:</strong> Always confirm the companion matches their directory photo before proceeding.</li>
                 <li><strong>Meet at Safe Locations:</strong> Prefer reputable hotels, cafes, or your own residence for first meetings.</li>
                 <li><strong>Trust Your Instincts:</strong> If something feels off, do not continue. Report any suspicious profile using the Report button.</li>
@@ -202,15 +202,15 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
 
             <h2 className="text-2xl mb-4">Why CallGirl4U is the Best Platform for Call Boys in {stateName}</h2>
             <p className="mb-4 leading-relaxed">
-              Unlike other platforms, CallGirl4U <strong>manually verifies every call boy profile in {stateName}</strong>. We do not allow fake photos or misleading information. Our platform is designed with complete privacy and discretion — your personal data is never shared with any third party.
+              Unlike other platforms, CallGirl4U <strong>manually verifies every call boy profile in {stateName}</strong>. We do not allow fake photos or misleading information. Our platform is designed with complete privacy and discretion, your personal data is never shared with any third party.
             </p>
             <p className="mb-8 leading-relaxed">
-              We serve clients across all age groups and preferences. Whether you are looking for a young, energetic college boy, or a mature, sophisticated gentleman — you will find your ideal companion right here.
+              We serve clients across all age groups and preferences. Whether you are looking for a young, energetic college boy, or a mature, sophisticated gentleman, you will find your ideal companion right here.
             </p>
 
             {/* Rates Table */}
             <h2 className="text-2xl mb-4">Call Boy Service Charges in {stateName}</h2>
-            <p className="mb-4 text-gray-600">Rates are approximate and may vary by city and profile type. Payment is cash only — no advance required.</p>
+            <p className="mb-4 text-gray-600">Rates are approximate and may vary by city and profile type. Payment is cash only | no advance required.</p>
             <div className="overflow-x-auto mb-8 rounded-lg shadow-sm border border-gray-200">
               <table className="w-full text-left bg-white font-sans text-sm">
                 <thead>
@@ -245,7 +245,7 @@ export default async function CallBoyStatePage({ params }: { params: Promise<{ s
             </div>
 
             {/* FAQs */}
-            <h2 className="text-2xl mb-6">Frequently Asked Questions — Call Boys in {stateName}</h2>
+            <h2 className="text-2xl mb-6">Frequently Asked Questions | Call Boys in {stateName}</h2>
             <div className="space-y-4 mb-10">
               {[
                 { q: `How do I book a call boy in ${stateName}?`, a: `Browse profiles on our directory, choose a city in ${stateName}, select the companion you like, and contact them directly via phone. No registration or advance payment needed.` },
