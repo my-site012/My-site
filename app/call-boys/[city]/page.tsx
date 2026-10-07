@@ -39,10 +39,10 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   const state = getStateFromCity(city) || "India";
 
   let title = `Call Boy in ${cityName} | Male Companions | CallGirl4U`;
-  let description = `Discover handsome, charming call boys in ${cityName}, ${state}. Browse verified male companion profiles — discreet, trustworthy, and available 24/7. No advance payment.`;
+  let description = `Discover handsome, charming call boys in ${cityName}, ${state}. Browse verified male companion profiles, discreet, trustworthy, and available 24/7. No advance payment.`;
 
   if (isPage2) {
-    title = `${title} - Page ${currentPage}`;
+    title = `${title} | Page ${currentPage}`;
     description = `${description} (Page ${currentPage})`;
   }
 
@@ -113,7 +113,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
     const overallIndex = index;
     const adId = `boy-${city}-${overallIndex}`;
     const adName = getBoyNameFromId(adId);
-    const adTitle = `${adName} - VIP Male Companion`;
+    const adTitle = `${adName} | VIP Male Companion`;
     const price = getPriceFromId(adId);
     return {
       id: adId,
@@ -253,7 +253,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
             Call Boys in <span className="text-red-600">{cityName}</span>
           </h1>
           <p className="text-gray-600 text-lg">
-            Discover charming, handsome, and discreet male companions in {cityName}, {state}. All profiles are individually verified — real photos, real people. <strong>No advance payment</strong> required.
+            Discover charming, handsome, and discreet male companions in {cityName}, {state}. All profiles are individually verified with real photos and real people. <strong>No advance payment</strong> required.
           </p>
         </div>
       </section>
@@ -314,7 +314,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
           Welcome to India's most trusted male companion directory. Whether you are a <strong>woman seeking a charming partner</strong>, or an individual looking for a fun and memorable experience, our verified <strong>call boy profiles in {cityName}</strong> are here for you. Every profile is real, handsome, and thoroughly screened.
         </p>
         <p className="mb-8 leading-relaxed">
-          Our <strong>call boys in {cityName}</strong> are well-groomed, educated, and trained in providing a comfortable, respectful, and enjoyable companionship experience. Whether you need a date for a social event, a travel partner, or simply someone to spend quality time with — we have the perfect companion for you.
+          Our <strong>call boys in {cityName}</strong> are well-groomed, educated, and trained in providing a comfortable, respectful, and enjoyable companionship experience. Whether you need a date for a social event, a travel partner, or simply someone to spend quality time with, we have the perfect companion for you.
         </p>
 
         {/* What We Offer */}
@@ -348,7 +348,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
 
         <h2 className="text-2xl mb-4">Why CallGirl4U is the Best Platform for Call Boys in {cityName}</h2>
         <p className="mb-4 leading-relaxed">
-          Unlike other platforms, CallGirl4U manually verifies every <strong>call boy profile in {cityName}</strong>. We do not allow fake photos or misleading information. Our platform is designed with privacy and discretion in mind — your personal data is never shared with any third party.
+          Unlike other platforms, CallGirl4U manually verifies every <strong>call boy profile in {cityName}</strong>. We do not allow fake photos or misleading information. Our platform is designed with privacy and discretion in mind, your personal data is never shared with any third party.
         </p>
         <p className="mb-8 leading-relaxed">
           We serve clients across all age groups and preferences. Whether you are looking for a young, energetic college boy, or a mature, sophisticated gentleman, you will find your ideal companion right here on our platform.
@@ -356,7 +356,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
 
         {/* Rates Table */}
         <h2 className="text-2xl mb-4">Call Boy Service Charges in {cityName}</h2>
-        <p className="mb-4 text-gray-600">All rates are approximate and may vary based on duration, services, and profile type. Payment is cash only — no advance required.</p>
+        <p className="mb-4 text-gray-600">All rates are approximate and may vary based on duration, services, and profile type. Payment is cash only, no advance required.</p>
         <div className="overflow-x-auto mb-8 rounded-lg shadow-sm border border-gray-200">
           <table className="w-full text-left bg-white font-sans text-sm">
             <thead>
@@ -391,7 +391,7 @@ export default async function CallBoyCityPage({ params, searchParams }: { params
         </div>
 
         {/* FAQs */}
-        <h2 className="text-2xl mb-6">Frequently Asked Questions — Call Boys in {cityName}</h2>
+        <h2 className="text-2xl mb-6">Frequently Asked Questions: Call Boys in {cityName}</h2>
         <div className="space-y-4 mb-10">
           {[
             { q: `How do I book a call boy in ${cityName}?`, a: `Browse profiles on our directory, select the companion you like, and contact them directly via the phone number. No registration or advance payment is needed.` },

@@ -10,13 +10,13 @@ import { cachedGetValue } from "@/lib/kv";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "CallGirl4U – Local Adult Classifieds & Personal Advertisements in India",
+  title: "CallGirl4U | Local Adult Classifieds & Personal Advertisements in India",
   description: "Browse local personal and adult classified advertisements across India on CallGirl4U. Explore advertiser profiles by city, connect with independent companions, or publish a free listing.",
   alternates: {
     canonical: "https://callgirl4u.com",
   },
   openGraph: {
-    title: "CallGirl4U – Local Adult Classifieds & Personal Advertisements in India",
+    title: "CallGirl4U | Local Adult Classifieds & Personal Advertisements in India",
     description: "Browse local personal and adult classified advertisements across India on CallGirl4U. Explore advertiser profiles by city, connect with independent companions, or publish a free listing.",
     url: "https://callgirl4u.com",
     siteName: "CallGirl4U",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CallGirl4U – Local Adult Classifieds & Personal Advertisements in India",
+    title: "CallGirl4U | Local Adult Classifieds & Personal Advertisements in India",
     description: "Browse local personal and adult classified advertisements across India on CallGirl4U. Explore advertiser profiles by city, connect with independent companions, or publish a free listing.",
     images: ["https://callgirl4u.com/icon.png"],
   },
@@ -79,6 +79,21 @@ export default async function Home() {
     "description": "CallGirl4U is an online classifieds platform in India for local personal advertisements, companion listings, and wellness massage services."
   };
 
+  const quickCities = [
+    { name: "Jaipur", slug: "jaipur-2" },
+    { name: "Delhi NCR", slug: "delhi" },
+    { name: "Mumbai", slug: "mumbai" },
+    { name: "Bengaluru", slug: "bengaluru" },
+    { name: "Goa", slug: "goa" },
+    { name: "Pune", slug: "pune" },
+    { name: "Kolkata", slug: "kolkata" },
+    { name: "Hyderabad", slug: "hyderabad" },
+    { name: "Ahmedabad", slug: "ahmedabad" },
+    { name: "Chandigarh", slug: "chandigarh" },
+    { name: "Surat", slug: "surat-2" },
+    { name: "Lucknow", slug: "lucknow" },
+  ];
+
   return (
     <div>
       {/* Dynamic SEO JSON-LD */}
@@ -92,16 +107,53 @@ export default async function Home() {
       />
       
       {/* Hero Search Section */}
-      <section className="bg-gray-50 py-12 border-b">
+      <section className="bg-gradient-to-b from-gray-50 via-white to-gray-50 py-10 md:py-14 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight">
+          <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
             Local Adult Classifieds and Companion Directory across India
           </h1>
-          <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto mb-8">
+          <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto mb-6">
             Search verified advertiser listings by city and category to discover independent companions and massage therapies in your area.
           </p>
+
+          {/* Clean Category Switcher Tabs (No emojis) */}
+          <div className="flex justify-center items-center gap-2 mb-6 flex-wrap">
+            <a
+              href="/call-girls"
+              className="bg-red-600 text-white font-bold text-xs md:text-sm px-4 py-2 rounded-lg shadow-sm hover:bg-red-700 transition"
+            >
+              Call Girls
+            </a>
+            <a
+              href="/massage"
+              className="bg-white border border-gray-300 text-gray-800 font-bold text-xs md:text-sm px-4 py-2 rounded-lg hover:border-red-600 hover:text-red-600 hover:bg-gray-50 transition"
+            >
+              Massage Services
+            </a>
+            <a
+              href="/call-boys"
+              className="bg-white border border-gray-300 text-gray-800 font-bold text-xs md:text-sm px-4 py-2 rounded-lg hover:border-red-600 hover:text-red-600 hover:bg-gray-50 transition"
+            >
+              Male Escorts
+            </a>
+          </div>
           
           <CitySearch cities={getAllCities()} layout="hero" />
+
+          {/* Quick City Pills (No emojis) */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-1.5 md:gap-2">
+            <span className="text-xs font-semibold text-gray-500 mr-1">Popular Cities:</span>
+            {quickCities.map((c) => (
+              <a
+                key={c.slug}
+                href={`/call-girls/${c.slug}`}
+                className="text-xs font-medium px-3 py-1 bg-white border border-gray-200 text-gray-700 rounded-full hover:border-red-500 hover:text-red-600 hover:bg-red-50/50 transition-all shadow-xs"
+              >
+                {c.name}
+              </a>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -122,7 +174,7 @@ export default async function Home() {
                  <AdCard 
                   key={index}
                   id={adId}
-                  title={`${adName} – Independent Profile`}
+                  title={`${adName} | Independent Profile`}
                   location={currentCity}
                   price={price}
                   imagePath={imgPath}

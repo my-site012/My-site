@@ -112,7 +112,7 @@ export default function CallGirlsDirectory() {
       <section className="max-w-4xl mx-auto px-4 py-12 border-t text-gray-800">
         <h2 className="text-3xl mb-6 uppercase tracking-tight">Genuine <strong>Call Girl Service Across India</strong></h2>
         <p className="mb-6 leading-relaxed">
-          CallGirl4U is India's most trusted platform for finding genuine and verified <strong>call girl services</strong>. We understand the importance of safety, privacy, and authenticity in adult classifieds. That's why we offer a comprehensive directory spanning every state and major city. <strong>No advance payment</strong> is required—you only pay in cash. 
+          CallGirl4U is India's most trusted platform for finding genuine and verified <strong>call girl services</strong>. We understand the importance of safety, privacy, and authenticity in adult classifieds. That's why we offer a comprehensive directory spanning every state and major city. <strong>No advance payment</strong> is required, you only pay in cash. 
         </p>
         <p className="mb-6 leading-relaxed">
           Our listings include <strong>Call Girls in All Cities</strong>, including independent <strong>College girls</strong>, sophisticated housewives, and high-profile international models. If you are looking for a <strong>genuine call girls number</strong>, every profile is vetted to ensure that the photos you see are the people you meet. Get the <strong>best call girls number</strong> only on CallGirl4U.
@@ -121,7 +121,7 @@ export default function CallGirlsDirectory() {
           <h3 className="text-xl font-bold text-red-800 mb-4 uppercase tracking-wide">Why Browse on CallGirl4U?</h3>
           <ul className="space-y-3 text-gray-800 font-medium">
             <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> Verified Profiles with Real Photos</li>
-            <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> <strong>No advance payment</strong> - Pay Cash on Delivery</li>
+            <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> <strong>No advance payment</strong> | Pay Cash on Delivery</li>
             <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> Discreet and Private Meeting Locations</li>
             <li className="flex items-center gap-3"><span className="text-red-600 text-xl">✓</span> <strong>Call Girls</strong> Available 24/7 in All Major Indian Cities</li>
           </ul>

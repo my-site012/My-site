@@ -90,8 +90,14 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   let description = "";
   let keywords = "";
 
-  // Extended cities — natural meta wording
-  if (isExt) {
+  // 1. Handcrafted custom city SEO data (e.g. Jaipur, Delhi, Mumbai, Surat, etc.)
+  if (cityContentData[seoDataKey]?.metaTitle) {
+    title = seoData.metaTitle;
+    description = seoData.metaDescription;
+    keywords = isJaipurSub 
+      ? `Call Girls in ${areaName} Jaipur, Escort Service ${areaName} Jaipur, ` + seoData.metaKeywords
+      : seoData.metaKeywords;
+  } else if (isExt) {
     keywords = `Call Girls in ${cityName}, Independent Companions ${cityName}, Escort Service ${cityName}, Cash on Delivery`;
     title = `Call Girls in ${cityName} | Direct Number | CallGirl4U`;
     description = `Find verified call girls in ${cityName} with direct number. Genuine female companions available 24/7 in ${cityName}, ${state}. Cash on delivery.`;
@@ -114,7 +120,7 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   }
 
   if (isPage2) {
-    title = `${title} - Page ${currentPage}`;
+    title = `${title} | Page ${currentPage}`;
     description = `${description} (Page ${currentPage})`;
   }
 
@@ -141,8 +147,6 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   };
 }
 
-
-
 function getMergedSeoData(cityName: string, state: string, citySlug: string): CitySEOContent {
   const defaultSeo = getDefaultSeoData(cityName, state);
   const customData = cityContentData[citySlug];
@@ -151,13 +155,8 @@ function getMergedSeoData(cityName: string, state: string, citySlug: string): Ci
 
   return {
     ...defaultSeo,
-    metaTitle: customData.metaTitle || defaultSeo.metaTitle,
-    metaDescription: customData.metaDescription || defaultSeo.metaDescription,
-    metaKeywords: customData.metaKeywords || defaultSeo.metaKeywords,
-    h1: customData.h1 || defaultSeo.h1,
-    heroSubtext: customData.heroSubtext || defaultSeo.heroSubtext,
-    introHeading: customData.introHeading || defaultSeo.introHeading,
-    introText: customData.introText || defaultSeo.introText,
+    ...customData,
+    faqs: customData.faqs && customData.faqs.length > 0 ? customData.faqs : defaultSeo.faqs,
   };
 }
 
@@ -225,7 +224,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
     const overallIndex = index;
     const adId = `${city}-${overallIndex}`;
     const adName = getNameFromId(adId);
-    const adTitle = `${adName} - VIP Companion`;
+    const adTitle = `${adName} | VIP Companion`;
     const price = getPriceFromId(adId);
     return {
       id: adId,
@@ -254,7 +253,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
     "@type": "CollectionPage",
     "name": seoData.h1,
     "description": seoData.metaDescription,
-    "url": `https://callgirl4u.com/call-girls/${seoDataKey}`,
+    "url": `https://callgirl4u.com/call-girls/${city}`,
     "mainEntity": {
       "@type": "ItemList",
       "numberOfItems": paginatedCards.length,
@@ -341,7 +340,7 @@ export default async function CityPage({ params, searchParams }: { params: Promi
               <h1 className="text-3xl text-gray-900 mb-4">Call Girls Available in {cityName}</h1>
               <p className="text-gray-600 text-lg">
                 Find <strong>verified call girls in {cityName}</strong>, {state} with direct number.
-                Genuine female companions available 24/7. <strong>Cash on delivery</strong> — no advance payment required.
+                Genuine female companions available 24/7. <strong>Cash on delivery</strong> | No advance payment required.
               </p>
             </>
           ) : (

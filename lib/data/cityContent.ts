@@ -31,56 +31,57 @@ export interface CitySEOContent {
 
 export const cityContentData: Record<string, CitySEOContent> = {
   jaipur: {
-    metaTitle: "Call Girls in Jaipur | Verified Independent Escort Directory",
-    metaDescription: "Find verified independent call girls in Jaipur. Direct direct contact, real photos, cash on delivery with zero advance payment in Pink City.",
-    metaKeywords: "Jaipur Call Girls, Call Girl in Jaipur, Independent Companions Jaipur, Jaipur Escort Service, Malviya Nagar Escorts, Vaishali Nagar Call Girls",
-    h1: "Call Girls in Jaipur — Verified Independent Companions",
-    heroSubtext: "Discover verified independent call girls across Jaipur including Malviya Nagar, Vaishali Nagar, Jagatpura, and Tonk Road. Browse real companion profiles with direct direct contact and strict Cash on Delivery booking.",
-    introHeading: "Verified Female Companions in Pink City Jaipur",
-    introText: "Welcome to the official Jaipur directory for independent companions. Whether staying at luxury heritage hotels in C-Scheme or business stays near Sitapura and Sanganer, our platform connects you directly with genuine local models, college companions, and VIP escorts without agency intermediaries.",
+    metaTitle: "Call Girls in Jaipur | Escorts in Jaipur Call Girls (Cash on Delivery)",
+    metaDescription: "Book top call girls in Jaipur and verified Jaipur escorts service. 100% Cash on Delivery, genuine independent female companions with direct contact in Pink City 24/7.",
+    metaKeywords: "Call Girls in Jaipur, Jaipur Call Girls, Escorts in Jaipur, Jaipur Escort Service, Independent Call Girls Jaipur, Malviya Nagar Escorts, Vaishali Nagar Call Girls, Tonk Road Call Girls, Cash on Delivery Escorts Jaipur",
+    h1: "Call Girls in Jaipur | Verified Escorts & Independent Companions",
+    heroSubtext: "Connect with verified independent call girls in Jaipur with direct contact numbers and 100% Cash on Delivery (COD). Fast 30-minute doorstep and hotel outcall delivery across Malviya Nagar, Vaishali Nagar, Mansarovar, Tonk Road, C-Scheme, Sitapura, and Jagatpura.",
+    introHeading: "Verified Female Companions & Escort Service in Pink City Jaipur",
+    introText: "Welcome to the official Jaipur directory for independent female companions and escort services. Whether staying at luxury heritage hotels in C-Scheme, business hotels near Sitapura and Sanganer, or transit accommodations near Jaipur International Airport, our platform connects you directly with genuine local models, college companions, and VIP escorts without agency middlemen.",
     whyChooseHeading: "Why Book Companions in Jaipur via CallGirl4U",
-    whyChooseText: `<p class="mb-4">Jaipur visitors choose our platform for transparency and direct communication:</p>
+    whyChooseText: `<p class="mb-4">Jaipur visitors and locals choose our directory for transparency, security, and direct provider communication:</p>
 <ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> Pay in person only after meeting your companion in your hotel room or residence.</li>
-  <li><strong>No Online Deposits:</strong> Protect your money by avoiding prepaid card scams, medical fee traps, or upfront booking charges.</li>
-  <li><strong>Local Coverage:</strong> Fast 30-minute outcall delivery across Raja Park, Mansarovar, MI Road, and Airport zones.</li>
-  <li><strong>Direct direct access:</strong> Chat directly with self-managed independent providers.</li>
+  <li><strong>100% Cash on Delivery (COD):</strong> Pay in person only after meeting your companion in your hotel room or private residence.</li>
+  <li><strong>Zero Advance Deposit:</strong> Avoid online payment fraud, prepaid gift card scams, or fake medical registration fees.</li>
+  <li><strong>Prompt Local Outcalls:</strong> Fast 30-minute doorstep arrival across Malviya Nagar, Vaishali Nagar, Raja Park, Mansarovar, MI Road, and Airport zones.</li>
+  <li><strong>Direct Direct Contact:</strong> Chat directly via WhatsApp or phone with self-managed independent providers.</li>
 </ul>`,
     typesHeading: "Popular Companion Categories in Jaipur",
-    typesText: `Explore diverse profiles in Jaipur:
+    typesText: `Explore diverse female companion profiles in Jaipur:
 <ul class="list-disc pl-5 space-y-2 mt-2">
-  <li><strong>College Models:</strong> Vibrant companions available for dinner dates, shopping trips, and casual dates.</li>
-  <li><strong>Mature Housewife Companions:</strong> Relaxing and attentive companions for warm Girlfriend Experience (GFE) meetings.</li>
-  <li><strong>VIP Russian Escorts:</strong> High-profile international escorts available for 5-star hotel bookings in Jaipur.</li>
+  <li><strong>College Models:</strong> Young, enthusiastic companions for friendly coffee dates, sightseeing in Pink City, and casual outings.</li>
+  <li><strong>Mature Housewife Companions:</strong> Warm, attentive companions for soothing conversations and relaxed Girlfriend Experience (GFE) meetings.</li>
+  <li><strong>VIP Russian & International Escorts:</strong> High-profile international models available for 5-star luxury hotel bookings across Jaipur.</li>
 </ul>`,
-    bookingHeading: "Steps to Book a Call Girl in Jaipur",
+    bookingHeading: "Steps to Book a Call Girl in Jaipur Safely",
     bookingText: `<ol class="list-decimal pl-5 space-y-2">
-  <li>Browse active Jaipur listings and select your favorite companion card.</li>
-  <li>Click the direct Contact button to start chatting with the provider.</li>
-  <li>Discuss meeting time, hotel/residential venue, and agreed session rate.</li>
-  <li>Meet in person and complete payment in cash upon verification.</li>
+  <li>Browse active Jaipur listings and choose your preferred companion profile.</li>
+  <li>Click the Contact button to start chatting directly via WhatsApp or phone call.</li>
+  <li>Confirm meeting time, hotel room or residence location, and session expectations.</li>
+  <li>Meet face-to-face and complete payment in cash after verification.</li>
 </ol>`,
-    areasHeading: "Jaipur Neighborhood & Hotel Coverage",
-    areasText: "Outcall delivery covers all major hubs: Malviya Nagar, Vaishali Nagar, Jagatpura, Sitapura Industrial Area, C-Scheme, Tonk Road, Ajmer Road 200 Feet Bypass, Mansarovar, and Jaipur International Airport vicinity.",
-    rateHeading: "Jaipur Companion Pricing & Rate Expectations",
-    rateIntro: "Rates in Jaipur depend on session length (short time vs full night stay) and companion category. Always pay directly in cash during the meeting.",
+    areasHeading: "Jaipur Neighborhood & Hotel Outcall Coverage",
+    areasText: "Doorstep delivery covers all key Jaipur localities: Malviya Nagar, Vaishali Nagar, Jagatpura, Sitapura Industrial Area, C-Scheme, Tonk Road, Ajmer Road (200 Feet Bypass), Mansarovar, Gopalpura, Sanganer, Raja Park, Bani Park, and Jaipur International Airport hotel clusters.",
+    rateHeading: "Jaipur Companion Pricing & Rates Guide",
+    rateIntro: "Standard rates in Jaipur range between ₹3,000 to ₹10,000 depending on session duration (1 hour, 2 hours, or overnight stay) and companion category. Strict Cash on Delivery applies | never pay any advance booking charge.",
     privacyHeading: "Discreet & Confidential Booking in Jaipur",
-    privacyText: "Your privacy is paramount. We do not log customer search details or retain personal information, allowing you to enjoy discreet dates with complete peace of mind.",
-    faqHeading: "Frequently Asked Questions — Jaipur Directory",
+    privacyText: "Your privacy is 100% protected. We do not store client search history or personal contact numbers, ensuring discreet companion bookings with complete peace of mind.",
+    faqHeading: "Frequently Asked Questions | Jaipur Call Girls Directory",
     faqs: [
-      { q: "Are call girl profiles in Jaipur verified?", a: "Yes, listings undergo manual photo verification to ensure active contact numbers and authentic photos." },
-      { q: "Do I need to pay any advance fee in Jaipur?", a: "No. Never pay any booking fee or deposit online. Pay cash face-to-face after meeting." },
-      { q: "Which hotel areas are supported for outcall in Jaipur?", a: "Companions deliver outcall services to all major hotels in C-Scheme, MI Road, Tonk Road, Malviya Nagar, and Vaishali Nagar." }
+      { q: "Are call girl profiles in Jaipur verified with real photos?", a: "Yes. Profiles undergo photo and contact verification so you can connect directly with authentic independent companions." },
+      { q: "Do I need to pay any advance fee before meeting in Jaipur?", a: "No. Never pay any advance, hotel card booking fee, or registration deposit online. Always pay directly in cash after meeting your companion." },
+      { q: "Which hotel zones are covered for outcall delivery in Jaipur?", a: "Companions deliver outcall services to all major hotels in Tonk Road, C-Scheme, Malviya Nagar, Vaishali Nagar, MI Road, and near Jaipur Airport." },
+      { q: "How long does outcall delivery take in Jaipur?", a: "Most independent companions arrive within 30 to 45 minutes of booking confirmation across all central Jaipur locations." }
     ],
-    hindiText: `<p class="mb-4"><strong>Jaipur Call Girl Directory:</strong> Jaipur (Pink City) me verified independent call girls aur companions ke saath connect karein. Direct direct contact aur zero advance payment policy ke saath 100% Cash on Delivery safe experience enjoy karein.</p>`,
+    hindiText: `<p class="mb-4"><strong>Jaipur Call Girl & Escort Directory:</strong> Jaipur (Pink City) me verified independent call girls aur escorts ke sath connect karein. Direct phone ya WhatsApp contact aur 100% Cash on Delivery policy ke sath safe aur confidential experience enjoy karein bina kisi advance deposit ke.</p>`,
     profiles: []
   },
 
   delhi: {
     metaTitle: "Call Girls in Delhi | Verified NCR Escort Directory",
-    metaDescription: "Find verified independent call girls in Delhi NCR. Direct direct contact, real photos, cash on delivery with zero advance payment across South Delhi, Connaught Place & Dwarka.",
+    metaDescription: "Find verified independent call girls in Delhi NCR. Direct contact, real photos, cash on delivery with zero advance payment across South Delhi, Connaught Place & Dwarka.",
     metaKeywords: "Delhi Call Girls, Call Girl in Delhi, Independent Companions Delhi, Delhi Escort Service, South Delhi Escorts, Aerocity Call Girls",
-    h1: "Call Girls in Delhi NCR — Verified Independent Companions",
+    h1: "Call Girls in Delhi NCR | Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls across Delhi NCR including South Delhi, Connaught Place, Aerocity, Dwarka, and Rohini. Direct direct booking with strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Delhi NCR",
     introText: "Welcome to CallGirl4U's Delhi directory. Find verified independent companions available 24/7 across South Delhi, Central Delhi, West Delhi, and Aerocity hotel hubs. Enjoy direct provider contact with zero deposit demands.",
@@ -111,9 +112,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   mumbai: {
     metaTitle: "Call Girls in Mumbai | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Mumbai. Direct direct contact, real photos, cash on delivery across Bandra, Andheri, Juhu & South Mumbai.",
+    metaDescription: "Find verified independent call girls in Mumbai. Direct contact, real photos, cash on delivery across Bandra, Andheri, Juhu & South Mumbai.",
     metaKeywords: "Mumbai Call Girls, Call Girl in Mumbai, Bandra Escorts, Andheri Call Girls, Independent Companions Mumbai",
-    h1: "Call Girls in Mumbai — Verified Independent Companions",
+    h1: "Call Girls in Mumbai | Verified Independent Companions",
     heroSubtext: "Discover verified independent companions across Mumbai including Bandra, Andheri, Juhu, Powai, and South Mumbai. Direct direct booking with strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Mumbai",
     introText: "Connect directly with verified independent companions in Mumbai without middleman commissions. Listings cover corporate event dates, hotel outcalls, and private arrangements.",
@@ -143,9 +144,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   surat: {
     metaTitle: "Call Girls in Surat | Verified Escort & Companion Directory",
-    metaDescription: "Find verified independent call girls in Surat, Gujarat. Direct direct contact, genuine photos, cash on delivery in Vesu, Piplod & Ring Road.",
+    metaDescription: "Find verified independent call girls in Surat, Gujarat. Direct contact, genuine photos, cash on delivery in Vesu, Piplod & Ring Road.",
     metaKeywords: "Surat Call Girls, Call Girl in Surat, Vesu Escorts, Piplod Call Girls, Independent Companions Surat",
-    h1: "Call Girls in Surat — Verified Independent Companions",
+    h1: "Call Girls in Surat | Verified Independent Companions",
     heroSubtext: "Browse genuine independent call girls across Surat including Vesu, Piplod, Adajan, Varachha, and Ring Road. Cash on Delivery booking with zero advance payment.",
     introHeading: "Verified Female Companions in Surat",
     introText: "Connect with independent models and female companions in Surat, Gujarat. Enjoy direct Contact messaging, transparent pricing, and 100% face-to-face cash payment.",
@@ -177,7 +178,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     metaTitle: "Call Girls in Ahmedabad | Verified Companion Directory",
     metaDescription: "Find verified independent call girls in Ahmedabad. Direct direct booking, authentic photos, cash on delivery across SG Highway, Satellite & Bodakdev.",
     metaKeywords: "Ahmedabad Call Girls, Call Girl in Ahmedabad, SG Highway Escorts, Satellite Call Girls, Independent Companions Ahmedabad",
-    h1: "Call Girls in Ahmedabad — Verified Independent Companions",
+    h1: "Call Girls in Ahmedabad | Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls across Ahmedabad including SG Highway, Satellite, Bodakdev, Prahlad Nagar, and Vastrapur. Strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Ahmedabad",
     introText: "Welcome to CallGirl4U's Ahmedabad directory. Connect directly with independent models and female escorts for hotel and residential outcalls across Ahmedabad.",
@@ -207,9 +208,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   pune: {
     metaTitle: "Call Girls in Pune | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Pune. Direct direct contact, real photos, cash on delivery across Viman Nagar, Koregaon Park, Baner & Hinjawadi.",
+    metaDescription: "Find verified independent call girls in Pune. Direct contact, real photos, cash on delivery across Viman Nagar, Koregaon Park, Baner & Hinjawadi.",
     metaKeywords: "Pune Call Girls, Call Girl in Pune, Viman Nagar Escorts, Koregaon Park Call Girls, Hinjewadi Escorts",
-    h1: "Call Girls in Pune — Verified Independent Companions",
+    h1: "Call Girls in Pune | Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls across Pune including Viman Nagar, Koregaon Park, Baner, Hinjawadi, and Wakad. Direct direct contact and Cash on Delivery.",
     introHeading: "Verified Female Companions in Pune",
     introText: "Connect with genuine independent companions in Pune. Ideal for corporate travelers and residents seeking discreet dates in IT hubs and luxury hotel zones.",
@@ -239,9 +240,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   bangalore: {
     metaTitle: "Call Girls in Bangalore | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Bangalore (Bengaluru). Direct direct contact, genuine photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
+    metaDescription: "Find verified independent call girls in Bangalore (Bengaluru). Direct contact, genuine photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
     metaKeywords: "Bangalore Call Girls, Call Girl in Bangalore, Indiranagar Escorts, Koramangala Call Girls, Whitefield Escorts",
-    h1: "Call Girls in Bangalore — Verified Independent Companions",
+    h1: "Call Girls in Bangalore | Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls across Bangalore (Bengaluru) including Indiranagar, Koramangala, Whitefield, HSR Layout, and MG Road. Cash on Delivery.",
     introHeading: "Verified Female Companions in Bangalore",
     introText: "Welcome to CallGirl4U's Bangalore directory. Connect directly with independent models and female escorts across Silicon Valley's top neighborhoods.",
@@ -271,9 +272,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   bengaluru: {
     metaTitle: "Call Girls in Bengaluru | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Bengaluru. Direct direct contact, real photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
+    metaDescription: "Find verified independent call girls in Bengaluru. Direct contact, real photos, cash on delivery across Indiranagar, Koramangala & Whitefield.",
     metaKeywords: "Bengaluru Call Girls, Call Girl in Bengaluru, Indiranagar Escorts, Koramangala Call Girls, Whitefield Escorts",
-    h1: "Call Girls in Bengaluru — Verified Independent Companions",
+    h1: "Call Girls in Bengaluru | Verified Independent Companions",
     heroSubtext: "Browse verified independent companions across Bengaluru including Indiranagar, Koramangala, Whitefield, HSR Layout, and MG Road. Cash on Delivery.",
     introHeading: "Verified Female Companions in Bengaluru",
     introText: "Connect with genuine independent companions in Bengaluru. Enjoy transparent pricing and direct direct contact with zero advance deposit.",
@@ -305,7 +306,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     metaTitle: "Call Girls in Kolkata | Verified Escort Directory",
     metaDescription: "Find verified independent call girls in Kolkata. Direct direct booking, authentic photos, cash on delivery across Salt Lake, Park Street & Rajarhat New Town.",
     metaKeywords: "Kolkata Call Girls, Call Girl in Kolkata, Salt Lake Escorts, Park Street Call Girls, New Town Escorts",
-    h1: "Call Girls in Kolkata — Verified Independent Companions",
+    h1: "Call Girls in Kolkata | Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls across Kolkata including Salt Lake, Park Street, Rajarhat New Town, Ballygunge, and EM Bypass. Cash on Delivery.",
     introHeading: "Verified Female Companions in City of Joy Kolkata",
     introText: "Welcome to CallGirl4U's Kolkata directory. Connect directly with genuine independent companions across Kolkata without middleman charges.",
@@ -335,9 +336,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   hyderabad: {
     metaTitle: "Call Girls in Hyderabad | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Hyderabad. Direct direct contact, real photos, cash on delivery across HITECH City, Gachibowli, Jubilee Hills & Banjara Hills.",
+    metaDescription: "Find verified independent call girls in Hyderabad. Direct contact, real photos, cash on delivery across HITECH City, Gachibowli, Jubilee Hills & Banjara Hills.",
     metaKeywords: "Hyderabad Call Girls, Call Girl in Hyderabad, HITECH City Escorts, Gachibowli Call Girls, Jubilee Hills Escorts",
-    h1: "Call Girls in Hyderabad — Verified Independent Companions",
+    h1: "Call Girls in Hyderabad | Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls across Hyderabad including HITECH City, Gachibowli, Jubilee Hills, Banjara Hills, and Madhapur. Strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Hyderabad",
     introText: "Connect directly with verified independent companions in Cyberabad and Hyderabad. Browse active listings with direct direct contact and zero advance fees.",
@@ -367,9 +368,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   goa: {
     metaTitle: "Call Girls in Goa | Verified Companion & Beach Escort Directory",
-    metaDescription: "Find verified independent call girls in Goa. Direct direct contact, real photos, cash on delivery across Calangute, Baga, Candolim & Panaji.",
+    metaDescription: "Find verified independent call girls in Goa. Direct contact, real photos, cash on delivery across Calangute, Baga, Candolim & Panaji.",
     metaKeywords: "Goa Call Girls, Call Girl in Goa, Calangute Escorts, Baga Call Girls, Panaji Escorts, Russian Escorts Goa",
-    h1: "Call Girls in Goa — Verified Independent Beach Companions",
+    h1: "Call Girls in Goa | Verified Independent Beach Companions",
     heroSubtext: "Discover verified independent call girls across Goa including Calangute, Baga, Candolim, Anjuna, Colva, and Panaji. Cash on Delivery with zero deposit.",
     introHeading: "Verified Female Companions in Goa",
     introText: "Welcome to CallGirl4U's Goa directory. Connect directly with independent beach companions, college models, and VIP Russian escorts during your vacation in Goa.",
@@ -399,9 +400,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   panaji: {
     metaTitle: "Call Girls in Panaji Goa | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Panaji, Goa. Direct direct contact, real photos, cash on delivery across Miramar, Dona Paula & Panaji.",
+    metaDescription: "Find verified independent call girls in Panaji, Goa. Direct contact, real photos, cash on delivery across Miramar, Dona Paula & Panaji.",
     metaKeywords: "Panaji Call Girls, Call Girl in Panaji, Miramar Escorts, Dona Paula Call Girls, Independent Companions Panaji",
-    h1: "Call Girls in Panaji — Verified Independent Companions",
+    h1: "Call Girls in Panaji | Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls in Panaji, Miramar, Dona Paula, and Miramar Beach. Strict Cash on Delivery with zero advance payment.",
     introHeading: "Verified Female Companions in Panaji",
     introText: "Connect directly with independent companions in Panaji city. Enjoy transparent pricing and direct direct booking.",
@@ -431,9 +432,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   chandigarh: {
     metaTitle: "Call Girls in Chandigarh | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Chandigarh, Mohali & Zirakpur. Direct direct contact, real photos, cash on delivery across Sector 17, 35 & 22.",
+    metaDescription: "Find verified independent call girls in Chandigarh, Mohali & Zirakpur. Direct contact, real photos, cash on delivery across Sector 17, 35 & 22.",
     metaKeywords: "Chandigarh Call Girls, Call Girl in Chandigarh, Mohali Escorts, Zirakpur Call Girls, Sector 17 Escorts",
-    h1: "Call Girls in Chandigarh — Verified Independent Companions",
+    h1: "Call Girls in Chandigarh | Verified Independent Companions",
     heroSubtext: "Browse verified independent call girls across Chandigarh Tri-City including Mohali, Zirakpur, Panchkula, and Sector 17/35. Strict Cash on Delivery.",
     introHeading: "Verified Female Companions in Chandigarh Tri-City",
     introText: "Welcome to CallGirl4U's Chandigarh directory. Connect directly with independent companions across Chandigarh, Mohali, and Zirakpur with zero deposit demands.",
@@ -463,9 +464,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   jodhpur: {
     metaTitle: "Call Girls in Jodhpur | Verified Companion Directory",
-    metaDescription: "Find verified independent call girls in Jodhpur, Rajasthan. Direct direct contact, real photos, cash on delivery across Ratanada, Sardarpura & Paota.",
+    metaDescription: "Find verified independent call girls in Jodhpur, Rajasthan. Direct contact, real photos, cash on delivery across Ratanada, Sardarpura & Paota.",
     metaKeywords: "Jodhpur Call Girls, Call Girl in Jodhpur, Ratanada Escorts, Sardarpura Call Girls, Independent Companions Jodhpur",
-    h1: "Call Girls in Jodhpur — Verified Independent Companions",
+    h1: "Call Girls in Jodhpur | Verified Independent Companions",
     heroSubtext: "Discover verified independent call girls in Jodhpur including Ratanada, Sardarpura, Paota, Shastri Nagar, and Airport Road. Cash on Delivery.",
     introHeading: "Verified Female Companions in Sun City Jodhpur",
     introText: "Connect directly with independent companions in Jodhpur without agency markups. Browse active profiles with authentic photos and direct numbers.",
@@ -495,9 +496,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
 
   udaipur: {
     metaTitle: "Call Girls in Udaipur | Verified Escort Directory",
-    metaDescription: "Find verified independent call girls in Udaipur, Rajasthan. Direct direct contact, authentic photos, cash on delivery across Hiran Magri, Sukher & City Palace area.",
+    metaDescription: "Find verified independent call girls in Udaipur, Rajasthan. Direct contact, authentic photos, cash on delivery across Hiran Magri, Sukher & City Palace area.",
     metaKeywords: "Udaipur Call Girls, Call Girl in Udaipur, Hiran Magri Escorts, Sukher Call Girls, Lake City Escorts",
-    h1: "Call Girls in Udaipur — Verified Independent Lake City Companions",
+    h1: "Call Girls in Udaipur | Verified Independent Lake City Companions",
     heroSubtext: "Browse verified independent call girls across Udaipur including Hiran Magri, Sukher, Panchwati, Fateh Sagar, and Fatehpura. Cash on Delivery.",
     introHeading: "Verified Female Companions in Lake City Udaipur",
     introText: "Welcome to CallGirl4U's Udaipur directory. Connect with verified independent companions during your heritage stay or business trip in Udaipur.",

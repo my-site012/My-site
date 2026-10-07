@@ -61,11 +61,29 @@ export async function GET() {
       priority: '0.6'
     }));
 
+  const JAIPUR_SUB_SLUGS = [
+    "jagatpura",
+    "gopalpura",
+    "sitapura",
+    "sanganer",
+    "200-feet-bypass",
+    "chandpole",
+    "jaipur-malviya-nagar",
+    "jaipur-vaishali-nagar",
+  ];
+
+  const jaipurSubUrls = JAIPUR_SUB_SLUGS.map(slug => ({
+    loc: `${baseUrl}/call-girls/${slug}`,
+    changefreq: 'daily',
+    priority: '0.8'
+  }));
+
   const rawUrls = [
     { loc: `${baseUrl}/call-girls`, changefreq: 'daily', priority: '0.9' },
     ...stateUrls,
     ...cityUrls,
-    ...extendedCityUrls
+    ...extendedCityUrls,
+    ...jaipurSubUrls
   ];
 
   const seen = new Set<string>();

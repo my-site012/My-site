@@ -112,10 +112,10 @@ function getMassageSeoData(cityName: string, state: string) {
     ? `Full Body Massage in ${cityName} | Best Spa & Massage Service`
     : `Massage Service in ${cityName} | Female to Male Body Spa`;
 
-  const heroSubtextTemplate = `{Discover|Find|Book|Explore} {verified|genuine|professional|trained} <strong class="font-bold">Massage Service in ${cityName}</strong>. {Connect directly|Get in touch} with {experienced|skilled|trained} massage therapists via direct phone number. {Our directory features|Browse through} {relaxing full body massages, sensual B2B massage, aromatherapy spa, and home massage delivery|body-to-body spa, deep tissue massage, and outcall home massage services} available {24/7|round-the-clock} in ${cityName}. All {sessions|bookings} are {based on|conducted via} <strong class="font-bold">Cash on Delivery</strong> — {no advance payment required|zero deposit needed}.`;
+  const heroSubtextTemplate = `{Discover|Find|Book|Explore} {verified|genuine|professional|trained} <strong class="font-bold">Massage Service in ${cityName}</strong>. {Connect directly|Get in touch} with {experienced|skilled|trained} massage therapists via direct phone number. {Our directory features|Browse through} {relaxing full body massages, sensual B2B massage, aromatherapy spa, and home massage delivery|body-to-body spa, deep tissue massage, and outcall home massage services} available {24/7|round-the-clock} in ${cityName}. All {sessions|bookings} are {based on|conducted via} <strong class="font-bold">Cash on Delivery</strong> | {no advance payment required|zero deposit needed}.`;
 
   const introHeading = hash % 2 === 0
-    ? `Best Massage Parlour in ${cityName} — Verified & Trusted`
+    ? `Best Massage Parlour in ${cityName} | Verified & Trusted`
     : `Top Massage Service in ${cityName} | Home & Hotel Delivery`;
 
   const introText = `{Welcome to the premier|Discover the leading} directory for booking {premium|professional|relaxing} <strong class="font-bold">Massage Service in ${cityName}</strong>. Whether you are {looking for a relaxing full body massage after a long day|seeking a rejuvenating spa experience}, our platform connects you directly with {certified therapists and independent massage providers|experienced massage specialists} across the city. We feature {verified|genuine} profiles of {female massage therapists|trained spa professionals} who offer services ranging from {traditional Indian massage|body-to-body massage|aromatherapy} to {deep tissue therapy|Swedish relaxation massage|sensual companion massage}. All services are {offered with cash-on-delivery|available with zero advance payment} so you {never have to worry about online fraud|pay only after complete satisfaction}. Our directory covers ${state} with {doorstep home delivery|hotel room service} in all major localities.`;
@@ -144,12 +144,12 @@ function getMassageSeoData(cityName: string, state: string) {
   const areasText = `{Our verified directory covers all major areas, hotels, and residential localities across <strong class="font-bold">${cityName}</strong> for home and hotel massage delivery. Whether you are staying at a {5-star luxury hotel|guest house|private residence}, our massage therapists can provide {doorstep service|room service} directly. Popular areas for massage home delivery include {business districts, tourist hotspots, and major transit areas|premium hotel zones, corporate hubs, and residential neighborhoods}. Most independent massage providers in ${cityName} can reach your location within {30-45 minutes|an hour}. Always {share your complete address|confirm location details} directly with the therapist for a smooth, on-time service. Our ${state} region directory ensures you find a {nearby professional|local massage expert} wherever you are in the city.}`;
 
   const rateHeading = `Massage Service Price List in ${cityName}`;
-  const rateIntro = `{The rates for massage services in <strong class="font-bold">${cityName}</strong> vary based on service type, duration, and therapist experience. The following is an estimated price guide. Always confirm actual rates directly with the provider before booking. Strictly follow Cash on Delivery — never pay any advance booking fee, medical card charge, or transport cost online.}`;
+  const rateIntro = `{The rates for massage services in <strong class="font-bold">${cityName}</strong> vary based on service type, duration, and therapist experience. The following is an estimated price guide. Always confirm actual rates directly with the provider before booking. Strictly follow Cash on Delivery | never pay any advance booking fee, medical card charge, or transport cost online.}`;
 
   const privacyHeading = `Privacy & Discretion for Massage Bookings`;
   const privacyText = `{Your privacy is our top priority. Our ${cityName} massage directory operates on a {strict no-logs policy|complete anonymity basis}, meaning we {don't store your browsing data|never track your searches or location}. All communication is {direct between you and the massage provider|completely private and end-to-end}. By using {cash-only payment|Cash on Delivery}, there are no {bank statements or credit card trails|online payment records} linking you to the service. Your {identity|personal information} is fully protected at all times. Enjoy {complete discretion|100% privacy} while booking your ${cityName} massage service.}`;
 
-  const faqHeading = `FAQs – Massage Service in ${cityName}`;
+  const faqHeading = `FAQs: Massage Service in ${cityName}`;
 
   const faqs = [
     {
@@ -460,7 +460,7 @@ export default async function MassageCityPage({ params, searchParams }: { params
               <h1 className="text-3xl text-gray-900 mb-4">Massage Service Available in {cityName}</h1>
               <p className="text-gray-600 text-lg">
                 Find <strong>verified massage therapists in {cityName}</strong>, {state} with direct contact.
-                Full body massage, B2B spa &amp; home delivery available 24/7. <strong>Cash on delivery</strong> — no advance payment.
+                Full body massage, B2B spa &amp; home delivery available 24/7. <strong>Cash on delivery</strong> | No advance payment.
               </p>
             </>
           ) : (

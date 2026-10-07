@@ -5,10 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AgeVerification from "@/components/AgeVerification";
 import SecurityProvider from "@/components/SecurityProvider";
+import BottomNav from "@/components/BottomNav";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://callgirl4u.com"),
-  title: "CallGirl4U India – #1 Adult Classified Ads & Escort Directory",
+  title: "CallGirl4U India | #1 Adult Classified Ads & Escort Directory",
   description: "CallGirl4U is the #1 adult classifieds website in India. Browse local listings for independent call girls, massages, male escorts, and shemale dating in your city. Post your adult ad absolutely FREE!",
   keywords: "adult classifieds india, adult classified website, escorts in india, call girls india, male escorts, massages, shemale escorts, post free adult ads",
   authors: [{ name: "CallGirl4U", url: "https://callgirl4u.com" }],
@@ -103,10 +104,11 @@ export default function RootLayout({
         <SecurityProvider />
         <AgeVerification />
         <Header />
-        <main className="min-h-screen">
+        <main className="min-h-screen pb-16 md:pb-0">
           {children}
         </main>
         <Footer />
+        <BottomNav />
       </body>
     </html>
   );

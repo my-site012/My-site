@@ -175,8 +175,9 @@ export function generateEnhancedLocalBusinessSchema({
 
   return {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "Service"],
+    "@type": "LocalBusiness",
     name: title,
+    image: "https://callgirl4u.com/icon.png",
     description: description,
     url: `https://callgirl4u.com/${categorySlug}/${citySlug}`,
     telephone: phone,
@@ -185,6 +186,7 @@ export function generateEnhancedLocalBusinessSchema({
     paymentAccepted: "Cash, Cash on Delivery",
     address: {
       "@type": "PostalAddress",
+      streetAddress: `${cityName} Center`,
       addressLocality: cityName,
       addressRegion: stateName,
       addressCountry: "IN",

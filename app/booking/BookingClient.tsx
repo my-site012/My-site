@@ -1180,7 +1180,7 @@ Please confirm and dispatch!`;
                           </>
                         ) : (
                           <>
-                            <span>I Have Paid — Generate My Token 🎟️</span>
+                            <span>I Have Paid: Generate My Token</span>
                           </>
                         )}
                       </button>

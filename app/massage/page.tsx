@@ -93,7 +93,7 @@ export default function MassageDirectory() {
         </div>
 
         <p className="mb-6 leading-relaxed">
-          CallGirl4U is India's trusted platform for finding genuine and verified <strong>massage service</strong> providers. Browse verified profiles of professional massage therapists offering full body massage, B2B spa, aromatherapy, and home delivery massage across all major Indian cities. <strong>No advance payment required</strong> — pay only in cash after your session.
+          CallGirl4U is India's trusted platform for finding genuine and verified <strong>massage service</strong> providers. Browse verified profiles of professional massage therapists offering full body massage, B2B spa, aromatherapy, and home delivery massage across all major Indian cities. <strong>No advance payment required</strong>, pay only in cash after your session.
         </p>
         <p className="mb-6 leading-relaxed">
           Our massage directory covers hundreds of cities across India including <strong>Mumbai, Delhi, Bangalore, Hyderabad, Chennai, Kolkata, Pune, Ahmedabad</strong> and many more. Every massage therapist listed here is verified for photo authenticity and contact details.
@@ -102,7 +102,7 @@ export default function MassageDirectory() {
           <h3 className="text-xl font-bold text-purple-800 mb-4 uppercase tracking-wide">Why Book on CallGirl4U?</h3>
           <ul className="space-y-3 text-gray-800 font-medium">
             <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> Verified Massage Therapist Profiles</li>
-            <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> <strong>No advance payment</strong> — Pay Cash After Service</li>
+            <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> <strong>No advance payment</strong> | Pay Cash After Service</li>
             <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> Home & Hotel Delivery Massage Available</li>
             <li className="flex items-center gap-3"><span className="text-purple-600 text-xl">✓</span> <strong>Massage Service</strong> Available 24/7 Across India</li>
           </ul>

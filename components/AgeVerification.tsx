@@ -46,7 +46,7 @@ export default function AgeVerification() {
             onClick={handleVerify}
             className="bg-red-600 hover:bg-red-700 transition-colors text-white px-6 py-3 rounded-lg font-bold cursor-pointer min-h-[48px] min-w-[140px] flex items-center justify-center text-sm"
           >
-            I am 18+ — Enter
+            I am 18+ Enter
           </button>
           <button
             onClick={() => window.location.href = "https://google.com"}
