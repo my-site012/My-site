@@ -1146,7 +1146,7 @@ Please click the link, scan the QR code to complete the advance payment, and ent
                       {new Date(log.timestamp).toLocaleString()}
                     </td>
                     <td className="p-4 font-bold text-gray-900 text-sm">
-                      {log.profileName} <span className="text-red-500" title="Genuine Photos">💋 100% GENUINE PHOTOS</span>
+                      {log.profileName} <span className="text-red-500 text-xs font-semibold" title="Genuine Photos">VERIFIED PHOTOS</span>
                     </td>
                     <td className="p-4 text-sm text-blue-600 font-medium whitespace-nowrap">
                       <span className="bg-blue-50 px-2 py-1 rounded-lg">{log.location}</span>

@@ -532,7 +532,7 @@ Please confirm and dispatch!`;
             <div className="bg-gradient-to-r from-red-600 via-red-700 to-rose-700 text-white p-6 sm:p-8 text-center relative overflow-hidden">
               <div className="relative z-10 max-w-2xl mx-auto">
                 <span className="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black tracking-widest uppercase mb-2">
-                  🔒 100% Confidential &amp; Verified Booking
+                  Confidential &amp; Verified Booking
                 </span>
                 <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
                   Book Your Appointment Online
@@ -1011,7 +1011,7 @@ Please confirm and dispatch!`;
                     <span className="text-xl">→</span>
                   </button>
                   <p className="text-center text-xs text-gray-400 mt-2">
-                    🔒 Advance amount of ₹1,000 is 100% adjusted into your final service bill.
+                    Advance amount of ₹1,000 is adjusted into your final service bill.
                   </p>
                 </div>
               </form>
@@ -1352,20 +1352,20 @@ Please confirm and dispatch!`;
 
         {/* Trust Badges / Highlights */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-            <span className="text-2xl mb-1 inline-block">🛡️</span>
+          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center">
+            <svg className="w-6 h-6 text-red-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             <div className="font-extrabold text-sm text-gray-900">Discreet &amp; Private</div>
             <p className="text-xs text-gray-500 mt-1">Your privacy and data are completely protected.</p>
           </div>
-          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-            <span className="text-2xl mb-1 inline-block">⚡</span>
+          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center">
+            <svg className="w-6 h-6 text-red-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             <div className="font-extrabold text-sm text-gray-900">Instant Token System</div>
             <p className="text-xs text-gray-500 mt-1">Auto-generated token ensures zero wait time.</p>
           </div>
-          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-            <span className="text-2xl mb-1 inline-block">💯</span>
-            <div className="font-extrabold text-sm text-gray-900">100% Genuine Profiles</div>
-            <p className="text-xs text-gray-500 mt-1">Directly connects you with verified companions.</p>
+          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center">
+            <svg className="w-6 h-6 text-red-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div className="font-extrabold text-sm text-gray-900">Verified Profiles</div>
+            <p className="text-xs text-gray-500 mt-1">Directly connects you with authentic companions.</p>
           </div>
         </div>
       </div>

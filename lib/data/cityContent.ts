@@ -32,16 +32,16 @@ export interface CitySEOContent {
 export const cityContentData: Record<string, CitySEOContent> = {
   jaipur: {
     metaTitle: "Call Girls in Jaipur | Escorts in Jaipur Call Girls (Cash on Delivery)",
-    metaDescription: "Book top call girls in Jaipur and verified Jaipur escorts service. 100% Cash on Delivery, genuine independent female companions with direct contact in Pink City 24/7.",
+    metaDescription: "Book top call girls in Jaipur and verified Jaipur escorts service. Cash on Delivery, genuine independent female companions with direct contact in Pink City 24/7.",
     metaKeywords: "Call Girls in Jaipur, Jaipur Call Girls, Escorts in Jaipur, Jaipur Escort Service, Independent Call Girls Jaipur, Malviya Nagar Escorts, Vaishali Nagar Call Girls, Tonk Road Call Girls, Cash on Delivery Escorts Jaipur",
     h1: "Call Girls in Jaipur | Verified Escorts & Independent Companions",
-    heroSubtext: "Connect with verified independent call girls in Jaipur with direct contact numbers and 100% Cash on Delivery (COD). Fast 30-minute doorstep and hotel outcall delivery across Malviya Nagar, Vaishali Nagar, Mansarovar, Tonk Road, C-Scheme, Sitapura, and Jagatpura.",
+    heroSubtext: "Connect with verified independent call girls in Jaipur with direct contact numbers and Cash on Delivery (COD). Fast 30-minute doorstep and hotel outcall delivery across Malviya Nagar, Vaishali Nagar, Mansarovar, Tonk Road, C-Scheme, Sitapura, and Jagatpura.",
     introHeading: "Verified Female Companions & Escort Service in Pink City Jaipur",
     introText: "Welcome to the official Jaipur directory for independent female companions and escort services. Whether staying at luxury heritage hotels in C-Scheme, business hotels near Sitapura and Sanganer, or transit accommodations near Jaipur International Airport, our platform connects you directly with genuine local models, college companions, and VIP escorts without agency middlemen.",
     whyChooseHeading: "Why Book Companions in Jaipur via CallGirl4U",
     whyChooseText: `<p class="mb-4">Jaipur visitors and locals choose our directory for transparency, security, and direct provider communication:</p>
 <ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery (COD):</strong> Pay in person only after meeting your companion in your hotel room or private residence.</li>
+  <li><strong>Cash on Delivery (COD):</strong> Pay in person only after meeting your companion in your hotel room or private residence.</li>
   <li><strong>Zero Advance Deposit:</strong> Avoid online payment fraud, prepaid gift card scams, or fake medical registration fees.</li>
   <li><strong>Prompt Local Outcalls:</strong> Fast 30-minute doorstep arrival across Malviya Nagar, Vaishali Nagar, Raja Park, Mansarovar, MI Road, and Airport zones.</li>
   <li><strong>Direct Direct Contact:</strong> Chat directly via WhatsApp or phone with self-managed independent providers.</li>
@@ -65,7 +65,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     rateHeading: "Jaipur Companion Pricing & Rates Guide",
     rateIntro: "Standard rates in Jaipur range between ₹3,000 to ₹10,000 depending on session duration (1 hour, 2 hours, or overnight stay) and companion category. Strict Cash on Delivery applies | never pay any advance booking charge.",
     privacyHeading: "Discreet & Confidential Booking in Jaipur",
-    privacyText: "Your privacy is 100% protected. We do not store client search history or personal contact numbers, ensuring discreet companion bookings with complete peace of mind.",
+    privacyText: "Your privacy is protected with complete discretion. We do not store client search history or personal contact numbers, ensuring confidential companion bookings with peace of mind.",
     faqHeading: "Frequently Asked Questions | Jaipur Call Girls Directory",
     faqs: [
       { q: "Are call girl profiles in Jaipur verified with real photos?", a: "Yes. Profiles undergo photo and contact verification so you can connect directly with authentic independent companions." },
@@ -73,7 +73,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
       { q: "Which hotel zones are covered for outcall delivery in Jaipur?", a: "Companions deliver outcall services to all major hotels in Tonk Road, C-Scheme, Malviya Nagar, Vaishali Nagar, MI Road, and near Jaipur Airport." },
       { q: "How long does outcall delivery take in Jaipur?", a: "Most independent companions arrive within 30 to 45 minutes of booking confirmation across all central Jaipur locations." }
     ],
-    hindiText: `<p class="mb-4"><strong>Jaipur Call Girl & Escort Directory:</strong> Jaipur (Pink City) me verified independent call girls aur escorts ke sath connect karein. Direct phone ya WhatsApp contact aur 100% Cash on Delivery policy ke sath safe aur confidential experience enjoy karein bina kisi advance deposit ke.</p>`,
+    hindiText: `<p class="mb-4"><strong>Jaipur Call Girl & Escort Directory:</strong> Jaipur (Pink City) me verified independent call girls aur escorts ke sath connect karein. Direct phone ya WhatsApp contact aur Cash on Delivery policy ke sath safe aur confidential experience enjoy karein bina kisi advance deposit ke.</p>`,
     profiles: []
   },
 
@@ -87,7 +87,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Delhi directory. Find verified independent companions available 24/7 across South Delhi, Central Delhi, West Delhi, and Aerocity hotel hubs. Enjoy direct provider contact with zero deposit demands.",
     whyChooseHeading: "Why Choose CallGirl4U in Delhi",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> No advance booking charges or upfront deposit.</li>
+  <li><strong>Cash on Delivery:</strong> No advance booking charges or upfront deposit.</li>
   <li><strong>Verified Independent Profiles:</strong> Direct direct access to genuine local models.</li>
   <li><strong>Discreet Hotel Outcalls:</strong> Fast doorstep delivery to hotels in Aerocity, Saket, and CP.</li>
 </ul>`,
@@ -132,7 +132,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     areasText: "Service covers Bandra West, Andheri East/West, Juhu, BKC, Powai, Lower Parel, and Colaba.",
     rateHeading: "Mumbai Pricing Overview",
     rateIntro: "Fair market rates determined by independent providers. Strictly cash on delivery.",
-    privacyHeading: "Mumbai Privacy Guarantee",
+    privacyHeading: "Mumbai Privacy Standards",
     privacyText: "Zero digital logs preserve your anonymity completely.",
     faqHeading: "Mumbai Directory FAQs",
     faqs: [
@@ -149,7 +149,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     h1: "Call Girls in Surat | Verified Independent Companions",
     heroSubtext: "Browse genuine independent call girls across Surat including Vesu, Piplod, Adajan, Varachha, and Ring Road. Cash on Delivery booking with zero advance payment.",
     introHeading: "Verified Female Companions in Surat",
-    introText: "Connect with independent models and female companions in Surat, Gujarat. Enjoy direct Contact messaging, transparent pricing, and 100% face-to-face cash payment.",
+    introText: "Connect with independent models and female companions in Surat, Gujarat. Enjoy direct Contact messaging, transparent pricing, and direct face-to-face cash payment.",
     whyChooseHeading: "Why Book Companions in Surat",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
   <li><strong>Zero Advance Deposit:</strong> Never transfer money online before meeting.</li>
@@ -168,9 +168,9 @@ export const cityContentData: Record<string, CitySEOContent> = {
     privacyText: "Strict zero-log infrastructure protects client confidentiality.",
     faqHeading: "Surat Directory FAQs",
     faqs: [
-      { q: "Is cash on delivery supported in Surat?", a: "Yes, 100% cash on delivery is enforced across all Surat listings." }
+      { q: "Is cash on delivery supported in Surat?", a: "Yes, cash on delivery is standard across all Surat listings." }
     ],
-    hindiText: `<p class="mb-4"><strong>Surat Call Girl Directory:</strong> Surat me verified independent companions ke saath direct connect karein. Zero advance fee aur 100% Cash on Delivery.</p>`,
+    hindiText: `<p class="mb-4"><strong>Surat Call Girl Directory:</strong> Surat me verified independent companions ke saath direct connect karein. Zero advance fee aur Cash on Delivery.</p>`,
     profiles: []
   },
 
@@ -184,7 +184,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Ahmedabad directory. Connect directly with independent models and female escorts for hotel and residential outcalls across Ahmedabad.",
     whyChooseHeading: "Why Choose CallGirl4U in Ahmedabad",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> No advance payments or online registration charges.</li>
+  <li><strong>Cash on Delivery:</strong> No advance payments or online registration charges.</li>
   <li><strong>Verified Models:</strong> Manual photo verification for complete authenticity.</li>
   <li><strong>Discreet Meetings:</strong> Prompt outcall delivery to hotels along SG Highway and Airport Road.</li>
 </ul>`,
@@ -196,8 +196,8 @@ export const cityContentData: Record<string, CitySEOContent> = {
     areasText: "Service covers SG Highway, Satellite, Bodakdev, Prahlad Nagar, Navrangpura, Ashram Road, and Airport zone.",
     rateHeading: "Ahmedabad Rate Guide",
     rateIntro: "Transparent pricing negotiated directly with independent providers. Pay cash face-to-face.",
-    privacyHeading: "Privacy Guarantees in Ahmedabad",
-    privacyText: "Zero-log browsing guarantees absolute client discretion.",
+    privacyHeading: "Privacy Standards in Ahmedabad",
+    privacyText: "Zero-log browsing provides complete client discretion.",
     faqHeading: "Ahmedabad FAQs",
     faqs: [
       { q: "Are SG Highway hotels covered in Ahmedabad?", a: "Yes, companions deliver prompt outcall services to all major hotels along SG Highway." }
@@ -234,7 +234,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are Hinjawadi and Baner hotels supported for outcall?", a: "Yes, fast outcall delivery is available to all major hotels in Hinjawadi IT Park and Baner." }
     ],
-    hindiText: `<p class="mb-4"><strong>Pune Call Girl Directory:</strong> Pune me verified independent companions ke saath direct connect karein. 100% Cash on Delivery aur zero advance payment risk.</p>`,
+    hindiText: `<p class="mb-4"><strong>Pune Call Girl Directory:</strong> Pune me verified independent companions ke saath direct connect karein. Cash on Delivery aur zero advance payment risk.</p>`,
     profiles: []
   },
 
@@ -248,7 +248,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Bangalore directory. Connect directly with independent models and female escorts across Silicon Valley's top neighborhoods.",
     whyChooseHeading: "Why Book in Bangalore via CallGirl4U",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> No advance payments or prepaid card fees.</li>
+  <li><strong>Cash on Delivery:</strong> No advance payments or prepaid card fees.</li>
   <li><strong>Direct direct booking:</strong> Zero middleman commissions.</li>
   <li><strong>Silicon Valley Coverage:</strong> Doorstep delivery to luxury hotels in Indiranagar, MG Road, and Electronic City.</li>
 </ul>`,
@@ -261,7 +261,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     rateHeading: "Bangalore Rates & Pricing",
     rateIntro: "Rates are determined independently by providers. Always pay cash upon meeting.",
     privacyHeading: "Bangalore Privacy Protection",
-    privacyText: "Zero-log system guarantees complete anonymity for all clients.",
+    privacyText: "Zero-log system maintains complete anonymity for all clients.",
     faqHeading: "Bangalore FAQs",
     faqs: [
       { q: "Are Koramangala and Indiranagar hotels covered?", a: "Yes, independent companions offer prompt outcall delivery to hotels in Koramangala and Indiranagar." }
@@ -312,7 +312,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Kolkata directory. Connect directly with genuine independent companions across Kolkata without middleman charges.",
     whyChooseHeading: "Why Choose CallGirl4U in Kolkata",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> No upfront deposit or online booking fee.</li>
+  <li><strong>Cash on Delivery:</strong> No upfront deposit or online booking fee.</li>
   <li><strong>Verified Independent Profiles:</strong> Direct direct access to local models.</li>
   <li><strong>Discreet Hotel Delivery:</strong> Fast outcall service to Park Street, Salt Lake, and Airport hotel zones.</li>
 </ul>`,
@@ -362,7 +362,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are Gachibowli and HITECH City hotels supported?", a: "Yes, fast outcall delivery is available to all major hotels in Gachibowli and HITECH City." }
     ],
-    hindiText: `<p class="mb-4"><strong>Hyderabad Call Girl Directory:</strong> Hyderabad me verified independent models ke saath connect karein. 100% Cash on Delivery aur zero advance payment.</p>`,
+    hindiText: `<p class="mb-4"><strong>Hyderabad Call Girl Directory:</strong> Hyderabad me verified independent models ke saath connect karein. Cash on Delivery aur zero advance payment.</p>`,
     profiles: []
   },
 
@@ -376,7 +376,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Goa directory. Connect directly with independent beach companions, college models, and VIP Russian escorts during your vacation in Goa.",
     whyChooseHeading: "Why Book Companions in Goa",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> Never pay any online deposit or booking fee while on holiday.</li>
+  <li><strong>Cash on Delivery:</strong> Never pay any online deposit or booking fee while on holiday.</li>
   <li><strong>Vacation Doorstep Service:</strong> Fast delivery to beach resorts and private villas.</li>
   <li><strong>Direct direct contact:</strong> Connect directly with independent models.</li>
 </ul>`,
@@ -388,7 +388,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     areasText: "Service covers North Goa (Calangute, Baga, Candolim, Anjuna, Vagator) and South Goa (Colva, Margao, Panaji).",
     rateHeading: "Goa Pricing Overview",
     rateIntro: "Rates vary based on resort outcall location and companion category. Strictly cash on delivery.",
-    privacyHeading: "Goa Vacation Privacy Guarantee",
+    privacyHeading: "Goa Vacation Discretion Standards",
     privacyText: "Complete zero-log discretion ensures safe and anonymous dates during your trip.",
     faqHeading: "Goa Directory FAQs",
     faqs: [
@@ -440,7 +440,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Chandigarh directory. Connect directly with independent companions across Chandigarh, Mohali, and Zirakpur with zero deposit demands.",
     whyChooseHeading: "Why Choose CallGirl4U in Chandigarh",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> No advance booking charges or upfront deposit.</li>
+  <li><strong>Cash on Delivery:</strong> No advance booking charges or upfront deposit.</li>
   <li><strong>Verified Tri-City Profiles:</strong> Direct direct access to genuine local models.</li>
   <li><strong>Prompt Hotel Outcalls:</strong> Fast doorstep delivery to hotels in Sector 17, 35, Mohali, and Zirakpur.</li>
 </ul>`,
@@ -453,7 +453,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     rateHeading: "Chandigarh Rate Expectations",
     rateIntro: "Rates are determined independently by providers. Always pay cash upon meeting.",
     privacyHeading: "Chandigarh Privacy Standards",
-    privacyText: "Zero-log system guarantees complete anonymity for all clients in Chandigarh.",
+    privacyText: "Zero-log system maintains complete anonymity for all clients in Chandigarh.",
     faqHeading: "Chandigarh FAQs",
     faqs: [
       { q: "Are Mohali and Zirakpur hotels covered?", a: "Yes, independent companions provide fast outcall service across Mohali and Zirakpur hotel zones." }
@@ -490,7 +490,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     faqs: [
       { q: "Are Ratanada hotel outcalls supported in Jodhpur?", a: "Yes, fast outcall delivery is available to all major hotels in Ratanada and Sardarpura." }
     ],
-    hindiText: `<p class="mb-4"><strong>Jodhpur Call Girl Directory:</strong> Jodhpur me verified independent companions ke saath direct connect karein. 100% Cash on Delivery.</p>`,
+    hindiText: `<p class="mb-4"><strong>Jodhpur Call Girl Directory:</strong> Jodhpur me verified independent companions ke saath direct connect karein. Cash on Delivery.</p>`,
     profiles: []
   },
 
@@ -504,7 +504,7 @@ export const cityContentData: Record<string, CitySEOContent> = {
     introText: "Welcome to CallGirl4U's Udaipur directory. Connect with verified independent companions during your heritage stay or business trip in Udaipur.",
     whyChooseHeading: "Why Choose CallGirl4U in Udaipur",
     whyChooseText: `<ul class="list-disc pl-5 space-y-2 mb-4">
-  <li><strong>100% Cash on Delivery:</strong> No advance booking charges or deposit demands.</li>
+  <li><strong>Cash on Delivery:</strong> No advance booking charges or deposit demands.</li>
   <li><strong>Direct direct booking:</strong> Connect directly with self-managed providers.</li>
   <li><strong>Resort Doorstep Service:</strong> Fast delivery to hotels and resorts around Lake Pichola and Fateh Sagar.</li>
 </ul>`,
