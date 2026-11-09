@@ -20,7 +20,6 @@ export default function Footer() {
           <Link prefetch={false} href="/dmca">DMCA Policy</Link>
           <Link prefetch={false} href="/terms">Terms and Conditions</Link>
           <Link prefetch={false} href="/contact">Contact Us</Link>
-          <Link prefetch={false} href="/forums" rel="nofollow">Adult Forums</Link>
         </div>
 
         {/* Contact / Inquiries Button */}
