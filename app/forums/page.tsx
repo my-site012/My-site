@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Adult Forums & Reviews | CallGirl4U Community",
   description: "Join the CallGirl4U discussion forum to share verified reviews, safety tips, and general discussions about local companions and massage services.",
   keywords: "adult forums, call girl reviews, escort forums, companion reviews, safety tips, body massage reviews",
-  robots: { index: false, follow: true },
+  robots: { index: false, follow: false },
   alternates: {
     canonical: "https://callgirl4u.com/forums",
   }

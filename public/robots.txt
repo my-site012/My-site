@@ -28,6 +28,8 @@ Disallow: /*?*s=*
 Disallow: /*?*filter=*
 Disallow: /*?*sort=*
 Disallow: /profile
+Disallow: /forums
+Disallow: /forums/*
 
 User-Agent: *
 Allow: /
@@ -48,6 +50,8 @@ Disallow: /*?*s=*
 Disallow: /*?*filter=*
 Disallow: /*?*sort=*
 Disallow: /profile
+Disallow: /forums
+Disallow: /forums/*
 
 Sitemap: https://callgirl4u.com/sitemap.xml
 Sitemap: https://callgirl4u.com/sitemap_main.xml
